@@ -1,0 +1,303 @@
+﻿
+//---------------逛网站
+	1.中国开源社区 -- https://www.oschina.net/
+
+	2.源码之家 -- http://www.mycodes.net/
+	
+	3.汇智网 -- http://www.hubwiz.com/ （在线教程）
+	
+	4.Awesomes-Web前端开发资源库 -- https://www.awesomes.cn/
+	
+	5.v2ex社区 -- https://www.v2ex.com/
+	
+	6.掘金 -- https://juejin.im/timeline
+	（这是一个综合技术社区，非常活跃，每天都有大量的技术文章发布）
+	
+	7.Web 技术文档 -- https://developer.mozilla.org/zh-CN/docs/Web
+	（这个网站以精美详细的文档著名。想CSS，HTML，Javascript的一些语法和API，都有详细的描述，并且有简单的实例）
+	
+	8.segmentfault -- https://segmentfault.com
+	（这也是一个相当活跃的技术社区，里面有很多文章）
+	
+	9.iKcamp -- https://www.ikcamp.com/
+	（由沪江Web前端团队发起的自由组织。我们追随JavaScript这门语言所秉持的精神，为ITer提供完善的在线学习平台和知识体系。）
+	
+//---------------
+
+//---------------
+
+	关于笔试的建议就是多刷题(超级学霸请无视我)，这里推荐几个网站：牛客网，leetCode，赛码网。
+		注意：像牛客和赛码这里要注意一下，很多公司的笔试都是用的这两个平台，建议多熟悉下这里的编程题的在线环境。
+	
+//---------------
+
+//--------------- 需要了解的知识点
+	1.Javascript
+		1).闭包
+	
+	2.窗口高度，文档高度，滚动问题	
+
+//---------------
+
+
+//--------------- 默认样式
+
+1.去掉手机端a连接点击出现的颜色背景或边框
+	-webkit-tap-highlight-color:rgba(255,0,0,0);
+	
+//---------------
+
+
+
+  1.ajax请求成功后要改变全局变量的值。
+	由于ajax是异步请求的，当要赋值时，此时的值还没有拿到，所以赋值不成功。改为同步即可，async:false;
+
+
+  2.高度给100%时没有撑起来，那是应为高度为100%是要从父级元素继承下来的。也就是父级元素没有给定明确的高度。
+  
+  3.全选，取消全选-----
+	jquery1.6中新加了一个方法prop()。有的浏览器只要写disabled，checked就可以了，而有的要写成 disabled = "disabled"，checked="checked"，比如用attr("checked")获取checkbox的checked属性时选中的时候可以取到值,值为"checked"但没选中获取值就是undefined。以前我们使用attr获取checked属性时返回"checked"和"",现在使用prop方法获取属性则统一返回true和false。
+	什么时候使用attr()，什么时候使用prop()？
+		1.添加属性名称该属性就会生效应该使用prop();
+		2.是有true,false两个属性使用prop();
+		3.其他则使用attr();
+		
+	4.CSS -- 使用break-word时，是将强制换行。
+		css：word-wrap:break-word
+		
+	5.CSS -- display:flex; 兼容性处理
+		display: box;              /* OLD - Android 4.4- */  
+		display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */  
+		display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */  
+		display: -ms-flexbox;      /* TWEENER - IE 10 */  
+		display: -webkit-flex;     /* NEW - Chrome */  
+		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+		
+		flex-wrap: wrap;
+		justify-content: space-between;
+		
+		width: 20%; /* For old syntax, otherwise collapses. */
+		
+		-webkit-box-flex: 1; /* OLD - iOS 6-, Safari 3.1-6 */ 
+		-moz-box-flex: 1; /* OLD - Firefox 19- */  
+		-webkit-flex: 1; /* Chrome */ 
+		-ms-flex: 1; /* IE 10 */ 
+		flex: 1; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+		flex: 1; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+		
+		//  
+			 display: box; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; flex-wrap: wrap; justify-content: space-between;
+		//
+		
+	6.font-family : Microsoft YaHei,Helvetica Neue,Helvetica,STHeiTi,Arial,sans-serif;	
+	
+	7.IE9 以下版本浏览器兼容HTML5的方法，使用(菜鸟联盟站内资源)html5shiv包：
+		<!--[if lt IE 9]> 
+		<script src="http://cdn.static.runoob.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+		<![endif]-->
+	载入后，初始化新标签的CSS：
+		/*html5*/
+		article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
+		
+	8.CSS -- 关于 table 
+		/*为表格设置合并边框模型*/border-collapse: collapse;
+		/*列宽由表格宽度和列宽度设定*/table-layout: fixed;
+		
+	9.CSS -- display:inline-block;后标签之间有间隙
+		给父元素 font-size:0;-webkit-text-size-adjust:none;(取消浏览器最小字体限制)。 再给父元素下的子元素设置字体大小。
+		
+		
+	10.手机端 ----- 	
+		（1）-webkit-appearance: none;  去除ios下按钮、输入框的默认样式。
+		（2）input 的 disable 属性在ios和安卓存在差异。ios下input是一种半透明状态。
+		（3）移动端浏览器自动保存登录数据(例：谷歌浏览器)，去除方法，不要在input的外部套用<form></form>标签。
+		（4）CSS -- input输入框在IOS移动端光标没有居中问题，设置line-height：normal;
+		（5）CSS -- iso移动端display:flex;出现随着页面滚动出现不固定现象，要将display:flex;元素放置在滚动元素的同级，就能正常固定。
+
+		
+	11.CSS -- 让input 双击后不出现历史记录 -----
+		在input加上 autocomplete="off" 属性
+		
+	12.JS中 this 的指向
+		this永远指向最后调用他的那个对象。
+		例：var name = "windowsName";
+			function a() {
+				var name = "Cherry";
+
+				console.log(this.name);          // windowsName
+
+				console.log("inner:" + this);    // inner: Window
+			}
+			a();
+			console.log("outer:" + this)         // outer: Window
+			
+		最后调用a的地方是a()；其相当于是 window.a(); 对象是window 。 （如果使用严格模式的话，全局对象就是 undefined，那么就会报错 Uncaught TypeError: Cannot read property 'name' of undefined。）
+		
+	13.去除input输入框默认的外边线框
+		outline：none; 或 outline:medium;
+		
+		
+	14.CSS -- css自定义字体font-face的兼容和使用
+		@Font-face目前浏览器的兼容性：
+
+		Webkit/Safari(3.2+) 
+		TrueType/OpenType TT (.ttf) 、OpenType PS (.otf)；
+
+		Opera (10+) 
+		TrueType/OpenType TT (.ttf) 、 OpenType PS (.otf) 、 SVG (.svg)；
+
+		Internet Explorer 
+		自ie4开始，支持EOT格式的字体文件；ie9支持WOFF；
+
+		Firefox(3.5+) 
+		TrueType/OpenType TT (.ttf)、 OpenType PS (.otf)、 WOFF (since Firefox 3.6)
+
+		Google Chrome 
+		TrueType/OpenType TT (.ttf)、OpenType PS (.otf)、WOFF since version 6
+
+		由上面可以得出：.eot + .ttf /.otf + svg + woff = 所有浏览器的完美支持。
+		
+		 @font-face {
+		  [font-family: <family-name>;]?
+		  [src: [ <uri> [format(<string>#)]? | <font-face-name> ]#;]?
+		  [unicode-range: <urange>#;]?
+		  [font-variant: <font-variant>;]?
+		  [font-feature-settings: normal|<feature-tag-value>#;]?
+		  [font-stretch: <font-stretch>;]?
+		  [font-weight: <weight>];
+		  [font-style: <style>];
+		}
+		例子：@font-face { font-family: MyHelvetica; src: local("Helvetica Neue Bold"), local("HelveticaNeue-Bold"), url(MgOpenModernaBold.ttf); font-weight: bold; } 
+		
+		@Font-face 让所有浏览器都兼容的方法： 有一个专门用于@font-face 的字体网站，http://www.fontsquirrel.com/fontface/generator 。fontsquirrel 网站提供了一个免费的 @font-face Kit Generator工具，可以生成不同的字体格式，并且直接用css和html给出demo。使你可以直接引用到你的网站上。你可以直接使用 fontsquirrel 网站提供 的一些字体，也可以上传你自己的字体还是用。
+		
+	
+
+
+	15. 给 input  加上监听
+		$(“#itemcode”).bind(“input propertychange”, function() {});
+		
+	
+
+	16.jquery中prop()方法和attr()方法的区别
+		attr("checked")获取checkbox的checked属性时选中的时候可以取到值,值为"checked"但没选中获取值就是undefined。“prop”来获取这些属性，就是来解决这个问题的。使用prop方法获取属性则统一返回true和false。
+		什么时候使用attr()，什么时候使用prop()？
+		1.添加属性名称该属性就会生效应该使用prop();2.是有true,false两个属性使用prop();3.其他则使用attr();
+		prop能同步更新立即生效。
+		
+	
+
+	17.jquery(function(){}) 与 (function(){})(jQuery) 的区别
+		1).jQuery(function(){}); 全写为 ： jQuery(document).ready(function(){}); 意义为在DOM加载完毕之后执行 ready()方法。
+		2).(function(){})(jQuery) 实际执行()(para)匿名方法，传递jQuery对象。
+		
+		总结：jQuery(funtion(){});用于存放DOM对象的代码，执行其中代码时DOM对象已经存在。
+			不可用于存放开发插件代码。因为jQuery对象没有得到传递，外部通过jQuery.methodye 调用不来其中方法。
+			(function(){})(jQuery) 用于存放开发插件的代码，执行其中代码DOM不一定存在，直接自动执行DOM操作代码请小心使用。
+		
+		
+		
+	18.CSS -- placeholder 占位符样式
+		::-webkit-input-placeholder { color:#f00; }
+		::-moz-placeholder { color:#f00; } /* firefox 19+ */
+		:-ms-input-placeholder { color:#f00; } /* Internet Explorer 10+ */
+		:-moz-placeholder { color:#f00; } /* firefox 14-18 */
+		
+		
+	
+	19.JS返回顶部 -- 用性能最好的定时器requestAnimationFrame来实现。谷歌浏览器，火狐浏览器，IE10+都实现了这个函数
+		var timer = null;
+      
+	  cancelAnimationFrame(timer);
+	  timer = requestAnimationFrame(function fn(){
+		var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+		
+		if(oTop > 0){
+		  document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+		  timer = requestAnimationFrame(fn);
+		}else{
+		  cancelAnimationFrame(timer);
+		} 
+	  });
+	  
+	  
+	  
+	20. H5储存 - sessionStorage
+		localStorage.setItem() 不会自动将Json对象转成字符串形式，储存方法：
+			1）.存储前先用JSON.stringify()方法将json对象转换成字符串形式。（JSON.stringify() 方法可以将任意的 JavaScript 值序列化成 JSON 字符串）
+			2）.后续要操作该JSON对象，要将之前存储的JSON字符串先转成JSON对象再进行操作（JSON.parse(localStorage.getItem("temp2"))）
+	
+	
+	
+	21.阻止页面继续加载
+		<script language="JavaScript">
+            /**ie9 及以下将执行以下代码,IE10/11不支持条件性注释，下面代码作为普通注释
+             * Firefox, Chrome 并不执行这段代码，下面的对于Firefox, Chrome逻辑判断是在去掉条件注释后才起作用
+             * ()()；语法是闭包
+             */
+            (function () {
+                //停止ajax请求
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                }else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.abort();
+                //停止继续加载页面，相当于点击stop按钮。
+                if (!!(window.attachEvent && !window.opera))
+                {
+                    document.execCommand("stop");// code for IE
+                }else{
+                    /**
+                     * stops window loading
+                     * code for  Firefox, Chrome, Opera, Safari
+                     */
+                    window.stop();
+                }
+            })();
+		</script>
+		
+		
+	22.图片上传插件 plupload
+		文档 -- http://doc.phpsj.com/docs/plupload/index.html
+		
+	
+	23.$("").load(); 不支持GET请求方式(低版本的jq可能默认在没有传入data参数时为post方式)
+		解决方式 用高版本的 或是 改源码 type为 GET
+
+	
+	
+	24.CSS -- rgba();
+		rgba()在 IE9以下的版本不被支持。解决： filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19ffffff,endColorstr=#19ffffff);
+	
+	
+	25.移动端，输入法把底部固定定位的元素撑起来
+		解决方法： $(window).resize(function(event) {}); 将元素从固定定位切换到static(粘性定位);
+		
+	
+	26.meta标签 -- 
+		1).当手机用户通过百度移动搜索或者其他方式访问站点的PC页（首页或者内容页）时，站点将其自动适配到该PC页面对应的手机页，并为之选择合适的页面版本。
+			<meta name="mobile-agent" content="format=xhtml; url=http://www.ak1ak1.com/wap">
+			<meta name="mobile-agent" content="format=html5; url=http://www.ak1ak1.com/wap">
+		2).IE8兼容性问题。IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame
+			<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		3).禁止百度转码和禁止百度快照缓存的方法。
+			<meta http-equiv="Cache-Control" content="no-transform">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+		4).移动端忽略数字自动识别为电话号码
+			<meta content="telephone=no" name="format-detection" />
+		5).移动端忽略识别邮箱
+			<meta content="email=no" name="format-detection" />
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
