@@ -171,7 +171,15 @@
 		
 		@Font-face 让所有浏览器都兼容的方法： 有一个专门用于@font-face 的字体网站，http://www.fontsquirrel.com/fontface/generator 。fontsquirrel 网站提供了一个免费的 @font-face Kit Generator工具，可以生成不同的字体格式，并且直接用css和html给出demo。使你可以直接引用到你的网站上。你可以直接使用 fontsquirrel 网站提供 的一些字体，也可以上传你自己的字体还是用。
 		
-	
+		@font-face {
+			font-family: '字体名';
+			src: url('字体名.eot'); /* IE9 兼容模式 */
+			src: url('字体名.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+				 url('字体名.woff') format('woff'), /* 现代浏览器 */
+				 url('字体名.ttf')  format('truetype'), /* Safari, Android, iOS */
+				 url('字体名.svg#grablau') format('svg'); /* Legacy iOS */
+		}
+		通常来说，有.woff和eot这两种就够了。
 
 
 	15. 给 input  加上监听
