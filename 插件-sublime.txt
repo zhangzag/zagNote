@@ -1,9 +1,23 @@
 
+插件集合 -- https://blog.csdn.net/zbwroom/article/details/72473851
+
 1.Babel -- 可使react代码高亮
 	使用：To set it as the default syntax for a particular extension: 1. Open a file with that extension, 2. Select View from the menu, 3. Then Syntax -> Open all with current extension as... -> Babel -> JavaScript (Babel). 4. Repeat this for each extension (e.g.: .js and .jsx).
 	
 2.word highlight -- 选中文本高亮
 
 3.px - rem 自动转换 -- https://github.com/flashlizi/cssrem
+
+4.AutoFileName -- 自动提示路径插件
+
+5.Git -- Git插件，提供Git常用的命令集合。
+
+6.HTML5 -- Sublime Text3支持HTML5
+
+7.Sass -- Sublime Text3支持Sass
+
+8.Less -- Sublime Text3支持Less
+
+8.Emmet -- 提高HTML & CSS3编写速度。
 
 	
