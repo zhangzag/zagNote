@@ -1,0 +1,112 @@
+
+一、样式
+	1.Normalize.css 去除不同浏览器默认样式存在的差异。
+		<link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css" rel="stylesheet">
+		
+	2.html5shiv.js 解决ie9以下浏览器对html5新标签无法识别的问题。
+		<!--[if It IE 9]>
+			<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<![endif]>
+		
+	3.respond.js 解决IE9以下浏览器不支持CSS3 Media Query
+		<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		
+	4.picturefill.js 解决 IE 9 10 11 等浏览器不支持 <picture> 标签的问题
+		<script src="https://cdn.bootcss.com/picturefill/3.0.3/picturefill.min.js"></script>、
+	
+	5.完美解决 Placeholder
+		<input type="text" value="Name *" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name *';}">
+		
+	6.清除浮动	
+		.fl { float: left; }
+		.fr { float: right; }
+		.clearfix:after { display: block; clear: both; content: ""; visibility: hidden; height: 0; }
+		.clearfix { zoom: 1; }
+		
+	7.zoom:1的作用 兼容IE6、IE7、IE8浏览器，经常会遇到一些问题，可以使用zoom:1来解决，有如下作用：
+		触发IE浏览器的haslayout 
+		解决ie下的浮动，margin重叠等一些问题。等
+		
+	8.BFC 解决边距重叠问题
+		当相邻元素都设置了 margin 边距时，margin 将取最大值，舍弃小值。为了不让边距重叠，可以给子元素加一个父元素，并设置该父元素为 BFC：overflow: hidden;
+		
+	9.解决 IE9 以下浏览器不能使用 opacity
+		opacity: 0.5;
+		filter: alpha(opacity = 50);
+		filter: progid:DXImageTransform.Microsoft.Alpha(style = 0, opacity = 50);
+		
+	10.解决 IE6 不支持 fixed 绝对定位以及IE6下被绝对定位的元素在滚动的时候会闪动的问题
+		/* IE6 hack */
+		*html, *html body {
+		  background-image: url(about:blank);
+		  background-attachment: fixed;
+		}
+		*html #menu {
+		  position: absolute;
+		  top: expression(((e=document.documentElement.scrollTop) ? e : document.body.scrollTop) + 100 + 'px');
+		}
+
+	11.解决 IE6 不支持 min-height 属性的问题
+		min-height: 350px;
+		_height: 350px;
+		
+	12.让 IE7 IE8 支持 CSS3 background-size属性
+		由于 background-size 是 CSS3 新增的属性，所以 IE 低版本自然就不支持了，但是老外写了一个 htc 文件，名叫 background-size polyfill，使用该文件能够让 IE7、IE8 支持 background-size 属性。其原理是创建一个 img 元素插入到容器中，并重新计算宽度、高度、left、top 等值，模拟 background-size 的效果。
+		html {
+		  height: 100%;
+		}
+		body {
+		  height: 100%;
+		  margin: 0;
+		  padding: 0;
+		  background-image: url('img/37.png');
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  -ms-behavior: url('css/backgroundsize.min.htc');
+		  behavior: url('css/backgroundsize.min.htc');
+		}
+		
+	13.求窗口大小的兼容写法
+		// 浏览器窗口可视区域大小（不包括工具栏和滚动条等边线）
+		// 1600 * 525
+		var client_w = document.documentElement.clientWidth || document.body.clientWidth;
+		var client_h = document.documentElement.clientHeight || document.body.clientHeight;
+
+		// 网页内容实际宽高（包括工具栏和滚动条等边线）
+		// 1600 * 8
+		var scroll_w = document.documentElement.scrollWidth || document.body.scrollWidth;
+		var scroll_h = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+		// 网页内容实际宽高 (不包括工具栏和滚动条等边线）
+		// 1600 * 8
+		var offset_w = document.documentElement.offsetWidth || document.body.offsetWidth;
+		var offset_h = document.documentElement.offsetHeight || document.body.offsetHeight;
+
+		// 滚动的高度
+		var scroll_Top = document.documentElement.scrollTop||document.body.scrollTop;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -20,4 +20,5 @@
 
 8.Emmet -- 提高HTML & CSS3编写速度。
 
+9.HTML-CSS-JS Prettify - HTML、CSS和JS都可以格式化
 	
