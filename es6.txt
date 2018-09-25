@@ -1,0 +1,109 @@
+
+一、字符串模板
+	1.
+		let a = '字符串模板';
+		let n1 = 2;
+		let n2 = 5;
+		let p = `这是es6的字符串模板demoe，-- ${a},<br>
+			还支持换行<br>
+			和<b>html标签</b>。
+			也支持运算，2+5 = ${n1+n2}`;
+	2.字符串查找
+		let a = '查找文字';
+		let b = '这是一段很长的文字，其中查找文字在这里';
+		//includes 直接判断是否存在
+		document.write( b.includes(a) );
+		//判断是否在结尾
+		document.write( b.endsWith(a) );
+		//判断开头是否存在
+		document.write( b.startWith(a) );
+		//负责字符串
+		document.write( 'zag?'.repeat(3) );
+
+
+二、对象扩展运算符 （...）
+	当编写一个允许传入的参数个数是不确定的方法时，可用对象扩展运算符。就算在方法中引用多了也不会报错，而是undefined
+	rest运算符，跟对象扩展运算符很相似。相当于除有定义以外的参数。
+	
+	
+三、数组
+	1.将JSON数组格式转换成数组。 Array.from();
+	2.将一堆文本转换成数组。 Array.of();
+	3.实例方法,find(): 
+		let arr=[1,2,3,4,5,6,7,8,9];
+		console.log(arr.find(function(value,index,arr){
+			//value-值， index-索引， arr-数组
+			return value > 5;//返回大于5的数组遇到一个就返回并停止。没有返回undefined
+		}));
+	4.实例方法,fill(): 把数组进行填充，它接收三个参数，第一个是填充的变量，第二个是开始填充的位置，第三个是填充到的位置。
+		let arr=[0,1,2,3,4,5,6,7,8,9];
+		arr.fill('jspang',2,5);
+		console.log(arr);
+	5.entries实例方法: 生成的是Iterator形式的数组，那这种形式的好处就是可以让我们在需要时用next()手动跳转到下一个值。
+		let arr=['jspang','技术胖','大胖逼逼叨']
+		let list=arr.entries();
+		console.log(list.next().value);
+		console.log(list.next().value);
+		console.log(list.next().value);
+		
+四、ES6中的函数和数组补漏
+	1.对象的函数解构
+		let json = {
+			a:'jspang',
+			b:'技术胖'
+		}
+		function fun({a,b='jspang'}){
+			console.log(a,b);
+		}
+
+	2.数组的函数解构
+		let arr = ['jspang','技术胖','免费教程'];
+		function fun(a,b,c){
+			console.log(a,b,c);
+		}
+	3.in的用法，n是用来判断对象或者数组中是否存在某个值的。
+		let obj={
+			a:'jspang',
+			b:'技术胖'
+		}
+		console.log('a' in obj);  //true
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
