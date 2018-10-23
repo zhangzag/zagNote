@@ -6,3 +6,123 @@
 	1.通过 prop：
 	2.通过 事件：
 	3.通过 ref：直接返回该实例化对象。
+	
+三、单页组件里添加统计代码：
+	在路由后置钩子里，通过匿名函数生成script标签后执行这个函数
+		setTimeout(()=>{
+			(function() {
+				//每次执行前，先移除上次插入的代码
+				document.getElementById('ym_tj') && document.getElementById('ym_tj').remove();
+				var script = document.createElement("script");
+				script.src = "https://s19.cnzz.com/z_stat.php?id=1275074289&web_id=1275074289";
+				script.id = "ym_tj"
+				script.language = 'JavaScript'
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(script, s);
+			})();
+		},0);
+		
+四、注意 -- 打开devtools模式在发布到生产时要切换回关闭状态。否则在控制台可以用devtools工具查看并更改vue数据。
+
+五、注意 -- vue打包后会出现一些.map文件，该文件的作用是，项目打包后是压缩加密的，map文件在项目报错时可以准确定位到代码位置。发布到生产时将其关闭可增加代码安全性。（在 ‘config/index.js’ 中修改： productionSourceMap:false即可。）
+
+六、vue - 分环境打包：
+	1.安装cross-env。 cnpm i --save-dev cross-env
+	2.修改各环境下的参数。在config/目录下添加test.env.js、pre.env.js。修改prod.env.js里的内容，修改后的内容如下：
+		'use strict'
+		module.exports = {
+		  NODE_ENV: '"production"',
+		  EVN_CONFIG:'"prod"',
+		  API_ROOT:'"/apis/v1"'
+		}
+		分别对test.env.js和pre.env.js文件内容进修修改，修改后的内容如下：
+		'use strict'
+		module.exports = {
+		  NODE_ENV: '"testing"',
+		  EVN_CONFIG:'"test"',
+		  API_ROOT:'"/test/apis/train"'
+		}
+
+
+		'use strict'
+		module.exports = {
+		  NODE_ENV: '"presentation"',
+		  EVN_CONFIG:'"pre"',
+		  API_ROOT:'"/pre/apis/train"'
+		}
+		对dev.env.js文件内容进行修改，修改后的内容如下。dev环境配制了服务代理，API_ROOT前的api是配制的代理地址。
+		module.exports = merge(prodEnv, {
+		  NODE_ENV: '"development"',
+		  VN_CONFIG: '"dev"',
+		  API_ROOT: '"api/apis/v1"'
+		})
+	3.修改项目package.json文件。对package.json文件中的scripts内容进行个性，添加上新定义的几种环境的打包过程，里的参数与前面的调协保持一致。
+		 "scripts": {
+			"dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+			"start": "npm run dev",
+			"build": "node build/build.js",
+			"build:test": "cross-env NODE_ENV=production env_config=test node build/build.js",
+			"build:pre": "cross-env NODE_ENV=production env_config=pre node build/build.js",
+			"build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js"
+		  },
+		在这里，NODE_ENV最好都设成production，因为在utils.js只做了production一种判定，亲测不会影响各环境API参数。
+		
+	4.修改config/index.js。修改config/index.js文件中build参数，这里的参数会在build/webpackage.prod.conf.js中使用到
+		build:{
+			// Template for index.html
+			// 添加test pre prod 三处环境的配制
+			prodEnv: require('./prod.env'),
+			preEnv: require('./pre.env'),
+			testEnv: require('./test.env'),
+			
+			//下面为原本的内容，不需要做任何个性
+			index:path.resolve(__dirname,'../dist/index.html'),
+			
+	5.在webpackage.prod.conf.js中使用构建环境参数。对build/webpackage.prod.conf.js文件进行修改，调整env常量的生成方式。
+		// 个性env常量的定义
+		// const env = require('../config/prod.env')
+		const env = config.build[process.env.env_config+'Env']
+
+	6.调整build/build.js。
+		'use strict'
+		require('./check-versions')()
+
+		// 注释掉的代码
+		// process.env.NODE_ENV = 'production'
+
+		const ora = require('ora')
+		const rm = require('rimraf')
+		const path = require('path')
+		const chalk = require('chalk')
+		const webpack = require('webpack')
+		const config = require('../config')
+		const webpackConfig = require('./webpack.prod.conf')
+
+		// 修改spinner的定义
+		// const spinner = ora('building for production...')
+		var spinner = ora('building for ' + process.env.NODE_ENV + ' of ' + process.env.env_config+ ' mode...' )
+		spinner.start()
+
+		//更多的其它内容，不需要做任何调整的内容 ... 
+		
+	7.在代码中使用。在代码中使用process.env.API_ROOT代替API真实地址，如：
+		//Axios.defaults.baseURL = "/apis/v1"
+		Axios.defaults.baseURL = process.env.API_ROOT
+
+
+		  
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -1,0 +1,140 @@
+
+一、嵌套，Sass 允许将一套 CSS 样式嵌套进另一套样式中，内层的样式将它外层的选择器作为父选择器，例如：
+	#main p {
+	  color: #00ff00;
+	  width: 97%;
+
+	  .redbox {
+		background-color: #ff0000;
+		color: #000000;
+	  }
+	}
+
+	编译为:
+	#main p {
+	  color: #00ff00;
+	  width: 97%; }
+	#main p .redbox {
+		background-color: #ff0000;
+		color: #000000; }
+		
+
+二、父选择器 & ,在嵌套 CSS 规则时，有时也需要直接使用嵌套外层的父选择器，例如，当给某个元素设定 hover 样式时，或者当 body 元素有某个 classname 时，可以用 & 代表嵌套规则外层的父选择器。
+	a {
+	  font-weight: bold;
+	  text-decoration: none;
+	  &:hover { text-decoration: underline; }
+	  body.firefox & { font-weight: normal; }
+	}
+	编译为： 
+	a {
+	  font-weight: bold;
+	  text-decoration: none; }
+	  a:hover {
+		text-decoration: underline; }
+	  body.firefox a {
+		font-weight: normal; }
+
+
+三、属性嵌套，些 CSS 属性遵循相同的命名空间 (namespace)，比如 font-family, font-size, font-weight 都以 font 作为属性的命名空间。为了便于管理这样的属性，同时也为了避免了重复输入，Sass 允许将属性嵌套在命名空间中，例如：
+	.funky {
+	  font: {
+		family: fantasy;
+		size: 30em;
+		weight: bold;
+	  }
+	}
+	编译为：
+	.funky {
+	  font-family: fantasy;
+	  font-size: 30em;
+	  font-weight: bold; }
+	命名空间也可以包含自己的属性值，例如：
+	.funky {
+	  font: 20px/24px {
+		family: fantasy;
+		weight: bold;
+	  }
+	}
+	编译为：
+	.funky {
+	  font: 20px/24px;
+		font-family: fantasy;
+		font-weight: bold; }
+
+		
+四、@extend，将一个选择器下的所有样式继承给另一个选择器。		
+		
+	.error {
+	  border: 1px #f00;
+	  background-color: #fdd;
+	}
+	.seriousError {
+	  @extend .error;
+	  border-width: 3px;
+	}
+	
+	
+	
+五、注释 /* */ 与 //，Sass 支持标准的 CSS 多行注释 /* */，以及单行注释 //，前者会 被完整输出到编译后的 CSS 文件中，而后者则不会
+	
+	
+
+六、变量 $ 
+	$width: 5em;
+	#main {
+	  width: $width;
+	}
+	变量支持块级作用域，嵌套规则内定义的变量只能在嵌套规则内使用（局部变量），不在嵌套规则内定义的变量则可在任何地方使用（全局变量）。将局部变量转换为全局变量可以添加 !global 声明。
+	#main {
+	  $width: 5em !global;
+	  width: $width;
+	}
+
+	#sidebar {
+	  width: $width;
+	}
+	编译为:
+	#main {
+	  width: 5em;
+	}
+
+	#sidebar {
+	  width: 5em;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

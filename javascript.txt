@@ -96,7 +96,8 @@
 	undefined、null、String、Numben、Boolean、Object、Symbol(ES6引入的一种新的原始数据类型)
 		
 		
-		
+六、获取元素高度/宽度/距离顶部位置/距离底部位置
+	1.document.getElementById('test').getBoundingClientRect用于获取某个html元素相对于视窗的位置集合。(会得到top、right、bottom、left、width、height属性。)
 		
 		
 		
