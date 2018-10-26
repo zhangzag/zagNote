@@ -1,0 +1,108 @@
+
+一、设置当前html文件的字符编码。
+	<meta charset="UTF-8">
+
+	
+二、设置浏览器的兼容模式（让IE使用最新的浏览器渲染）。和 最新版本的Chrome。
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	
+三、视口（快捷键：meta:vp）
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	
+四、Cache-Control头域
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	1.Cache-Control指定请求和响应遵循的缓存机制。在请求消息或响应消息中设置Cache-Control并不会修改另一个消息处理过程中的缓存处理过程。请求时的缓存指令包括no-cache、no-store、max-age、max-stale、min-fresh、only-if-cached，响应消息中的指令包括public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age。各个消息中的指令含义如下,
+	2.no-cache指示请求或响应消息不能缓存
+	3.no-store用于防止重要的信息被无意的发布。在请求消息中发送将使得请求和响应消息都不使用缓存
+	4.must-revalidate：告诉浏览器、缓存服务器，本地副本过期前，可以使用本地副本；本地副本一旦过期，必须去源服务器进行有效性校验。
+	
+五、用于设定禁止浏览器从本地机的缓存中调阅页面内容，设定后一旦离开网页就无法从Cache中再调出。
+	<meta http-equiv="Pragma" content="no-cache"/>
+	
+六、禁止将页面中的一连串数字识别为电话号码、并设置为手机可以拨打的一个连接。忽略页面中的邮箱格式为邮箱。
+	<meta name="format-detection" content="telphone=no, email=no"/>
+	
+七、删除默认的苹果工具栏和菜单栏。
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	
+八、控制状态栏显示样式。
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	
+九、条件注释。
+	<!--[if lt IE 9]> 
+		<script src="lib/html5shiv/html5shiv.min.js"></script> 
+		<script src="lib/respond/respond.min.js"></script> 
+	<![endif]--> 
+	- html5shiv让浏览器可以识别html5的新标签；
+	- respond让低版本浏览器可以使用CSS3的媒体查询。
+	
+十、页面关键词。页面描述。
+	<meta name="keywords" content=""/> <meta name="description" content="不超过150个字符"/>
+	
+十一、不让百度转码。
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	
+十二、针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓。
+	<meta name="HandheldFriendly" content="true">
+	
+十三、SEO 优化。
+	<meta name="description" content="不超过150个字符" />页面描述
+	<meta name="keywords" content="html5, css3, 关键字"/>页面关键词
+	<meta name="author" content="魔法小栈" />定义网页作者
+	<meta name="robots" content="index,follow" /> ----- 定义网页搜索引擎索引方式，robotterms是一组使用英文逗号「,」分割的值，通常有如下几种取值：none，noindex，nofollow，all，index和follow。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
