@@ -1,0 +1,57 @@
+
+/* header */
+.header {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	height: 1.25rem;
+	width: 100%;
+	max-width: 640px;
+	z-index: 9;
+	transform: translateX(-50%);
+}
+
+/* 头部标题 */
+.mint-header {
+	background-color: #fff;
+	color: #262626;
+	height: 1.25rem;
+	border-bottom: 0.03125rem solid #dadada;
+	max-width: 640px;
+    margin: 0 auto;
+}
+
+/* 更多 */
+.more_block {
+	right: 0.3125rem;
+	top: 1.25rem;
+	left: auto;
+	width: 3.75rem;
+	border-radius: 0.125rem;
+	padding: 0 0.3125rem;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 0 9px rgba(0,0,0,.2);
+}
+.more_block a {
+	height: 1.5625rem;
+	line-height: 1.5625rem;
+	text-align: center;
+	font-size: 0.40625rem;
+	border-bottom: 0.03125rem solid #dadada;
+}
+.more_block a:last-child {
+	border-bottom: 0;
+}
+.more_block::before {
+	content: '';
+	height: 0;
+	width: 0;
+	position: absolute;
+	right: 0.15625rem;
+	top: -0.25rem;
+	border: 0.125rem solid #fff;
+	border-top-color: transparent ;
+	border-left-color: transparent ;
+	border-right-color: transparent ;
+}

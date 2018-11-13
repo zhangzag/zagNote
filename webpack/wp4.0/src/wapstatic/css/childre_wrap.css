@@ -1,0 +1,21 @@
+
+.has_header_wrap {
+    padding-top: 1.25rem;
+}
+
+.c_wrap {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 999;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    max-width: 640px;
+    margin:0 auto;
+}
+

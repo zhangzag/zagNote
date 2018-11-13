@@ -1,0 +1,44 @@
+
+
+	一、webpack配置： 外部扩展(externals)
+		通过cdn引进的jQuery可通过外部扩展将其定义为全局变量。
+		externals:{
+			'jquery':'window.jQuery'
+		}
+		上面的externals配置，告诉webpack，在编译时，看到require('jquery')，就把它替换成window.jQuery。这样，就实现了引用全局上的jQuery。现在依旧用require的方式来引入时，webpack不会将它又编译进文件中。
+		
+	
+	二、提取公共js: CommonsChunkPlugin (webpack4.x已经废弃，改用optimization)
+		plugins: [
+			// 提供公共代码, 默认会把所有入口节点的公共代码提取出来,生成一个common.js
+			new webpack.optimize.CommonsChunkPlugin({
+				name : 'common',
+				filename : 'js/common.js'
+			})
+		]
+		将公共文件放在入口文件的话，文件引用公共JS时不用在去require公共js文件。
+		
+		
+	三、webpack配置： 解决(resolve)可配置路径引用
+		resolve : {
+		  alias : {
+			  image          : __dirname + '/src/assets/images',
+			  '~': __dirname + '/src'
+		  }
+		},
+		
+	
+	四、提取css，不让css打包进js
+		const ExtractTextPlugin   = require('extract-text-webpack-plugin');
+		
+		plugins: [
+			new ExtractTextPlugin("css/[name].css"),
+		]
+	
+	
+	
+	
+	
+	
+	
+	

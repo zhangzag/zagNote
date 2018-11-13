@@ -1,0 +1,19 @@
+
+一、nuxt.comfig.js
+	1. plugins: 对插件进一步配置。
+	
+二、解决Nuxt 执行generate静态化后 文件路径错误导致404，CSS无效，JS不执行的等问题。
+	nuxt.config.js里 需要如下配置：
+		router:{
+			base:"/" //此为根目录，如果有具体目录需求按实际情况写
+		}
+
+
+
+
+
+
+
+
+
+

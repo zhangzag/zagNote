@@ -1,0 +1,644 @@
+
+/* 全局样式 */
+html {
+  height: 100%;
+  background-color: #f0f0f0;  
+  max-width: 640px;
+  margin: 0 auto;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #f0f0f0;
+}
+
+/* *{
+  font-size: 0.375rem;
+  color: #555;
+} */
+
+#app {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;  
+  font-size: 0.375rem;
+  color: #555;
+  -webkit-text-size-adjust:none; /* 支持12px，chrome 27 以下支持 */
+}
+
+p {
+  margin: 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  display: block;
+  color: #262626;
+  text-decoration: none;
+  -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+h1,h2,h3,h4,h5 {
+  margin: 0;
+}
+input, button {
+  outline: none;
+}
+dl, dd {
+  margin: 0;
+}
+input[type=number] {  
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;
+}
+
+/* flex布局 display: flex; */
+.d_flex {
+  display: box;              /* OLD - Android 4.4- */  
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */  
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */  
+  display: -ms-flexbox;      /* TWEENER - IE 10 */  
+  display: -webkit-flex;     /* NEW - Chrome */  
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+/* 浮动 */
+.f_left {
+  float: left;
+}
+.f_right {
+  float: right;
+}
+.clear_all {
+  clear: both;
+}
+/* 行块内元素 */
+.inline_block {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.4375rem;
+}
+/* 字体颜色 */
+.r_color {
+  color: #e00000;
+  font-style: normal;
+}
+.c_wran {
+  color: #f08200;
+  font-style: normal;
+}
+.c_green {
+  color: #0f904e;
+  font-style: normal;
+}
+
+/* wrap */
+.wrap {
+  min-height: 100vh;
+}
+.has_header_wrap { /* 有顶部标题的wrap */
+  /* padding-top: 1.25rem; */
+  /* position: fixed; */
+  position: relative;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  /* overflow: auto; */
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.wrap_in {
+  padding-top: 1.25rem;
+  box-sizing: border-box;
+  max-width: 640px;
+}
+/*** 禁止页面滚动 ***/
+.unscrollable {
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top:0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.wrap.unscrollable {
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  top:0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* 多选框样式1 */
+label[ischeckbox] {
+  font-size: 0;
+  height: 0.625rem;
+  display: inline-block;
+  line-height: 0.625rem;
+  vertical-align: middle;
+}
+label[ischeckbox]>* {
+  display: inline-block;
+  font-size: 0.375rem;
+  vertical-align: middle;
+  margin: 0;
+}
+label[ischeckbox] input[type="checkbox"] {
+  display: none;
+}
+label[ischeckbox]>i {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border: 1px solid #a7a7a7;
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+}
+label[ischeckbox]>i::after {
+  content: '';
+  width: 0.25rem;
+  height: 0.25rem;
+  background-color: #a7a7a7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.125rem;
+  margin-top: -0.125rem;
+  transition: transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  -moz-transition: transform 0.2s ease-out;
+  -ms-transition: transform 0.2s ease-out;
+  -o-transition: transform 0.2s ease-out;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+}
+label[ischeckbox] input[type="checkbox"]:checked+i::after {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}
+label[ischeckbox]>span {
+  padding-left: 0.125rem;
+}
+/* 多选选样式2 */
+label[ischeckboxtwo] {
+  font-size: 0;
+  height: 0.625rem;
+  display: inline-block;
+  line-height: 0.625rem;
+  vertical-align: middle;
+}
+label[ischeckboxtwo]>* {
+  display: inline-block;
+  font-size: 0.375rem;
+  vertical-align: middle;
+  margin: 0;
+}
+label[ischeckboxtwo] input[type="checkbox"] {
+  display: none;
+}
+label[ischeckboxtwo]>i {
+  width: 0.25rem;
+  height: 0.25rem;
+  border: 1px solid #555555;
+  background-color: transparent;
+  position: relative;
+}
+label[ischeckboxtwo]>i::after {
+  content: '';
+  width: 0.09375rem;
+  height: 0.25rem;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.0625rem;
+  margin-top: -0.1875rem;
+  transition: transform 0.1s ease-out;
+  -webkit-transition: transform 0.1s ease-out;
+  -moz-transition: transform 0.1s ease-out;
+  -ms-transition: transform 0.1s ease-out;
+  -o-transition: transform 0.1s ease-out;
+  transform: scale(0) rotate(45deg);
+  -webkit-transform: scale(0) rotate(45deg);
+  -moz-transform: scale(0) rotate(45deg);
+  -ms-transform: scale(0) rotate(45deg);
+  -o-transform: scale(0) rotate(45deg);
+}
+label[ischeckboxtwo] input[type="checkbox"]:checked+i::after {
+  border-color: #0f904e;
+  border-right: 1px solid #0f904e;
+  border-bottom: 1px solid #0f904e;
+  transform: scale(1) rotate(45deg);
+  -webkit-transform: scale(1) rotate(45deg);
+  -moz-transform: scale(1) rotate(45deg);
+  -ms-transform: scale(1) rotate(45deg);
+  -o-transform: scale(1) rotate(45deg);
+}
+label[ischeckboxtwo]>span {
+  padding-left: 0.125rem;
+}
+/* 单选 样式1 */
+label[isradio] {
+  font-size: 0;
+  height: 0.625rem;
+  display: inline-block;
+  line-height: 0.625rem;
+  vertical-align: middle;
+}
+label[isradio]>* {
+  display: inline-block;
+  font-size: 0.375rem;
+  vertical-align: middle;
+  margin: 0;
+}
+label[isradio] input[type="radio"] {
+  display: none;
+}
+label[isradio]>i {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border: 1px solid #a7a7a7;
+  border-radius: 50%;
+  background-color: transparent;
+  position: relative;
+}
+label[isradio]>i::after {
+  content: '';
+  width: 0.25rem;
+  height: 0.25rem;
+  background-color: #a7a7a7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.125rem;
+  margin-top: -0.125rem;
+  transition: transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  -moz-transition: transform 0.2s ease-out;
+  -ms-transition: transform 0.2s ease-out;
+  -o-transition: transform 0.2s ease-out;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+}
+label[isradio] input[type="radio"]:checked+i::after {
+  background-color: #0f904e;
+  border-color: #0f904e;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}
+label[isradio]>span {
+  padding-left: 0.125rem;
+}
+
+
+/* mint-ui */
+body .mint-button-text {
+  font-size: 0.40625rem;
+}
+.mint-button--default.mint-button--small.is-plain {
+  color: #555;
+  border-color: #555;
+  font-size: 0.40625rem;
+  padding: 0 0.4375rem;
+  height: 0.875rem;
+  line-height: 0.875rem;
+}
+.mint-button--default.mint-button--small.is-plain .mint-button-text {
+  color: #555;
+}
+/* 主按钮 橙色 */
+.mint-button--primary.mint-button--small { 
+  background-color: #f08200;
+  font-size: 0.40625rem;
+  width: 2.4375rem;
+  height: 0.875rem;
+  line-height: 0.875rem;
+}
+/* 主按钮 橙色 幽灵 */
+body .mint-button.is-plain.warm {
+  border-color: #f08200;
+  color: #f08200;
+}
+body .mint-button.is-plain.warm .mint-button-text {
+  color: #f08200;
+}
+/* 普通 幽灵 绿色 */
+body .mint-button--normal {
+  font-size: 0.40625rem;
+  height: 0.875rem;
+  line-height: 0.875rem;
+}
+.mint-button--default.is-plain.green {
+  border-color: #2fba66;
+  color: #2fba66;
+}
+/* 普通 绿色 */
+.mint-button--default.mint-button--small.green {
+  background-color: #2fba66;
+  height: 0.875rem;
+  line-height: 0.875rem;
+  color: #fff;
+  font-size: 0.40625rem;
+  padding: 0 0.4375rem;
+  border: 0;
+}
+.mint-button--default.mint-button--small.green .mint-button-text {
+  color: #fff;
+}
+/* 底部按钮全屏宽 */
+.foot_btn {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 1.375rem;
+  padding: 0 0.3125rem;
+  background-color: #2fba66;
+  color: #fff;
+  border: 0;
+  font-size: 0;
+}
+.foot_btn>.icons_add {
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+  background-image: url(../../../../static/images/icons_edit.png);
+  background-repeat: no-repeat;
+  -webkit-background-size: 1.625rem auto;
+  background-size: 1.625rem auto;
+  background-position: -0.625rem -2.5rem;
+  font-size: 0.46875rem;
+  vertical-align: middle;
+}
+.foot_btn>span {
+  display: inline-block;
+  font-size: 0.46875rem;
+  vertical-align: middle;
+}
+/* cell */
+body .mint-cell-wrapper {
+  background: none;
+  border-bottom: 0.03125rem solid #f0f0f0;
+  font-size: 0.4375rem;
+  padding: 0 0.3125rem;
+}
+body .mint-cell-wrapper .mint-cell-text {
+  font-size: 0.4375rem;
+  color: #262626;
+}
+body .mint-cell-wrapper .mint-cell-value {
+  font-size:0.375rem;
+}
+body .mint-field .mint-cell-title {
+  width: 3.28125rem;
+}
+body .mint-cell {
+  min-height: 1.375rem;
+}
+body .mint-field-core::-webkit-input-placeholder {
+  color: #a7a7a7;
+}
+body .mint-field-core::-moz-placeholder {
+  color: #a7a7a7;
+}
+body .mint-field-core:-moz-placeholder {
+  color: #a7a7a7;
+}
+body .mint-field-core:-ms-input-placeholder {
+  color: #a7a7a7;
+}
+/* cell 右箭头 */
+body .mint-cell-allow-right::after {
+	width: 0.21875rem;
+	height: 0.21875rem;
+	border-width: 0.03125rem;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+body .mint-field-core {
+  color: #a7a7a7;
+}
+/* 头部标题 */
+.mint-header .mint-header-title {
+	font-size: 0.46875rem;
+	color: #262626;
+  height: 0.875rem;
+  line-height: 0.875rem;
+}
+.mint-header .mint-button-icon i {
+	font-size: 0.5rem;
+}
+/* 多选框 */
+body .mint-checkbox-core {
+  border: 0.03125rem solid #a7a7a7;
+  background-color: transparent;
+  width: 0.3125rem;
+  height: 0.3125rem;
+}
+body .mint-checkbox-core::after {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  background-color: #a7a7a7;
+  width: 0.25rem;
+  height: 0.25rem; 
+  border: 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.125rem;
+  margin-top: -0.125rem;
+  border-radius: 50%;
+}
+body .mint-checkbox-input:checked + .mint-checkbox-core {
+  background-color: transparent;
+  border-color: #a7a7a7;
+}
+body .mint-msgbox {
+  width: 6.1875rem;
+  font-size: 0.5rem;
+}
+body .mint-msgbox .mint-msgbox-message {
+  font-size: 0.4375rem;
+  color: #555;
+}
+body .mint-msgbox-content {
+  border-bottom: 0;
+}
+body .mint-msgbox .mint-msgbox-btns {
+  padding: 0 1.0rem;
+}
+body .mint-msgbox .mint-msgbox-cancel {
+  width: 100%;
+  box-sizing: border-box;
+  height: 0.875rem;
+  line-height: 0.875rem;
+  font-size: 0.4375rem;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 0.0625rem;
+  border-right: 0;
+  margin-right: 0.15625rem;
+  font-size: 0.375rem;
+}
+body .mint-msgbox .mint-msgbox-confirm {
+  width: 100%;
+  box-sizing: border-box;
+  height: 0.875rem;
+  line-height: 0.875rem;
+  font-size: 0.4375rem;
+  background-color: #2fba66;
+  color: #fff;
+  border-radius: 0.0625rem;
+  font-size: 0.375rem;
+}
+body .v-modal {
+  height: 100vh;
+}
+
+/* 性别单选 */
+.sexs {
+	min-height:1.375rem;
+	padding: 0 0.3125rem ;
+    border-bottom: 0.03125rem solid #f0f0f0;
+    background-color:#fff;
+}
+.sexs .mint-cell:last-child {
+	background-image:none;
+}
+.sexs .mint-radiolist-title {
+	width: 3.28125rem;
+	margin: 0;
+	line-height: 1.5rem;
+	font-size: 0.4375rem;
+    color: #262626;
+    height: 1.375rem;
+}
+.sexs .mint-cell-title {
+	font-size: 0.375rem;
+	color:#a7a7a7;
+}
+.sexs .mint-cell-wrapper {
+	border-bottom: 0;
+}
+.sexs .mint-cell {
+	background-image: none;
+	flex: 1;
+}
+.sexs .mint-radio-core {
+	width: 0.375rem;
+	height: 0.375rem;
+}
+.sexs .mint-radio-core::after {
+	top: 0.0625rem;
+    left: 0.0625rem;
+    width: 0.1875rem;
+    height: 0.1875rem;
+}
+
+/* 加载动画 */
+body .mint-spinner-fading-circle {
+  width: 0.875rem !important;
+  height: 0.875rem !important;
+}
+body .mint-spinner-snake {
+  width: 0.875rem !important;
+  height: 0.875rem !important;
+  box-sizing: border-box;
+}
+
+/* popup */
+body .mint-datetime {
+  max-width: 640px;
+}
+
+
+/* 没有更多数据 */
+/* nothing */
+#nothing {
+  background-color: #fff;
+  text-align: center;
+  padding-top: 1.6875rem;
+  padding-bottom: 1.625rem;
+}
+#nothing p {
+  background-image: url(../../../../static/images/noting_order.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  -webkit-background-size: 2.453125rem auto;
+  background-size: 2.453125rem auto;
+  padding-top: 3.03125rem;
+}
+#nothing p span {
+  font-size: 0.46875rem;
+  color: #a7a7a7;
+  height: 0.875rem;
+  display: inline-block;
+}
+#nothing p a {
+  color: #fff;
+  font-size: 0.375rem;
+  width: 1.8125rem;
+  height: 0.75rem;
+  line-height: 0.75rem;
+  text-align: center;
+  border: 0;
+  background-color: #2fba66;
+  border-radius: 0.375rem;
+  display: block;
+  margin: 0 auto;
+}
+
+/*TQ客服工具*/
+#tq_kefu_main, #tq_kefu_normal_container {
+    position: fixed !important;
+    top: 9.375rem !important;
+    left: 0.3125rem !important;
+    width: 1.3125rem !important;
+    height: 1.3125rem !important;  
+}
+
+
+/*** 动画 ***/
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+/* .fade-leave-active below version 2.1.8 */
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}

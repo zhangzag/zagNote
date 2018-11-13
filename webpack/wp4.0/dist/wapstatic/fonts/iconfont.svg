@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="gengduo" unicode="&#59035;" d="M247.172414 313.37931a70.62069 70.62069 0 1 1 0 141.24138 70.62069 70.62069 0 0 1 0-141.24138z m264.827586 0a70.62069 70.62069 0 1 1 0 141.24138 70.62069 70.62069 0 0 1 0-141.24138z m264.827586 0a70.62069 70.62069 0 1 1 0 141.24138 70.62069 70.62069 0 0 1 0-141.24138z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="jiantou" unicode="&#58883;" d="M801.548285 385.728968L301.254151-114.360574c-18.242732-18.242732-47.73799-18.106338-65.844327 0.306887a47.226511 47.226511 0 0 0 0.272788 66.389904l433.358652 433.154061L235.784908 815.643665A47.192413 47.192413 0 0 0 235.307528 882.033569 46.30585 46.30585 0 0 0 301.151856 882.545048l500.396429-496.81608z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="jiantouxiangzuo" unicode="&#58913;" d="M354 384.08a61.19 61.19 0 0 0 17.79 43.25L609 664.45a35 35 0 1 0 49.55-49.55L427.62 384l230.89-230.9A35 35 0 0 0 609 103.56L371.84 340.69A61.41 61.41 0 0 0 354 384.08z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>

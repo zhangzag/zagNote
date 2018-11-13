@@ -81,8 +81,13 @@
 		var b={b:'技术胖'};
 		var c={c:'web'};
 		let d=Object.assign(a,b,c);// {a:'jspang', b: '技术胖', c: 'web'}
-		
-		
+
+
+六、async/await 
+	1. async function a(){return 1}
+		这个函数总是返回一个promise,如果代码中有return <非promise>语句，javascript会自动把返回的这个value值包装成promise的resolve。
+	2.await只能在async函数里使用，它可以让javascript进行等待，知道一个promise执行并返回他的执行结果，javascript才会继续往下执行。(await字面上使得JavaScript等待，直到promise处理完成，
+然后将结果继续下去。这并不会花费任何的cpu资源，因为引擎能够同时做其他工作：执行其他脚本，处理事件等等。)	
 		
 		
 		
