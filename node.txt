@@ -1,0 +1,126 @@
+
+一、开启严格模式： node --use_strict hello.js(--use_strict参数来开启严格模式。)
+
+二、对象：
+	1.全局对象(global)：JavaScript有且仅有一个全局对象，在浏览器中，叫window对象。而在Node.js环境中，也有唯一的全局对象，但不叫window，而叫global，这个对象的属性和方法也和浏览器环境的window不同。
+	2.进程对象(process)：是Node.js提供的一个对象，它代表当前Node.js进程。
+		JavaScript程序是由事件驱动执行的单线程模型，Node.js也不例外。Node.js不断执行响应事件的JavaScript函数，直到没有任何响应事件的函数可以执行时，Node.js就退出了。
+		如果我们想要在下一次事件响应中执行代码，可以调用process.nextTick()：
+			// process.nextTick()将在下一轮事件循环中调用:
+			process.nextTick(function () {
+				console.log('nextTick callback!');
+			});
+			console.log('nextTick was set!');
+			//执行结果
+			//nextTick was set!
+			//nextTick callback!
+		这说明传入process.nextTick()的函数不是立刻执行，而是要等到下一次事件循环。
+
+		Node.js进程本身的事件就由process对象来处理。如果我们响应exit事件，就可以在程序即将退出时执行某个回调函数：
+			// 程序即将退出时的回调函数:
+			process.on('exit', function (code) {
+				console.log('about to exit with code: ' + code);
+			});
+
+三、判断JavaScript执行环境
+	有很多JavaScript代码既能在浏览器中执行，也能在Node环境执行，但有些时候，程序本身需要判断自己到底是在什么环境下执行的，常用的方式就是根据浏览器和Node环境提供的全局变量名称来判断：
+		if (typeof(window) === 'undefined') {
+			console.log('node.js');
+		} else {
+			console.log('browser');
+		}
+
+
+四、模块(fs),文件系统模块，负责读写文件。和所有其它JavaScript模块不同的是，fs模块同时提供了异步和同步的方法。	
+		1.异步：
+		var fs = require('fs');
+
+		fs.readFile('sample.png', function (err, data) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(data);
+				console.log(data.length + ' bytes');
+			}
+		});
+		2.同步：
+		var fs = require('fs');
+
+		var data = fs.readFileSync('sample.txt', 'utf-8');
+		console.log(data);
+		如果同步读取文件发生错误，则需要用try...catch捕获该错误：
+		try {
+			var data = fs.readFileSync('sample.txt', 'utf-8');
+			console.log(data);
+		} catch (err) {
+			// 出错了
+		}
+		
+		
+		3.写文件： 
+			异步：
+			var data = 'Hello, Node.js';
+			fs.writeFile('output.txt', data, function (err) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log('ok.');
+				}
+			});
+			同步：
+			var fs = require('fs');
+
+			var data = 'Hello, Node.js';
+			fs.writeFileSync('output.txt', data);
+		
+		
+		4.获取文件的创建信息
+			fs.stat('sample.txt', function (err, stat) {
+				if (err) {
+					console.log(err);
+				} else {
+					// 是否是文件:
+					console.log('isFile: ' + stat.isFile());
+					// 是否是目录:
+					console.log('isDirectory: ' + stat.isDirectory());
+					if (stat.isFile()) {
+						// 文件大小:
+						console.log('size: ' + stat.size);
+						// 创建时间, Date对象:
+						console.log('birth time: ' + stat.birthtime);
+						// 修改时间, Date对象:
+						console.log('modified time: ' + stat.mtime);
+					}
+				}
+			});
+			stat()也有一个对应的同步函数statSync();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+ 
+ 
