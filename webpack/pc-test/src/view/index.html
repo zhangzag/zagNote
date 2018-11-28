@@ -2,21 +2,20 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>index模板</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    
+    <%= require('html-loader!./layout/comHeadText.html')  %>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/es7-shim/6.0.0/es7-shim.min.js"></script> -->
   </head>
   <body>
     <div class="wrap">
       <!-- <img src="test.png" alt=""> -->
-      <img src="../assets/images/test.png" data-type="htmlimg">
+      <!-- <img src="../assets/images/test.png" data-type="htmlimg"> -->
 
       <div id="ejs">
+        <a href="./login.html">登录页</a>
+        <a href="./login.html">登录页</a>
+        <a href="./login.html">登录页</a>
         <a href="./login.html">登录页</a>
       </div>
     </div>

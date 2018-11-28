@@ -35,6 +35,94 @@
 			new ExtractTextPlugin("css/[name].css"),
 		]
 	
+	五、自动加载模块，不必到处 import或require (ProvidePlugin):
+		new webpack.ProvidePlugin({
+		  $: 'jquery',
+		  jQuery: 'jquery'
+		})
+		
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+/**************************************************/
+对es6的支持：
+	1.使用babel-loader对js进行es6转es5
+	2.使用babel-polyfill，在每个入口引入，提供es6的API支持。
+	
+
+
+
+
+/**************************************************/	
+UglifyJsPlugin 压缩工具对es6转es5的影响：会把转为es5代码又转回es6。
+	解决：
+		new UglifyJsPlugin({
+		  ie8: true,//支持IE8。
+		  exclude:['/node_modules/'],
+		  sourceMap: false,
+		  compress:{
+			  properties: false,//用.来重写属性引用，例如foo["bar"] → foo.bar
+			  warnings: false
+		  },
+		  output:{
+				comments:false,
+				beautify: false,
+				quote_keys: true,//传true的话会在对象所有的键加上括号, 解决ie下 default、class等的保留字问题
+		  },
+		  mangle: {
+			  screw_ie8: false,//默认为true,会去掉支持ie8的api
+		  },
+		})
+	
+	
+	
+	
+/**************************************************/	
+webpack报错处理：	
+	1.Cannot resolve module 'fs'。
+		解决： https://segmentfault.com/q/1010000004399596
+				在webpack.config中加上 node: {fs: "empty"}
+	
+	2.提取公共js后打包出现 webpackJsonp is not defined 。
+		entry:{//首先在入口引入公共文件，取名'common'
+			'commom':['./src/page/common/index.js']
+			'index':['./src/page/index/index.js'],
+			'login':['./src/page/login/index.js']
+		  },
+		  output:{
+			path:path.resolve(__dirname, 'dist'),
+			filename:'js/[name].js'
+		  },
+		  plugins:[
+			new webpack.optimize.CommonsChunkPlugin({
+			  name : 'common',//这里的'common'回去找上面入口处引入的common
+			  filename : 'js/base.js'
+			})
+		  ]
+		其实就是打包的公共模块 base.js并没有引用：
+			HtmlWebpackPlugin({
+				...
+				chunks      : ['login', 'common',//common 就是引入公共的入口 'common'
+			})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

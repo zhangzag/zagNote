@@ -1,0 +1,25 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodd app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa2": "^2.0.0-alpha.7"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "koa-bodyparser": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.1.4"
+  }
+}

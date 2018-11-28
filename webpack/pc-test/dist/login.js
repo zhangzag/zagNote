@@ -1,1 +1,1 @@
-webpackJsonp([3],[function(n,o){"use strict";function c(){return new Promise(function(n,o){n(1)})}!function(){c().then(function(n){console.log("hahahha: ",n)})}(),console.log("这是login","zhang"),console.log("99955959")}]);
+webpackJsonp([3],{"0":function(n,o,c){c(1),n.exports=c(352)},"352":function(n,o){"use strict";function c(){return new Promise(function(n,o){n(1)})}!function(){c().then(function(n){console.log("hahahha: ",n)})}(),console.log("这是login","zhang"),console.log("99955959")}});

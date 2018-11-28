@@ -1,12 +1,12 @@
-// require("babel-polyfill");
+require("babel-polyfill");
 
 module.exports = {
   //入口文件
   entrys: {
-    'common'  : './src/pages/Common/index.js',
-    'index'   : './src/pages/Index/index.js',
-    'login'   : './src/pages/Login/index.js',
-    'comHead' : './src/components/head.js'
+    'common'  : ['babel-polyfill', './src/pages/Common/index.js'],
+    'index'   : ['babel-polyfill', './src/pages/Index/index.js'],
+    'login'   : ['babel-polyfill', './src/pages/Login/index.js'],
+    'comHead' : ['babel-polyfill', './src/components/head.js']
   },
   //页面模板
   modules: [

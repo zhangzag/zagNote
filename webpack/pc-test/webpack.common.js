@@ -3,53 +3,47 @@ const HtmlWebpackPlugin   = require('html-webpack-plugin');
 const ExtractTextPlugin   = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var options = {
   entry: {},
   output: {
     filename: '[name].js',
-    publicPath: '/dist/',
+    // publicPath: '/dist/',
     path: path.resolve(__dirname, 'dist')
   },
   externals : {
      jquery: "jQuery"
   },
-  // node: {
-  //    fs: "empty"
-  // },
+  node: {
+     fs: "empty"
+  },
   module: {
       loaders: [
-          { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader") },
-          // { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=8192&name=resource/[name].[ext]' },
-          { test: /\.(gif|png|jpg|woff|svg|eot|ttf)$/, loader: 'url-loader?limit=5000&name=resource/[name].[ext]' },
-          { test: /\.ejs$/, loader: 'ejs-loader' },
-          { test: /\.(string|html)$/, loader: 'html-loader', query : {minimize : true,removeAttributeQuotes : false }
-          },
-          // { test: /\.art$/, loader: 'art-template-loader', query : {} },
-          // { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: { 'presets': ['env'], } }
-          { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' }
+            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader") },
+            // { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=8192&name=resource/[name].[ext]' },
+            // { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] },
+            { test: /\.(gif|png|jpg|woff|svg|eot|ttf)$/, loader: 'url-loader?limit=5000&name=resource/[name].[ext]' },
+            // { test: /\.ejs$/, loader: 'ejs-loader' },
+            { test: /\.(string|hbs)$/, loader: 'html-loader', query : {minimize : true,removeAttributeQuotes : false }
+            },
+            // { test: /\.art$/, loader: 'art-template-loader', query : {} },
+            // { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: { 'presets': ['env'], } }
+            { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
       ]
   },
   plugins: [
-    new CleanWebpackPlugin(['./dist/*']),
+    // new CleanWebpackPlugin(['./dist/*']),
     // 提供公共代码, 默认会把所有入口节点的公共代码提取出来,生成一个common.js
     // new webpack.optimize.CommonsChunkPlugin({
     //     name : 'common',
     //     filename : 'js/common.js',
     // }),
     new ExtractTextPlugin("css/[name].css"),
-    new UglifyJsPlugin({
-      beautify:true,
-      exclude:['/node_modules/'],
-      // mangle: ,
-      compress:{
-          warnings:false
-      },
-      output:{
-          comments:false
-      }
-    }),
+    new CopyWebpackPlugin([ // 复制
+      { from: path.join(__dirname,'/static/'), to: path.join(__dirname,'/dist/static/') },
+      // { flatten: true, from: './statics/*', to: path.join(__dirname,'/dist/static/') }
+    ])
   ],
   resolve : {
       extensions: ['', '.es6','.js', '.jsx', '.json', '.css', '.less', '.string'],
@@ -60,6 +54,8 @@ var options = {
           // service         : __dirname + '/src/service',
           'image' : __dirname + '/src/assets/images',
           '~': __dirname + '/src',
+          '@': __dirname + '/src',
+          'rooturl': __dirname + '/',
           'pages': __dirname + '/src/pages',
           'views': __dirname + '/src/view'
       }

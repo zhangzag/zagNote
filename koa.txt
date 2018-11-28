@@ -1,0 +1,143 @@
+
+一、GET请求 
+	1.通过 ctx.request.query 或 ctx.request.querystring 来获取请求参数。(query 是json对象， querystring 是字符串)
+	2.通过 ctx.query 或 ctx.querydstring 来获取请求参数。
+
+	
+	
+二、POST请求
+	1.ctx.request和ctx.req的区别
+		ctx.request:是Koa2中context经过封装的请求对象，它用起来更直观和简单。
+		ctx.req:是context提供的node.js原生HTTP请求对象。这个虽然不那么直观，但是可以得到更多的内容，适合我们深度编程。
+	2.通过 ctx.req.on 监听数据的变化，
+		let postdata="";
+		ctx.req.on('data',(data)=>{
+			postdata += data
+		})
+
+
+		
+三、中间件-koa-bodyparser : 对于POST请求的处理，koa-bodyparser中间件可以把koa2上下文的formData数据解析到ctx.request.body中。
+	npm install --save koa-bodyparser@3
+	
+	const bodyParser = require('koa-bodyparser');
+	app.use(bodyParser());
+	直接可以用ctx.request.body进行获取POST请求参数。
+
+	
+
+四、中间件-Koa-router ： 
+	const Router = require('koa-router');
+	const router = new Router();
+	router.get('/', function (ctx, next) {
+		ctx.body="Hello JSPang";
+	});
+	app
+	  .use(router.routes())
+	  .use(router.allowedMethods());
+	  
+	层级：把所有的路径前面都再加入一个级别。
+		const router = new Router({
+			  prefix:'/jspang'
+		})
+	路由层级: 为单个页面设置层级。
+		let home = new Router();
+		home.get('/jspang',async(ctx)=>{
+			ctx.body="Home JSPang";
+		}).get('/todo',async(ctx)=>{
+			ctx.body ='Home ToDo';
+		})
+
+		let page = new Router();
+		page.get('/jspang',async(ctx)=>{
+			ctx.body="Page JSPang";
+		}).get('/todo',async(ctx)=>{
+			ctx.body ='Page ToDo';
+		})
+
+		//装载所有子路由
+		let router = new Router();
+		router.use('/home',home.routes(),home.allowedMethods());
+		router.use('/page',page.routes(),page.allowedMethods());
+		
+		//加载路由中间件
+		app.use(router.routes()).use(router.allowedMethods());
+
+		
+		
+五、中间件 - 模板引擎
+	cnpm install --save koa-views
+	
+	const views = require('koa-views')
+	const path = require('path')
+	// 加载模板引擎
+	app.use(views(path.join(__dirname, './view'), {
+	  extension: 'ejs'
+	}))
+	app.use( async ( ctx ) => {
+	  let title = 'hello koa2'
+	  await ctx.render('index', {
+		title
+	  })
+	})
+
+
+六、中间件 - 静态资源
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
