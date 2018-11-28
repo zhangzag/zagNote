@@ -22,7 +22,10 @@ var options = {
       loaders: [
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader") },
             // { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=8192&name=resource/[name].[ext]' },
-            // { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] },
+            // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader") },
+            // { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader!sass-resources-loader' },
+            // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader") },
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader") },
             { test: /\.(gif|png|jpg|woff|svg|eot|ttf)$/, loader: 'url-loader?limit=5000&name=resource/[name].[ext]' },
             // { test: /\.ejs$/, loader: 'ejs-loader' },
             { test: /\.(string|hbs)$/, loader: 'html-loader', query : {minimize : true,removeAttributeQuotes : false }
@@ -32,6 +35,9 @@ var options = {
             { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
       ]
   },
+  sassResources: './src/assets/style/base.scss',
+  // Or array of paths
+  // sassResources: [ './path/to/vars.scss', './path/to/mixins.scss' ],
   plugins: [
     // new CleanWebpackPlugin(['./dist/*']),
     // 提供公共代码, 默认会把所有入口节点的公共代码提取出来,生成一个common.js
@@ -39,7 +45,8 @@ var options = {
     //     name : 'common',
     //     filename : 'js/common.js',
     // }),
-    new ExtractTextPlugin("css/[name].css"),
+    // new ExtractTextPlugin("css/[name].css"),
+    new ExtractTextPlugin("static/css/[name].css"),
     new CopyWebpackPlugin([ // 复制
       { from: path.join(__dirname,'/static/'), to: path.join(__dirname,'/dist/static/') },
       // { flatten: true, from: './statics/*', to: path.join(__dirname,'/dist/static/') }

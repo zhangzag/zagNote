@@ -1,5 +1,5 @@
 // require('./style/index.css');
-// require('./style/index.scss');
+require('./style/index.scss');
 import { renderHtml } from '@/util/util.js';
 import source from './index.hbs';
 

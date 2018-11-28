@@ -1,0 +1,476 @@
+/*** 变量 ***/
+/* 字体颜色 */
+$c_green: #2FBA66;
+$c_orange: #F08200;
+
+/*** mixin ***/
+@mixin transition-all {
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+}
+@mixin overflow-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+/* CSS Document */
+html {
+    background:#fafafa;
+    color:#646464;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, input, textarea, p, blockquote, th, td, hr, button, article, footer, header, menu, nav, section {
+    margin:0;
+    padding:0;
+}
+body, button, input, select, textarea {
+    font-size:12px;
+    font-family: "微软雅黑", "Hiragino Sans GB", arial, tahoma, "微软雅黑", "宋体", sans-serif;
+}
+h1, h2, h3, h4, h5, h6, textarea {
+    font-weight:normal;
+    font-size:14px;
+}
+b, textarea {
+    font-style:normal;
+    font-weight:400;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/* 去掉 table cell 的边距并让其边重合 */
+ pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+/* pre 可以换行*/
+ img {
+    border:none;
+    vertical-align:middle;
+}
+input, select, textarea {
+    font-size:100%;
+}
+del {
+    text-decoration:line-through;
+}
+/* 一致的 del 样式 */
+ a {
+    color:#666;
+    text-decoration:none;
+}
+a:active, a:focus, *:focus {
+    -moz-outline:none;
+    outline:none;
+}
+/* 去除 ie6 & ie7 焦点点状线 */
+a:hover, a:link, a:visited, a:active, input:focus {
+    text-decoration: none;
+    transition:background 120ms, border 120ms, text-shadow 250ms ease-in 0ms, color 120ms ease-in 0ms;
+}
+ul, li, ol {
+    list-style:none;
+}
+th {
+    text-align:inherit;
+}
+/* 输入框 */
+input {
+    font-family:inherit;
+    margin: 0;
+    padding: 0;
+}
+input[type="text"] {
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #e8e8e8;
+    background-color: #fafafa;
+    font-size: 14px;
+    color:#646464;
+}
+input[type="text"]::-webkit-input-placeholder { color:#a7a7a7;font-size: 12px; }
+input[type="text"]::-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefox 19+ */
+input[type="text"]:-ms-input-placeholder { color:#a7a7a7;font-size: 12px; } /* Internet Explorer 10+ */
+input[type="text"]:-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefox 14-18 */
+
+/* 默认文本域 */
+.default_textarea {
+    background-color: #FAFAFA;
+    border:1px solid #E8E8E8;
+    padding: 6px 10px;
+    color:#646464;
+    resize: none;
+}
+/* 单选按钮 */
+.radio_label {
+    display: inline-block;
+    font-size: 0;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 27px;
+
+    input[type="radio"] {
+        display: none;
+    }
+    &>span {
+        display: inline-block;
+        font-size: 14px;
+        float: left;
+        height: 30px;
+        line-height: 30px;
+    }
+    .radio_frame {
+        width: 14px;
+        height: 14px;
+        border:1px solid #a9a9a9;
+        border-radius: 50%;
+        position: relative;
+        margin: 7px 6px 0 10px;
+
+        i {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #2fba66;
+            border-radius: 50%;
+            top:50%;
+            left: 50%;
+            margin: -5px 0 0 -5px;
+            display: none;
+            @include transition-all;
+        }
+    }
+    input[type="radio"]:checked + .radio_frame i {
+        display: block;
+    }
+}
+
+/* 多选按钮 */
+.checkbox_label {
+    display: inline-block;
+    font-size: 0;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 27px;
+
+    &>input[type="checkbox"] {
+        display: none;
+    }
+    &>span {
+        display: inline-block;
+        font-size: 14px;
+        float: left;
+        height: 30px;
+        line-height: 30px;
+    }
+    .checkbox_frame {
+        width: 12px;
+        height: 12px;
+        position: relative;
+        margin: 9px 6px 0 10px;
+        // background-image: url('../../images/icon_checkn.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .checkbox_frame i {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 12px;
+        height: 12px;
+        // background-image: url('../../images/icon_check.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        display: none;
+        @include transition-all;
+    }
+    input[type="checkbox"]:checked + .checkbox_frame i {
+        display: block;
+    }
+}
+/* ie bug：th 不继承 text-align */
+ iframe {
+    display:block;
+}
+/* 字体颜色 */
+.c_green {
+    color:#2FBA66;
+    font-style: normal;
+}
+a.c_green:hover {
+    color:#51d485;
+}
+.c_orange {
+    color:#F08200;
+    font-style: normal;
+}
+a.c_orange:hover {
+    color:#F08200;
+}
+/* 行内块 */
+.inlie_block {
+    font-size: 0;
+}
+.inlie_block>* {
+    font-size: 14px;
+    vertical-align: middle;
+    display: inline-block;
+}
+/* 文本对齐 */
+.tc {
+    text-align: center;
+}
+.tl {
+    text-align: left;
+}
+.tr {
+    text-align: right;
+}
+/* ie6 7 8(q) bug 显示为行内表现 */
+ .mc-main .elli>a {
+    color: #f03b44;
+}
+.elli {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+/* 表格 */
+.akdefult_table {
+    line-height: 22px;
+    width: 100%;
+}
+.akdefult_table th {
+    padding: 5px 0;
+    min-height: 20px;
+    font-size: 14px;
+    color:#646464;
+}
+/* 单行多出省略号.... */
+.clear {
+    display:block;
+    overflow:hidden;
+    clear:both;
+    height:0;
+    line-height:0;
+    font-size:0;
+    zoom:1;
+}
+/* 清除浮动 zoom:1 for ie6 & ie7 */
+.clear:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden
+}
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.clearfix {
+    zoom:1;
+    /* for ie6 & ie7 */
+}
+.hide {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.fl {
+    float:left;
+    display:inline;
+}
+/* 设置浮动，减少浮动带来的 bug */
+.fr {
+    float:right;
+    display:inline;
+}
+.ctrl-prev a, .ctrl-next a {
+    transition: all 0.15s ease-in 0s;
+}
+/* 按钮 */
+/* 普通主要按钮 */
+.btn_primary {
+    height: 28px;
+    line-height: 26px;
+    border-radius: 3px;
+    font-size: 14px;
+    color:#fff;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 15px;
+    background-color: #fff;
+    border:1px solid #fff;
+    cursor:pointer;
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+}
+/* 主要按钮 - 绿色 */
+.bp_green {
+    background-color: #2fba66;
+    border:1px solid #2fba66;
+}
+.bp_green:hover {
+    background-color: #51d485;
+    border:1px solid #51d485;
+}
+/* 主要按钮 - 橙色 */
+.bp_orange {
+    background-color: #f08200;
+    border:1px solid #f08200;
+}
+.bp_orange:hover {
+    background-color: #f1a74f;
+    border:1px solid #f1a74f;
+}
+.btn_primary.large {
+    height: 46px;
+    line-height: 44px;
+    border-radius: 4px;
+    font-size: 18px;
+    padding: 0 56px;
+}
+/* 主要按钮 - 灰白色 */
+.bp_default {
+    background-color: #f5f5f5;
+    color:#969696;
+    border:1px solid #ececec;
+}
+.bp_default:hover {
+    background-color: #efefef;
+}
+/* 主要按钮 - 灰白色朴素按钮 */
+.plain {
+    background-color: transparent;
+    color:#646464;
+    border:1px solid #e8e8e8;
+}
+.plain:hover {
+    background-color: #fafafa;
+}
+
+/*分页*/
+#pagings {
+    text-align: center;
+}
+
+/* 弹框 */
+#loginLayer_wrap {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    z-index: 99999;
+    
+    .loginLayer {
+        width: 256px;
+        height: 160px;
+        background-color: #fff;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        margin:-80px 0 0 -128px ;
+        border-radius: 2px;
+    }
+    .loginLayerTip {
+        height: 42px;
+        line-height: 42px;
+        overflow: hidden;
+        background-color: #F8F8F8;
+        border-bottom: 1px solid #eee;
+        padding:0 20px;
+
+        &>i {
+            font-style: normal;
+            cursor: pointer;
+            width: 20px;
+            text-align: right;
+        }
+    }
+    .loginLayerCon {
+        padding: 20px;
+        height: 21px;
+        color:#333;
+        overflow: hidden;
+    }
+    .loginLayerBtns {
+        height: 30px;
+        line-height: 56px; 
+        padding: 13px 20px;
+    }
+    .loginLayerBtns button {
+        height: 30px;
+        line-height: 28px;
+        padding: 0 15px;
+        border-radius: 2px;
+    }  
+    .loginLayerBtns .loginLayerCancel {
+        background-color: #fff;
+        border:1px solid #dedede;
+        color:#646464;
+        cursor: pointer;
+    } 
+    .loginLayerBtns .loginLayerCancel:hover {
+        opacity: .8;
+    }
+    .loginLayerBtns .loginLayerConfirm {
+        border:1px solid #1E9FFF;
+        background-color: #1E9FFF;
+        cursor: pointer;
+        color: #fff;
+    }
+    .loginLayerBtns .loginLayerConfirm:hover {
+        opacity: .9;
+    }
+}
+
+/* 顶部低版本提示 */
+.lowVersion {
+    display: none;
+    width: 100%;
+    margin:0 auto;
+    font-size: 12px;
+    text-align: center;
+    background-color: #fff4e4;
+    color:#9a5124;
+}
+.lowVersionIn {
+    height: 32px;
+    line-height: 32px;
+    width: 1190px;
+    margin:0 auto;
+    position: relative;
+    overflow: hidden;
+
+    &>p {
+        padding: 0 20px;
+        overflow: hidden;
+    }
+    &>i {
+        position: absolute;
+        right: 0;
+        text-align: right;
+        width: 20px;
+        top:0;
+        height: 32px;
+        font-style: normal;
+        cursor: pointer;
+        color:#f55d12;
+    }
+}
+
