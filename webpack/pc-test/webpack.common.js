@@ -64,7 +64,8 @@ var options = {
           '@': __dirname + '/src',
           'rooturl': __dirname + '/',
           'pages': __dirname + '/src/pages',
-          'views': __dirname + '/src/view'
+          'views': __dirname + '/src/view',
+          'apis': __dirname + '/src/api'
       }
   },
 };

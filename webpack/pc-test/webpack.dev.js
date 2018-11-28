@@ -19,7 +19,15 @@ module.exports = merge(common, {
       historyApiFallback: true,
       https: false,
       proxy: {
-        // "**": "http://localhost:9090"
+        // http://113.108.163.210:9999/AKGW-api/v1/product/getProductByProductNumber
+        '/tapi': {
+          target: 'http://113.108.163.210:9999',
+          pathRewrite: {
+            "^/tapi":"/AKGW-api/v1"
+          },
+          changeOrigin: true,
+          secure: false
+        }
       },
   }
 });

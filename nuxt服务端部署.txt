@@ -1,0 +1,31 @@
+
+# 本文记录 nuxt.js 在服务端的部署。
+
+一.创建 nuxt 项目。
+
+二.安装pm2守护程序（防止进程被下线）
+	1. npm install pm2 -g
+	
+三.配置 nuxt package.json
+	1."scripe": { "dev": "nuxt", "start": "POST=3000 nuxt start", "build": "nuxt build && npm start" }
+	
+四.启动pm2守护进程
+	1.在nuxt项目里，pm2 start npm --name "进程名称" -- run build
+	2.pm2 list 命令用于查看进程列表
+	3.pm2 的启动命令 
+		pm2 start app.js
+		pm2 start app.js --name my-api       #my-api为PM2进程名称
+		pm2 start app.js -i 0                #根据CPU核数启动进程个数
+		pm2 start app.js --watch             #实时监控app.js的方式启动，当app.js文件有变动时，pm2会自动reload
+	4.pm2 的停止命令
+		pm2 stop all                         #停止PM2列表中所有的进程
+		pm2 stop 0                           #停止PM2列表中进程为0的进程
+	5.pm2 的重启命令 (更新需要重启才生效)
+		pm2 restart all                      #重启PM2列表中所有的进程
+		pm2 restart 0                        #重启PM2列表中进程为0的进程
+		
+五.部署 
+	1.打包nuxt
+	2.部署文件
+	3.启动nuxt
+		使用pm2启动nuxt.js：pm2 start npm --name "my-nuxt" -- run start

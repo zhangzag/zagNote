@@ -1,0 +1,17 @@
+
+#本文记录在linux系统下安装node
+
+1.创建目录
+	(1) cd /usr/local
+	(2) mkdir nodejs //创建一个目录
+	(3) cd nodejs
+	
+2.下载安装包
+	wget https://nodejs.org/dist/v10.8.0/node-v10.8.0-linux-x64.tar.xz
+	
+3.解压安装包
+	xz node-v10.8.0-linux-x64.tar.xz
+	tar -xvf node-v10.8.0-linux-x64.tar.xz
+	
+4.建立软链接
+	ln -s ......
