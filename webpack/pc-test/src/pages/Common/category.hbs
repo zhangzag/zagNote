@@ -1,0 +1,16 @@
+
+{{#each data}}
+    <div class="list_item">
+        <a target="_blank" href="/list.html?productTypeOne={{this.productTypeID}}" data-pdi="{{this.productTypeID}}" class="">{{this.productTypeName}}</a>
+        <div class="item_childs" data-eq="{{@index}}">
+            {{#each this.productTypeList}}
+                <dl>
+                    <dt><a target="_blank" href="/list.html?productTypeOne=72234&amp;productTypeTwo={{this.parentTypeID}}">{{this.productTypeName}}</a></dt>
+                    {{#each this.products}}
+                            <dd><a target="_blank" href="/list.html?productName={{this.productNumber}}">{{this.currentName}}</a></dd>
+                    {{/each}}
+                </dl>
+            {{/each}}
+        </div>
+    </div>
+{{/each}}
