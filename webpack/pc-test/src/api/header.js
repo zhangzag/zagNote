@@ -1,4 +1,5 @@
 import { webRoot, curDate } from '@/assets/js/globalDefine.js';
+import { _req } from './apiConfig.js';
 
 /**
  * 获取一级分类 - 科室
@@ -8,17 +9,18 @@ import { webRoot, curDate } from '@/assets/js/globalDefine.js';
  */
 export function getCategory (){
     return new Promise((resolve, reject)=>{
-        $.ajax({
+        _req({
             url: webRoot + '/productType/getProductTypeList',
         })
-        .success(res=>{
+        .then(res=>{
             resolve(res);
         })
-        .error(err=>{
+        .catch(err=>{
             reject(err);
         });
     });
 };
+
 
 
 /**
@@ -31,8 +33,8 @@ export function getCategory (){
  */
 export function getHotSearc( productTypeId='', type='', isValid=1 ){
     return new Promise((resolve, reject)=>{
-        $.ajax({
-            url: webRoot + '/getHotSearchByProductTypeID',
+        _req({
+            url:  webRoot + '/getHotSearchByProductTypeID',
             data: {
                 endDate: curDate,//格式为 2018-05-26 00:00:00
                 productTypeID: productTypeId,//格式为 int
@@ -40,12 +42,12 @@ export function getHotSearc( productTypeId='', type='', isValid=1 ){
                 isValid: isValid,
             },
         })
-        .success(res=>{
+        .then(res=>{
             resolve(res);
         })
-        .error(err=>{
+        .catch(err=>{
             reject(err);
-        })
+        });
     });
 };
 

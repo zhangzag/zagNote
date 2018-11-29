@@ -22,6 +22,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 
 export let webRoot = '/tapi';
+// export let webRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
 
 //当前时间
 export let curDate = new Date().Format("yyyy-MM-dd hh:mm:ss");

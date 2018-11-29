@@ -19,7 +19,8 @@ module.exports = merge(common, {
       historyApiFallback: true,
       https: false,
       proxy: {
-        // http://113.108.163.210:9999/AKGW-api/v1/product/getProductByProductNumber
+        // http://192.168.2.254:8080/AKGW-api/v1/searchShowBrand
+        // http://113.108.163.210:9999/AKGW-api/v1
         '/tapi': {
           target: 'http://113.108.163.210:9999',
           pathRewrite: {
