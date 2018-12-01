@@ -1,0 +1,12 @@
+{{#each datas}}
+{{this.productPhotos}}
+    <li>
+        <a target="_blank" href="/products/{{this.productNumber}}.html">
+            <img src="{{getFirstPhoto this.productPhotos}}?200*200">
+        </a>
+        <div class="pro_info">
+            <h2>{{this.productName}}</h2>
+            <div class="pro_price"><span class="c_orange"><em>{{formatPrice this.ourPrice}}</em></span></div>
+        </div>
+    </li>
+{{/each}}

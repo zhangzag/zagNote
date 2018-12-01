@@ -1,6 +1,6 @@
 require('@/assets/style/common.css');
 import { webRoot, curDate } from '@/assets/js/globalDefine.js';
-import { renderHtml } from '@/util/util.js';
+import { renderHtml, getQueryString } from '@/util/util.js';
 import { getCategory, getHotSearc } from 'apis/header';
 //分类模块
 import categoryHtml from './category.hbs';
@@ -30,7 +30,7 @@ $(function(){
     //获取热门搜索
     getHotSearc()
     .then(res=>{
-        console.log("获取分类", res);
+        console.log("获取热门搜索: ", res);
     })
     .catch(err=>{
         console.log('获取热门搜索失败，', err)
@@ -64,7 +64,6 @@ $(function(){
 			// });
 			// window.location.href = '/list.html?productName='+ encodeURI(val);
 
-			// var searchList = $.cookie('aksearchlis')?JSON.parse( $.cookie('aksearchlis')):[];
 			let searchList = Cookies.get('aksearchlis')?JSON.parse( Cookies.get('aksearchlis') ):[];
 			let listLength = searchList.length || 0;
 
@@ -102,6 +101,27 @@ $(function(){
 		},function(){
 			$('.nav_in .sort_list').removeClass('isIndex');
 		});
+	};
+
+	//收藏本站
+	$('.collectOur').click(function(event) {
+		var url = location.href;
+		var title = '阿康健康大药房';
+
+		try {
+				window.external.addFavorite(url, title);
+		} catch (e) {
+			try {
+					window.sidebar.addPanel(title, url, "");
+			} catch (e) {
+					alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请使用Ctrl+D进行添加");
+			}
+		};
+	});
+
+	// 搜索记录出现在搜索框内
+	if(getQueryString('productName') != null){
+		$('#searchFields').val(getQueryString('productName'));
 	};
 
 	//导航条hover

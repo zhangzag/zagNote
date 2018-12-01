@@ -5,21 +5,53 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     
     <%= require('html-loader!./layout/comHeadText.html')  %>
-
   </head>
   <body>
     <%= require('html-loader!./layout/comHeader.html') %>
 
-    <div class="wrap">
-      <!-- <img src="test.png" alt=""> -->
-      <!-- <img src="../assets/images/test.png" data-type="htmlimg"> -->
-
-      <div id="ejs">
-        <a href="./login.html">登录页</a>
-        <a href="./login.html">登录页</a>
-        <a href="./login.html">登录页</a>
-        <a href="./login.html">登录页</a>
+    <div class="container">
+      <!-- 轮播图 -->
+      <div class="focus-wrap">
+        <div class="focus_in">
+            <div class="focus">
+                <div class="m-banner" style="height: 500px;">
+                  <div class="banner_btns">
+                      <a href="javascript:void(0);" class="prev" id="turnL"></a>
+                      <a href="javascript:void(0);" class="next" id="turnR"></a>
+                    </div>
+                    <ul id="roteAdv" class="m-b-con">
+                      
+                    </ul>
+                </div>
+            </div>
+          </div>
       </div>
+      <!-- 轮播图 end -->
+
+      <!-- 阿康特色 -->
+      <div class="featur_area hasBotAdv">
+        <div class="featur_area_in">
+            <h2><img src=<%= require('../assets/images/ak_recom.png') %> alt=""></h2>
+            <div class="featur_pro_wrap">
+                <ul class="featur_pro" style="top: 0px;">
+                    
+                </ul>
+            </div>
+        </div>
+          
+        <!-- 轮播分页按钮 -->
+        <!-- <div class="paginations">
+          <span class="active_p"></span>
+        </div> -->
+
+        <!-- 切换按钮 -->
+        <div class="feature_btns">
+            <div id="feature_prev"><img src=<%= require("../assets/images/ak_arr_l.png") %> alt=""></div>
+            <div id="feature_next"><img src=<%= require("../assets/images/ak_arr_r.png") %> alt=""></div>
+        </div>
+        <!-- 切换按钮 end -->
+      </div>
+      <!-- 阿康特色 end -->
     </div>
 
 
