@@ -22,8 +22,8 @@ module.exports = merge(common, {
         // http://192.168.2.254:8080/AKGW-api/v1/searchShowBrand
         // http://113.108.163.210:9999/AKGW-api/v1
         '/tapi': {
-          // target: 'http://113.108.163.210:9999',
-          target: 'http://192.168.2.254:8080',
+          target: 'http://113.108.163.210:9999',
+          // target: 'http://192.168.2.254:8080',
           pathRewrite: {
             "^/tapi":"/AKGW-api/v1"
           },

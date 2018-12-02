@@ -1,0 +1,13 @@
+
+{{#each datas}}
+<div class="fl">
+    <h3>{{this.productName}}</h3>
+    <p class="c_orange">{{formatPrice ourPrice}}</p>
+    <div>
+        <a target="_blank" href="/products/{{this.productNumber}}.html">
+        <img class="lazy" data-original="{{getFirstPhoto this.productPhotos}}?160*160"
+                alt="{{this.productNumber}}" title="{{this.productName}}">
+        </a>
+    </div>
+</div>
+{{/each}}

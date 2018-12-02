@@ -1,0 +1,13 @@
+
+<div class="fl">
+    <h3>{{productName}}</h3>
+    {{#if sellingPoint}}
+    <span>{{sellingPoint}}</span>
+    {{/if}}
+    <p class="c_orange">{{formatPrice ourPrice}}</p>
+</div>
+<div class="fr">
+    <a target="_blank" href="/products/{{productNumber}}.html">
+        <img class="lazy" data-original="{{getFirstPhoto this.productPhotos}}?240*240" alt="{{productName}}"
+            title="{{productName}}"></a>
+</div>
