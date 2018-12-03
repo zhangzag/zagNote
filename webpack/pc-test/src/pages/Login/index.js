@@ -1,4 +1,6 @@
-// require('pages/Common/index.js');
+require('./style/login.scss');
+require('./style/register_header.scss');
+
 const zhang = 'zhang';
 
 function aa(){

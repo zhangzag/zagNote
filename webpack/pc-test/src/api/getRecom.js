@@ -81,3 +81,54 @@ export function getProRecomDetail ( {showID, isValid=1} ){
         });
     });
 };
+
+
+/**
+ *获取品牌推荐
+ *
+ * @export
+ * @param {*} {pageNo, isValid=1}
+ * @returns
+ */
+export function getBrandRecom( {pageNo, isValid=1} ){
+    return new Promise((resolve, reject)=>{
+        if(!pageNo){reject('未指定推荐模块名称');};
+
+        _req({
+            url: webRoot + '/searchShowBrand',
+            data: {
+                endDate: curDate,
+                pageNo,
+                isValid
+            },
+        })
+        .then(res=>{
+            resolve(res);
+        })
+        .catch(err=>{
+            reject(err);
+        });
+    });
+}
+
+//获取品牌推荐详情
+export function getBrandRecomDetail( {showBrandID, isValid=1} ){
+    return new Promise((resolve, reject)=>{
+        if( !showBrandID && showBrandID!=0 ){ reject('没有指定模块id'); }
+
+        _req({
+            url: webRoot + '/searchShowBrandDetail',
+            data: {
+                endDate: curDate,
+                showBrandID,
+                isValid
+            },
+        })
+        .then(res=>{
+            resolve(res);
+        })
+        .catch(err=>{
+            reject(err);
+        });
+    });
+};

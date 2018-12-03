@@ -13,7 +13,12 @@ $(function(){
     .then(res=>{
         // console.log("获取分类", res);
         if( res.data && res.data.length>0 ){
-			let datas = res.data;
+			let datas = [];
+			//获取前14个科室
+			for( let i=0; i<res.data.length; i++ ){
+				if(i>13){break};
+				datas.push(res.data[i]);
+			}
             let categoryHtmlString = renderHtml(categoryHtml, {data: datas});
 
             //挂载分类
@@ -148,4 +153,14 @@ $(function(){
 	$('#searchFields').blur(function(event) {
 		$('.search_history').stop(true,true).fadeOut(300);
 	});
+
+	
+	//图片懒加载
+	$("img.lazy").lazyload({
+		placeholder : '../../assets/images/myImg.png', //用图片提前占位
+		  // placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏
+		effect: 'fadeIn', // 载入使用何种效果
+		  // effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn
+		threshold: 200, // 提前开始加载
+	});	
 });

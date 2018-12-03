@@ -9,7 +9,7 @@ var options = {
   entry: {},
   output: {
     filename: '[name].js',
-    // publicPath: '/dist/',
+    publicPath: path.resolve(__dirname, './'),
     path: path.resolve(__dirname, 'dist')
   },
   externals : {
@@ -25,10 +25,12 @@ var options = {
             // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader") },
             // { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader!sass-resources-loader' },
             // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader") },
-            { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader") },
-            { test: /\.(gif|png|jpg|woff|svg|eot|ttf)$/, loader: 'url-loader?limit=5000&name=resource/[name].[ext]' },
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader", {
+              publicPath:'../'
+            }) },
+            { test: /\.(gif|png|jpg|woff|svg|eot|ttf)$/, loader: 'url-loader?limit=8192&name=resource/[name].[ext]' },
             // { test: /\.ejs$/, loader: 'ejs-loader' },
-            { test: /\.(string|hbs)$/, loader: 'html-loader', query : {minimize : true,removeAttributeQuotes : false }
+            { test: /\.hbs$/, loader: 'html-loader', query : {minimize : true,removeAttributeQuotes : false }
             },
             // { test: /\.art$/, loader: 'art-template-loader', query : {} },
             // { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: { 'presets': ['env'], } }
@@ -53,7 +55,7 @@ var options = {
     ])
   ],
   resolve : {
-      extensions: ['', '.es6','.js', '.jsx', '.json', '.css', '.less', '.string'],
+      extensions: ['', '.es6','.js', '.json', '.css', '.less', '.hbs', '.scss'],
       alias : {
           // node_modules    : __dirname + '/node_modules',
           // util            : __dirname + '/src/util',

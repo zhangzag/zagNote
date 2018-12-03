@@ -42,3 +42,21 @@ export function getQueryString(name) {
 
     if (r != null) return decodeURI(r[2]); return null; 
 };
+
+
+/**
+ *设置图片懒加载
+ *
+ * @export
+ * @param {*} { el="img.lazy", placeholder='../../assets/images/myImg.png', effect='fadeIn', threshold=200 }
+ */
+export function setLazyLoad( { el="img.lazy", placeholder='myImg.png', effect='fadeIn', threshold=200 } ){
+    console.log('el: ', el)
+    return $(el).lazyload({
+        placeholder: require( '@/assets/images/' + placeholder ), //用图片提前占位
+          // placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏
+        effect, // 载入使用何种效果
+          // effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn
+        threshold, // 提前开始加载
+    });	
+}

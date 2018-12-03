@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="utf-8" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title><%= htmlWebpackPlugin.options.title %></title>
@@ -290,9 +290,7 @@
       <!-- 楼层6 end -->
     </div>
 
-
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    
+    <%= require('html-loader!./layout/comFooter.html') %>
   </body>
-  <!-- <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js
-  "></script> -->
 </html>

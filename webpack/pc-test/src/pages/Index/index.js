@@ -1,13 +1,13 @@
 // require('./style/index.css');
+// require('./style/index.scss');
 require('./style/index.scss');
-require('./style/index.scss');
-import $ from 'jquery';
+// import $ from 'jquery';
 require('../../../static/js/jquery.cycle.all.min.js');
 
 import { webRoot, curDate } from '@/assets/js/globalDefine.js';
 
-import { renderHtml } from '@/util/util.js';
-import { getAdvRecom, getProRecom, getProRecomDetail } from 'apis/getRecom.js';
+import { renderHtml, setLazyLoad } from '@/util/util.js';
+import { getAdvRecom, getProRecom, getProRecomDetail, getBrandRecom, getBrandRecomDetail } from 'apis/getRecom.js';
 import { getProByProductNumber } from 'apis/product.js';
 
 import bannerHtml from './indexBanner.hbs';
@@ -15,10 +15,14 @@ import akRecomHtml from './indexAkRecom.hbs';
 import floorProBigHtml from './floorProBig.hbs';
 import floorProBottomHtml from './floorProBottom.hbs';
 import floorProRightHtml from './floorProRight.hbs';
+import floorAdvImgLHtml from './floorAdvImgL.hbs';
+import floorAdvImgSHtml from './floorAdvImgS.hbs';
+import floorBrandHtml from './floorBrand.hbs';
+import floorBotAdvHtml from './floorBotAdv.hbs';
 
 
 // let htmlString2 = renderHtml(source, data);
-
+console.log('body: ', $(document))
 $(function(){
     let memberId = 10299;
 
@@ -200,7 +204,7 @@ $(function(){
         pageNo: 'pcRecom',
     })
     .then(res=>{
-        console.log('楼层信息：', res)
+        // console.log('楼层信息：', res)
         let datas = res.data;
         let showIdList = [];
 
@@ -208,73 +212,187 @@ $(function(){
             return false;
         }
 
-        getProRecomDetail({
-            showID: datas[0].showID
-        })
-        .then(res=>{
-            console.log('获取楼层商品推荐详细: ', res)
-            
-            if ( !res.success || res.data.length === 0 ){
-                return false;
-            }
-            let productIdArr = [];
-            for( let val of res.data ){
-                productIdArr.push( val.productID );
-            }
-
-            //获取商品详情
-            getProByProductNumber({
-                memberId: 10299,
-                productNumbers: productIdArr
+        for( let floorIndex=0; floorIndex<datas.length; floorIndex++ ){
+            getProRecomDetail({
+                showID: datas[floorIndex].showID
             })
             .then(res=>{
-                console.log('楼层获取商品: ', res)
-                if( res.data.length === 0 ){
+                // console.log('获取楼层商品推荐详细: ', res)
+                
+                if ( !res.success || res.data.length === 0 ){
                     return false;
                 }
-
-                //产品1
-                let floorProBigHtmlString = renderHtml(floorProBigHtml, res.data[0]);
-
-                $('.floor').eq(0).find('.pro_lar').html( floorProBigHtmlString );
-                
-                // 产品1下边2个产品
-                let datasBottom = [];
-                for( let i = 1; i<3; i++ ){
-                    if(!res.data[i]){break}
-                    datasBottom.push( res.data[i] );
+                let productIdArr = [];
+                for( let val of res.data ){
+                    productIdArr.push( val.productID );
                 }
-                let floorProBottomHtmlString = renderHtml(floorProBottomHtml, {
-                    datas: datasBottom
+
+                //获取商品详情
+                getProByProductNumber({
+                    memberId: 10299,
+                    productNumbers: productIdArr
+                })
+                .then(res=>{
+                    // console.log('楼层获取商品: ', res)
+                    if( res.data.length === 0 ){
+                        return false;
+                    }
+                    
+                    //产品1
+                    let floorProBigHtmlString = renderHtml(floorProBigHtml, res.data[0]);
+
+                    $('.floor').eq(floorIndex).find('.pro_lar').html( floorProBigHtmlString );
+                    
+                    // 产品1下边2个产品
+                    let datasBottom = [];
+                    for( let i = 1; i<3; i++ ){
+                        if(!res.data[i]){break}
+                        datasBottom.push( res.data[i] );
+                    }
+                    let floorProBottomHtmlString = renderHtml(floorProBottomHtml, {
+                        datas: datasBottom
+                    });
+
+                    $('.floor').eq(floorIndex).find('.pro_lar_bots').html( floorProBottomHtmlString );
+
+                    //产品1右边三个产品
+                    let datasRight = [];
+                    for( let i = 3; i<6; i++ ){
+                        if(!res.data[i]){break}
+                        datasRight.push( res.data[i] );
+                    }
+                    let floorProRightHtmlString = renderHtml(floorProRightHtml, {
+                        datas: datasRight
+                    });
+
+                    $('.floor').eq(floorIndex).find('.floor_lc').html( floorProRightHtmlString );
+
+                    //图片懒加载
+                    setLazyLoad({
+                        el: '.floor .lazy'
+                    });
+                })
+                .catch(err=>{
+                    console.log('楼层获取商品失败，', err)
                 });
-
-                $('.floor').eq(0).find('.pro_lar_bots').html( floorProBottomHtmlString );
-
-                //产品1右边三个产品
-                let datasRight = [];
-                for( let i = 3; i<6; i++ ){
-                    if(!res.data[i]){break}
-                    datasRight.push( res.data[i] );
-                }
-                let floorProRightHtmlString = renderHtml(floorProRightHtml, {
-                    datas: datasRight
-                });
-
-                $('.floor').eq(0).find('.floor_lc').html( floorProRightHtmlString );
             })
             .catch(err=>{
-                console.log('楼层获取商品失败，', err)
+                console.log('获取楼层商品推荐详细失败', err)
             });
-        })
-        .catch(err=>{
-            console.log('获取楼层商品推荐详细失败', err)
-        });
+        }
     })
     .catch(err=>{
         console.log('获取楼层商品失败,', err)
     });
 
+    //楼层大图广告
+    getAdvRecom({
+        pageNo: 'fAdvImgL',
+    })
+    .then(res=>{
+        // console.log('楼层大图广告: ', res)
+        if( !res.success || res.data.length === 0 ){
+            return false;
+        }
+
+        for( let i = 0; i < res.data.length; i++ ){
+            let floorAdvImgLHtmlString = renderHtml( floorAdvImgLHtml, res.data[i] );
+            
+            //向楼层插入楼层名称
+            $('.floor_ladv').eq(i).html(floorAdvImgLHtmlString);
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+    });
+
+    //楼层小图广告
+    getAdvRecom({
+        pageNo: 'fAdvImgS',
+    })
+    .then(res=>{
+        // console.log('楼层小图广告: ', res)
+        if( !res.success || res.data.length === 0 ){
+            return false;
+        }
+
+        for( let i = 0; i < res.data.length; i++ ){
+            let floorAdvImgSHtmlHtmlString = renderHtml( floorAdvImgSHtml, res.data[i] );
+            
+            //向楼层插入楼层名称
+            $('.fr_adv').eq(i).html(floorAdvImgSHtmlHtmlString);
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+    });
+
+    //获取楼层品牌推荐
+    getBrandRecom({
+        pageNo: 'akBrands',
+    })
+    .then(res=>{
+        // console.log('获取楼层品牌推荐: ', res)
+        if( res.success && res.data.length>0 ){
+            //循环
+            // for( let val of res.data ){
+            for( let i=0; i<res.data.length; i++ ){
+                //获取品牌推荐详情
+                getBrandRecomDetail({
+                    showBrandID: res.data[i].showBrandID
+                })
+                .then(list=>{
+                    // console.log('获取品牌推荐详情: ', list)
+                    if( list.success && list.data.length>0 ){
+                        let floorBrandHtmlString = renderHtml( floorBrandHtml, {
+                            datas: list.data
+                        } );
+
+                        //挂载
+                        $('.fr_brandlist>ul').eq(i).html( floorBrandHtmlString );
+                    }
+                })
+                .catch(err=>{
+                    console.log('获取品牌推荐详情失败，', err)
+                });
+            }
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+    });
+
+    //楼层底部广告
+    getAdvRecom({
+        pageNo: 'pFloorAdv',
+    })
+    .then(res=>{
+        console.log('楼层底部广告: ', res)
+        if( !res.success || res.data.length === 0 ){
+            return false;
+        }
+
+        //向楼层底部插入广告图
+        for( let i = 0; i < res.data.length; i++ ){
+            let floorBotAdvHtmlString = renderHtml( floorBotAdvHtml, res.data[i] );
+
+            $('.hasBotAdv').eq(i).after( floorBotAdvHtmlString );
+        }
+
+        //图片懒加载
+        setLazyLoad({
+            el: '.floor_bot_adv .lazy'
+        });
+    })
+    .catch(err=>{
+        console.log('获取楼层底部广告失败，', err)
+    });
+
+
+
+
 
 
 
 });
+
