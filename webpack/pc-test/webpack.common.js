@@ -5,11 +5,16 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var options = {
+const processEnv = process.env;
+console.log( `web is start in ${processEnv.NODE_ENV} !!!!` );
+
+let options = {
   entry: {},
   output: {
     filename: '[name].js',
-    publicPath: path.resolve(__dirname, './'),
+    // publicPath: path.resolve(__dirname, './'),
+    // publicPath: '/',
+    publicPath: processEnv.NODE_ENV==='development'?'/':'/pc_test/',
     path: path.resolve(__dirname, 'dist')
   },
   externals : {
@@ -20,21 +25,14 @@ var options = {
   },
   module: {
       loaders: [
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader") },
-            // { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=8192&name=resource/[name].[ext]' },
-            // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader") },
-            // { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader!sass-resources-loader' },
-            // { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader") },
-            { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader","css-loader!sass-loader!sass-resources-loader", {
-              publicPath:'../'
-            }) },
+            { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
+            { 
+              test: /\.(css|scss)$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader!sass-resources-loader") 
+            },
             { test: /\.(gif|png|jpg|woff|svg|eot|ttf)$/, loader: 'url-loader?limit=8192&name=resource/[name].[ext]' },
-            // { test: /\.ejs$/, loader: 'ejs-loader' },
             { test: /\.hbs$/, loader: 'html-loader', query : {minimize : true,removeAttributeQuotes : false }
             },
-            // { test: /\.art$/, loader: 'art-template-loader', query : {} },
             // { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: { 'presets': ['env'], } }
-            { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
       ]
   },
   sassResources: './src/assets/style/base.scss',
@@ -52,7 +50,13 @@ var options = {
     new CopyWebpackPlugin([ // 复制
       { from: path.join(__dirname,'/static/'), to: path.join(__dirname,'/dist/static/') },
       // { flatten: true, from: './statics/*', to: path.join(__dirname,'/dist/static/') }
-    ])
+    ]),
+    //定义全局变量
+    new webpack.DefinePlugin({
+      'process.env':{
+        NODE_ENV: processEnv.NODE_ENV?JSON.stringify(processEnv.NODE_ENV) : 'development'
+      }
+    })
   ],
   resolve : {
       extensions: ['', '.es6','.js', '.json', '.css', '.less', '.hbs', '.scss'],

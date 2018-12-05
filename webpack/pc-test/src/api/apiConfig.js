@@ -32,7 +32,7 @@ $.ajaxSetup( {
     }
 } );
 
-export function _req( {url, type="POST", dataType='json', cache=true, headers, data} ){
+export function _req( {url, type="POST", dataType='json', cache=true, headers, data, xhrFields='', crossDomain=false} ){
     return new Promise((resolve, reject)=>{
         $.ajax({
             url,
@@ -40,7 +40,9 @@ export function _req( {url, type="POST", dataType='json', cache=true, headers, d
             dataType,
             cache,
             headers,
-            data
+            data,
+            xhrFields,
+            crossDomain
         })
         .success(res=>{
             resolve(res);

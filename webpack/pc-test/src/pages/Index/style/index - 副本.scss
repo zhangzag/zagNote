@@ -240,6 +240,7 @@
     width: 145px;
     height: 40px;
     padding-top: 90px;
+    // background: url("../../../assets/images/ksbg.png");
 }
 
 .foc-rt .tab-pan-first .menu .item-l a span {
@@ -282,6 +283,7 @@
     width: 145px;
     height: 40px;
     padding-top: 90px;
+    // background: url("../../../assets/images/rtbg.png");
 }
 
 .foc-rt .tab-pan-first .menu .item-r a span {
@@ -342,6 +344,7 @@
         content: "";
         width: 11px;
         height: 26px;
+        // background: url(../../../assets/images/l-bg2.png) no-repeat;
     }
 
     .foc-rt .tab-pan-one .item a:hover {
@@ -452,7 +455,7 @@
     left: 190px;
     width: 44px;
     height: 60px;
-    background-image: url(../../../assets/images/icons_index.png);
+    // background-image: url('/static/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -176px;
     z-index: 4;
@@ -465,7 +468,7 @@
     width: 44px;
     height: 60px;
     z-index: 4;
-    background-image: url(../../../assets/images/icons_index.png);
+    // background-image: url('/static/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -316px;
     transition: background 0ms, opacity 120ms;
@@ -498,6 +501,7 @@
     padding-left: 42px;
     font-size: 20px;
     color: #fff;
+    // background: url(../../../assets/images/tj-bg_137x32.png) no-repeat;
 }
 
 .bargain-w .left .l-tit .time {
@@ -596,9 +600,11 @@
     color: #fff;
     line-height: 28px;
     text-align: center;
+    // background: url(../../../assets/images/g-list01.png) no-repeat 0 -18px;
 }
 
 .bargain-w .left .l-cont li .btn-buy:hover {
+    // background: url(../../../assets/images/g-list02.png) no-repeat 0 -18px;
 }
 
 .bargain-w .left .l-cont .time {
@@ -747,6 +753,7 @@
     text-align: center;
     color: #fff;
     font-family: Simsun;
+    // background: url(../../../assets/images/yf-bg.png) no-repeat;
 }
 
 .bargain-w .right .tab-pan .slider-main li .p-sku {
@@ -785,6 +792,7 @@
     height: 60px;
     text-indent: -9999px;
     transition: none;
+    // background: url(../../../assets/images/arrs.png) no-repeat;
 }
 
 .bargain-w .right .tab-pan .slider-prev {
@@ -869,6 +877,7 @@
     font-size: 14px;
     color: #3366cc;
     padding-left: 21px;
+    // background: url("../../../assets/images/cg-icon.png") no-repeat 0 center;
 }
 
 .send-w .mt a.more {
@@ -878,6 +887,7 @@
     font-size: 14px;
     color: #999999;
     padding-right: 10px;
+    // background: url("../../../assets/images/ask-r1.png") no-repeat 100% center;
 }
 
 .send-w .mt a:hover {
@@ -938,6 +948,7 @@
     text-align: center;
     color: #ffffff;
     font-size: 18px;
+    // background: url("../../../assets/images/yuan-icon.png") no-repeat;
     position: absolute;
     left: 95px;
     top: 34px;
@@ -1057,6 +1068,7 @@
     margin-right: 5px;
     text-indent: -9999px;
     cursor: pointer;
+    // background: url(../../../assets/images/slider-nav.png) no-repeat -14px 0;
 }
 
 .slider-item.cur {
@@ -1166,15 +1178,19 @@
 }
 
 .com-med .con .item-01 {
+    // background: url(../../../assets/images/med-bg01_295x260.png) no-repeat;
 }
 
 .com-med .con .item-02 {
+    // background: url(../../../assets/images/med-bg02_295x260.png) no-repeat;
 }
 
 .com-med .con .item-03 {
+    // background: url(../../../assets/images/med-bg03_295x260.png) no-repeat;
 }
 
 .com-med .con .item-04 {
+    // background: url(../../../assets/images/med-bg04_295x260.png) no-repeat;
 }
 
 .floor-ad {
@@ -1294,6 +1310,7 @@
     color: #fff;
     text-align: center;
     line-height: 14px;
+    // background: url(../../../assets/images/groupd-01-icon01.png) no-repeat;
 }
 
 .unite-med .cont li>a:hover .p-desc {
@@ -1901,6 +1918,7 @@
     border-bottom: 0;
     cursor: pointer;
     position: relative;
+    // background: url(../../../assets/images/cates.png) no-repeat center 0;
 }
 
 .leftNav .F2 {

@@ -6,6 +6,8 @@ import { getCategory, getHotSearc } from 'apis/header';
 import categoryHtml from './category.hbs';
 import Cookies from 'js-cookie';
 
+document.body.scrollTop = document.documentElement.scrollTop = 0;
+
 $(function(){
 
     //获取分类

@@ -1,0 +1,107 @@
+.reg-bg{ background-color: #f8f8f8;padding: 20px 0;}
+
+.reg-bg .w{width: 900px; border: 1px solid #dddddd; margin: 0 auto; background-color: #fff; overflow: hidden;}
+
+.reg-bg .lt{ padding: 33px 0;margin-left: 275px;}
+
+.reg-bg h4{width: 350px; color: #059557; font-size: 24px; line-height: 40px; text-align: center; margin-bottom: 30px;}
+
+.reg-bg .item{ padding: 5px 0; overflow: hidden; margin-top: 20px; }
+
+.reg-bg .item .label{display: block; float: left; width: 92px; height: 40px; padding-right: 18px; line-height: 40px; text-align: right; color: #666666; font-size: 14px;}
+
+.reg-bg .fore1{position: relative;}
+
+.reg-bg .fore1 input{width: 300px; padding-left: 30px; height: 38px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;background: url(../../../assets/images/phone.png) no-repeat 10px;}
+
+.reg-bg .fore1 #phoneErr{display: none; color: red; position: absolute; top: 5px; left: 350px;}
+
+.reg-bg .fore2{position: relative;}
+.reg-bg .fore2 input{width: 180px; padding-left: 30px; height: 38px; background: url(../../../assets/images/yanzhengma.png) no-repeat 10px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;}
+.reg-bg .fore2 button{width: 120px; height: 40px; float: left;color: #059557; border: 1px solid #bdbdbd;cursor: pointer; border-left: none; font-size: 14px;background: #FAFAFA;}
+.reg-bg .fore2 #phoneCodeError{display: block; color: red; position: absolute; top: 5px; left: 350px;}
+.reg-bg .fore2 #picCodeError{display: block; color: red; position: absolute; top: 5px; left: 350px;}
+
+.reg-bg .fore3{position: relative;}
+.reg-bg .fore3 input{width: 300px; padding-left: 30px; height: 38px;background: url(../../../assets/images/password.png) no-repeat 10px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;}
+.reg-bg .fore3 #pswTip{display: block; color: red; position: absolute; top: 5px; left: 350px;}
+
+.reg-bg .fore3 img{float: left; margin: 0 6px;}
+
+.reg-bg .fore3 a{float: left; line-height: 40px; color: #0099ff; font-size: 14px;}
+
+.reg-bg .fore3 a:hover{text-decoration: underline;}
+
+.reg-bg .fore4 button{display: block; width: 330px; border: 1px solid #00894e; border-radius: 2px;cursor: pointer; text-align: center; line-height: 38px; background-color: #059557; font-size: 20px; color: #fff; }
+
+.reg-bg .fore4 input{width: 300px; padding-left: 18px; height: 38px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;}
+
+.reg-bg .fore5{padding-bottom: 0; line-height: 24px; color: #999999;}
+
+.reg-bg .fore5 .label{height: 24px; line-height: 24px;}
+
+.reg-bg .fore5 label{float: left;cursor: pointer;}
+
+.reg-bg .fore5 input{vertical-align: text-top;cursor: pointer;}
+
+.reg-bg .fore5 a{float: left;color: #0099f1;}
+
+.reg-bg .fore5 a:hover{text-decoration: underline;}
+
+.reg-bg .agree-btn{display: block; width: 318px; border: 1px solid #00894e; border-radius: 2px; text-align: center; line-height: 38px; background-color: #059557; font-size: 20px; color: #fff; margin: 20px 0 0 110px;}
+
+.reg-bg a:hover.agree-btn{background-color: #00894e;}
+
+.reg-bg .coagent{padding-left: 10px; margin: 25px 0 0 110px; width: 310px;}
+
+.reg-bg .coagent h5{line-height: 22px; color: #999;}
+
+.reg-bg .coagent ul{width: 300px; height: 44px; margin-top: 7px; overflow: hidden;}
+
+.reg-bg .coagent ul li{float: left; height: 22px; margin-right: 8px;}
+
+.reg-bg .coagent ul li span{color: #999; padding: 0 4px; line-height: 22px;}
+
+.reg-bg .coagent ul li a{line-height: 22px; color: #333333;}
+
+.reg-bg .coagent ul li a:hover{text-decoration: underline; color: #265599;}
+
+/*注册成功*/
+.reg-bg .success h5{line-height: 40px; color: #333333; font-size: 24px; }
+
+.reg-bg .success p{line-height: 28px; margin: 12px 0 14px; font-size: 14px;color: #666;}
+
+.reg-bg .success p span{color: #1ea5b0; font-size: 18px; font-weight: bold; padding: 0 3px;}
+
+.reg-bg .success p a{color: #1ea5b0;}
+
+.reg-bg .success p a:hover{text-decoration: underline;}
+
+.reg-bg .t-b{ float:left; display:inline; height:22px; padding-left:8px; padding-top:5px; overflow:hidden; color:#666;}
+
+.reg-bg .t-b img{ vertical-align:middle;}
+
+.reg-bg .t-b a{ color:#06c;}
+
+.reg-bg .pass{ padding-left:20px; float:left; padding-top:5px;}
+
+
+body .agreeAlert{
+    background-color: #059557;
+}
+body .agreeAlert .layui-layer-title{
+    background-color: transparent;
+    color: #fff;
+}
+body .agreeAlert .layui-layer-setwin .layui-layer-close1{
+    background: url('../../../assets/images/agreeClose.png');
+}
+body .agreeAlert .layui-layer-content{
+    background-color: #fff;
+}
+body .agreeAlert .layui-layer-btn0{
+    background-color: #fff;
+    border-color: transparent;
+    color: #646464;
+    margin-top: 12px;
+}

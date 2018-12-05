@@ -40,7 +40,15 @@
 		  $: 'jquery',
 		  jQuery: 'jquery'
 		})
-		
+	
+	六、定义全局变量，
+		new webpack.DefinePlugin({
+		  'process.env':{
+			NODE_ENV: processEnv.NODE_ENV?JSON.stringify(processEnv.NODE_ENV) : 'development'
+		  }
+		})
+		这样在全部的文件里都可以通过 process.process.env 获取 NODE_ENV 的值。
+	
 	
 	
 	

@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+const processEnv = process.env;
 
 //时间格式化
 Date.prototype.Format = function (fmt) { //author: meizz 
@@ -20,12 +22,37 @@ Date.prototype.Format = function (fmt) { //author: meizz
     
 }
 
+//webRoot
+let curWebRoot = '/tapi';
+if( processEnv && processEnv.NODE_ENV ){
+    switch( processEnv.NODE_ENV )
+    {
+        case 'development': //开发
+            curWebRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
+            break;
+        case 'production': //生产
+            curWebRoot = 'http://113.108.163.210:9999/AKGW-api/v1'; 
+            break;
+        case 'preview': //预览
+            curWebRoot = 'http://113.108.163.210:9999/AKGW-api/v1'; 
+            break;
+        case 'testing'://测试
+            curWebRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
+            break;
+        default: //默认
+            curWebRoot = '/tapi';
+    }
+}
 
-export let webRoot = '/tapi';
+export let webRoot = curWebRoot;
 // export let webRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
 
 //当前时间
 export let curDate = new Date().Format("yyyy-MM-dd hh:mm:ss");
 //当前日期
 export let curDay = new Date().Format("yyyy-MM-dd");
+
+//会员id
+export let memberId = Cookies.get('memberId')?JSON.parse(Cookies.get('memberId')) : '';
+
 
