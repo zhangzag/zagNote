@@ -95,8 +95,6 @@ export function verifyMessageApi( {telephone, randomCode} ) {
     });
 }
 
-
-
 /**
  *更换密码
  *
@@ -127,3 +125,70 @@ export function changePasswordApi( {telephone, randomCodeTwo, password} ) {
     });
 }
 
+/**
+ *注册-短信验证
+ *
+ * @export
+ * @param {*} {telephone, randomCode}
+ * @returns
+ */
+export function sendCodeMessageApi ({ telephone, code }){
+    return new Promise((resolve, reject)=>{
+        if( !telephone || !code ){
+            reject('参数不齐');
+        }
+
+        _req({
+            url: webRoot + '/sendCodeMessage',
+            data:{
+                telephone,//电话号码
+                code,//图形验证码
+            },
+            xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
+        })
+        .then(res=>{
+            resolve(res);
+        })
+        .catch(err=>{
+            reject(err);
+        });
+    });
+}
+
+/**
+ *注册-提交
+ *
+ * @export
+ * @param {*} {telephone, randomCode}
+ * @returns
+ */
+export function registerApi({ telephone, randomCodeTwo, password, code }){
+    return new Promise((resolve, reject)=>{
+        if( !telephone || !randomCodeTwo || !password || !code ){
+            reject('参数不齐');
+        }
+
+        _req({
+            url: webRoot + '/vipRegisterInsert',
+            data:{
+                telephone, //电话号码
+                randomCodeTwo, //验证码
+                password,//密码
+                code
+            },
+            xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
+        })
+        .then(res=>{
+            resolve(res);
+        })
+        .catch(err=>{
+            reject(err);
+        });
+    });
+}

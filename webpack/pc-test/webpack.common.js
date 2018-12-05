@@ -14,7 +14,7 @@ let options = {
     filename: '[name].js',
     // publicPath: path.resolve(__dirname, './'),
     // publicPath: '/',
-    publicPath: processEnv.NODE_ENV==='development'?'/':'/pc_test/',
+    publicPath: processEnv.NODE_ENV==='development' || processEnv.NODE_ENV==='preview'?'/':'/pc_test/',
     path: path.resolve(__dirname, 'dist')
   },
   externals : {

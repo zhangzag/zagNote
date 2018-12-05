@@ -1,1 +1,0 @@
-webpackJsonp([0],{"0":function(o,n,c){c(1),o.exports=c(327)},"327":function(o,n){"use strict";console.log("这是公用的头部")}});

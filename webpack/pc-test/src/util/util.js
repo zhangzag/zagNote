@@ -43,6 +43,25 @@ export function getQueryString(name) {
     if (r != null) return decodeURI(r[2]); return null; 
 };
 
+/**
+ * 获取url数据
+ *
+ * @export
+ * @returns
+ */
+export function getUrlData(){
+    let location = window.location;
+
+    // http://localhost:3002/login.html
+    return {
+        hash: location.hash,// 
+        host: location.host,// "localhost:3002"
+        hostname: location.hostname,// "localhost"
+        href: location.href,// "http://localhost:3002/login.html"
+        origin: location.origin,// "http://localhost:3002"
+        pathname: location.pathname,// "/login.html"
+    }
+}
 
 /**
  *设置图片懒加载

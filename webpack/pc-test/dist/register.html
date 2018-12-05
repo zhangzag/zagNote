@@ -2,24 +2,9 @@
 <html lang="utf-8" dir="ltr">
   <head>
     <meta charset="utf-8">
-		<title>用户登录</title>
-		<script>
-			var cookies = document.cookie;
+		<title>新用户注册</title>
 
-			var c_name = 'memberId';
-			c_start=document.cookie.indexOf(c_name + "=");
-			if (c_start!=-1)
-			{ 
-				c_start=c_start + c_name.length+1 ;
-				c_end=document.cookie.indexOf(";",c_start);
-
-				if (c_end==-1) c_end=document.cookie.length;
-				unescape( document.cookie.substring(c_start,c_end) );
-				console.log( unescape( document.cookie.substring(c_start,c_end) ) );
-			} 
-		</script>
-
-    
+		
 	<meta charset="UTF-8">
 	<meta name="renderer" content="webkit">
 	<meta name="force-rendering" content="webkit">
@@ -72,9 +57,9 @@
 
 
 
-  <link href="/pc_test/static/css/common.css?d0fb91cc018eb6a7b415" rel="stylesheet"><link href="/pc_test/static/css/login.css?d0fb91cc018eb6a7b415" rel="stylesheet"></head>
+		<script src="../../static/js/step.js" type="text/javascript" charset="utf-8"></script>
+  <link href="/pc_test/static/css/common.css?d0fb91cc018eb6a7b415" rel="stylesheet"><link href="/pc_test/static/css/register.css?d0fb91cc018eb6a7b415" rel="stylesheet"></head>
   <body>
-    
 		<!-- 头部 -->
 		<div class="header-mc">
     <div class="logo frameEdit" frameinfo="logo|403X67">
@@ -118,31 +103,54 @@
 		<!-- 头部 end -->
 		
 		<!-- 页面主体 -->
-		<div class="login-bg">
+		<div class="reg-bg">
 			<div class="w">
-				<div class="l">
-					<img src=/pc_test/resource/login-left.png />
-				</div>
-				<div class="r">
-					<h2>欢迎登录</h2>
-					<p class="phoneErr"></p>
-					<div class="fore">
-						<input class="userName" type="text" placeholder="请输入手机号" />
-					</div>
-					<div class="fore">
-						<input class="pass" type="password" placeholder="请输入密码" />
-					</div>
-					<div class="fore">
-						<button class="loginBtn" disabled="disabled">立即登录</button>
-					</div>
-					<div class="fore">
-						<a href="/forgetPassword.html">忘记密码？</a>
+				<div id="registerForm" name="">
+					<!-- <input id="userMobile" name="userMobile1" type="hidden" value="">
+					<input id="registerType" name="registerType1" type="hidden" value="">
+					<input name="fid1" type="hidden" value=""> -->
+					<div class="lt">
+						<h4>欢迎注册</h4>
+						<div class="item fore1">
+							<input type="text" class="phone" id="userMobile" name="userMobile" maxlength="20" placeholder="请输入手机号码" >
+							<div id="phoneErr"></div>
+						</div>
+
+						<div class="item fore2">
+							<input placeholder="请输入图形验证码" maxlength="16" name="" id="picCode" type="text">
+							<button class="picBtn">
+								<!-- <img src="http://192.168.2.254:8080/AKGW-api/v1/sendCode"> -->
+								<!-- <img src="http://192.168.2.67:8082/AKGW-api/v1/sendCode"> -->
+								<img src="http://113.108.163.210:9999/AKGW-api/v1/sendCode">
+							</button>
+							<div id="picCodeError"></div>
+						</div>
+						<div class="item fore2">
+							<input placeholder="短信验证码" id="phoneCode" maxlength="16" name="" type="text">
+							<button class="getVerifyCode">获取验证码</button>
+							<div id="phoneCodeError"></div>
+						</div>
+						<div class="item fore3">
+							<input type="password" name="" id="userPsw" placeholder="请输入密码" readonly onfocus="this.removeAttribute('readonly');">
+							<div id="pswTip"></div>
+						</div>
+						<div class="item fore4" id="">
+							<button id="regSubmit">立即注册</button>
+						</div>
+						<div class="item fore5">
+							<label><input class="xieCheck" type="checkbox" checked="checked"> 我已阅读并同意</label>
+							<a class="agreement" href="javascript:void(0)">《网站服务协议》</a>
+						</div>
+						
 					</div>
 				</div>
 			</div>
+
 		</div>
 		<!-- 页面主体 -->
-
+		
+		<!-- 页面主体 -->
+		
 		<!-- 底部 -->
 		<div id="rl_footer">
     <div class="fb">
@@ -199,5 +207,5 @@
         </div>
 </div>
 		<!-- 底部 end -->
-  <script type="text/javascript" src="/pc_test/js/common.js?d0fb91cc018eb6a7b415"></script><script type="text/javascript" src="/pc_test/login.js?d0fb91cc018eb6a7b415"></script></body>
+	<script type="text/javascript" src="/pc_test/js/common.js?d0fb91cc018eb6a7b415"></script><script type="text/javascript" src="/pc_test/register.js?d0fb91cc018eb6a7b415"></script></body>
 </html>

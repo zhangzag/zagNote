@@ -1,6 +1,6 @@
 require('@/assets/style/common.css');
 import { webRoot, curDate } from '@/assets/js/globalDefine.js';
-import { renderHtml, getQueryString } from '@/util/util.js';
+import { renderHtml, getQueryString, getUrlData } from '@/util/util.js';
 import { getCategory, getHotSearc } from 'apis/header';
 //分类模块
 import categoryHtml from './category.hbs';
@@ -9,40 +9,49 @@ import Cookies from 'js-cookie';
 document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 $(function(){
+	let isNeedComApi = true;
+	let curPathName = getUrlData().pathname;
+	
+	//不需要获取分类和热门搜索的页面
+	if( curPathName.indexOf('login.html')>0 || curPathName.indexOf('register.html')>0 || curPathName.indexOf('forgetPassword.html')>0 ){
+		isNeedComApi = false;
+	}
+	//需要获取分类和热门搜索的页面
+	if( isNeedComApi ){
+		//获取分类
+		getCategory()
+		.then(res=>{
+			// console.log("获取分类", res);
+			if( res.data && res.data.length>0 ){
+				let datas = [];
+				//获取前14个科室
+				for( let i=0; i<res.data.length; i++ ){
+					if(i>13){break};
+					datas.push(res.data[i]);
+				}
+				let categoryHtmlString = renderHtml(categoryHtml, {data: datas});
 
-    //获取分类
-    getCategory()
-    .then(res=>{
-        // console.log("获取分类", res);
-        if( res.data && res.data.length>0 ){
-			let datas = [];
-			//获取前14个科室
-			for( let i=0; i<res.data.length; i++ ){
-				if(i>13){break};
-				datas.push(res.data[i]);
-			}
-            let categoryHtmlString = renderHtml(categoryHtml, {data: datas});
+				//挂载分类
+				$('.sort_list').html(categoryHtmlString);
+			}else{
+				console.log("获取分类失败");
+			};
+		})
+		.catch(err=>{
+			console.log('获取科室失败，', err)
+		});
+		// 获取分类 end
 
-            //挂载分类
-            $('.sort_list').html(categoryHtmlString);
-		}else{
-			console.log("获取分类失败");
-		};
-    })
-    .catch(err=>{
-        console.log('获取科室失败，', err)
-    });
-    // 获取分类 end
-
-    //获取热门搜索
-    getHotSearc()
-    .then(res=>{
-        console.log("获取热门搜索: ", res);
-    })
-    .catch(err=>{
-        console.log('获取热门搜索失败，', err)
-    });
-    //获取热门搜索 end
+		//获取热门搜索
+		getHotSearc()
+		.then(res=>{
+			console.log("获取热门搜索: ", res);
+		})
+		.catch(err=>{
+			console.log('获取热门搜索失败，', err)
+		});
+		//获取热门搜索 end
+	}
 
 	
 	//从cookie获取搜索记录
@@ -156,6 +165,19 @@ $(function(){
 		$('.search_history').stop(true,true).fadeOut(300);
 	});
 
+	//许可证滚动文字
+	let qualifItemHeight = $('.qualification ul li').outerHeight(true);
+	let qualifItemLength = $('.qualification ul li').length;
+	let qualifCurIndex = 0;
+
+	if( qualifItemLength>1 ){
+		setInterval(()=>{
+			qualifCurIndex++;
+			if( qualifCurIndex>=qualifItemLength ){qualifCurIndex=0};
+	
+			$('.qualification ul').css( 'top', -qualifItemHeight*qualifCurIndex );
+		}, 3000);
+	};
 	
 	//图片懒加载
 	$("img.lazy").lazyload({
