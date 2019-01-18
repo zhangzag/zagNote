@@ -98,9 +98,26 @@
 		
 六、获取元素高度/宽度/距离顶部位置/距离底部位置
 	1.document.getElementById('test').getBoundingClientRect用于获取某个html元素相对于视窗的位置集合。(会得到top、right、bottom、left、width、height属性。)
+	
+七、栈（stack）和堆（heap）
+	1.stack为自动分配的内存空间，它由系统自动释放；而heap则是动态分配的内存，大小不定也不会自动释放。
+	2.栈存放简单的数据，数据大小可以确定，内存空间大小可以分配(基本数据类型: String、Number、Null、Boolean、Undefined、Symbol,它们是直接按值存放的，所以可以直接访问。)。堆存放的是对象，空间大小不一样，需要根据情况进行特定的分配(引用类型：如对象，数组，函数等,当我们需要访问引用类型的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据。)。
 		
-		
-		
+八、map和filter
+	1.map遍历数组，返回一个新的数组，如果return 是条件语句，则返回true或false,
+		let arr = [1, 2, 3, 4, 5]
+		let mapArr = arr.map((item, index, arr)=>{
+			console.log(item, index, arr)
+			return item > 2
+		})
+		console.log('mapArr: ', mapArr);// mapArr: [false, false, true, true, true]
+	2.filter过滤数组中不满足条件的值
+		let filterArr = arr.filter((item, index, arr)=>{
+			console.log(item, index, arr)
+			return item > 3
+		})
+		console.log('filterArr: ', filterArr);//filterArr: [4, 5]
+	
 		
 		
 		

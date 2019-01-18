@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="utf-8" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    
+    <%= require('html-loader!../layout/comHeadText.html')  %>
+  </head>
+  <body>
+    <%= require('html-loader!../layout/comHeader.html') %>
+
+	<!-- 主体 -->
+	<!-- 个人中心 -->
+	<div class="member_wrap">
+		<!-- 左菜单 -->
+		<div class="member_l_block">
+			
+		</div>
+		<!-- 左菜单 end -->
+		
+		<!-- 内容 -->
+		<div class="con">
+			<!-- 左菜单 end -->
+			<div class="tabs">
+				<ul>
+					<li class="num_all"><a href="javascript:void(0);">全部<span>(0)</span></a></li>
+					<li class="num_wait"><a href="javascript:void(0);">待付款<span>(0)</span></a></li>
+					<li class="num_wsend"><a href="javascript:void(0);">待发货<span>(0)</span></a></li>
+					<li class="num_wget"><a href="javascript:void(0);">待收货<span>(0)</span></a></li>
+					<li class="num_finish"><a href="javascript:void(0);">已完成<span>(0)</span></a></li>
+					<li class="num_cancel"><a href="javascript:void(0);">已取消<span>(0)</span></a></li>
+				</ul>
+			</div>
+
+			<div class="top_search">
+				<form action="javascript:;">
+					<select class="fl" name="recentDate" id="">
+						<option value="">选择时间</option>
+						<option value="30">近一个月的订单</option>
+						<option value="60">近两个月的订单</option>
+						<option value="90">近三个月的订单</option>
+					</select>
+					<div class="fr">
+						<div>
+							<input name="orderCodeOrProName" autocomplete="off" type="text" placeholder="请输入订单编号、商品名称">
+							<button type="submit"></button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="list_con">
+				<div class="list_head">
+					<table class="akdefult_table" cellspacing="0" cellpadding="0" border="0">
+						<col width="374" align="center" />
+						<col width="120" align="center" />
+						<col width="80" align="center" />
+						<col width="186" align="center" />
+						<col width="190" align="center" />
+						<thead>
+							<tr>
+								<th class="tc">商品信息</th>
+								<th>单价</th>
+								<th>数量</th>
+								<th class="tc">订单金额（元）</th>
+								<th class="tc">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<!-- 加载中动画 -->
+				<div class="loading_animate">
+					<i class="layui-icon layui-icon layui-anim layui-anim-rotate layui-anim-loop"><i class="layui-icon">&#xe63d;</i></i>
+				</div>
+				<!-- 加载中动画 end -->
+				<!-- 没有更多 -->
+				<div class="nothing">
+					<img src="/static/images/isnothing.png" alt="">
+					<p>还没有相关订单哦</p>
+					<a href="/index.html">去首页逛逛</a>
+				</div>
+				<!-- 没有更多 end -->
+				<!-- 列表 -->
+				<div class="list_lists">
+					
+				</div>
+
+				<!-- 分页 -->
+				<div id="pagings"></div>
+				<!-- 分页 end -->
+			</div>
+
+			<span class="clear"></span>
+		</div>
+		<span class="clear"></span>
+	</div>
+	<!-- 个人中心 end -->
+	<!-- 主体 end -->
+	
+	<!-- 查看物流窗口 -->
+	<div class="exp_layer">
+		<div class="exp_layer_in">
+			<div class="exp_head">
+				物流状态<i class="fr">X</i>
+			</div>
+			<div class="exp_line inlie_block">
+				<span>物流状态:</span><span class="exp_line_status"></span>
+			</div>
+			<div class="exp_line inlie_block">
+				<span>承运公司:</span><span class="exp_line_company"></span>
+			</div>
+			<div class="exp_line inlie_block">
+				<span>运单编号:</span><span class="exp_line_num"></span>
+			</div>
+			<div class="exp_line inlie_block">
+				<span>官方电话:</span><span class="exp_line_tel"></span>
+			</div>
+			<div class="exp_detail">
+				<div class="exp_detail_right">
+					<div class="exp_detail_left"></div>
+					<!-- <p class="new_detail">
+						<span>【温州市】温州市中转部已发出</span>
+							<span>2018-08-21   19:44:34</span>
+					</p>
+					<p>
+						<span>【温州市】温州市中转部已发出</span>
+							<span>2018-08-21   19:44:34</span>
+					</p> -->
+				</div>
+			</div>
+			<input type="hidden" id="logisticsInfo">
+		</div>
+	</div>
+	<!-- 查看物流窗口 end -->
+
+	<%= require('html-loader!../layout/comFooter.html') %>
+</body>
+</html>
+

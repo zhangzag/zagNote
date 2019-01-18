@@ -22,7 +22,7 @@ import floorBotAdvHtml from './floorBotAdv.hbs';
 
 
 // let htmlString2 = renderHtml(source, data);
-console.log('body: ', $(document))
+// console.log('body: ', $(document))
 $(function(){
     let memberId = 10299;
 
@@ -367,7 +367,7 @@ $(function(){
         pageNo: 'pFloorAdv',
     })
     .then(res=>{
-        console.log('楼层底部广告: ', res)
+        // console.log('楼层底部广告: ', res)
         if( !res.success || res.data.length === 0 ){
             return false;
         }

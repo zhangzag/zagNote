@@ -1,5 +1,9 @@
 import { webRoot } from '@/assets/js/globalDefine.js';
 import sha256 from 'sha-256-js';
+import Cookies from 'js-cookie';
+
+// console.log(1233, Cookies.get('memberId'))
+let setAuthorization = Cookies.get('memberId')?sha256(JSON.parse(Cookies.get('memberId')) + 'akjk') : '';
 
 $.ajaxSetup( {
     url: webRoot , // 默认URL
@@ -7,7 +11,7 @@ $.ajaxSetup( {
     dataType: 'json',//默认格式
     cache: true,
     headers : {
-        'Authorization': sha256('10299' + 'akjk'),
+        'Authorization': setAuthorization,
     },
     error: function(jqXHR, textStatus, errorMsg){ // 出错时默认的处理函数
         // jqXHR 是经过jQuery封装的XMLHttpRequest对象
@@ -21,7 +25,7 @@ $.ajaxSetup( {
             console.log( '出错[' + jqXHR.status + ']：' + errorMsg+':::'+jqXHR.responseText ); 
 
             if( JSON.parse(jqXHR.responseText).msg === '请先登录！' ){
-                // alert('请等登录')
+                alert('请等登录')
                 // $('body').append('<div class="loginLayer"></div>')
                 console.log('请先登录！')
             }

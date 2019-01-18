@@ -113,6 +113,12 @@
 		（3）移动端浏览器自动保存登录数据(例：谷歌浏览器)，去除方法，不要在input的外部套用<form></form>标签。
 		（4）CSS -- input输入框在IOS移动端光标没有居中问题，设置line-height：normal;
 		（5）CSS -- iso移动端display:flex;出现随着页面滚动出现不固定现象，要将display:flex;元素放置在滚动元素的同级，就能正常固定。
+		（6）css -- 多行溢出
+				display: -webkit-box;
+				-webkit-line-clamp: 2;/* 两行溢出 */
+				text-overflow: ellipsis;
+				overflow: hidden;
+				-webkit-box-orient: vertical;
 
 		
 	11.CSS -- 让input 双击后不出现历史记录 -----
@@ -313,7 +319,9 @@
 			display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
 			-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。
 			text-overflow: ellipsis; 可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。
-		
+	
+
+	28.PC端浏览器滚动条，通过在最外层overflow:hidden; 在内层加padding-right:15px;可以隐藏。
 		
 		
 		

@@ -1,0 +1,13 @@
+
+一、图片懒加载 vue-lazyload
+	https://www.npmjs.com/package/vue-lazyload
+	
+二、日期选择 vuejs-datepicker
+	https://www.npmjs.com/package/vuejs-datepicker
+	
+三、图片操作（放大、缩放、预览等）Viewer.js
+	https://github.com/fengyuanchen/viewerjs
+	http://fengyuanchen.github.io/viewerjs/
+	http://www.dowebok.com/192.html
+	https://segmentfault.com/a/1190000016584946?utm_source=tag-newest
+

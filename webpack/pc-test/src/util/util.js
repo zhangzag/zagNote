@@ -16,6 +16,14 @@ handlebars.registerHelper('formatPrice', function(price) {
 
     return '¥' + price.toFixed(2);
 });
+//个人中心菜单
+handlebars.registerHelper('curMemPage', function(curPageId, menuId) {
+    if( curPageId === menuId ){
+        return 'cur';
+    }else{
+        return '';
+    }
+});
 
 
 
@@ -70,7 +78,7 @@ export function getUrlData(){
  * @param {*} { el="img.lazy", placeholder='../../assets/images/myImg.png', effect='fadeIn', threshold=200 }
  */
 export function setLazyLoad( { el="img.lazy", placeholder='myImg.png', effect='fadeIn', threshold=200 } ){
-    console.log('el: ', el)
+    // console.log('el: ', el)
     return $(el).lazyload({
         placeholder: require( '@/assets/images/' + placeholder ), //用图片提前占位
           // placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏

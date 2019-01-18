@@ -1079,7 +1079,8 @@ a.c_orange:hover {
   overflow: hidden; }
 
 .qualification ul {
-  position: relative; }
+  position: relative;
+  transition: all 0.5s ease-out; }
 
 .qualification span {
   color: #249e55; }

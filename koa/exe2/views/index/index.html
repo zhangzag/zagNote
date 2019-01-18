@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../layout/headTextTop.html', {keywords: locals.keywords ,description: locals.description}) %>
+
+    <title><% if(locals.title){ %><%= title %><% }else{ %>首页a<% } %></title>
+
+    <%- include('../layout/headTextBottom.html') %>
+    <link rel='stylesheet' href='/style/base.scss' />
+  </head>
+  <body>
+    
+    <!-- 头部 -->
+    <%- include('../layout/head.html', { cateList: locals.cateList }) %>
+    <!-- 头部 end -->
+
+      <!-- <%= locals %> -->
+      <!-- <%= JSON.stringify(locals.cateList) %> -->
+
+      <!-- <% let a = JSON.stringify(locals) %>
+        <%- a %>
+      <% ; %> -->
+
+      <!-- <% if(renderDada.a){ %>
+          hahah
+      <% }else{ %>
+          heheh
+      <% } %> -->
+
+        <script src="/js/common/top.js"></script>
+  </body>
+</html>

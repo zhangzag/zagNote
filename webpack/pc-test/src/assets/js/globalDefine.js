@@ -55,4 +55,7 @@ export let curDay = new Date().Format("yyyy-MM-dd");
 //会员id
 export let memberId = Cookies.get('memberId')?JSON.parse(Cookies.get('memberId')) : '';
 
+//会员信息
+export let memberInfo = Cookies.get('_mi')?JSON.parse(Cookies.get('_mi')) : '';
+
 

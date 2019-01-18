@@ -108,9 +108,20 @@
 	7.在代码中使用。在代码中使用process.env.API_ROOT代替API真实地址，如：
 		//Axios.defaults.baseURL = "/apis/v1"
 		Axios.defaults.baseURL = process.env.API_ROOT
+	
+	
+	8.同一个页面，结构是相同的，我只是在vue-router中通过添加参数的方式来区分状态，即使我们修改了参数，URL也显示已经改变，但页面并不会刷新。因为路由是相同的，vue就会认为你是同一个页面，从而复用已加载的页面，而不会重新加载。
+		可以通过watch监听事件来监听路由的变化：
+		watch: {
+          '$route' (to, from) {
+                     if (to.name === 'projectAdd') {
+                             console.log(to.query)     // 在此调用函数
+                      }
+           }
+		}
 
-
-		  
+		
+	
 		
 		
 		

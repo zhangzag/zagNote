@@ -1,3 +1,7 @@
 
 
-一、
+一、常用中间件
+
+	1.koa-favicon：网站小图标。
+	2.koa-compress: gzip压缩。（要放在最前）
+		

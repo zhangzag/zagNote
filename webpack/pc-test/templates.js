@@ -7,7 +7,10 @@ module.exports = {
     'index'           : ['babel-polyfill', './src/pages/Index/index.js'],
     'login'           : ['babel-polyfill', './src/pages/Login/index.js'],
     'forgetPassword'  : ['babel-polyfill', './src/pages/Login/forgetPassword.js'],
-    'register'        : ['babel-polyfill', './src/pages/Login/register.js']
+    'register'        : ['babel-polyfill', './src/pages/Login/register.js'],
+    'memberIndex'     : ['babel-polyfill', './src/pages/Member/index.js'],
+    'updateInfo'      : ['babel-polyfill', './src/pages/Member/updateInfo.js'],
+    'order'           : ['babel-polyfill', './src/pages/Member/order.js'],
   },
   //页面模板
   modules: [
@@ -42,6 +45,30 @@ module.exports = {
       inject      : true,
       hash        : true,
       chunks      : ['common', 'register']
+    },
+    {
+      title       : '阿康大药房会员中心-个人资料',
+      template    : './src/view/member/index.html',
+      filename    : 'member/index.html',
+      inject      : true,
+      hash        : true,
+      chunks      : ['common', 'memberIndex']
+    },
+    {
+      title       : '阿康大药房会员中心-个人资料修改',
+      template    : './src/view/member/updateinfo.html',
+      filename    : 'member/updateInfo.html',
+      inject      : true,
+      hash        : true,
+      chunks      : ['common', 'updateInfo']
+    },
+    {
+      title       : '阿康大药房会员中心-我的订单',
+      template    : './src/view/member/order.html',
+      filename    : 'member/order.html',
+      inject      : true,
+      hash        : true,
+      chunks      : ['common', 'order']
     }
   ]
 }

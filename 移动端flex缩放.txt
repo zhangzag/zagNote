@@ -1,0 +1,32 @@
+<script>
+	!function(_window, _document) {
+		var _documentEle = _document.documentElement,
+			devicePixelRatio = _window.devicePixelRatio || 1;
+
+
+		function count() {
+			//1rem = 100px; 3.75rem = 375px
+			// var _cwidth = _documentEle.clientWidth / 3.75;
+			var _cwidth = _documentEle.clientWidth / 10;
+			_documentEle.style.fontSize = _cwidth + "px";
+		};
+
+		if (
+
+			function e(){ 
+				_document.body ? _document.body.style.fontSize = "16px" : _document.addEventListener("DOMContentLoaded", _window);
+			}(), 
+			count(), 
+			_window.addEventListener("resize", count), 
+			_window.addEventListener("pageshow", function(e) { _window.persisted && count() }), 
+			devicePixelRatio >= 2
+
+			){
+
+			var createElementBody = _document.createElement("body"),
+				creareDiv = _document.createElement("div");
+
+			creareDiv.style.border = ".5px solid transparent", createElementBody.appendChild(creareDiv), _documentEle.appendChild(createElementBody), 1 === creareDiv.offsetHeight , _documentEle.removeChild(createElementBody);
+		};
+	}(window, document);
+</script>

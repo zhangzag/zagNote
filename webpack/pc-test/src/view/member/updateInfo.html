@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="utf-8" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    
+    <%= require('html-loader!../layout/comHeadText.html')  %>
+	<script src="../../../static/js/plupload.full.min.js"></script>
+  </head>
+  <body>
+    <%= require('html-loader!../layout/comHeader.html') %>
+
+	<!-- 主体 -->
+	<!-- 个人中心 -->
+	<div class="member_wrap">
+		<!-- 左菜单 -->
+		<div class="member_l_block">
+			
+		</div>
+		<!-- 左菜单 end -->
+		<!-- 中心 -->
+		<div class="member_info">
+			<h3>个人资料</h3>
+			<div class="info_left fl">
+				<div class="inlie_block info_name">
+					<span class="in_title">用户昵称:</span>
+					<span><input type="text" placeholder="请输入昵称" name="userName"></span>
+				</div>
+				<div class="inlie_block">
+					<span class="in_title">性别:</span>
+					<span>
+						<label class="radio_label" for="male">
+							<input id="male" name="sex" type="radio" value="男" >
+							<span class="radio_frame"><i></i></span>
+							<span>男</span>
+						</label>
+
+						<label class="radio_label" for="female">
+							<input id="female" name="sex" type="radio" value="女" >
+							<span class="radio_frame"><i></i></span>
+							<span>女</span>
+						</label>
+
+						<label class="radio_label" for="unSet">
+							<input id="unSet" name="sex" type="radio" value="" >
+							<span class="radio_frame"><i></i></span>
+							<span>保密</span>
+						</label>
+					</span>
+				</div>
+				<div class="inlie_block">
+					<span class="in_title">生日:</span>
+					<span class="birth_select">
+						<!-- <select name="" id="">
+							<option value="1">2008</option>
+							<option value="1">2002</option>
+						</select>
+						<span>年</span>
+						<select name="" id="">
+							<option value="1">05</option>
+							<option value="1">06</option>
+						</select>
+						<span>月</span>
+						<select name="" id="">
+							<option value="1">22</option>
+							<option value="1">23</option>
+						</select>
+						<span>日</span> -->
+						<input type="text" class="layui-input" id="birInput">
+					</span>
+				</div>
+				<div class="inlie_block btn_block"><button class="btn_primary bp_green btn_comfirm">确认修改</button></div>
+			</div>
+			<div class="info_right fr">
+				<div class="ir_upImg">
+					<!-- <img src="/static/images/myImg.png" alt=""> -->
+					<!-- <img class="lazy" data-original=""> -->
+					<div class="img"></div>
+					<input id="upload_img_btn" type="file" name="file">
+				</div>
+				<span>编辑头像</span>
+				<p><em class="c_orange">提示：</em>请上传不超过1M且为jpg、jpeg、png格式的图像。</p>
+			</div>
+		</div>
+		<!-- 中心 -->
+	</div>
+	<!-- 个人中心 end -->
+	<!-- 主体 end -->
+	
+	<!-- 头像预览 -->
+	<div class="user_img_layer">
+		<div class="user_img_in">
+			<div class="user_img_con">
+				
+			</div>
+			<div class="user_img_options">
+				<button class="btn_primary bp_green fl">确定</button>
+				<button class="btn_primary bp_default fr">取消</button>
+			</div>
+			<!-- 上传中动画 -->
+			<div class="img_load_layer">
+				<i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i> 
+			</div>
+			<!-- 上传中动画 end -->
+		</div>
+	</div>
+	<!-- 头像预览 end -->
+
+	<%= require('html-loader!../layout/comFooter.html') %>
+</body>
+</html>
+
