@@ -1,6 +1,7 @@
 const router = require('koa-router')()
 
-const { getAdvRecom } = require('../../api/getRecom')
+const { getAdvRecom, getProRecom, getProRecomDetail } = require('../../api/recommend/')
+const { getPros } = require('../../api/product/')
 const passport = require('koa-passport');
 
 router.get('/', async (ctx, next) => {
@@ -13,9 +14,11 @@ router.get('/', async (ctx, next) => {
   //   return ctx.login({id: 1, username: 'admin', password: '123456'})
   // })(ctx)
 
-  let bannerDatas = '';
   let cateList = ctx.state.cateList;
+  let bannerDatas = '';
+  let akRecomProducts = '';
 
+  //轮播图
   await getAdvRecom({pageNo: 'indBanners'})
         .then(res=>{
           if( !res.data.success || res.data.data.length === 0 ){
@@ -25,8 +28,51 @@ router.get('/', async (ctx, next) => {
           // console.log('bannerDatas: ', bannerDatas)
         })
         .catch(err=>{
-          //获取banner 报错
+          console.log('获取banner 报错，', err)
         })
+
+  //阿康推荐
+  let akRecomDatas = '';
+  await getProRecom({pageNo: 'pakRecom'})
+        .then(res=>{
+          if( !res.data.success || res.data.data.length === 0 ){
+            return false;
+          }
+          akRecomDatas = res.data.data;
+          // console.log('akRecomDatas: ', akRecomDatas)
+        })
+        .catch(err=>{
+          console.log('获取阿康推荐出错', err)
+        })
+  
+  let akRecomDetailArr = [];
+  await getProRecomDetail({showID: akRecomDatas[0].showID})
+        .then(res=>{
+          // console.log('获取阿康推荐详细: ', res)
+          if( res.data.data.length <=0 ){
+            return
+          }
+          // akRecomDetailArr = res.data.data
+          for(let val of res.data.data){
+            akRecomDetailArr.push(val.productID)
+          }
+        })
+        .catch(err=>{
+          console.log('获取阿康推荐详细出错', err)
+        })
+        
+  if( akRecomDetailArr.length>0 ){
+  await getPros({productNumbers: akRecomDetailArr})
+        .then(res=>{
+          console.log('获取阿康推荐列表： ', res)
+          if( res.data.success && res.data.data.length>0 ){
+            akRecomProducts = res.data.data;
+          }
+        })
+        .catch(err=>{
+          console.log('获取阿康推荐产品列表出错，', err)
+        })
+  }
 
   await ctx.render('index/index', {
     keywords: '啦啦啦',//页面关键字
@@ -34,8 +80,9 @@ router.get('/', async (ctx, next) => {
     title: '首页',//页面标题
     //传到模板的数据
     renderDada: { 
-      bannerDatas,
+      bannerDatas,//首页轮播
       cateList,//分类列表数据
+      akRecomProducts, //阿康推荐产品
     },
   })
 })

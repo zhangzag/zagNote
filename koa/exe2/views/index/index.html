@@ -6,7 +6,11 @@
     <title><% if(locals.title){ %><%= title %><% }else{ %>首页a<% } %></title>
 
     <%- include('../layout/headTextBottom.html') %>
+
     <link rel='stylesheet' href='/style/base.scss' />
+    
+    <script src="/js/jquery.cycle.all.min.js"></script>
+    <script src="/js/index.js"></script>
   </head>
   <body>
     
@@ -26,7 +30,58 @@
       <% }else{ %>
           heheh
       <% } %> -->
+    
+    <!-- 轮播图 -->
+    <div class="focus-wrap">
+      <div class="focus_in">
+          <div class="focus">
+              <div class="m-banner" style="height: 500px;">
+                <div class="banner_btns">
+                    <a href="javascript:void(0);" class="prev" id="turnL"></a>
+                    <a href="javascript:void(0);" class="next" id="turnR"></a>
+                  </div>
+                  <ul id="roteAdv" class="m-b-con">
+                  <% if(renderDada.bannerDatas){ let datas=renderDada.bannerDatas %>
+                    <% datas.forEach(function(item, index){ %>
+                      <li id="<%- index+1 %>"><a target="_blank" href="<%- item.advertisementUrl %>"><img src="<%- item.advertisementPhoto %>"></a></li>
+                    <% }); %>
+                  <% }; %>
+                  </ul>
+              </div>
+          </div>
+        </div>
+    </div>
+    <!-- 轮播图 end -->
 
-        <script src="/js/common/top.js"></script>
+    <!-- 阿康特色 -->
+    <div class="featur_area hasBotAdv">
+      <div class="featur_area_in">
+          <h2><img src="/static/images/ak_recom.png" alt=""></h2>
+          <div class="featur_pro_wrap">
+              <ul class="featur_pro" style="top: 0px;">
+                <% if(renderDada.akRecomProducts){ let datas=renderDada.akRecomProducts %>
+                  <% datas.forEach(function(item, index){ %>
+                    <li><a target="_blank" href="/products/<%- item.productNumber %>.html"><img src="<%- item.productPhotos[0] %>?200*200"></a><div class="pro_info"><h2><%- item.productName %></h2><div class="pro_price"><span class="c_orange"><em><%- item.ourPrice %></em></span></div></div></li>
+                  <% }); %>
+                <% }; %>
+              </ul>
+          </div>
+      </div>
+        
+        <!-- 轮播分页按钮 -->
+      <!-- <div class="paginations">
+        <span class="active_p"></span>
+    </div> -->
+
+      <!-- 切换按钮 -->
+      <div class="feature_btns">
+          <div id="feature_prev"><img src="/static/images/ak_arr_l.png" alt=""></div>
+          <div id="feature_next"><img src="/static/images/ak_arr_r.png" alt=""></div>
+      </div>
+      <!-- 切换按钮 end -->
+    </div>
+    <!-- 阿康特色 end -->
+
+    <script src="/js/common/top.js"></script>
   </body>
 </html>
