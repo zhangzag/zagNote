@@ -1,0 +1,77 @@
+
+一、基本语法：
+	
+	1.查看当前所有数据库
+		show dbs
+	
+	2.创建数据库
+		use demo (创建一个名为demo的数据库，要插入数据后才能存在)
+		
+	3.创建集合
+		db.createCollection('user') //创建一个表名为 user 的表
+		
+	4.创建集合（方法2）
+		db.users.insert({}) //创建一个叫users的表，并向里面插入数据
+	
+	5.查看当前数据的集合(表)
+		show collections
+		
+	6.删除数据库
+		db.dropDatabase()
+		
+	7.删除集合(表)
+		db.user.drop() //删除user表
+		
+	8.查看集合的数据
+		db.user.find() //查看集合user的数据
+		
+	9.集合数据格式化
+		db.user.find().pretty()
+	
+	10.查看集合的第一条数据
+		db.user.findOne()
+	
+	11.更新数据
+		//更新user集合里 userName字段为'jack'的一列数据，把userAge改为 20
+		db.user.update({userName:'jack'},{$set: {userAge: 20}})
+		
+	12.查找数据
+		//查找userName为 'jack'的数据
+		db.user.find({userName: 'jack'})
+		
+	12.查找数据 - 大于
+		//查找年龄大于20的数据
+		db.user.find({userAge: {$gt: 20}})
+		
+	13.查找数据 - 小于
+		//查找年龄小于20的数据
+		db.user.find({userAge: {$lt: 20}})
+		
+	14.查找数据 - 等于
+		//查找年龄等于20的数据
+		db.user.find({userAge: {$eq: 20}})
+		
+	14.查找数据 - 大于等于
+		//查找年龄大于等于20的数据
+		db.user.find({userAge: {$gte: 20}})
+	
+	15.删除数据
+		//把userId为 1 的数据删除
+		db.user.remove({userId: 1})
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
