@@ -39,6 +39,11 @@ $(function(){
         }
     });
     /*轮换广告 end*/
+
+    //图片懒加载
+    lazyLoad({
+        imgSrc: '/images/i_placeholder.gif',
+    });
 });
 
 //时间格式化

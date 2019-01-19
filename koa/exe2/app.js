@@ -7,7 +7,19 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const compress = require('koa-compress')
 const favicon = require('koa-favicon');
+const render = require('koa-art-template');
+const path = require('path')
+const utils = require('./util/');//工具
 
+render(app, {
+  root: path.join(__dirname, 'views'),
+  // extname: '.art',
+  extname: '.html',
+  debug: process.env.NODE_ENV !== 'production',
+  imports: {
+    ...utils.moduleFuns,//模板工具类
+  }
+});
 // const index = require('./routes/index')
 // const index = require(routers.index);
 // const users = require('./routes/users')
@@ -44,7 +56,8 @@ app.use(require('koa-static')(__dirname + '/assets', {
 
 app.use(views(__dirname + '/views', {
   // extension: 'ejs',
-  map: { html: 'ejs' }
+  // map: { html: 'ejs' }
+  // map: { html: 'art' }
 }))
 
 // logger
@@ -68,7 +81,7 @@ app.use(session({
   rolling: false,  //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
   renew: false,  //(boolean) renew session when session is nearly expired,
 }, app))
-app.keys = ['some secret']
+app.keys = ['zayjt key']
 const conf = {
   encode: json => JSON.stringify(json),
   decode: str => JSON.parse(str)
@@ -114,11 +127,17 @@ app.use(passport.session())
 // 设置全局数据
 const { getCategory } = require('./api/header/');//分类列表 
 app.use(async (ctx, next) => {
+  // console.log(ctx.state)
   await getCategory()
   .then(res=>{
     // console.log('分类列表: ', res.data)
     if( res.data.data ){
-      ctx.state = Object.assign(ctx.state, { cateList: res.data.data });
+      let cateList = [];
+      
+      cateList = res.data.data.filter((item, index)=>{
+        return index < 14;
+      })
+      ctx.state = Object.assign(ctx.state, { cateList });
     }
   })
   .catch(err=>{

@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% include('../layout/headTextTop.html', {keywords: keywords ,description: description}) %>
 
-    <title><% if(title){ %><%= title %><% }else{ %>首页a<% } %></title>
+    <title><% if(locals.title){ %><%= title %><% }else{ %>首页a<% } %></title>
 
-    <% include('../layout/headTextBottom.html') %>
 
-    <% include('../layout/headCss.html') %>
-
-    <% include('../layout/headJs.html') %>
-
+    <link rel='stylesheet' href='/style/base.scss' />
+    
     <script src="/js/jquery.cycle.all.min.js"></script>
     <script src="/js/index.js"></script>
   </head>
   <body>
     
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: cateList }) %>
     <!-- 头部 end -->
+
+      <!-- <%= locals %> -->
+      <!-- <%= JSON.stringify(locals.cateList) %> -->
+
+      <!-- <% let a = JSON.stringify(locals) %>
+        <%- a %>
+      <% ; %> -->
+
+      <!-- <% if(renderDada.a){ %>
+          hahah
+      <% }else{ %>
+          heheh
+      <% } %> -->
     
     <!-- 轮播图 -->
     <div class="focus-wrap">
@@ -41,7 +49,7 @@
         </div>
     </div>
     <!-- 轮播图 end -->
-    
+
     <!-- 阿康特色 -->
     <div class="featur_area hasBotAdv">
       <div class="featur_area_in">
@@ -50,7 +58,7 @@
               <ul class="featur_pro" style="top: 0px;">
                 <% if(renderDada.akRecomProducts){ let datas=renderDada.akRecomProducts %>
                   <% datas.forEach(function(item, index){ %>
-                    <li><a target="_blank" href="/products/<%- item.productNumber %>.html"><img class="lazy" data-original="{{item.productPhotos | filterFirstPhoto}}?200*200"></a><div class="pro_info"><h2><%- item.productName %></h2><div class="pro_price"><span class="c_orange"><em>{{item.ourPrice | filterPrice}}</em></span></div></div></li>
+                    <li><a target="_blank" href="/products/<%- item.productNumber %>.html"><img src="<%- item.productPhotos[0] %>?200*200"></a><div class="pro_info"><h2><%- item.productName %></h2><div class="pro_price"><span class="c_orange"><em><%- item.ourPrice %></em></span></div></div></li>
                   <% }); %>
                 <% }; %>
               </ul>
@@ -71,8 +79,6 @@
     </div>
     <!-- 阿康特色 end -->
 
-    <!-- 底部 -->
-    <% include('../layout/footer.html') %>
-    <!-- 底部 end -->
+    <script src="/js/common/top.js"></script>
   </body>
 </html>

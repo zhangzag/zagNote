@@ -111,44 +111,44 @@ $(function(){
 		$(this).removeClass('cur');
 	});
 
-	// 获取分类
-	$.ajax({
-		url: webRoot + '/productType/getProductTypeList',
-	})
-	.done(function(res) {
-		// console.log("获取分类", res);
-		if( res.data && res.data.length>0 ){
-			var datas = res.data;
+	// // 获取分类
+	// $.ajax({
+	// 	url: webRoot + '/productType/getProductTypeList',
+	// })
+	// .done(function(res) {
+	// 	// console.log("获取分类", res);
+	// 	if( res.data && res.data.length>0 ){
+	// 		var datas = res.data;
 
-			//遍历前13个科室
-			for( var i=0; i<14; i++ ){
-				//一级分类
-				$('.sort_list').append('<div class="list_item"><a target="_blank" href="/list.html?productTypeOne='+datas[i].productTypeID+'" data-pdi="'+ datas[i].productTypeID +'">'+ datas[i].productTypeName +'</a></div>');
+	// 		//遍历前13个科室
+	// 		for( var i=0; i<14; i++ ){
+	// 			//一级分类
+	// 			$('.sort_list').append('<div class="list_item"><a target="_blank" href="/list.html?productTypeOne='+datas[i].productTypeID+'" data-pdi="'+ datas[i].productTypeID +'">'+ datas[i].productTypeName +'</a></div>');
 				
-				if( datas[i].productTypeList == null ){ break };
-				$('.list_item').eq(i).append(
-					'<div class="item_childs" data-eq="'+ i +'"></div>'
-				);
-				//遍历二级
-				for( var y=0; y<datas[i].productTypeList.length; y++ ){
-					$('.item_childs').eq(i).append(
-						'<dl><dt><a target="_blank" href="/list.html?productTypeOne='+datas[i].productTypeID+'&productTypeTwo='+datas[i].productTypeList[y].productTypeID+'">'+ datas[i].productTypeList[y].productTypeName +'</a></dt></dl>'
-					);
+	// 			if( datas[i].productTypeList == null ){ break };
+	// 			$('.list_item').eq(i).append(
+	// 				'<div class="item_childs" data-eq="'+ i +'"></div>'
+	// 			);
+	// 			//遍历二级
+	// 			for( var y=0; y<datas[i].productTypeList.length; y++ ){
+	// 				$('.item_childs').eq(i).append(
+	// 					'<dl><dt><a target="_blank" href="/list.html?productTypeOne='+datas[i].productTypeID+'&productTypeTwo='+datas[i].productTypeList[y].productTypeID+'">'+ datas[i].productTypeList[y].productTypeName +'</a></dt></dl>'
+	// 				);
 
-					if( datas[i].productTypeList == null ){ break };
-					//遍历三级
-					var threeChilder = datas[i].productTypeList[y].products;
+	// 				if( datas[i].productTypeList == null ){ break };
+	// 				//遍历三级
+	// 				var threeChilder = datas[i].productTypeList[y].products;
 					
-					for (var z=0; z<threeChilder.length; z++) {
-						// console.log( threeChilder[z].currentName )
-						$('.item_childs').eq(i).find('dt').eq(y).after('<dd><a target="_blank" href="/list.html?productName='+ threeChilder[z].currentName +'">'+ threeChilder[z].currentName +'</a></dd>');
-					}
-				};
-			}
-		}else{
-			console.log("获取分类失败");
-		};
-	});
+	// 				for (var z=0; z<threeChilder.length; z++) {
+	// 					// console.log( threeChilder[z].currentName )
+	// 					$('.item_childs').eq(i).find('dt').eq(y).after('<dd><a target="_blank" href="/list.html?productName='+ threeChilder[z].currentName +'">'+ threeChilder[z].currentName +'</a></dd>');
+	// 				}
+	// 			};
+	// 		}
+	// 	}else{
+	// 		console.log("获取分类失败");
+	// 	};
+	// });
 	
 	// 获取分类 end
 

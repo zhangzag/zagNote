@@ -16,20 +16,15 @@
 		var userName = $.trim( $('.userName').val() );
 		var pass = $.trim( $('.pass').val() );
 
-		//console.log(/^13[0-9]{9}|15[012356789][0-9]{8}|18[0-9]{9}|17[0-9]{9}|147[0-9]{8}$/.test(userName));
 		if(/^1[3|4|5|6|7|8|9][0-9]{9}$/.test(userName)){
 			$.ajax({
-				url: $.getGlobalVal().webRoot + '/login',
-				type: 'POST',
-				dataType: 'json',
+				url: '/toLogin',
 				data: {
 					username: userName,//用户名
- 					password: pass,//用户密码
-				},
-				error: function(err){
-					console.log(err)
+					password: pass,//用户密码
 				}
-			}).done(function(res){
+			})
+			.done(function(res){
 				// console.log(res);
 				if(res.success === true){
 					layui.use('layer',function(){
@@ -43,7 +38,7 @@
 							// }else{
 							// 	window.history.go(-1);
 							// }
-							window.location.href= "/";
+							// window.location.href= "/";
 						})
 					})
 					
