@@ -23,6 +23,9 @@ const _req = axios.create({
     // '/api/': { target: 'http://192.168.2.254:8080/AKGW-api/v1', pathRewrite: {'^/api/': ''} }
 });
 
+_req.all = axios.all;
+_req.spread = axios.spread;
+
 module.exports = {
     _req: _req
 };

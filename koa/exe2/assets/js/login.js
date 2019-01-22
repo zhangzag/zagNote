@@ -12,6 +12,7 @@
  		}
 	});
 
+	//登录
 	$('.loginBtn').click(function(){
 		var userName = $.trim( $('.userName').val() );
 		var pass = $.trim( $('.pass').val() );
@@ -38,7 +39,7 @@
 							// }else{
 							// 	window.history.go(-1);
 							// }
-							// window.location.href= "/";
+							window.location.href= "/";
 						})
 					})
 					

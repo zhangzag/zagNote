@@ -1,16 +1,25 @@
 const router = require('koa-router')()
 
 const passport = require('koa-passport');
-const { getAdvRecom, getProRecom, getProRecomDetail } = require('../../api/recommend/')
+const { getAdvRecom, getProRecom, getProRecomDetail, axiosAll } = require('../../api/recommend/')
 const { getPros } = require('../../api/product/')
 const { loginMember } = require('../../api/login/')
 const { getMemberInfo } = require('../../api/member/')
 
-const { setCookieByKey, getCookieByKey } = require('../../util/')
+const { setCookieByKey, getCookieByKey, removeCookie } = require('../../util/')
+
+// axiosAll([getAdvRecom({pageNo: 'indBanners'}),getProRecom({pageNo: 'pakRecom'})])
+// .then(res=>{
+//   console.log('全部res - 0： ', res[0].data)
+//   console.log('全部res - 1： ', res[1].data)
+// })
+// .catch(err=>{
+//   console.log('全部出错了， ', err)
+// })
 
 //首页
 router.get(['/', '/index.html'], async (ctx, next) => {
-  // ctx.compress = true;
+  ctx.compress = true;
   passport.authenticate('local', function(err, user, info, status){
     ctx.login({id: 6565, username: '哈哈哈', password: '332211'})
   })(ctx)
@@ -23,6 +32,7 @@ router.get(['/', '/index.html'], async (ctx, next) => {
   let bannerDatas = '';
   let akRecomProducts = '';
   const sha256 = require('sha-256-js');
+  let memberInfo = '';//会员信息
 
   //获取用户信息
   if( getCookieByKey(ctx, '_sami') ){
@@ -31,78 +41,94 @@ router.get(['/', '/index.html'], async (ctx, next) => {
       headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')}
     })
     .then(res=>{
-      console.log('获取会员信息： ', res)
+      // console.log('获取会员信息： ', res.data)
+      if(!res.data){ console.log('没有会员信息，', res);return; }
+
+      memberInfo = res.data;
     })
     .catch(err=>{
       console.log('获取会员信息出错了： ', err)
     })
   }
 
+  let akRecomDatas = '';
+  // await axiosAll([getAdvRecom({pageNo: 'indBanner'}),getProRecom({pageNo: 'pakRecom'})])
+  await axiosAll([getAdvRecom({pageNo: 'indBanners'}),getProRecom({pageNo: 'pakRecom'})])
+  .then(res=>{
+    // console.log('全部res - 0： ', res[0].data.data)
+    bannerDatas = res[0].data.data;
+
+    // console.log('全部res - 1： ', res[1].data)
+    akRecomDatas = res[1].data.data;
+    // console.log('akRecomProducts1-1: ')
+  })
+  .catch(err=>{
+    console.log('获取轮播图或获取阿康推荐出错了， ', err)
+  })
+
   //轮播图
-  await getAdvRecom({pageNo: 'indBanners'})
-        .then(res=>{
-          if( !res.data.success || res.data.data.length === 0 ){
-            return false;
-          }
-          bannerDatas = res.data.data;
-          // console.log('bannerDatas: ', bannerDatas)
-        })
-        .catch(err=>{
-          console.log('获取banner 报错，', err)
-        })
+  // await getAdvRecom({pageNo: 'indBanners'})
+  // .then(res=>{
+  //   if( !res.data.success || res.data.data.length === 0 ){
+  //     return false;
+  //   }
+  //   bannerDatas = res.data.data;
+  //   // console.log('bannerDatas: ', bannerDatas)
+  // })
+  // .catch(err=>{
+  //   console.log('获取banner 报错，', err)
+  // })
 
   //阿康推荐
-  let akRecomDatas = '';
-  await getProRecom({pageNo: 'pakRecom'})
-        .then(res=>{
-          if( !res.data.success || res.data.data.length === 0 ){
-            return false;
-          }
-          akRecomDatas = res.data.data;
-          // console.log('akRecomDatas: ', akRecomDatas)
-        })
-        .catch(err=>{
-          console.log('获取阿康推荐出错', err)
-        })
+  // let akRecomDatas = '';
+  // await getProRecom({pageNo: 'pakRecom'})
+  // .then(res=>{
+  //   if( !res.data.success || res.data.data.length === 0 ){
+  //     return false;
+  //   }
+  //   akRecomDatas = res.data.data;
+  //   // console.log('akRecomDatas: ', akRecomDatas)
+  // })
+  // .catch(err=>{
+  //   console.log('获取阿康推荐出错', err)
+  // })
   
   let akRecomDetailArr = [];
   await getProRecomDetail({showID: akRecomDatas[0].showID})
-        .then(res=>{
-          // console.log('获取阿康推荐详细: ', res)
-          if( res.data.data.length <=0 ){
-            return
-          }
-          // akRecomDetailArr = res.data.data
-          for(let val of res.data.data){
-            akRecomDetailArr.push(val.productID)
-          }
-        })
-        .catch(err=>{
-          console.log('获取阿康推荐详细出错', err)
-        })
+  .then(res=>{
+    // console.log('获取阿康推荐详细: ', res)
+    if( res.data.data.length <=0 ){
+      return
+    }
+    // akRecomDetailArr = res.data.data
+    for(let val of res.data.data){
+      akRecomDetailArr.push(val.productID)
+    }
+  })
+  .catch(err=>{
+    console.log('获取阿康推荐详细出错', err)
+  })
         
   if( akRecomDetailArr.length>0 ){
-  await getPros({productNumbers: akRecomDetailArr})
-        .then(res=>{
-          // console.log('获取阿康推荐列表： ', res)
-          if( res.data.success && res.data.data.length>0 ){
-            akRecomProducts = res.data.data;
-          }
-        })
-        .catch(err=>{
-          console.log('获取阿康推荐产品列表出错，', err)
-        })
+    await getPros({productNumbers: akRecomDetailArr})
+    .then(res=>{
+      // console.log('获取阿康推荐列表： ', res)
+      if( res.data.success && res.data.data.length>0 ){
+        akRecomProducts = res.data.data;
+      }
+    })
+    .catch(err=>{
+      console.log('获取阿康推荐产品列表出错，', err)
+    })
   }
-
+  
   await ctx.render('index/index', {
     keywords: '啦啦啦',//页面关键字
     description: '哈哈哈',//页面描述
     title: '首页',//页面标题
     //传到模板的数据
     renderDada: { 
-      userInfo: {
-        userId: getCookieByKey( ctx, '_sami' ),
-      },
+      memberInfo,//会员信息
       bannerDatas,//首页轮播
       cateList,//分类列表数据
       akRecomProducts, //阿康推荐产品
@@ -160,36 +186,24 @@ router.post('/toLogin', async (ctx, next)=>{
     console.log('登录出错了, ', err)
     ctx.throw(err.status, err);
   })
-
+})
+//退出登录
+router.get('/loginOut', async (ctx, next)=>{
+  if(removeCookie(ctx, '_sami')){
+    //移除cookie
+    ctx.body = {
+      success: true,
+      msg: '已安全退出',
+    }
+  }else{
+    ctx.body = {
+      success: false,
+      msg: '安全退出出错了'
+    }
+  };
 })
 
 router.get('/string', async (ctx, next) => {
-  // ctx.isAuthenticated()
-  // ctx.isUnauthenticated()
-  // await ctx.login()
-  // ctx.logout()
-  // ctx.state.user
-
-  // 设置 session
-  // ctx.session.username = "张"
-  // ctx.body = 'koa2 string' + ctx.session.username
-  
-  // if (ctx.path === '/favicon.ico') return;
- 
-  // let n = ctx.session.views || 0;
-  // ctx.session.views = ++n;
-  // ctx.body = ctx.session;
-
-  // if (ctx.isAuthenticated()) {
-  //   // ctx.state.user就是鉴权后得到的用户身份
-  //   ctx.body = 'hello ' + JSON.stringify(ctx.state.user)
-  // } else {
-  //   ctx.throw(401)
-  // }
-  // passport.authenticate('local', function(err, user, info, status) {
-  //   ctx.body = {user, err, info, status}
-  //   return ctx.login({id: 1, username: 'admin', password: '123456'})
-  // })(ctx)
   if( !ctx.isAuthenticated() ){
     ctx.redirect('/users')
   }else{
@@ -198,7 +212,6 @@ router.get('/string', async (ctx, next) => {
 })
 
 router.get('/json', async (ctx, next) => {
-  // ctx.state.testing = 56897;
   ctx.logout()
   ctx.body = '退出 --- ' + JSON.stringify( ctx.state )
 })

@@ -2,16 +2,18 @@
     <!-- 头部顶部条 -->
     <div class="shortcut">
         <div class="sh-cont">
+            {{if memberInfo}} 
+            <div class="fl isLogin">
+                <span>欢迎,<a class="login" href="/module/member/index.html">{{memberInfo.memberName || memberInfo.mobile}}</a>来到阿康大药房！&nbsp;[<a href="javascript:;" class="loginOutBtn" title="退出">退出</a>]&nbsp;</span>
+            </div>
+            {{else}}
             <div class="fl welcome">
                 欢迎来到阿康大药房！
             </div>
-            <div class="fl isLogin">
-                <!-- <span>欢迎,<a class="login" href="/module/member/index.html">18819446848</a>来到阿康大药房！&nbsp;[<a href="/member/exit.html?sysUserId=50043" title="退出">退出</a>]&nbsp;</span> -->
+            <div class="fl">
+                <span class="isunlogin notLogin"><a class="login_entry c_orange" href="/login.html">请登录</a><a href="/register.html">注册</a></span>
             </div>
-
-            <!-- <div class="fl">
-                <span class="isunlogin"><a class="login_entry" href="javascript:;">请登录</a><a href="javascript:;">注册</a></span>
-            </div> -->
+            {{/if}}
 
             <ul class="fr">
                 <li class="item show_phone_ewm">
