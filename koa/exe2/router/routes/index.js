@@ -8,15 +8,6 @@ const { getMemberInfo } = require('../../api/member/')
 
 const { setCookieByKey, getCookieByKey, removeCookie } = require('../../util/')
 
-// axiosAll([getAdvRecom({pageNo: 'indBanners'}),getProRecom({pageNo: 'pakRecom'})])
-// .then(res=>{
-//   console.log('全部res - 0： ', res[0].data)
-//   console.log('全部res - 1： ', res[1].data)
-// })
-// .catch(err=>{
-//   console.log('全部出错了， ', err)
-// })
-
 //首页
 router.get(['/', '/index.html'], async (ctx, next) => {
   ctx.compress = true;
@@ -28,28 +19,27 @@ router.get(['/', '/index.html'], async (ctx, next) => {
   //   return ctx.login({id: 1, username: 'admin', password: '123456'})
   // })(ctx)
 
-  let cateList = ctx.state.cateList;
   let bannerDatas = '';
   let akRecomProducts = '';
-  const sha256 = require('sha-256-js');
-  let memberInfo = '';//会员信息
+  // const sha256 = require('sha-256-js');
+  // let memberInfo = '';//会员信息
 
   //获取用户信息
-  if( getCookieByKey(ctx, '_sami') ){
-    getMemberInfo({
-      id: getCookieByKey(ctx, '_sami'),
-      headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')}
-    })
-    .then(res=>{
-      // console.log('获取会员信息： ', res.data)
-      if(!res.data){ console.log('没有会员信息，', res);return; }
+  // if( getCookieByKey(ctx, '_sami') ){
+  //   getMemberInfo({
+  //     id: getCookieByKey(ctx, '_sami'),
+  //     headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')}
+  //   })
+  //   .then(res=>{
+  //     // console.log('获取会员信息： ', res.data)
+  //     if(!res.data){ console.log('没有会员信息，', res);return; }
 
-      memberInfo = res.data;
-    })
-    .catch(err=>{
-      console.log('获取会员信息出错了： ', err)
-    })
-  }
+  //     memberInfo = res.data;
+  //   })
+  //   .catch(err=>{
+  //     console.log('获取会员信息出错了： ', err)
+  //   })
+  // }
 
   let akRecomDatas = '';
   // await axiosAll([getAdvRecom({pageNo: 'indBanner'}),getProRecom({pageNo: 'pakRecom'})])
@@ -128,9 +118,9 @@ router.get(['/', '/index.html'], async (ctx, next) => {
     title: '首页',//页面标题
     //传到模板的数据
     renderDada: { 
-      memberInfo,//会员信息
+      memberInfo: ctx.state.memberInfo || '',//会员信息
       bannerDatas,//首页轮播
-      cateList,//分类列表数据
+      cateList: ctx.state.cateList || '',//分类列表数据
       akRecomProducts, //阿康推荐产品
     },
   })

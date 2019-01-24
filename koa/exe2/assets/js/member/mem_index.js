@@ -3,38 +3,45 @@ $(function(){
 	var memberId = $.getGlobalVal().memberId;
 	var webOrigin = $.getGlobalVal().webOrigin;
 
-	//获取会员信息
-	$.ajax({
-		url: webRoot + '/vipSearchByID',
-		type: 'POST',
-		dataType: 'json',
-		data: {id: memberId},
-	})
-	.done(function(res) {
-		// console.log("success", res);
-		if( res ){
-			var now = new Date(),
-				hour = now.getHours();
+	// //获取会员信息
+	var now = new Date(),
+		hour = now.getHours();
+	
+	//会员名称
+	if( hour < 9 ){
+		$('.mcb_info h3>span').html('早安，新的一天又开始了~');
+	}
+	// $.ajax({
+	// 	url: webRoot + '/vipSearchByID',
+	// 	type: 'POST',
+	// 	dataType: 'json',
+	// 	data: {id: memberId},
+	// })
+	// .done(function(res) {
+	// 	// console.log("success", res);
+	// 	if( res ){
+	// 		var now = new Date(),
+	// 			hour = now.getHours();
 			
-			//会员名称
-			if( hour < 9 ){
-				var memberName = res.memberName + '<span>早安，新的一天又开始了~</span>';
-			}else{
-				var memberName = res.memberName;
-			}
-			$('.mcb_info h3').html(memberName);
-			//会员头像
-			if( res.picURL ){
-				$('.mcb_img img').attr( 'src', res.picURL );
-			}
-			//会员等级
-			$('.vip_grade').html( res.vipGradeName?res.vipGradeName:'普通会员' );
-			//性别
-			$('.mcb_infor .sex').html( res.sex?res.sex:'保密' );
-			//生日
-			$('.mcb_infor .bir').html( res.birthday?res.birthday:'未填写' )
-		}
-	});
+	// 		//会员名称
+	// 		if( hour < 9 ){
+	// 			var memberName = res.memberName + '<span>早安，新的一天又开始了~</span>';
+	// 		}else{
+	// 			var memberName = res.memberName;
+	// 		}
+	// 		$('.mcb_info h3').html(memberName);
+	// 		//会员头像
+	// 		if( res.picURL ){
+	// 			$('.mcb_img img').attr( 'src', res.picURL );
+	// 		}
+	// 		//会员等级
+	// 		$('.vip_grade').html( res.vipGradeName?res.vipGradeName:'普通会员' );
+	// 		//性别
+	// 		$('.mcb_infor .sex').html( res.sex?res.sex:'保密' );
+	// 		//生日
+	// 		$('.mcb_infor .bir').html( res.birthday?res.birthday:'未填写' )
+	// 	}
+	// });
 	
 
 	$('.ir_upImg').click(function(){
@@ -100,48 +107,6 @@ $(function(){
 
 	//我的订单
 	// 1.在线未支付    2.货到付款待确认    3.待发货    4.待收货    5.物流待收款    6.财务待收款    7.已完成    8.已取消    9.支付中
-	// $.ajax({
-	// 	url: webRoot + '/order/getOrderByMemberId',
-	// 	type: 'POST',
-	// 	dataType: 'json',
-	// 	data: {
-	// 		memberId: memberId,
-	// 	},
-	// })
-	// .done(function(res) {
-	// 	console.log("llll", res);
-	// 	if( res.success ){
-	// 		if( res.data.length === 0 ){
-	// 			return ;
-	// 		}
-	// 		var numWait = 0; //待付款
-	// 		var numWsend = 0; //待发货
-	// 		var numWget = 0; //待收货
-	// 		var numFinish = 0; //已完成
-	// 		var numCancel = 0; //已取消
-
-	// 		for( var i=0; i<res.data.length; i++ ){
-	// 			if( res.data[i].orderStatus == 1 || res.data[i].orderStatus == 9 ){
-	// 				numWait++;//待付款
-	// 			}else if( res.data[i].orderStatus == 2 || res.data[i].orderStatus == 3 ){
-	// 				numWsend++;//待发货
-	// 			}else if( res.data[i].orderStatus == 4 ){
-	// 				numWget++;//待收货
-	// 			}else if( res.data[i].orderStatus == 5 || res.data[i].orderStatus == 6 || res.data[i].orderStatus == 7 ){
-	// 				numFinish++;//已完成
-	// 			}else {
-	// 				numCancel++;//已取消
-	// 			}
-	// 		}
-	// 		$('.num_wait').html(numWait);
-	// 		$('.num_wsend').html(numWsend);
-	// 		$('.num_wget').html(numWget);
-	// 		$('.num_finish').html(numFinish);
-	// 		$('.num_cancel').html(numCancel);
-	// 	}else{
-	// 		console.log(res.msg)
-	// 	}
-	// });
 	$.ajax({
 	    url: webRoot + '/order/getOrderCount',
 	    data: {

@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
-const views = require('koa-views')
+// const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
@@ -9,13 +9,37 @@ const compress = require('koa-compress')
 const favicon = require('koa-favicon');
 const render = require('koa-art-template');
 const path = require('path')
+const sha256 = require('sha-256-js');
+// var htmlMinifier = require('html-minifier').minify;
+const htmlMinifier = require('html-minifier').minify;
 const utils = require('./util/');//工具
+
+const { getMemberInfo } = require('./api/member/')
+const axiosAll = require('./api/apiConfig.js')._req.axiosAll;
+
+const { getCookieByKey } = require('./util/')
 
 render(app, {
   root: path.join(__dirname, 'views'),
   // extname: '.art',
   extname: '.html',
   debug: process.env.NODE_ENV !== 'production',
+  // 是否开启压缩。它会运行 htmlMinifier，将页面 HTML、CSS、CSS 进行压缩输出
+  // 如果模板包含没有闭合的 HTML 标签，请不要打开 minimize，否则可能被 htmlMinifier 修复或过滤
+  minimize: true,
+  // 是否编译调试版
+  // compileDebug: true,
+  htmlMinifier: htmlMinifier,// HTML 压缩器。仅在 NodeJS 环境下有效
+  // HTML 压缩器配置。参见 https://github.com/kangax/html-minifier
+  htmlMinifierOptions: {
+    removeAttributeQuotes: true,
+    removeComments: true,//是否去掉注释
+    collapseWhitespace: true,
+    minifyCSS: true,
+    minifyJS: true,
+    // 运行时自动合并：rules.map(rule => rule.test)
+    ignoreCustomFragments: []
+  },
   imports: {
     ...utils.moduleFuns,//模板工具类
   }
@@ -49,14 +73,15 @@ app.use(json())
 app.use(logger())
 // app.use(require('koa-static')(__dirname + '/public'))
 app.use(require('koa-static')(__dirname + '/assets', {
-  hidden: true
+  hidden: true,
+  gzip: true,
 }))
 
-app.use(views(__dirname + '/views', {
-  // extension: 'ejs',
-  // map: { html: 'ejs' }
-  // map: { html: 'art' }
-}))
+// app.use(views(__dirname + '/views', {
+//   // extension: 'ejs',
+//   // map: { html: 'ejs' }
+//   // map: { html: 'art' }
+// }))
 
 // logger
 app.use(async (ctx, next) => {
@@ -125,25 +150,73 @@ app.use(passport.session())
 // 设置全局数据
 const { getCategory } = require('./api/header/');//分类列表 
 app.use(async (ctx, next) => {
-  // console.log(ctx.state)
-  await getCategory()
+  let apiArr = [];
+  apiArr.push( getCategory() );//分类
+
+  //获取会员信息
+  if(getCookieByKey(ctx, '_sami')){
+    apiArr.push( getMemberInfo({ id: getCookieByKey(ctx, '_sami'), headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')} }) );
+  }
+  
+  await axiosAll(apiArr)
   .then(res=>{
-    // console.log('分类列表: ', res.data)
-    if( res.data.data ){
+    // console.log('两个数据： ', res[1].data)
+    //分类列表
+    if( res[0].data.data ){
       let cateList = [];
       
-      cateList = res.data.data.filter((item, index)=>{
+      cateList = res[0].data.data.filter((item, index)=>{
         return index < 14;
       })
       ctx.state = Object.assign(ctx.state, { cateList });
     }
+    //会员信息
+    if( res[1] && res[1].data ){
+      ctx.state = Object.assign(ctx.state, { memberInfo: res[1].data });
+    }
   })
   .catch(err=>{
-    console.log('分类列表出错了，', err)
+    console.log('获取分类或取会员信息出错了： ', err)
   })
+  // await getCategory()
+  // .then(res=>{
+  //   // console.log('分类列表: ', res.data)
+  //   if( res.data.data ){
+  //     let cateList = [];
+      
+  //     cateList = res.data.data.filter((item, index)=>{
+  //       return index < 14;
+  //     })
+  //     ctx.state = Object.assign(ctx.state, { cateList });
+  //   }
+  // })
+  // .catch(err=>{
+  //   console.log('分类列表出错了，', err)
+  // })
   
   await next();
 })
+
+// app.use(async (ctx, next) => {
+//   //获取用户信息
+//   if( getCookieByKey(ctx, '_sami') ){
+//     await getMemberInfo({
+//       id: getCookieByKey(ctx, '_sami'),
+//       headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')}
+//     })
+//     .then(res=>{
+//       // console.log('获取会员信息： ', res.data)
+//       if(!res.data){ console.log('没有会员信息，', res);return; }
+  
+//       // memberInfo = res.data;
+//       ctx.state = Object.assign(ctx.state, { memberInfo: res.data });
+//     })
+//     .catch(err=>{
+//       console.log('获取会员信息出错了： ', err)
+//     })
+//   }
+//   await next();
+// })
 
 const routers = require('./router/')
 

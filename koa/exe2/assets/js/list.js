@@ -1,8 +1,17 @@
 
+	function test(item){
+		console.log(1)
+		console.log(item)
+	}
 $(function(){
 	var webRoot = $.getGlobalVal().webRoot;
 	//搜索内容
 	var searchCon = getQueryString('ser_con') || null;
+	
+	//图片懒加载
+	lazyLoad({
+		imgSrc: '/images/ak_300x300.jpg',
+	});
 
 	var productTypeOne = getQueryString('productTypeOne'),productTypeTwo = getQueryString('productTypeTwo'),productNameUrl = getQueryString('productName');
 	//console.log(productTypeOne,productTypeTwo,productNameUrl)
@@ -12,42 +21,42 @@ $(function(){
 
 	// 面包屑
 	var crumbBar = '<a href="/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>';
-	// 一级分类
-	if(productTypeOne != null){
-		$.ajax({
-			url: $.getGlobalVal().webRoot + '/productType/getAllOneLevelProductType',
-			type: 'POST',
-			dataType: 'json',
-			async: false
-		})
-		.done(function(res) {
-			// console.log(res)
-			for (var i = 0; i < res.length; i++) {
-				if(productTypeOne == res[i].productTypeID){
-					crumbBar += '<a href="/list.html?productTypeOne='+res[i].productTypeID+'">'+res[i].productTypeName+'</a> <i class="layui-icon layui-icon-right"></i>';
-				}
-			}
-		})
-	}
-	// 二级分类
-	if(productTypeTwo != null){
-		$.ajax({
-			url: $.getGlobalVal().webRoot + '/productType/getAllTwoLevelProductType',
-			type: 'POST',
-			dataType: 'json',
-			data: { parentTypeID: productTypeOne },
-			async: false
-		})
-		.done(function(res) {
-			// console.log(res)
-			for (var i = 0; i < res.length; i++) {
-				if(productTypeTwo == res[i].productTypeID){
-					crumbBar += '<a href="/list.html?productTypeOne='+productTypeOne+'&productTypeTwo='+productTypeTwo+'">'+res[i].productTypeName+'</a> <i class="layui-icon layui-icon-right"></i>';
-				}
-			}
-		})
-	}
-	$('.crumbs').append(crumbBar);
+	// // 一级分类
+	// if(productTypeOne != null){
+	// 	$.ajax({
+	// 		url: $.getGlobalVal().webRoot + '/productType/getAllOneLevelProductType',
+	// 		type: 'POST',
+	// 		dataType: 'json',
+	// 		async: false
+	// 	})
+	// 	.done(function(res) {
+	// 		// console.log(res)
+	// 		for (var i = 0; i < res.length; i++) {
+	// 			if(productTypeOne == res[i].productTypeID){
+	// 				crumbBar += '<a href="/list.html?productTypeOne='+res[i].productTypeID+'">'+res[i].productTypeName+'</a> <i class="layui-icon layui-icon-right"></i>';
+	// 			}
+	// 		}
+	// 	})
+	// }
+	// // 二级分类
+	// if(productTypeTwo != null){
+	// 	$.ajax({
+	// 		url: $.getGlobalVal().webRoot + '/productType/getAllTwoLevelProductType',
+	// 		type: 'POST',
+	// 		dataType: 'json',
+	// 		data: { parentTypeID: productTypeOne },
+	// 		async: false
+	// 	})
+	// 	.done(function(res) {
+	// 		// console.log(res)
+	// 		for (var i = 0; i < res.length; i++) {
+	// 			if(productTypeTwo == res[i].productTypeID){
+	// 				crumbBar += '<a href="/list.html?productTypeOne='+productTypeOne+'&productTypeTwo='+productTypeTwo+'">'+res[i].productTypeName+'</a> <i class="layui-icon layui-icon-right"></i>';
+	// 			}
+	// 		}
+	// 	})
+	// }
+	// $('.crumbs').append(crumbBar);
 	
 	$('.list-shou').click(function(){
 		if($(this).children('span').html() == '收起'){
@@ -164,7 +173,30 @@ $(function(){
 			}
 		})
 	}
-	getList(1);
+	// getList(1);
+	//页数
+	if( $('.pro-wrap .item').length>0 ){
+		var items = $('.pro-wrap .item');
+
+		layui.use('laypage', function(){
+			var laypage = layui.laypage;
+			//执行一个laypage实例
+			laypage.render({
+				elem: 'page', //注意，这里的 test1 是 ID，不用加 # 号
+				count: $('#prosCount').attr('data-count') || 0, //数据总数，从服务端得到
+				limit: 20, //每页显示的条数
+				curr: 1,
+				layout: ['page', 'prev', 'next'], //自定义排版
+				theme: '#a7a7a7', // 主题
+				jump: function(obj,first){ //切换分页的回调
+					$('.tab-card .page .tabCurr').html(obj.curr)
+					if(!first){
+						getList(obj.curr);
+					}
+				}
+			})
+		})
+	};
 
 	// 数量
 	$('.pro-wrap').on('click','.reduce',function(){
@@ -195,24 +227,24 @@ $(function(){
 	})
 
 	//  品牌
-	function getBrandList(pageNumber){
-		$.ajax({
-			url: $.getGlobalVal().webRoot + '/brand/getBrandList',
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				page: 1,
-				limit: 60,
-			},
-		})
-		.done(function(res){
-			// console.log('品牌',res)
-			for (var i = 0; i < res.data.length; i++) {
-				$('.pro-type .brandList').append('<li><a href="javascript: void(0)" brandId="'+res.data[i].brandID+'">'+res.data[i].brandName+'</a></li>')
-			}
-		})
-	}
-	getBrandList(1)
+	// function getBrandList(pageNumber){
+	// 	$.ajax({
+	// 		url: $.getGlobalVal().webRoot + '/brand/getBrandList',
+	// 		type: 'POST',
+	// 		dataType: 'json',
+	// 		data: {
+	// 			page: 1,
+	// 			limit: 60,
+	// 		},
+	// 	})
+	// 	.done(function(res){
+	// 		// console.log('品牌',res)
+	// 		for (var i = 0; i < res.data.length; i++) {
+	// 			$('.pro-type .brandList').append('<li><a href="javascript: void(0)" brandId="'+res.data[i].brandID+'">'+res.data[i].brandName+'</a></li>')
+	// 		}
+	// 	})
+	// }
+	// getBrandList(1)
 
 	// 品牌刷选
 	$('.pro-type .brandList').on('click','a',function(){

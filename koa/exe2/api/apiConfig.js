@@ -25,6 +25,17 @@ const _req = axios.create({
 
 _req.all = axios.all;
 _req.spread = axios.spread;
+_req.axiosAll = (axiosList) =>{
+    return new Promise((resolve, reject)=>{
+        _req.all(axiosList)
+        .then(res=>{
+            resolve(res)
+        })
+        .catch(err=>{
+            reject(err)
+        })
+    })
+}
 
 module.exports = {
     _req: _req

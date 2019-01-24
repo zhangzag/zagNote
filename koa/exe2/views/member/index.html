@@ -3,11 +3,12 @@
 <head>
     <% include('../layout/headTextTop.html', {keywords: keywords ,description: description}) %>
 
-    <title><% if(title){ %><%= title %><% }else{ %>首页a<% } %></title>
+    <title><% if(title){ %><%= title %><% }else{ %>首页<% } %></title>
 
     <% include('../layout/headTextBottom.html') %>
 
     <% include('../layout/headCss.html') %>
+    <link rel="stylesheet" href="/style/member/mem_ind.css">
 
     <% include('../layout/headJs.html') %>
     
@@ -22,25 +23,25 @@
 	<div class="member_wrap">
 		<!-- 左菜单 -->
 		<div class="member_l_block">
-                <% include('../layout/memleftblock.html') %>
+                <% include('../layout/memleftblock.html', { curList: renderDada.curList || 0 }) %>
 		</div>
 		<!-- 左菜单 end -->
 		<!-- 中心 -->
 		<div class="member_c_block">
 			<div class="mcb_top">
 				<div class="mcb_img">
-					<img src="/static/images/myImg.png" alt="">
+                    {{if memberInfo.picURL}}<img src="{{memberInfo.picURL}}" alt="">{{else}}<img src="/images/myImg.png" alt="">{{/if}}
 				</div>
 				<div class="mcb_info">
 					<div>
-						<h3><!-- 陈文科<span>早安，新的一天又开始了~</span> --></h3>
+						<h3>{{memberInfo.memberName}}<span><!-- 早安，新的一天又开始了~ --></span></h3>
 						<!-- <p>最近登录时间：xxxx-xx-xx  xx:xx:xx</p> -->
 					</div>
-					<span class="vip_grade"></span>
+					<span class="vip_grade">{{memberInfo.vipGradeName?memberInfo.vipGradeName:'普通会员'}}</span>
 				</div>
 				<div class="mcb_infor">
-					<div><span>性别：</span><span class="sex"></span></div>
-					<div><span>生日：</span><span class="bir"></span></div>
+					<div><span>性别：</span><span class="sex">{{memberInfo.sex?memberInfo.sex:'保密'}}</span></div>
+					<div><span>生日：</span><span class="bir">{{memberInfo.birthday?memberInfo.birthday:'未填写'}}</span></div>
 					<a class="update_btn c_green" href="./updateinfo.html">修改</a>
 				</div>
 			</div>
@@ -106,6 +107,7 @@
     <!-- 底部 -->
     <% include('../layout/footer.html') %>
     <!-- 底部 end -->
+    <script src="/js/member/mem_index.js"></script>
 </body>
 </html>
 

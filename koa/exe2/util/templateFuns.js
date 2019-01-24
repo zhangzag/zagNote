@@ -23,10 +23,32 @@ const filterPriceOnlyNum = (data)=>{
 
     return `${data.toFixed(2)}`;
 }
+
+//商品类型图标
+const imgType = (data)=>{
+    if( data == 1 ){
+      return 'RX';
+    }else if(data == 2){
+      return 'OTC-2'
+    }else if(data == 3){
+      return 'OTC-1'
+    }
+}
+
+//数字向上取整
+const numCeil = (data)=>{
+    if( !data && data!=0 ){
+        return 
+    }
+    return Math.ceil(data);
+}
+
 /***** 过滤 end *****/
 
 module.exports = {
     filterFirstPhoto,
     filterPrice,
     filterPriceOnlyNum,
+    imgType,
+    numCeil,
 }
