@@ -13,14 +13,12 @@
 
     <% include('../layout/headJs.html') %>
 	<script src="/js/jquery.form.js" type="text/javascript"></script>
-
   </head>
   <body>
     
     <!-- 头部 -->
     <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
 	<!-- 头部 end -->
-	
 
 	<div class="list-main">
 		<div class="crumbs-bar">
@@ -120,7 +118,7 @@
 						</a>
 						<div class="buy">
 							<div class="pri">
-								<span class="buy-pri" onclick="test({{$value}})">{{$value.ourPrice | filterPrice}}</span>
+								<span class="buy-pri">{{$value.ourPrice | filterPrice}}</span>
 								<span class="old-pri">{{$value.price | filterPrice}}</span>
 							</div>
 							<div class="num-wrap">
@@ -130,9 +128,9 @@
 							</div>
 						</div>
 						{{if $value.prescriptionType == 1}}
-						<button class="demandBtn">需求登记</button>
+						<button class="demandBtn" data-proNum="{{$value.productNumber}}">需求登记</button>
 						{{else}}
-						<button class="buyBtn">立即购买</button>
+						<button class="buyBtn" data-proNum="{{$value.productNumber}}">立即购买</button>
 						{{/if}}
 					</div>
 				{{/each}}

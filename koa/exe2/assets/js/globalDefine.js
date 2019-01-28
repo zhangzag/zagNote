@@ -44,8 +44,9 @@ if( processEnv && processEnv.NODE_ENV ){
     }
 }
 
-// let webRoot = curWebRoot;
-let webRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
+let webRoot = curWebRoot;
+console.log('webRoot111111111: ', webRoot, processEnv.NODE_ENV)
+// let webRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
 // export let webRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
 
 //当前时间

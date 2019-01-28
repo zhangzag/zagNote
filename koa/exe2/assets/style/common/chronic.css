@@ -210,7 +210,7 @@
 	width: 200px;
 	height: 200px;
 	margin: 0 auto;
-	/* background: cadetblue; */
+	background: cadetblue;
 }
 .first .right-bottom{
 	/*overflow: hidden;*/
@@ -227,7 +227,7 @@
 	width: 150px;
 	height: 150px;
 	margin: 0 auto;
-	/* background: #129747; */
+	background: #129747;
 }
 .first .right-bottom .pro-list h6{
 	width: 150px;

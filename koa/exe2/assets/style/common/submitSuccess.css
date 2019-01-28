@@ -1,0 +1,79 @@
+.smain{
+	width: 1190px; 
+	margin: 12px auto 50px;
+	border: 1px solid #E8E8E8; 
+}
+.smain-top{
+	padding: 30px 32px;
+	background: #F4FCF7;
+	border-bottom: 1px solid #e8e8e8;
+}
+.smain-top h3 img{
+	width: 39px;
+	height: 39px;
+}
+.smain-top h3 span{
+	font-size: 24px;
+	font-weight: 900;
+	color: #646464;
+	margin-left: 15px;
+	vertical-align: middle;
+}
+.smain-top>p{
+	color: #646464;
+	font-size: 14px;
+	line-height: 24px;
+}
+.smain-top>p .pay-money{
+	color: #F08200;
+}
+.smain-bottom{
+	padding: 30px 32px;
+}
+.smain-bottom h3{
+	font-size: 18px;
+	color: #646464;
+}
+.smain-bottom .pay-logo{
+	margin-top: 20px;
+}
+.smain-bottom .pay-logo a{
+	display: inline-block;
+	width: 137px;
+	height: 48px;
+	margin-right: 12px;
+	border: 1px solid #E8E8E8;
+	text-align: center;
+	line-height: 48px;
+}
+.smain-bottom .pay-logo a img{
+	/*width: 89px;*/
+	/*height: 29px;*/
+}
+.smain-bottom .pay-logo .active{
+	border-color: #2FBA66;
+}
+.smain-bottom .button-w{
+	overflow: hidden;
+	padding-top: 75px;
+}
+.smain-bottom .button-w>button{
+	float: right;
+	width: 182px;
+	height: 46px;
+	font-size: 18px;
+	color: #ffffff;
+	background: #F08200;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.smain-bottom .button-w .surePay{
+	color: #ffffff;
+	background: #F08200;
+}
+.smain-bottom .button-w .goHome{
+	color: #ffffff;
+	background: #2FBA66;
+}

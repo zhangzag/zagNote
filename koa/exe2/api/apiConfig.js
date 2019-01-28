@@ -2,7 +2,8 @@ const axios = require('axios');
 const Qs = require('qs');
 
 const _req = axios.create({
-    baseURL: 'http://113.108.163.210:9999/AKGW-api/v1',
+    // baseURL: 'http://113.108.163.210:9999/AKGW-api/v1',
+    baseURL: '/api',
     method: 'post',
     timeout: 20000,
     // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -20,7 +21,7 @@ const _req = axios.create({
     //       password: 'rapunz3l'
     //     }
     //  	},
-    // '/api/': { target: 'http://192.168.2.254:8080/AKGW-api/v1', pathRewrite: {'^/api/': ''} }
+    '/api': { target: 'http://192.168.2.254:8080', pathRewrite: {'^/api': '/AKGW-api/v1'} }
 });
 
 _req.all = axios.all;

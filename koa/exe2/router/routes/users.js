@@ -6,7 +6,9 @@ router.prefix('/member')
 router.get('*', async (ctx, next)=>{
   if( !ctx.state.memberInfo ){
     ctx.redirect('/login.html');
+    return
   }
+
   await next();
 })
 

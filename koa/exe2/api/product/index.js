@@ -89,8 +89,33 @@ const getBrandList = function ( {page=1, limit=60} ){
     });
 };
 
+/**
+ * 获取找药列表
+ *
+ * @export
+ * @returns
+ */
+const getALLDisease = function ( {page=1, limit=100} ){
+    return new Promise((resolve, reject)=>{
+        _req({
+            url: webRoot + '/product/searchALLDisease',
+            data: {
+                page,
+                limit,
+            }
+        })
+        .then(res=>{
+            resolve(res);
+        })
+        .catch(err=>{
+            reject(err);
+        });
+    });
+};
+
 module.exports = {
     getPros,
     getProList,
     getBrandList,
+    getALLDisease,
 }

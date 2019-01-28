@@ -13,7 +13,8 @@ const getAdvRecom = function ( {pageNo, isValid=1, endDate=curDate} ){
         if(!pageNo){reject('未指定模块名');};
 
         _req({
-            url: webRoot + '/seachAd',
+            // url: webRoot + '/seachAd',
+            url: '/seachAd',
             data: {
                 endDate,
                 pageNo,

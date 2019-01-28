@@ -2,7 +2,7 @@ const router = require('koa-router')()
 
 const passport = require('koa-passport');
 const { getAdvRecom, getProRecom, getProRecomDetail, axiosAll } = require('../../api/recommend/')
-const { getPros } = require('../../api/product/')
+const { getPros, getALLDisease } = require('../../api/product/')
 const { loginMember } = require('../../api/login/')
 const { getMemberInfo } = require('../../api/member/')
 
@@ -82,7 +82,7 @@ router.get(['/', '/index.html'], async (ctx, next) => {
   // .catch(err=>{
   //   console.log('获取阿康推荐出错', err)
   // })
-  
+  console.log('akRecomDatas: ', akRecomDatas)
   let akRecomDetailArr = [];
   await getProRecomDetail({showID: akRecomDatas[0].showID})
   .then(res=>{
@@ -135,7 +135,7 @@ router.get('/login.html', async (ctx, next)=>{
     //传到模板的数据
     renderDada: { 
       // bannerDatas,//首页轮播
-      // cateList,//分类列表数据
+      // cateList: ctx.state.cateList || '',//分类列表数据
       // akRecomProducts, //阿康推荐产品
     },
   })
@@ -192,6 +192,154 @@ router.get('/loginOut', async (ctx, next)=>{
     }
   };
 })
+
+//找药
+router.get('/findDrug.html', async (ctx, next)=>{
+  let drugList = '';
+
+  await getALLDisease({
+    page: 1,
+    limit: 100,
+  })
+  .then(res=>{
+    console.log('找药列表： ', res)
+    if( res.data ){
+      drugList = res.data;
+    }
+  })
+  .catch(err=>{
+    console.log('获取找药列表出错')
+  })
+
+  
+  await ctx.render('index/findDrug', {
+    keywords: '阿康大药房病重分类',//页面关键字
+    description: '阿康大药房病重分类',//页面描述
+    title: '阿康大药房-找药页',//页面标题
+    //传到模板的数据
+    renderDada: { 
+      cateList: ctx.state.cateList || '',//分类列表数据
+      drugList,
+    },
+  })
+});
+
+//频道页- 慢病药馆
+router.get('/chronic.html', async (ctx, next)=>{
+  let bannerDatas = '', proRecomDatas = '', recomProducts = '', tuiJian = '';
+
+  await axiosAll([getAdvRecom({pageNo: 'pcmanbing'}), getProRecom({pageNo: 'pcChronicTuiJian'}), getAdvRecom({pageNo: 'pcChronicTuiJian'})])
+  .then(res=>{
+    // console.log('全部res - 0： ', res[0].data.data)
+    bannerDatas = res[0].data.data;
+
+    // console.log('全部res - 1： ', res[1].data)
+    proRecomDatas = res[1].data.data;
+    // console.log('akRecomProducts1-1: ')
+
+    //慢病推荐广告
+    tuiJian = res[2].data.data;
+  })
+  .catch(err=>{
+    console.log('获取轮播图或获取阿康推荐出错了， ', err)
+  })
+
+  let proRecomDetailArr = [];
+  await getProRecomDetail({showID: proRecomDatas[0].showID})
+  .then(res=>{
+    // console.log('获取阿康推荐详细: ', res)
+    if( res.data.data.length <=0 ){
+      return
+    }
+    // proRecomDetailArr = res.data.data
+    for(let val of res.data.data){
+      proRecomDetailArr.push(val.productID)
+    }
+  })
+  .catch(err=>{
+    console.log('获取阿康推荐详细出错', err)
+  })
+        
+  if( proRecomDetailArr.length>0 ){
+    await getPros({productNumbers: proRecomDetailArr})
+    .then(res=>{
+      // console.log('获取阿康推荐列表： ', res)
+      if( res.data.success && res.data.data.length>0 ){
+        recomProducts = res.data.data;
+      }
+    })
+    .catch(err=>{
+      console.log('获取阿康推荐产品列表出错，', err)
+    })
+  }
+
+  //列表
+  let listRecomDatas = '', listRecomDetailArr = [], listRroducts = '';
+  await getProRecom({pageNo: 'pManBingList'})
+  .then(res=>{
+    console.log('获取慢病商品列表: ', res)
+    if( !res.data.success || res.data.data.length===0 ){
+        return false;
+    };
+    listRecomDatas = res.data.data;
+  })
+  .catch(err=>{
+    console.log('获取慢病商品列表出错了', err)
+  })
+  await getProRecomDetail({showID: listRecomDatas[0].showID})
+  .then(res=>{
+    // console.log('获取阿康推荐详细: ', res)
+    if( res.data.data.length <=0 ){
+      return
+    }
+    // listRecomDetailArr = res.data.data
+    for(let val of res.data.data){
+      listRecomDetailArr.push(val.productID)
+    }
+  })
+  .catch(err=>{
+    console.log('获取慢病商品列表出错了', err)
+  })
+  if( listRecomDetailArr.length>0 ){
+    await getPros({productNumbers: listRecomDetailArr})
+    .then(res=>{
+      // console.log('获取阿康推荐列表： ', res)
+      if( res.data.success && res.data.data.length>0 ){
+        listRroducts = res.data.data;
+      }
+    })
+    .catch(err=>{
+      console.log('获取阿康推荐产品列表出错，', err)
+    })
+  }
+  
+  await ctx.render('channel/chronic', {
+    keywords: '阿康大药房',//页面关键字
+    description: '阿康大药房',//页面描述
+    title: '阿康大药房-慢病药馆',//页面标题
+    //传到模板的数据
+    renderDada: { 
+      cateList: ctx.state.cateList || '',//分类列表数据
+      bannerDatas,
+      recomProducts,
+      tuiJian,
+      listRroducts,
+    },
+  })
+});
+
+//帮助页
+router.get('/help-new.html', async (ctx, next)=>{
+  await ctx.render('help/help-new.html', {
+    keywords: '阿康大药房',//页面关键字
+    description: '阿康大药房',//页面描述
+    title: '阿康大药房-慢病药馆',//页面标题
+    //传到模板的数据
+    renderDada: { 
+      cateList: ctx.state.cateList || '',//分类列表数据
+    },
+  })
+});
 
 router.get('/string', async (ctx, next) => {
   if( !ctx.isAuthenticated() ){
