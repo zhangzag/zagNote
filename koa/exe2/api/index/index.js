@@ -1,4 +1,4 @@
-const { webRoot, curDate } = require('../../assets/js/globalDefine.js');
+const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 
 let _req = _reqs._req;
@@ -13,7 +13,7 @@ let _req = _reqs._req;
 //         if(!pageNo){reject('未指定模块名');};
 
 //         _req({
-//             url: webRoot + '/seachAd',
+//             url: '/seachAd',
 //             data: {
 //                 endDate: curDate,
 //                 pageNo,

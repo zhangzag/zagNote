@@ -1,4 +1,4 @@
-const { webRoot, curDate } = require('../../assets/js/globalDefine.js');
+const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 
 let _req = _reqs._req;
@@ -13,7 +13,7 @@ const getMemberInfo = function ( {id, headers} ){
         if(!id && id!=0 ){reject('没有用户id参数')};
 
         _req({
-            url: webRoot + '/vipSearchByID',
+            url: '/vipSearchByID',
             data: {
                 id,//会员id
             },

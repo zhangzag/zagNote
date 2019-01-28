@@ -1,4 +1,4 @@
-const { webRoot, curDate } = require('../../assets/js/globalDefine.js');
+const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 
 let _req = _reqs._req;
@@ -13,7 +13,7 @@ const getPros = function ( {memberId=10299, productNumbers} ){
         if(!productNumbers){reject('没有产品参数');};
 
         _req({
-            url: webRoot + '/product/getProductByProductNumber',
+            url: '/product/getProductByProductNumber',
             data: JSON.stringify({
                 memberId,
                 productNumbers,
@@ -22,13 +22,7 @@ const getPros = function ( {memberId=10299, productNumbers} ){
             transformRequest: [function (data) {
                 return data
             }]
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
 
@@ -41,7 +35,7 @@ const getPros = function ( {memberId=10299, productNumbers} ){
 const getProList = function ( {page=1, limit=20, productName, isImport=null, productDrugType, brandId, lowestPrice, highest, productType_one, productType_two, sysNo='pc'} ){
     return new Promise((resolve, reject)=>{
         _req({
-            url: webRoot + '/product/getProductList',
+            url: '/product/getProductList',
             data: {
                 page,
                 limit,
@@ -55,13 +49,7 @@ const getProList = function ( {page=1, limit=20, productName, isImport=null, pro
                 productType_two,//当前科室ID
                 sysNo, //终端
             }
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
 
@@ -74,18 +62,12 @@ const getProList = function ( {page=1, limit=20, productName, isImport=null, pro
 const getBrandList = function ( {page=1, limit=60} ){
     return new Promise((resolve, reject)=>{
         _req({
-            url: webRoot + '/brand/getBrandList',
+            url: '/brand/getBrandList',
             data: {
                 page,
                 limit,
             }
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
 
@@ -98,24 +80,38 @@ const getBrandList = function ( {page=1, limit=60} ){
 const getALLDisease = function ( {page=1, limit=100} ){
     return new Promise((resolve, reject)=>{
         _req({
-            url: webRoot + '/product/searchALLDisease',
+            url: '/product/searchALLDisease',
             data: {
                 page,
                 limit,
             }
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
+
+/**
+ *根据productNumber获取商品信息
+ *
+ * @param {*} {productNumber}
+ * @returns
+ */
+const getProByProductNumber = function ({productNumber}){
+    return new Promise((resolve, reject)=>{
+        if(!productNumber && productNumber!=0){reject('没有商品id')}
+
+        _req({
+            url: '/product/findProductByProductNumber',
+            data: {
+                productNumber
+            }
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
 
 module.exports = {
     getPros,
     getProList,
     getBrandList,
     getALLDisease,
+    getProByProductNumber,
 }

@@ -1,9 +1,9 @@
 const router = require('koa-router')()
 
-router.prefix('/product');
+router.prefix('/products');
 
 const axiosAll = require('../../api/apiConfig.js')._req.axiosAll;
-const { getProList, getBrandList } = require('../../api/product/');
+const { getProList, getBrandList, getProByProductNumber } = require('../../api/product/');
 
 //产品列表页
 router.get(['/', '/list.html'], async (ctx, next)=>{
@@ -60,17 +60,6 @@ router.get(['/', '/list.html'], async (ctx, next)=>{
         console.log('获取品牌或商品列表出错了', err)
     })
 
-    // await getProList({page:1, limit: 20})
-    // .then(res=>{
-    //     // console.log('获取商品列表proList： ' ,res.data)
-    //     if( res.data.data.length ){
-    //         proList = res.data;
-    //     }
-    // })
-    // .catch(err=>{
-    //     console.log('获取商品列表出错了', err)
-    // })
-
     await ctx.render('product/list', {
       keywords: '啦啦啦',//页面关键字
       description: '哈哈哈',//页面描述
@@ -86,5 +75,36 @@ router.get(['/', '/list.html'], async (ctx, next)=>{
     })
 })
 
+router.get('/:productNumber.html', async (ctx, next)=>{
+    // console.log(11111, ctx.params);
+    let params = ctx.params;
+    let productNumber = params.productNumber;
+    let productInfo = '';
+
+    await getProByProductNumber({productNumber})
+    .then(res=>{
+        console.log('查询商品信息： ', res)
+        
+        if(res.data.data == null){    
+            //没有商品信息
+            return false;
+        }
+        productInfo = res.data.data;
+    })
+    .catch(err=>{
+        console.log('查找商品信息出错了', err)
+    })
+
+    await ctx.render('product/detail', {
+        keywords: '啦啦啦',//页面关键字
+        description: '哈哈哈',//页面描述
+        title: '阿康大药房-商品详情',//页面标题
+        //传到模板的数据
+        renderDada: { 
+          cateList: ctx.state.cateList || '',//分类列表数据
+          productInfo,
+        },
+    })
+})
 
 module.exports = router

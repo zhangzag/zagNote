@@ -1,4 +1,4 @@
-const { webRoot, curDate } = require('../../assets/js/globalDefine.js');
+const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 let _req = _reqs._req;
 
@@ -11,7 +11,7 @@ let _req = _reqs._req;
 const getCategory = function (){
     return new Promise((resolve, reject)=>{
         _req({
-            url: webRoot + '/productType/getProductTypeList',
+            url: '/productType/getProductTypeList',
         })
         .then(res=>{
             resolve(res);
@@ -21,8 +21,6 @@ const getCategory = function (){
         });
     });
 };
-
-
 
 /**
  *获取热门搜索 - 通过分类id
@@ -35,7 +33,7 @@ const getCategory = function (){
 const getHotSearc = function( productTypeId='', type='', isValid=1 ){
     return new Promise((resolve, reject)=>{
         _req({
-            url:  webRoot + '/getHotSearchByProductTypeID',
+            url:  '/getHotSearchByProductTypeID',
             data: {
                 endDate: curDate,//格式为 2018-05-26 00:00:00
                 productTypeID: productTypeId,//格式为 int

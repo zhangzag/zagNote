@@ -23,7 +23,8 @@ render(app, {
   root: path.join(__dirname, 'views'),
   // extname: '.art',
   extname: '.html',
-  debug: process.env.NODE_ENV !== 'production',
+  // debug: process.env.NODE_ENV !== 'production',
+  debug: false,
   // 是否开启压缩。它会运行 htmlMinifier，将页面 HTML、CSS、CSS 进行压缩输出
   // 如果模板包含没有闭合的 HTML 标签，请不要打开 minimize，否则可能被 htmlMinifier 修复或过滤
   minimize: true,

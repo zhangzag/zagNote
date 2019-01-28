@@ -3,6 +3,27 @@ const CryptoJS = require("crypto-js");
 //秘钥必须为：8/16/32位
 const aseKey = "zayjt2019";
 
+//时间格式化
+Date.prototype.Format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) 
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+    
+}
+
 
 /***** 模板工具 *****/
 const moduleFuns = require('./templateFuns');
@@ -11,6 +32,15 @@ const moduleFuns = require('./templateFuns');
 /***** 过滤 *****/
 
 /***** 过滤 end *****/
+
+
+/***** 通用变量 *****/
+//当前时间
+const curDate = new Date().Format("yyyy-MM-dd hh:mm:ss");
+//当前日期
+const curDay = new Date().Format("yyyy-MM-dd");
+
+/***** 通用变量 end *****/
 
 
 /***** 通用方法 *****/
@@ -80,4 +110,6 @@ module.exports = {
     setCookieByKey,
     getCookieByKey,
     removeCookie,
+    curDate,
+    curDay
 }

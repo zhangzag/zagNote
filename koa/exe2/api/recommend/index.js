@@ -1,4 +1,4 @@
-const { webRoot, curDate } = require('../../assets/js/globalDefine.js');
+const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 
 let _req = _reqs._req;
@@ -13,7 +13,6 @@ const getAdvRecom = function ( {pageNo, isValid=1, endDate=curDate} ){
         if(!pageNo){reject('未指定模块名');};
 
         _req({
-            // url: webRoot + '/seachAd',
             url: '/seachAd',
             data: {
                 endDate,
@@ -41,7 +40,7 @@ const getProRecom = function ( {pageNo, isValid=1, endDate=curDate} ){
         if(!pageNo){reject('未指定模块名');};
 
         _req({
-            url: webRoot + '/seachSt',
+            url: '/seachSt',
             data: {
                 endDate,
                 pageNo,
@@ -68,7 +67,7 @@ const getProRecomDetail = function ( {showID, isValid=1, endDate=curDate} ){
         if(!showID){reject('未指定模块id');};
 
         _req({
-            url: webRoot + '/seachStDetail',
+            url: '/seachStDetail',
             data: {
                 endDate,
                 showID,

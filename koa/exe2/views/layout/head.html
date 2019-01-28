@@ -59,15 +59,15 @@
             </div>
             <div class="hotwords frameEdit" frameinfo="new_hotwords">
                 <strong>
-                <a href="/product/list.html?productName=白蛋白" title="白蛋白">白蛋白</a>
+                <a href="/products/list.html?productName=白蛋白" title="白蛋白">白蛋白</a>
                 </strong>
             
                 <strong>
-                <a href="/product/list.html?productName=恩必普" title="恩必普">恩必普</a>
+                <a href="/products/list.html?productName=恩必普" title="恩必普">恩必普</a>
                 </strong>
             
                 <strong>
-                <a href="/product/list.html?productName=非布司他片" title="非布司他片 ">非布司他片 </a>
+                <a href="/products/list.html?productName=非布司他片" title="非布司他片 ">非布司他片 </a>
                 </strong>
             
                 <strong>
@@ -75,11 +75,11 @@
                 </strong>
             
                 <strong>
-                <a href="/product/list.html?productName=神经生长因子" title="神经生长因子">神经生长因子</a>
+                <a href="/products/list.html?productName=神经生长因子" title="神经生长因子">神经生长因子</a>
                 </strong>
             
                 <strong>
-                <a href="/product/list.html?productName=清肺散结丸" title="清肺散结丸" style="border-right:0;">清肺散结丸</a>
+                <a href="/products/list.html?productName=清肺散结丸" title="清肺散结丸" style="border-right:0;">清肺散结丸</a>
                 </strong>
             </div>
             <div class="search_history">
@@ -152,16 +152,16 @@
     <div class="nav">
         <div class="nav_in">
             <div class="all_sort">
-                <a href="/product/list.html" style="color: #fff;">全部分类</a>
+                <a href="/products/list.html" style="color: #fff;">全部分类</a>
                 <div class="sort_list">
                     <% if(cateList){  %>
                         <% cateList.forEach(function(item, index){ %>
                         <div class="list_item">
-                            <a target="_blank" href="/product/list.html?productTypeOne=<%- item.productTypeID %>" data-pdi="<%- item.productTypeID %>" class=""><%- item.productTypeName %></a>
+                            <a target="_blank" href="/products/list.html?productTypeOne=<%- item.productTypeID %>" data-pdi="<%- item.productTypeID %>" class=""><%- item.productTypeName %></a>
                             <div class="item_childs" data-eq="<%- index %>">
                                 <% item.productTypeList.forEach(function(ChildItem, index){ %>
                                     <dl>
-                                        <dt><a target="_blank" href="/product/list.html?productTypeOne=<%- item.productTypeID %>&productTypeTwo=<%- ChildItem.productTypeID %>"><%- ChildItem.productTypeName %></a></dt>
+                                        <dt><a target="_blank" href="/products/list.html?productTypeOne=<%- item.productTypeID %>&productTypeTwo=<%- ChildItem.productTypeID %>"><%- ChildItem.productTypeName %></a></dt>
                                         <% ChildItem.products.forEach(function(ChildTwoItem, index){ %>
                                                 <dd><a target="_blank" href="/list.html?productName=<%- ChildTwoItem.productNumber %>"><%- ChildTwoItem.currentName %></a></dd>
                                         <% }); %>

@@ -26,16 +26,16 @@
           <div class="focus">
               <div class="m-banner" style="height: 500px;">
                 <div class="banner_btns">
-                    <a href="javascript:void(0);" class="prev" id="turnL"></a>
-                    <a href="javascript:void(0);" class="next" id="turnR"></a>
-                  </div>
-                  <ul id="roteAdv" class="m-b-con">
+                  <a href="javascript:void(0);" class="prev" id="turnL"></a>
+                  <a href="javascript:void(0);" class="next" id="turnR"></a>
+                </div>
+                <ul id="roteAdv" class="m-b-con">
                   <% if(renderDada.bannerDatas){ let datas=renderDada.bannerDatas %>
                     <% datas.forEach(function(item, index){ %>
                       <li id="<%- index+1 %>"><a target="_blank" href="<%- item.advertisementUrl %>"><img src="<%- item.advertisementPhoto %>"></a></li>
                     <% }); %>
                   <% }; %>
-                  </ul>
+                </ul>
               </div>
           </div>
         </div>

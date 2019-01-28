@@ -1,4 +1,4 @@
-const { webRoot, curDate } = require('../../assets/js/globalDefine.js');
+const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 
 let _req = _reqs._req;
@@ -14,7 +14,7 @@ const loginMember = function ( {username, password} ){
         if(!password ){reject('请输入密码')};
 
         _req({
-            url: webRoot + '/login',
+            url: '/login',
             data: {
                 username,//用户名
                 password,//用户密码

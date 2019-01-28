@@ -7,128 +7,140 @@ $(function(){
     var productId = ''
     // 获取商品
     var productDetail = null;
-    $.ajax({
-        // url: $.getGlobalVal().webRoot + '/product/getProductByProductId',
-        url: $.getGlobalVal().webRoot + '/product/findProductByProductNumber',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            // productId: productId
-            productNumber: productNumber
-        },
-        async: false
-    })
-    .done(function(res){
-        // console.log('商品详情：',res);
-        if(res.data == null){    
-            window.history.back()
-            return false;
-        }
-        productDetail = res.data;
-        productId = res.data.productID;
+    
+    $('#zoomContainer .zoomItem li').eq(0).addClass('jxfzoomy-active')
+    $('#zoomContainer').jxfZoomy({
+        smallBoxW: 400,//小图框的宽 单位px 默认250px
+        smallBoxH: 400,//小图框的高 单位px 默认250px
+        bigBoxW: 500, //大图放大镜框的宽 单位px 默认350px
+        bigBoxH: 500, //大图放大镜框的高 单位px 默认350px
+        smallListImgW:66,//缩略图的宽 单位px 默认50px
+        smallListImgH:50,//缩略图的高 单位px 默认50px
+        moveSpeed:100 //缩略图点击左右方向键移动的速度 单位px 默认50px
+    });
+    
+    // $.ajax({
+    //     // url: $.getGlobalVal().webRoot + '/product/getProductByProductId',
+    //     url: $.getGlobalVal().webRoot + '/product/findProductByProductNumber',
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     data: {
+    //         // productId: productId
+    //         productNumber: productNumber
+    //     },
+    //     async: false
+    // })
+    // .done(function(res){
+    //     // console.log('商品详情：',res);
+    //     if(res.data == null){    
+    //         window.history.back()
+    //         return false;
+    //     }
+    //     productDetail = res.data;
+    //     productId = res.data.productID;
 
-        // 面包屑
-        var crumbs = '<a href="/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>'
-        var productTypeOne = null;
-        // 一级 分类
-        $.ajax({
-            url: $.getGlobalVal().webRoot + '/productType/getAllOneLevelProductType',
-            type: 'POST',
-            dataType: 'json',
-            async: false
-        })
-        .done(function(proTypeOne) {
-            //console.log(proTypeOne)
-            for (var k = 0; k < proTypeOne.length; k++) {
-                if(productDetail.productTypeOne == proTypeOne[k].productTypeName){
-                    productTypeOne = proTypeOne[k].productTypeID;
-                    crumbs += '<a href="/list.html?productTypeOne='+proTypeOne[k].productTypeID+'">'+productDetail.productTypeOne+'</a> <i class="layui-icon layui-icon-right"></i>';
-                }
-            }
-        })
-        // 二级分类
-        $.ajax({
-            url: $.getGlobalVal().webRoot + '/productType/getAllTwoLevelProductType',
-            type: 'POST',
-            dataType: 'json',
-            data: { parentTypeID: productTypeOne },
-            async: false
-        })
-        .done(function(resTypeTwo) {
-            //console.log(resTypeTwo)
-            for (var g = 0; g < resTypeTwo.length; g++) {
-                if(productDetail.productTypeTwo == resTypeTwo[g].productTypeName){
-                    crumbs += '<a href="/list.html?productTypeOne='+productTypeOne+'&productTypeTwo='+ resTypeTwo[g].productTypeID+'">'+productDetail.productTypeTwo+'</a> <i class="layui-icon layui-icon-right"></i>';
-                }
-            }
-        })
+    //     // 面包屑
+    //     var crumbs = '<a href="/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>'
+    //     var productTypeOne = null;
+    //     // 一级 分类
+    //     $.ajax({
+    //         url: $.getGlobalVal().webRoot + '/productType/getAllOneLevelProductType',
+    //         type: 'POST',
+    //         dataType: 'json',
+    //         async: false
+    //     })
+    //     .done(function(proTypeOne) {
+    //         //console.log(proTypeOne)
+    //         for (var k = 0; k < proTypeOne.length; k++) {
+    //             if(productDetail.productTypeOne == proTypeOne[k].productTypeName){
+    //                 productTypeOne = proTypeOne[k].productTypeID;
+    //                 crumbs += '<a href="/list.html?productTypeOne='+proTypeOne[k].productTypeID+'">'+productDetail.productTypeOne+'</a> <i class="layui-icon layui-icon-right"></i>';
+    //             }
+    //         }
+    //     })
+    //     // 二级分类
+    //     $.ajax({
+    //         url: $.getGlobalVal().webRoot + '/productType/getAllTwoLevelProductType',
+    //         type: 'POST',
+    //         dataType: 'json',
+    //         data: { parentTypeID: productTypeOne },
+    //         async: false
+    //     })
+    //     .done(function(resTypeTwo) {
+    //         //console.log(resTypeTwo)
+    //         for (var g = 0; g < resTypeTwo.length; g++) {
+    //             if(productDetail.productTypeTwo == resTypeTwo[g].productTypeName){
+    //                 crumbs += '<a href="/list.html?productTypeOne='+productTypeOne+'&productTypeTwo='+ resTypeTwo[g].productTypeID+'">'+productDetail.productTypeTwo+'</a> <i class="layui-icon layui-icon-right"></i>';
+    //             }
+    //         }
+    //     })
 
-        crumbs += '<span>'+productDetail.productName+'</span>';
-        $('.crumbs').html(crumbs);
+    //     crumbs += '<span>'+productDetail.productName+'</span>';
+    //     $('.crumbs').html(crumbs);
 
-        // 放大镜
-        for (var i = 0; i < res.data.productPhotos.length; i++) {
-            var item = '<li data-smallImg="'+res.data.productPhotos[i].photoURL+'" data-bigImg="'+res.data.productPhotos[i].photoURL+'"><div><img src="'+res.data.productPhotos[i].photoURL+'" alt="" width="60" height="60"></div></li>'
-            $('#zoomContainer .zoomItem').append(item)
-        }
-        $('#zoomContainer .zoomItem li').eq(0).addClass('jxfzoomy-active')
-        $('#zoomContainer').jxfZoomy({
-            smallBoxW: 400,//小图框的宽 单位px 默认250px
-            smallBoxH: 400,//小图框的高 单位px 默认250px
-            bigBoxW: 500, //大图放大镜框的宽 单位px 默认350px
-            bigBoxH: 500, //大图放大镜框的高 单位px 默认350px
-            smallListImgW:66,//缩略图的宽 单位px 默认50px
-            smallListImgH:50,//缩略图的高 单位px 默认50px
-            moveSpeed:100 //缩略图点击左右方向键移动的速度 单位px 默认50px
-        });
-        $('.pro-l .collection .proCode span').html(res.data.productCode)
+    //     // 放大镜
+    //     for (var i = 0; i < res.data.productPhotos.length; i++) {
+    //         var item = '<li data-smallImg="'+res.data.productPhotos[i].photoURL+'" data-bigImg="'+res.data.productPhotos[i].photoURL+'"><div><img src="'+res.data.productPhotos[i].photoURL+'" alt="" width="60" height="60"></div></li>'
+    //         $('#zoomContainer .zoomItem').append(item)
+    //     }
+    //     $('#zoomContainer .zoomItem li').eq(0).addClass('jxfzoomy-active')
+    //     $('#zoomContainer').jxfZoomy({
+    //         smallBoxW: 400,//小图框的宽 单位px 默认250px
+    //         smallBoxH: 400,//小图框的高 单位px 默认250px
+    //         bigBoxW: 500, //大图放大镜框的宽 单位px 默认350px
+    //         bigBoxH: 500, //大图放大镜框的高 单位px 默认350px
+    //         smallListImgW:66,//缩略图的宽 单位px 默认50px
+    //         smallListImgH:50,//缩略图的高 单位px 默认50px
+    //         moveSpeed:100 //缩略图点击左右方向键移动的速度 单位px 默认50px
+    //     });
+    //     $('.pro-l .collection .proCode span').html(res.data.productCode)
         
-        // 商品信息
-        $('.pro-r .productTitle').html('<i class="'+$.imgType(res.data.prescriptionType)+'"></i> <h1>' + res.data.productName +'</h1>')
-        $('.pro-r .pro-text').html(res.data.sellingPoint);
-        $('.pro-r .pro-p .shi').html('￥' + priceInit(res.data.price));
-        $('.pro-r .pro-p .we span').html(priceInit(res.data.ourPrice));
-        $('.pro-r .pro-i .approval_number').html(res.data.approvalNo);
-        $('.pro-r .productFactory').html(res.data.productFactory);
-        $('.pro-r .gui').html(res.data.spec);
-        // 按钮 判断是否处方药 1:处方药 
-        if(res.data.prescriptionType == 1){
-            $('.buy-btn').css({'display':'none'});
-            $('.demand-btn').css({'display':'inline-block'});
-            $('.rxtips').css({'display': 'block'});
-        }else{
-            $('.buy-btn').css({'display':'inline-block'});
-            $('.demand-btn').css({'display':'none'});
-            $('.rxtips').css({'display': 'none'});
-        }
-        // 商品详情
-        var currentName = res.data.currentName == null ? res.data.productCategoryProperty.drug_nm:res.data.currentName;
-        $('.product-detail .p-info .brand').html(res.data.brandName)
-        $('.product-detail .p-info .commonName').html(currentName)
-        $('.product-detail .p-info .approvalDate').html(res.data.productCategoryProperty.approval_date)
-        $('.product-detail .p-info .productFactory').html(res.data.productFactory);
+    //     // 商品信息
+    //     $('.pro-r .productTitle').html('<i class="'+$.imgType(res.data.prescriptionType)+'"></i> <h1>' + res.data.productName +'</h1>')
+    //     $('.pro-r .pro-text').html(res.data.sellingPoint);
+    //     $('.pro-r .pro-p .shi').html('￥' + priceInit(res.data.price));
+    //     $('.pro-r .pro-p .we span').html(priceInit(res.data.ourPrice));
+    //     $('.pro-r .pro-i .approval_number').html(res.data.approvalNo);
+    //     $('.pro-r .productFactory').html(res.data.productFactory);
+    //     $('.pro-r .gui').html(res.data.spec);
+    //     // 按钮 判断是否处方药 1:处方药 
+    //     if(res.data.prescriptionType == 1){
+    //         $('.buy-btn').css({'display':'none'});
+    //         $('.demand-btn').css({'display':'inline-block'});
+    //         $('.rxtips').css({'display': 'block'});
+    //     }else{
+    //         $('.buy-btn').css({'display':'inline-block'});
+    //         $('.demand-btn').css({'display':'none'});
+    //         $('.rxtips').css({'display': 'none'});
+    //     }
+    //     // 商品详情
+    //     var currentName = res.data.currentName == null ? res.data.productCategoryProperty.drug_nm:res.data.currentName;
+    //     $('.product-detail .p-info .brand').html(res.data.brandName)
+    //     $('.product-detail .p-info .commonName').html(currentName)
+    //     $('.product-detail .p-info .approvalDate').html(res.data.productCategoryProperty.approval_date)
+    //     $('.product-detail .p-info .productFactory').html(res.data.productFactory);
         
-        if(res.data.productCategoryProperty == null){
-            $('.product-detail .p-info .gmp').html('是');
-            $('.product-detail .p-info .englishName').html('')
-        }else{
-            if(res.data.productCategoryProperty.gmp_attestation_stats == '0'){
-                $('.product-detail .p-info .gmp').html('否')
-            }else{
-                $('.product-detail .p-info .gmp').html('是')
-            }
-            $('.product-detail .p-info .englishName').html(res.data.productCategoryProperty.english_nm)
-        }
+    //     if(res.data.productCategoryProperty == null){
+    //         $('.product-detail .p-info .gmp').html('是');
+    //         $('.product-detail .p-info .englishName').html('')
+    //     }else{
+    //         if(res.data.productCategoryProperty.gmp_attestation_stats == '0'){
+    //             $('.product-detail .p-info .gmp').html('否')
+    //         }else{
+    //             $('.product-detail .p-info .gmp').html('是')
+    //         }
+    //         $('.product-detail .p-info .englishName').html(res.data.productCategoryProperty.english_nm)
+    //     }
         
-        $('.product-detail .p-info .approvalNumber').html(res.data.approvalNo);
-        $('.product-detail .p-pic').html(res.data.remark);
+    //     $('.product-detail .p-info .approvalNumber').html(res.data.approvalNo);
+    //     $('.product-detail .p-pic').html(res.data.remark);
         
-        // 说明书
-        $(' .product-detail .p-detail .p-ins').html(res.data.instructions);
+    //     // 说明书
+    //     $(' .product-detail .p-detail .p-ins').html(res.data.instructions);
 
-        // totalMoney(30,30,1);
-        // totalMoney();
-    })
+    //     // totalMoney(30,30,1);
+    //     // totalMoney();
+    // })
 
     // 数量
     //var productNumber = 1;
