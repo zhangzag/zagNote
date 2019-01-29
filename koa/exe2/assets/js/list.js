@@ -386,28 +386,11 @@ $(function(){
             $.loginAlert();
             // tips('还没登陆喔，请前往登陆！',2);
             return false;
-        }
-   //  	if($(this).prev().find('.num').attr('maxStore') == 0){
-   //  		tips('此商品缺货，紧急备货中！',2)
-			// gtag('event', '点击立即购买', {
-			//   'event_category' : '商品id：' + productId,
-			//   'event_label' : '失败，此商品缺货，紧急备货中！'
-			// });
-   //  		return false;
-   //  	}
-   //  	if(count >  $(this).prev().find('.num').attr('maxStore')){
-   //          tips('库存不足',null);
-   //          $(this).prev().find('.num').val($(this).prev().find('.num').attr('maxStore'));
-			// gtag('event', '点击立即购买', {
-			//   'event_category' : '商品id：' + productId,
-			//   'event_label' : '失败，库存不足。'
-			// });
-   //          return false;
-   //      }
-		gtag('event', '点击立即购买', {
-		  'event_category' : '商品id：' + productId
-		});
-    	//window.location.href = '/submitOrder.html?productId='+productId+'&count='+count;
+		}
+		
+		// gtag('event', '点击立即购买', {
+		//   'event_category' : '商品id：' + productId
+		// });
 
     	window.location.href = '/submitOrder.html';
         $.cookie('order',JSON.stringify({orderType:1,productId:productId,qty:Number(count)}),{  path:'/', domain:domain, /*secure:true*/});

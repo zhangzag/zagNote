@@ -3,9 +3,8 @@
     <div class="shortcut">
         <div class="sh-cont">
             {{if memberInfo}} 
-            <div class="fl isLogin">
-                <span>欢迎,<a class="login" href="/module/member/index.html">{{memberInfo.memberName || memberInfo.mobile}}</a>来到阿康大药房！&nbsp;[<a href="javascript:;" class="loginOutBtn" title="退出">退出</a>]&nbsp;</span>
-            </div>
+            <div class="fl welcome">你好,<a class="login" href="/module/member/index.html">{{memberInfo.memberName || memberInfo.mobile}}</a>欢迎来到阿康大药房！</div>
+            <div class="fl isLogin"><span><a class="quitLogin loginOutBtn" href="javascript:void(0)" title="安全退出">安全退出</a></span></div>
             {{else}}
             <div class="fl welcome">
                 欢迎来到阿康大药房！

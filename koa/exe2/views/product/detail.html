@@ -26,14 +26,18 @@
     
     <!-- 主体 -->
 		<div class="detail-main">
-        {{if renderDada.productInfo.prescriptionType == 1}}
-      <div class="pro-i rxtips"><p style="color: #a7a7a7;width: 100%;line-height: 28px;">温馨提示：本品为处方药，您成功预订后，阿康大药房会主动与您联系。（如需协助请拨打400-930-9990）</p></div>
-      {{/if}}
+        	{{if renderDada.productInfo.prescriptionType == 1}}
+      			<div class="pro-i rxtips"><p style="color: #a7a7a7;width: 100%;line-height: 28px;">温馨提示：本品为处方药，您成功预订后，阿康大药房会主动与您联系。（如需协助请拨打400-930-9990）</p></div>
+      		{{/if}}
 			<div class="crumbs">
-				<!-- <a href="javascript:void(0)">全部结果</a>  >  
-				<a href="javascript:void(0)">肝瘤科药</a>  >  
-				<a href="javascript:void(0)">冷链商品</a> > 
-				<span>时代阳光 贞芪扶正颗粒 15g*10袋/盒</span> -->
+				<a href="/products/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>
+				{{if renderDada.crumbBar.productTypeOne}}
+					<a href="/products/list.html?productTypeOne={{renderDada.crumbBar.productTypeOne.productTypeID}}">{{renderDada.crumbBar.productTypeOne.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
+				{{/if}}
+				{{if renderDada.crumbBar.productTypeTwo}}
+					<a href="/products/list.html?productTypeOne={{renderDada.crumbBar.productTypeOne.productTypeID}}&productTypeTwo={{renderDada.crumbBar.productTypeTwo.productTypeID}}">{{renderDada.crumbBar.productTypeTwo.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
+				{{/if}}
+				<span>{{renderDada.productInfo.productName}}</span>
 			</div>
 			<!-- 基本信息 -->
 			<div class="pro-w">
@@ -56,7 +60,7 @@
                           <li data-smallImg="{{$value.photoURL}}" data-bigImg="{{$value.photoURL}}"><div><img src="{{$value.photoURL}}" alt="" width="60" height="60"></div></li>
                         {{/each}}
                       {{else}}
-                      <li data-smallImg="/static/images/ak_300x300.jpg" data-bigImg="/static/images/ak_300x300.jpg"><div><img src="/static/images/ak_300x300.jpg" alt="" width="60" height="60"></div></li>
+                      <li data-smallImg="/images/ak_300x300.jpg" data-bigImg="/images/ak_300x300.jpg"><div><img src="/images/ak_300x300.jpg" alt="" width="60" height="60"></div></li>
                       {{/if}}
                   </ul>
                 </div>
@@ -76,7 +80,7 @@
 				<!-- 商品信息 -->
 				<div class="pro-r">
 					<div class="productTitle"><i class="{{renderDada.productInfo.prescriptionType | imgType}}"></i> <h1>{{renderDada.productInfo.productName}}</h1></div>
-					<h2 class="pro-text">{{renderDada.productInfo.sellingPoint}}</h2>
+					<h2 class="pro-text">{{@renderDada.productInfo.sellingPoint}}</h2>
 					<h3 class="pro-i pro-p">
 						<span>市场价</span>
 						<p class="shi">{{renderDada.productInfo.price | filterPrice}}</p>
@@ -117,11 +121,11 @@
 						</div>
 					</div>
 					<div class="pro-i pro-btn">
-            {{if renderDada.productInfo.prescriptionType == 1}}
-            <button	class="demand-btn">需求登记</button>
-            {{else}}
+            		{{if renderDada.productInfo.prescriptionType == 1}}
+            			<button	class="demand-btn">需求登记</button>
+            		{{else}}
 						<button id="nowBuy" class="buy-btn">立即购买</button>
-            {{/if}}
+            		{{/if}}
 						<button	class="consultation-btn"><a class="btn3" href="javascript:void(0)" id="tqchat1">在线咨询</a></button>
 					</div>
 					
@@ -199,7 +203,7 @@
 				</div>
 			</div>
 			<!-- 套餐 -->
-
+			
 			<!-- 详情  -->
 			<div class="detail">
 				<ul class="minute-menu">
@@ -220,11 +224,11 @@
 								<li>批准文号： <span class="approvalNumber">{{renderDada.productInfo.approvalNo}}</span></li>
 							</ul>
 						</div>
-						<div class="p-pic">{{renderDada.productInfo.remark}}</div>
+						<div class="p-pic">{{@renderDada.productInfo.remark}}</div>
 					</div>
 					<div class="p-detail" style="display: none;">
 						<div class="p-ins">
-              <%- renderDada.productInfo.instructions %>
+			  				{{@renderDada.productInfo.instructions}}
 						</div>
 					</div>
 					<div class="p-detail" id="aboutAK" style="display: none;background-color: #fff;">

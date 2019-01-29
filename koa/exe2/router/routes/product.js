@@ -11,14 +11,12 @@ router.get(['/', '/list.html'], async (ctx, next)=>{
     let brandList = '';//商品列表
     let params = ctx.query || '';
     let crumbBar = {};//面包屑
-    console.log('params: ', params)
 
     if(params.productTypeOne){
         let typeOne = ctx.state.cateList.find((val, index, arr)=>{
             return val.productTypeID == params.productTypeOne;
         });
         crumbBar.productTypeOne = typeOne;
-        console.log('typeOne:  ', typeOne)
 
         if( typeOne && params.productTypeTwo){
             let typeTwo = typeOne.productTypeList.find((valTwo, indexTwo, arrTwo)=>{
@@ -27,7 +25,6 @@ router.get(['/', '/list.html'], async (ctx, next)=>{
             crumbBar.productTypeTwo = typeTwo;
         }
     }
-    console.log('crumbBar:  ', crumbBar)
 
     await axiosAll([
         getBrandList({page:1, limit: 60}), 
@@ -75,15 +72,15 @@ router.get(['/', '/list.html'], async (ctx, next)=>{
     })
 })
 
+let productInfo = '';
 router.get('/:productNumber.html', async (ctx, next)=>{
     // console.log(11111, ctx.params);
     let params = ctx.params;
     let productNumber = params.productNumber;
-    let productInfo = '';
 
     await getProByProductNumber({productNumber})
     .then(res=>{
-        console.log('查询商品信息： ', res)
+        // console.log('查询商品信息： ', res)
         
         if(res.data.data == null){    
             //没有商品信息
@@ -93,7 +90,21 @@ router.get('/:productNumber.html', async (ctx, next)=>{
     })
     .catch(err=>{
         console.log('查找商品信息出错了', err)
-    })
+    })   
+    
+    //面包屑
+    let crumbBar = {};
+    let typeOne = ctx.state.cateList.find((val, index, arr)=>{
+        return val.productTypeName == productInfo.productTypeOne;
+    });
+    crumbBar.productTypeOne = typeOne;
+
+    if( typeOne && productInfo.productTypeTwo){
+        let typeTwo = typeOne.productTypeList.find((valTwo, indexTwo, arrTwo)=>{
+            return valTwo.productTypeName == productInfo.productTypeTwo;
+        })
+        crumbBar.productTypeTwo = typeTwo;
+    }
 
     await ctx.render('product/detail', {
         keywords: '啦啦啦',//页面关键字
@@ -103,8 +114,25 @@ router.get('/:productNumber.html', async (ctx, next)=>{
         renderDada: { 
           cateList: ctx.state.cateList || '',//分类列表数据
           productInfo,
+          crumbBar,
         },
     })
+})
+//接口 - 获取商品信息
+router.get('/pro', async (ctx, next)=>{
+    if(!productInfo){
+        ctx.body = {
+            state: 'success',
+            msg: '没有商品信息',
+            data: ''
+        }
+        return false;
+    }
+    ctx.body = {
+        state: 'success',
+        msg: '获取商品信息成功',
+        data: productInfo
+    };
 })
 
 module.exports = router

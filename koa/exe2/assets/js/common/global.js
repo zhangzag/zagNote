@@ -53,10 +53,10 @@
 	}
 	//请求地址
 	// 生产
-	var webRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
+	// var webRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
 	// var webRoot = '/api';
 	
-	// var webRoot = 'http://192.168.2.254:8080/AKGW-api/v1'; 
+	var webRoot = 'http://192.168.2.254:8080/AKGW-api/v1'; 
 	// var webRoot = 'http://192.168.2.248:8080/AKGW-api/v1'; 
 	//var webRoot = 'http://api-web.ak1ak1.com/AKGW-api/v1'; 
 	// var webRoot = '/testapi';
