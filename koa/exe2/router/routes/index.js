@@ -21,52 +21,96 @@ router.get(['/', '/index.html'], async (ctx, next) => {
   //   return ctx.login({id: 1, username: 'admin', password: '123456'})
   // })(ctx)
 
-  let bannerDatas = '';
-  let akRecomProducts = '';
-
-  let akRecomDatas = '';
-  // await axiosAll([getAdvRecom({pageNo: 'indBanner'}),getProRecom({pageNo: 'pakRecom'})])
-  await axiosAll([getAdvRecom({pageNo: 'indBanners'}),getProRecom({pageNo: 'pakRecom'})])
+  let bannerDatas = '', akRecomProducts = '', akRecomDatas = '', floorName = '', floorBotAdv = '', floorRecomDatas = '';
+  await axiosAll([
+    getAdvRecom({pageNo: 'indBanners'}),
+    getProRecom({pageNo: 'pakRecom'}),
+    getAdvRecom({pageNo: 'fName'}),
+    getAdvRecom({pageNo: 'pFloorAdv'}),
+    getProRecom({pageNo: 'pcRecom'}),
+  ])
   .then(res=>{
-    // console.log('全部res - 0： ', res[0].data.data)
+    // 轮播图
     bannerDatas = res[0].data.data;
-
-    // console.log('全部res - 1： ', res[1].data)
+    // 阿康推荐
     akRecomDatas = res[1].data.data;
-    // console.log('akRecomProducts1-1: ')
+    // 楼层名称
+    floorName = res[2].data.data;
+    // 楼层底部广告
+    floorBotAdv = res[3].data.data;
+    // 楼层商品推荐
+    floorRecomDatas = res[4].data.data;
   })
   .catch(err=>{
     console.log('获取轮播图或获取阿康推荐出错了， ', err)
   })
-
-  let akRecomDetailArr = [];
-  await getProRecomDetail({showID: akRecomDatas[0].showID})
+  
+  let akRecomDetailArr = [], floorRecomDetailArr = [];
+  await axiosAll([
+    getProRecomDetail({showID: akRecomDatas[0].showID}),
+    getProRecomDetail({showID: floorRecomDatas[0].showID})
+  ])
   .then(res=>{
-    // console.log('获取阿康推荐详细: ', res)
-    if( res.data.data.length <=0 ){
-      return
+    //阿康推荐
+    if( res[0].data.data.length >0 ){
+      for(let val of res[0].data.data){
+        akRecomDetailArr.push(val.productID)
+      }
     }
-    // akRecomDetailArr = res.data.data
-    for(let val of res.data.data){
-      akRecomDetailArr.push(val.productID)
+    
+
+    //楼层商品推荐
+    if( res[1].data.data.length >0 ){
+      for(let val of res[1].data.data){
+        floorRecomDetailArr.push(val.productID)
+      }
     }
   })
   .catch(err=>{
     console.log('获取阿康推荐详细出错', err)
   })
-        
-  if( akRecomDetailArr.length>0 ){
-    await getPros({productNumbers: akRecomDetailArr})
-    .then(res=>{
-      // console.log('获取阿康推荐列表： ', res)
-      if( res.data.success && res.data.data.length>0 ){
-        akRecomProducts = res.data.data;
-      }
-    })
-    .catch(err=>{
-      console.log('获取阿康推荐产品列表出错，', err)
-    })
-  }
+  // await getProRecomDetail({showID: akRecomDatas[0].showID})
+  // .then(res=>{
+  //   // console.log('获取阿康推荐详细: ', res)
+  //   if( res.data.data.length <=0 ){
+  //     return
+  //   }
+  //   // akRecomDetailArr = res.data.data
+  //   for(let val of res.data.data){
+  //     akRecomDetailArr.push(val.productID)
+  //   }
+  // })
+  // .catch(err=>{
+  //   console.log('获取阿康推荐详细出错', err)
+  // })
+  
+  // if( akRecomDetailArr.length>0 ){
+  //   await getPros({productNumbers: akRecomDetailArr})
+  //   .then(res=>{
+  //     // console.log('获取阿康推荐列表： ', res)
+  //     if( res.data.success && res.data.data.length>0 ){
+  //       akRecomProducts = res.data.data;
+  //     }
+  //   })
+  //   .catch(err=>{
+  //     console.log('获取阿康推荐产品列表出错，', err)
+  //   })
+  // }
+  await axiosAll([
+    getPros({productNumbers: akRecomDetailArr}),
+    getPros({productNumbers: floorRecomDetailArr})
+  ])
+  .then(res=>{
+    if( res[0].data.success && res[0].data.data.length>0 ){
+      akRecomProducts = res[0].data.data;
+    }
+    if( res[1].data.success && res[1].data.data.length>0 ){
+      floorRecomDatas = res[1].data.data;
+    }
+  })
+  .catch(err=>{
+    console.log('获取阿康推荐产品列表出错，', err)
+  })
   
   await ctx.render('index/index', {
     keywords: '药房网，网上药店，处方药网购，网上买药，药品网，新特药买药购药就上阿康大药房-阿康大药房',//页面关键字
@@ -78,6 +122,9 @@ router.get(['/', '/index.html'], async (ctx, next) => {
       bannerDatas,//首页轮播
       cateList: ctx.state.cateList || '',//分类列表数据
       akRecomProducts, //阿康推荐产品
+      floorName,// 楼层名称
+      floorBotAdv,// 楼层底部广告
+      floorRecomDatas,//楼层商品推荐
     },
   })
 })

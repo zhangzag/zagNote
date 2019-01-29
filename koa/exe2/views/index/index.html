@@ -70,6 +70,52 @@
       <!-- 切换按钮 end -->
     </div>
     <!-- 阿康特色 end -->
+    
+    <!-- 楼层广告 1 -->
+    {{if renderDada.floorBotAdv[0]}}
+      <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[0].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[0].advertisementPhoto}}" ></a></div>
+    {{/if}}
+    <!-- 楼层广告 1 end -->
+    
+    <% if(renderDada.floorRecomDatas){ %> 
+      <% renderDada.floorRecomDatas.forEach(function(item, index){ %>
+        <!-- 楼层1 -->
+        <div class="floor f1">
+          <h3 class="f_title"><a target="_blank" href="<%- renderDada.floorName[index].advertisementUrl %>"><img src="<%- renderDada.floorName[index].advertisementPhoto %>" ></a></h3>
+          <div class="f_con">
+              <div class="floor_l">
+                <% if(index==0){ %>
+                <div class="pro_lar">
+                    <div class="fl">
+                      <h3><%- item.productName %></h3>
+                      <span><%- item.sellingPoint || '' %></span>
+                      <p class="c_orange"><%= $imports.filterPrice(item.ourPrice) %></p>
+                    </div>
+                    <div class="fr">
+                      <a target="_blank" href="/products/<%- item.productNumber %>.html">
+                        <img class="lazy" data-original="<%- $imports.filterFirstPhoto(item.productPhotos) %>?240*240" alt="<%- item.productName %>" title="<%- item.productName %>">
+                      </a>
+                    </div>
+                </div>
+                <% } %>
+
+                <% if(index>=1 && index<=2){ %>
+                <div class="pro_lar_bots">
+                    <div class="fl">
+                      <h3><%- item.productName %></h3>
+                      <p class="c_orange"><%= $imports.filterPrice(item.ourPrice) %></p>
+                      <div>
+                        <a target="_blank" href="/products/<%- item.productNumber %>.html">
+                          <img class="lazy" data-original="<%- $imports.filterFirstPhoto(item.productPhotos) %>?160*160" alt="<%- item.productName %>" title="<%- item.productName %>">
+                        </a>
+                      </div>
+                    </div>
+                </div>
+                <% } %>
+              </div>
+          </div>
+      <% }) %>
+    <% } %>
 
     <!-- 底部 -->
     <% include('../layout/footer.html') %>
