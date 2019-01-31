@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "nodemon": "^1.8.1"
+    "nodemon": "^1.8.1",
+    "uglify-js": "^3.4.9"
   }
 }

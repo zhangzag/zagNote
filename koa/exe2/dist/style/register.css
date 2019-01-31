@@ -1,0 +1,245 @@
+.reg-bg{ background-color: #f8f8f8;padding: 20px 0;}
+
+.reg-bg .w{width: 900px; border: 1px solid #dddddd; margin: 0 auto; background-color: #fff; overflow: hidden;}
+
+.reg-bg .lt{ padding: 33px 0;margin-left: 275px;}
+
+.reg-bg h4{width: 350px; color: #059557; font-size: 24px; line-height: 40px; text-align: center; margin-bottom: 30px;}
+
+.reg-bg .item{ padding: 5px 0; overflow: hidden; margin-top: 20px; }
+
+.reg-bg .item .label{display: block; float: left; width: 92px; height: 40px; padding-right: 18px; line-height: 40px; text-align: right; color: #666666; font-size: 14px;}
+
+/*.reg-bg .item .highlight1{border: 1px solid #059557; box-shadow: 0 0 5px rgba(0,0,0,0.2);}*/
+
+/*.reg-bg .item .highlight2{border: 1px solid #ff4400; box-shadow: 0 0 5px rgba(0,0,0,0.2);}*/
+
+
+
+.reg-bg .fore1{position: relative;}
+
+.reg-bg .fore1 input{width: 300px; padding-left: 30px; height: 38px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;background: url(../images/phone.png) no-repeat 10px;}
+
+.reg-bg .fore1 .name-succeed{display: block; width: 12px; height: 12px; background: url("../images/reg-01-icon01.png") no-repeat; position: absolute; top: 19px; left: 405px;}
+
+.reg-bg .fore1 .name-error{display: block; width: 12px; height: 12px; background: url("../images/reg-01-icon02.png") no-repeat; position: absolute; top: 19px; left: 405px;}
+
+.reg-bg .fore1 #phoneErr{display: none; color: red; position: absolute; top: 5px; left: 350px;}
+
+.reg-bg .fore2{position: relative;}
+.reg-bg .fore2 input{width: 180px; padding-left: 30px; height: 38px; background: url(../images/yanzhengma.png) no-repeat 10px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;}
+.reg-bg .fore2 button{width: 120px; height: 40px; float: left;color: #059557; border: 1px solid #bdbdbd;cursor: pointer; border-left: none; font-size: 14px;background: #FAFAFA;}
+.reg-bg .fore2 #phoneCodeError{display: block; color: red; position: absolute; top: 5px; left: 350px;}
+.reg-bg .fore2 #picCodeError{display: block; color: red; position: absolute; top: 5px; left: 350px;}
+
+.reg-bg .fore3{position: relative;}
+.reg-bg .fore3 input{width: 300px; padding-left: 30px; height: 38px;background: url(../images/password.png) no-repeat 10px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;}
+.reg-bg .fore3 #pswTip{display: block; color: red; position: absolute; top: 5px; left: 350px;}
+
+.reg-bg .fore3 img{float: left; margin: 0 6px;}
+
+.reg-bg .fore3 a{float: left; line-height: 40px; color: #0099ff; font-size: 14px;}
+
+.reg-bg .fore3 a:hover{text-decoration: underline;}
+
+
+.reg-bg .fore4 button{display: block; width: 330px; border: 1px solid #00894e; border-radius: 2px;cursor: pointer; text-align: center; line-height: 38px; background-color: #059557; font-size: 20px; color: #fff; }
+
+.reg-bg .fore4 input{width: 300px; padding-left: 18px; height: 38px; line-height: 38px; border: 1px solid #bdbdbd; color: #333333; font-size: 14px; float: left;}
+
+.reg-bg .fore4 a{float: left; display: block; width: 150px; background: url("../images/reg-01-bg01.png") repeat-x; height: 38px; border: 1px solid #bdbdbd; text-align: center; line-height: 38px; color: #333333; margin-left: 6px;}
+
+.reg-bg .fore4 a:hover{text-decoration: underline;}
+
+
+
+.reg-bg .fore5{padding-bottom: 0; line-height: 24px; color: #999999;}
+
+.reg-bg .fore5 .label{height: 24px; line-height: 24px;}
+
+.reg-bg .fore5 label{float: left;cursor: pointer;}
+
+.reg-bg .fore5 input{vertical-align: text-top;cursor: pointer;}
+
+.reg-bg .fore5 a{float: left;color: #0099f1;}
+
+.reg-bg .fore5 a:hover{text-decoration: underline;}
+
+
+
+.reg-bg .agree-btn{display: block; width: 318px; border: 1px solid #00894e; border-radius: 2px; text-align: center; line-height: 38px; background-color: #059557; font-size: 20px; color: #fff; margin: 20px 0 0 110px;}
+
+.reg-bg a:hover.agree-btn{background-color: #00894e;}
+
+
+
+.reg-bg .coagent{padding-left: 10px; margin: 25px 0 0 110px; width: 310px;}
+
+.reg-bg .coagent h5{line-height: 22px; color: #999;}
+
+.reg-bg .coagent ul{width: 300px; height: 44px; margin-top: 7px; overflow: hidden;}
+
+.reg-bg .coagent ul li{float: left; height: 22px; margin-right: 8px;}
+
+.reg-bg .coagent ul li span{color: #999; padding: 0 4px; line-height: 22px;}
+
+.reg-bg .coagent ul li a{line-height: 22px; color: #333333;}
+
+.reg-bg .coagent ul li a:hover{text-decoration: underline; color: #265599;}
+
+
+
+
+/*注册成功*/
+
+.reg-bg .success{padding: 47px 0 0 375px; background: url("../images/reg-01-icon03.png") no-repeat 285px 42px;}
+
+.reg-bg .success h5{line-height: 40px; color: #333333; font-size: 24px; }
+
+.reg-bg .success p{line-height: 28px; margin: 12px 0 14px; font-size: 14px;color: #666;}
+
+.reg-bg .success p span{color: #1ea5b0; font-size: 18px; font-weight: bold; padding: 0 3px;}
+
+.reg-bg .success p a{color: #1ea5b0;}
+
+.reg-bg .success p a:hover{text-decoration: underline;}
+
+
+
+
+.reg-bg .tips{ float:left; background:url(../images/register_line01.gif) repeat-x; margin-left:10px; }
+
+.reg-bg .l-l{ float:left; display:inline; background:url(../images/register_line03.gif) no-repeat; width:3px; overflow:hidden; height:27px;}
+
+.reg-bg .t-b{ float:left; display:inline; height:22px; padding-left:8px; padding-top:5px; overflow:hidden; color:#666;}
+
+.reg-bg .t-b img{ vertical-align:middle;}
+
+.reg-bg .t-b a{ color:#06c;}
+
+.reg-bg .r-l{ float:right; display:inline; background:url(../images/register_line02.gif) no-repeat; width:3px; overflow:hidden; height:27px;}
+
+.reg-bg .pass{ padding-left:20px; float:left; padding-top:5px;}
+
+
+
+
+
+
+
+
+
+.modal-box{width: 770px;height:500px;background-color: #fff;border: 1px solid #eee;margin: 20px auto;padding:20px;}
+
+.modal-box .tit{ position: relative; height: 30px;border-bottom: 1px solid #eee;padding-bottom: 10px;}
+
+.modal-box .tit h3{font-size: 18px;}
+
+.modal-box .tit .close{position:absolute;top: 2px;right: 20px;font-size: 18px;color: #666;}
+
+.modal-box .content{border-bottom: 1px solid #eee;padding: 20px 0;height: 350px;overflow-y: auto;}
+
+.modal-box .bot{height: 30px; line-height: 30px;text-align: right;padding-top:15px;}
+
+.modal-box .bot a{ display: inline-block;width: 80px;height: 30px; background-color: #0063D2;color: #fff;font-size: 16px;text-align: center;
+
+    line-height: 30px;}
+
+
+
+
+
+.pwd-bg .put{ float:left;}
+
+.pwd-bg .put input{ width:187px; height:19px; line-height:18px; overflow:hidden; border:1px solid #ccc; padding:2px 0 2px 3px; color:#333333;}
+
+.pwd-bg .put div {margin: 0px;}
+
+.tipErrorClass{float: left; position: static!important; margin: 10px 0 0 10px!important;}
+
+#rl_footer{
+	
+	background-color: #f8f8f8;
+	padding-top: 30px;
+}
+
+#rl_footer .fb {   
+	width: 1072px;
+	margin: 0 auto;
+    padding-top: 18px;
+    height: 204px;
+    border-top: 1px solid #e8e8e8;
+}
+
+#rl_footer .fb>div {
+    float: left;
+}
+
+#rl_footer .fb .fb_l { 
+    padding-left: 48px;
+    padding-right: 55px;
+}
+
+#rl_footer .fb .fb_c { 
+    width: 526px;
+    height: 204px;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    padding-top: 0;
+    /*background-color: blue*/
+}
+
+#rl_footer .fb .fb_c_ser { 
+    color:#414141;
+
+}
+
+#rl_footer .fb .fb_c_ser dl {  
+    float: left;
+    padding-left: 60px;
+}
+
+#rl_footer .fb .fb_c_ser dl dt {
+    font-size: 18px;
+    height: 30px;
+    font-weight: 900;
+}
+
+#rl_footer .fb .fb_c_ser dl dd {
+    font-size: 14px;
+}
+
+#rl_footer .fb .fb_c_ser a {   
+    color:#646464;
+    display: block;
+    line-height: 26px;
+}
+
+#rl_footer .fb .fb_c_ser a:hover {
+    text-decoration: underline;
+}
+
+#rl_footer .fb .fb_r { 
+    padding-left: 66px;
+}
+
+
+body .agreeAlert{
+    background-color: #059557;
+}
+body .agreeAlert .layui-layer-title{
+    background-color: transparent;
+    color: #fff;
+}
+body .agreeAlert .layui-layer-setwin .layui-layer-close1{
+    background: url('../images/agreeClose.png');
+}
+body .agreeAlert .layui-layer-content{
+    background-color: #fff;
+}
+body .agreeAlert .layui-layer-btn0{
+    background-color: #fff;
+    border-color: transparent;
+    color: #646464;
+    margin-top: 12px;
+}

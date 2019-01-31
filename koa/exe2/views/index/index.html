@@ -11,7 +11,7 @@
 
     <% include('../layout/headJs.html') %>
 
-    <script src="/js/jquery.cycle.all.min.js"></script>
+    <script src="/plug/jquery.cycle.all.min.js"></script>
     <script src="/js/index.js"></script>
   </head>
   <body>
@@ -30,8 +30,8 @@
                   <a href="javascript:void(0);" class="next" id="turnR"></a>
                 </div>
                 <ul id="roteAdv" class="m-b-con">
-                  <% if(renderDada.bannerDatas){ let datas=renderDada.bannerDatas %>
-                    <% datas.forEach(function(item, index){ %>
+                  <% if(renderDada.bannerDatas){ %>
+                    <% renderDada.bannerDatas.forEach(function(item, index){ %>
                       <li id="<%- index+1 %>"><a target="_blank" href="<%- item.advertisementUrl %>"><img src="<%- item.advertisementPhoto %>"></a></li>
                     <% }); %>
                   <% }; %>
@@ -48,8 +48,8 @@
           <h2><img src="/images/ak_recom.png" alt=""></h2>
           <div class="featur_pro_wrap">
               <ul class="featur_pro" style="top: 0px;">
-                <% if(renderDada.akRecomProducts){ let datas=renderDada.akRecomProducts %>
-                  <% datas.forEach(function(item, index){ %>
+                <% if(renderDada.akRecomProducts){ %>
+                  <% renderDada.akRecomProducts.forEach(function(item, index){ %>
                     <li><a target="_blank" href="/products/<%- item.productNumber %>.html"><img class="lazy" data-original="{{item.productPhotos | filterFirstPhoto}}?200*200"></a><div class="pro_info"><h2><%- item.productName %></h2><div class="pro_price"><span class="c_orange"><em>{{item.ourPrice | filterPrice}}</em></span></div></div></li>
                   <% }); %>
                 <% }; %>
@@ -77,44 +77,394 @@
     {{/if}}
     <!-- 楼层广告 1 end -->
     
-    <% if(renderDada.floorRecomDatas){ %> 
-      <% renderDada.floorRecomDatas.forEach(function(item, index){ %>
-        <!-- 楼层1 -->
-        <div class="floor f1">
-          <h3 class="f_title"><a target="_blank" href="<%- renderDada.floorName[index].advertisementUrl %>"><img src="<%- renderDada.floorName[index].advertisementPhoto %>" ></a></h3>
-          <div class="f_con">
-              <div class="floor_l">
-                <% if(index==0){ %>
-                <div class="pro_lar">
-                    <div class="fl">
-                      <h3><%- item.productName %></h3>
-                      <span><%- item.sellingPoint || '' %></span>
-                      <p class="c_orange"><%= $imports.filterPrice(item.ourPrice) %></p>
-                    </div>
-                    <div class="fr">
-                      <a target="_blank" href="/products/<%- item.productNumber %>.html">
-                        <img class="lazy" data-original="<%- $imports.filterFirstPhoto(item.productPhotos) %>?240*240" alt="<%- item.productName %>" title="<%- item.productName %>">
-                      </a>
-                    </div>
-                </div>
+    <% if(renderDada.floorProducts1){ %> 
+      <!-- 楼层1 -->
+      <div class="floor f1">
+        <h3 class="f_title">
+          <% if(renderDada.floorName[0]){ %>
+            <a target="_blank" href="<%- renderDada.floorName[0].advertisementUrl %>"><img src="<%- renderDada.floorName[0].advertisementPhoto %>" ></a>
+          <% } %>
+        </h3>
+        <div class="f_con">
+          <div class="floor_l">
+            <div class="pro_lar">
+                <div class="fl"><h3><%- renderDada.floorProducts1[0].productName %></h3><span><%- renderDada.floorProducts1[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts1[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderDada.floorProducts1[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts1[0].productPhotos) %>?240*240" alt="<%- renderDada.floorProducts1[0].productName %>" title="<%- renderDada.floorProducts1[0].productName %>"></a></div>
+            </div>
+            <div class="pro_lar_bots">
+              <% if(renderDada.floorProducts1[1]){ %>
+                <% for(let i=1;i<3;i++){ %>
+                  <% if(renderDada.floorProducts1[i]){ %>
+                    <div class="fl"><h3><%- renderDada.floorProducts1[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts1[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderDada.floorProducts1[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts1[i].productPhotos) %>?160*160" alt="<%- renderDada.floorProducts1[i].productName %>" title="<%- renderDada.floorProducts1[i].productName %>"></a></div></div>
+                  <% } %>
                 <% } %>
-
-                <% if(index>=1 && index<=2){ %>
-                <div class="pro_lar_bots">
-                    <div class="fl">
-                      <h3><%- item.productName %></h3>
-                      <p class="c_orange"><%= $imports.filterPrice(item.ourPrice) %></p>
-                      <div>
-                        <a target="_blank" href="/products/<%- item.productNumber %>.html">
-                          <img class="lazy" data-original="<%- $imports.filterFirstPhoto(item.productPhotos) %>?160*160" alt="<%- item.productName %>" title="<%- item.productName %>">
-                        </a>
-                      </div>
-                    </div>
-                </div>
-                <% } %>
-              </div>
+              <% } %>
+              <p class="clear"></p>
+            </div>
           </div>
-      <% }) %>
+          <div class="floor_lc">
+            <% if(renderDada.floorProducts1[3]){ %>
+              <% for(let i=3;i<6;i++){ %>
+                <% if(renderDada.floorProducts1[i]){ %>
+                  <div class="l_item"><h3><%- renderDada.floorProducts1[i].productName %></h3><a target="_blank" href="/products/<%- renderDada.floorProducts1[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderDada.floorProducts1[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts1[i].productPhotos) %>?120*120" alt="<%- renderDada.floorProducts1[i].productName %>" title="<%- renderDada.floorProducts1[i].productName %>"></span><span class="clear"></span></a></div>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="floor_ladv">
+            <% if(renderDada.advImgLDatas[0]){ %>
+              <a target="_blank" href="<%- renderDada.advImgLDatas[0].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgLDatas[0].advertisementPhoto %>" alt=""></a>
+            <% } %>
+          </div>
+          <div class="floor_radv">
+            <div class="fr_adv">
+            <%if(renderDada.advImgSDatas[0]){ %>
+              <a target="_blank" href="<%- renderDada.advImgSDatas[0].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgSDatas[0].advertisementPhoto %>" alt=""></a>
+            <% } %>
+            </div>
+            <!-- <div class="fr_adv fr_adv2"></div>-->
+            <div class="fr_brandlist">
+              <ul> 
+                <%if(renderDada.brandRecomDetailArr1){ %>
+                  <% renderDada.brandRecomDetailArr1.forEach(function(item, index){ %>
+                  <li><a target="_blank" href="/products/list.html?productName=<%- item.brandName %>"><img class="lazy" data-original="<%- item.largePhoto %>" alt="<%- item.brandName %>"></a></li>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 楼层1 end -->
+      <!-- 楼层广告 1 -->
+      {{if renderDada.floorBotAdv[1]}}
+        <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[1].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[1].advertisementPhoto}}" ></a></div>
+      {{/if}}
+      <!-- 楼层广告 1 end -->
+    <% } %>
+    
+    <% if(renderDada.floorProducts2){ %> 
+      <!-- 楼层2 -->
+      <div class="floor f2">
+        <h3 class="f_title">
+          <% if(renderDada.floorName[1]){ %>
+            <a target="_blank" href="<%- renderDada.floorName[1].advertisementUrl %>"><img src="<%- renderDada.floorName[1].advertisementPhoto %>" ></a>
+          <% } %>
+        </h3>
+        <div class="f_con">
+          <div class="floor_l">
+            <div class="pro_lar">
+                <div class="fl"><h3><%- renderDada.floorProducts2[0].productName %></h3><span><%- renderDada.floorProducts2[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts2[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderDada.floorProducts2[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts2[0].productPhotos) %>?240*240" alt="<%- renderDada.floorProducts2[0].productName %>" title="<%- renderDada.floorProducts2[0].productName %>"></a></div>
+            </div>
+            <div class="pro_lar_bots">
+              <% if(renderDada.floorProducts2[1]){ %>
+                <% for(let i=1;i<3;i++){ %>
+                  <% if(renderDada.floorProducts2[i]){ %>
+                    <div class="fl"><h3><%- renderDada.floorProducts2[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts2[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderDada.floorProducts2[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts2[i].productPhotos) %>?160*160" alt="<%- renderDada.floorProducts2[i].productName %>" title="<%- renderDada.floorProducts2[i].productName %>"></a></div></div>
+                  <% } %>
+                <% } %>
+              <% } %>
+              <p class="clear"></p>
+            </div>
+          </div>
+          <div class="floor_lc">
+            <% if(renderDada.floorProducts2[3]){ %>
+              <% for(let i=3;i<6;i++){ %>
+                <% if(renderDada.floorProducts2[i]){ %>
+                  <div class="l_item"><h3><%- renderDada.floorProducts2[i].productName %></h3><a target="_blank" href="/products/<%- renderDada.floorProducts2[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderDada.floorProducts2[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts2[i].productPhotos) %>?120*120" alt="<%- renderDada.floorProducts2[i].productName %>" title="<%- renderDada.floorProducts2[i].productName %>"></span><span class="clear"></span></a></div>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="floor_ladv">
+            <% if(renderDada.advImgLDatas[1]){ %>
+              <a target="_blank" href="<%- renderDada.advImgLDatas[1].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgLDatas[1].advertisementPhoto %>" alt=""></a>
+            <% } %>
+          </div>
+          <div class="floor_radv">
+            <div class="fr_adv">
+            <%if(renderDada.advImgSDatas[1]){ %>
+              <a target="_blank" href="<%- renderDada.advImgSDatas[1].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgSDatas[1].advertisementPhoto %>" alt=""></a>
+            <% } %>
+            </div>
+            
+            <div class="fr_brandlist">
+              <ul> 
+                <%if(renderDada.brandRecomDetailArr2){ %>
+                  <% renderDada.brandRecomDetailArr2.forEach(function(item, index){ %>
+                  <li><a target="_blank" href="/products/list.html?productName=<%- item.brandName %>"><img class="lazy" data-original="<%- item.largePhoto %>" alt="<%- item.brandName %>"></a></li>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 楼层2 end -->
+      <!-- 楼层广告 2 -->
+      {{if renderDada.floorBotAdv[2]}}
+        <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[2].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[2].advertisementPhoto}}" ></a></div>
+      {{/if}}
+      <!-- 楼层广告 2 end -->
+    <% } %>
+    
+    <% if(renderDada.floorProducts3){ %> 
+      <!-- 楼层3 -->
+      <div class="floor f3">
+        <h3 class="f_title">
+          <% if(renderDada.floorName[2]){ %>
+            <a target="_blank" href="<%- renderDada.floorName[2].advertisementUrl %>"><img src="<%- renderDada.floorName[2].advertisementPhoto %>" ></a>
+          <% } %>
+        </h3>
+        <div class="f_con">
+          <div class="floor_l">
+            <div class="pro_lar">
+                <div class="fl"><h3><%- renderDada.floorProducts3[0].productName %></h3><span><%- renderDada.floorProducts3[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts3[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderDada.floorProducts3[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts3[0].productPhotos) %>?240*240" alt="<%- renderDada.floorProducts3[0].productName %>" title="<%- renderDada.floorProducts3[0].productName %>"></a></div>
+            </div>
+            <div class="pro_lar_bots">
+              <% if(renderDada.floorProducts3[1]){ %>
+                <% for(let i=1;i<3;i++){ %>
+                  <% if(renderDada.floorProducts3[i]){ %>
+                    <div class="fl"><h3><%- renderDada.floorProducts3[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts3[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderDada.floorProducts3[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts3[i].productPhotos) %>?160*160" alt="<%- renderDada.floorProducts3[i].productName %>" title="<%- renderDada.floorProducts3[i].productName %>"></a></div></div>
+                  <% } %>
+                <% } %>
+              <% } %>
+              <p class="clear"></p>
+            </div>
+          </div>
+          <div class="floor_lc">
+            <% if(renderDada.floorProducts3[3]){ %>
+              <% for(let i=3;i<6;i++){ %>
+                <% if(renderDada.floorProducts3[i]){ %>
+                  <div class="l_item"><h3><%- renderDada.floorProducts3[i].productName %></h3><a target="_blank" href="/products/<%- renderDada.floorProducts3[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderDada.floorProducts3[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts3[i].productPhotos) %>?120*120" alt="<%- renderDada.floorProducts3[i].productName %>" title="<%- renderDada.floorProducts3[i].productName %>"></span><span class="clear"></span></a></div>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="floor_ladv">
+            <% if(renderDada.advImgLDatas[2]){ %>
+              <a target="_blank" href="<%- renderDada.advImgLDatas[2].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgLDatas[2].advertisementPhoto %>" alt=""></a>
+            <% } %>
+          </div>
+          <div class="floor_radv">
+            <div class="fr_adv">
+            <%if(renderDada.advImgSDatas[2]){ %>
+              <a target="_blank" href="<%- renderDada.advImgSDatas[2].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgSDatas[2].advertisementPhoto %>" alt=""></a>
+            <% } %>
+            </div>
+            
+            <div class="fr_brandlist">
+              <ul> 
+                <%if(renderDada.brandRecomDetailArr3){ %>
+                  <% renderDada.brandRecomDetailArr3.forEach(function(item, index){ %>
+                  <li><a target="_blank" href="/products/list.html?productName=<%- item.brandName %>"><img class="lazy" data-original="<%- item.largePhoto %>" alt="<%- item.brandName %>"></a></li>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 楼层2 end -->
+      <!-- 楼层广告 2 -->
+      {{if renderDada.floorBotAdv[3]}}
+        <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[3].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[3].advertisementPhoto}}" ></a></div>
+      {{/if}}
+      <!-- 楼层广告 3 end -->
+    <% } %>
+    
+    <% if(renderDada.floorProducts4){ %> 
+      <!-- 楼层4 -->
+      <div class="floor f4">
+        <h3 class="f_title">
+          <% if(renderDada.floorName[3]){ %>
+            <a target="_blank" href="<%- renderDada.floorName[3].advertisementUrl %>"><img src="<%- renderDada.floorName[3].advertisementPhoto %>" ></a>
+          <% } %>
+        </h3>
+        <div class="f_con">
+          <div class="floor_l">
+            <div class="pro_lar">
+                <div class="fl"><h3><%- renderDada.floorProducts4[0].productName %></h3><span><%- renderDada.floorProducts4[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts4[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderDada.floorProducts4[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts4[0].productPhotos) %>?240*240" alt="<%- renderDada.floorProducts4[0].productName %>" title="<%- renderDada.floorProducts4[0].productName %>"></a></div>
+            </div>
+            <div class="pro_lar_bots">
+              <% if(renderDada.floorProducts4[1]){ %>
+                <% for(let i=1;i<3;i++){ %>
+                  <% if(renderDada.floorProducts4[i]){ %>
+                    <div class="fl"><h3><%- renderDada.floorProducts4[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts4[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderDada.floorProducts4[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts4[i].productPhotos) %>?160*160" alt="<%- renderDada.floorProducts4[i].productName %>" title="<%- renderDada.floorProducts4[i].productName %>"></a></div></div>
+                  <% } %>
+                <% } %>
+              <% } %>
+              <p class="clear"></p>
+            </div>
+          </div>
+          <div class="floor_lc">
+            <% if(renderDada.floorProducts4[3]){ %>
+              <% for(let i=3;i<6;i++){ %>
+                <% if(renderDada.floorProducts4[i]){ %>
+                  <div class="l_item"><h3><%- renderDada.floorProducts4[i].productName %></h3><a target="_blank" href="/products/<%- renderDada.floorProducts4[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderDada.floorProducts4[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts4[i].productPhotos) %>?120*120" alt="<%- renderDada.floorProducts4[i].productName %>" title="<%- renderDada.floorProducts4[i].productName %>"></span><span class="clear"></span></a></div>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="floor_ladv">
+            <% if(renderDada.advImgLDatas[3]){ %>
+              <a target="_blank" href="<%- renderDada.advImgLDatas[3].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgLDatas[3].advertisementPhoto %>" alt=""></a>
+            <% } %>
+          </div>
+          <div class="floor_radv">
+            <div class="fr_adv">
+            <%if(renderDada.advImgSDatas[3]){ %>
+              <a target="_blank" href="<%- renderDada.advImgSDatas[3].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgSDatas[3].advertisementPhoto %>" alt=""></a>
+            <% } %>
+            </div>
+            
+            <div class="fr_brandlist">
+              <ul> 
+                <%if(renderDada.brandRecomDetailArr4){ %>
+                  <% renderDada.brandRecomDetailArr4.forEach(function(item, index){ %>
+                  <li><a target="_blank" href="/products/list.html?productName=<%- item.brandName %>"><img class="lazy" data-original="<%- item.largePhoto %>" alt="<%- item.brandName %>"></a></li>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 楼层4 end -->
+      <!-- 楼层广告 4 -->
+      {{if renderDada.floorBotAdv[4]}}
+        <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[4].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[4].advertisementPhoto}}" ></a></div>
+      {{/if}}
+      <!-- 楼层广告 4 end -->
+    <% } %>
+    
+    <% if(renderDada.floorProducts5){ %> 
+      <!-- 楼层5 -->
+      <div class="floor f5">
+        <h3 class="f_title">
+          <% if(renderDada.floorName[4]){ %>
+            <a target="_blank" href="<%- renderDada.floorName[4].advertisementUrl %>"><img src="<%- renderDada.floorName[4].advertisementPhoto %>" ></a>
+          <% } %>
+        </h3>
+        <div class="f_con">
+          <div class="floor_l">
+            <div class="pro_lar">
+                <div class="fl"><h3><%- renderDada.floorProducts5[0].productName %></h3><span><%- renderDada.floorProducts5[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts5[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderDada.floorProducts5[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts5[0].productPhotos) %>?240*240" alt="<%- renderDada.floorProducts5[0].productName %>" title="<%- renderDada.floorProducts5[0].productName %>"></a></div>
+            </div>
+            <div class="pro_lar_bots">
+              <% if(renderDada.floorProducts5[1]){ %>
+                <% for(let i=1;i<3;i++){ %>
+                  <% if(renderDada.floorProducts5[i]){ %>
+                    <div class="fl"><h3><%- renderDada.floorProducts5[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts5[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderDada.floorProducts5[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts5[i].productPhotos) %>?160*160" alt="<%- renderDada.floorProducts5[i].productName %>" title="<%- renderDada.floorProducts5[i].productName %>"></a></div></div>
+                  <% } %>
+                <% } %>
+              <% } %>
+              <p class="clear"></p>
+            </div>
+          </div>
+          <div class="floor_lc">
+            <% if(renderDada.floorProducts5[3]){ %>
+              <% for(let i=3;i<6;i++){ %>
+                <% if(renderDada.floorProducts5[i]){ %>
+                  <div class="l_item"><h3><%- renderDada.floorProducts5[i].productName %></h3><a target="_blank" href="/products/<%- renderDada.floorProducts5[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderDada.floorProducts5[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts5[i].productPhotos) %>?120*120" alt="<%- renderDada.floorProducts5[i].productName %>" title="<%- renderDada.floorProducts5[i].productName %>"></span><span class="clear"></span></a></div>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="floor_ladv">
+            <% if(renderDada.advImgLDatas[4]){ %>
+              <a target="_blank" href="<%- renderDada.advImgLDatas[4].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgLDatas[4].advertisementPhoto %>" alt=""></a>
+            <% } %>
+          </div>
+          <div class="floor_radv">
+            <div class="fr_adv">
+            <%if(renderDada.advImgSDatas[4]){ %>
+              <a target="_blank" href="<%- renderDada.advImgSDatas[4].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgSDatas[4].advertisementPhoto %>" alt=""></a>
+            <% } %>
+            </div>
+            
+            <div class="fr_brandlist">
+              <ul> 
+                <%if(renderDada.brandRecomDetailArr5){ %>
+                  <% renderDada.brandRecomDetailArr5.forEach(function(item, index){ %>
+                  <li><a target="_blank" href="/products/list.html?productName=<%- item.brandName %>"><img class="lazy" data-original="<%- item.largePhoto %>" alt="<%- item.brandName %>"></a></li>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 楼层5 end -->
+      <!-- 楼层广告 5 -->
+      {{if renderDada.floorBotAdv[5]}}
+        <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[5].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[5].advertisementPhoto}}" ></a></div>
+      {{/if}}
+      <!-- 楼层广告 5 end -->
+    <% } %>
+    
+    <% if(renderDada.floorProducts6){ %> 
+      <!-- 楼层6 -->
+      <div class="floor f6">
+        <h3 class="f_title">
+          <% if(renderDada.floorName[5]){ %>
+            <a target="_blank" href="<%- renderDada.floorName[5].advertisementUrl %>"><img src="<%- renderDada.floorName[5].advertisementPhoto %>" ></a>
+          <% } %>
+        </h3>
+        <div class="f_con">
+          <div class="floor_l">
+            <div class="pro_lar">
+                <div class="fl"><h3><%- renderDada.floorProducts6[0].productName %></h3><span><%- renderDada.floorProducts6[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts6[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderDada.floorProducts6[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts6[0].productPhotos) %>?240*240" alt="<%- renderDada.floorProducts6[0].productName %>" title="<%- renderDada.floorProducts6[0].productName %>"></a></div>
+            </div>
+            <div class="pro_lar_bots">
+              <% if(renderDada.floorProducts6[1]){ %>
+                <% for(let i=1;i<3;i++){ %>
+                  <% if(renderDada.floorProducts6[i]){ %>
+                    <div class="fl"><h3><%- renderDada.floorProducts6[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderDada.floorProducts6[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderDada.floorProducts6[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts6[i].productPhotos) %>?160*160" alt="<%- renderDada.floorProducts6[i].productName %>" title="<%- renderDada.floorProducts6[i].productName %>"></a></div></div>
+                  <% } %>
+                <% } %>
+              <% } %>
+              <p class="clear"></p>
+            </div>
+          </div>
+          <div class="floor_lc">
+            <% if(renderDada.floorProducts6[3]){ %>
+              <% for(let i=3;i<6;i++){ %>
+                <% if(renderDada.floorProducts6[i]){ %>
+                  <div class="l_item"><h3><%- renderDada.floorProducts6[i].productName %></h3><a target="_blank" href="/products/<%- renderDada.floorProducts6[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderDada.floorProducts6[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderDada.floorProducts6[i].productPhotos) %>?120*120" alt="<%- renderDada.floorProducts6[i].productName %>" title="<%- renderDada.floorProducts6[i].productName %>"></span><span class="clear"></span></a></div>
+                <% } %>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="floor_ladv">
+            <% if(renderDada.advImgLDatas[5]){ %>
+              <a target="_blank" href="<%- renderDada.advImgLDatas[5].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgLDatas[5].advertisementPhoto %>" alt=""></a>
+            <% } %>
+          </div>
+          <div class="floor_radv">
+            <div class="fr_adv">
+            <%if(renderDada.advImgSDatas[5]){ %>
+              <a target="_blank" href="<%- renderDada.advImgSDatas[5].advertisementUrl %>" ><img class="lazy" data-original="<%- renderDada.advImgSDatas[5].advertisementPhoto %>" alt=""></a>
+            <% } %>
+            </div>
+            
+            <div class="fr_brandlist">
+              <ul> 
+                <%if(renderDada.brandRecomDetailArr6){ %>
+                  <% renderDada.brandRecomDetailArr6.forEach(function(item, index){ %>
+                  <li><a target="_blank" href="/products/list.html?productName=<%- item.brandName %>"><img class="lazy" data-original="<%- item.largePhoto %>" alt="<%- item.brandName %>"></a></li>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 楼层5 end -->
+      <!-- 楼层广告 6 -->
+      {{if renderDada.floorBotAdv[6]}}
+        <div class="floor_bot_adv"><a target="_blank" href="{{renderDada.floorBotAdv[6].advertisementUrl}}"><img class="lazy" data-original="{{renderDada.floorBotAdv[6].advertisementPhoto}}" ></a></div>
+      {{/if}}
+      <!-- 楼层广告 6 end -->
     <% } %>
 
     <!-- 底部 -->

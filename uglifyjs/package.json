@@ -14,7 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "uglifyjs ./test/index.js -m -o ./dist/index.min.js"
+    "build": "uglifyjs ./testcookie.js -m --mangle-props -o ./testcookie.min.js"
   },
   "keywords": [],
   "author": "",

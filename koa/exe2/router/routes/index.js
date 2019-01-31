@@ -3,7 +3,7 @@ const router = require('koa-router')()
 const passport = require('koa-passport');
 const {_req} = require('../../api/apiConfig.js');
 const axiosAll = _req.axiosAll;
-const { getAdvRecom, getProRecom, getProRecomDetail } = require('../../api/recommend/')
+const { getAdvRecom, getProRecom, getProRecomDetail, getRecomBrand, getBrandRecomDetail } = require('../../api/recommend/')
 const { getPros, getALLDisease } = require('../../api/product/')
 const { loginMember } = require('../../api/login/')
 const { getMemberInfo } = require('../../api/member/')
@@ -21,13 +21,16 @@ router.get(['/', '/index.html'], async (ctx, next) => {
   //   return ctx.login({id: 1, username: 'admin', password: '123456'})
   // })(ctx)
 
-  let bannerDatas = '', akRecomProducts = '', akRecomDatas = '', floorName = '', floorBotAdv = '', floorRecomDatas = '';
+  let bannerDatas = '', akRecomProducts = '', akRecomDatas = '', floorName = '', floorBotAdv = '', floorRecomDatas = '', floorProducts1 = '', floorProducts2 = '', floorProducts3 = '', floorProducts4 = '', floorProducts5 = '', floorProducts6 = '', advImgLDatas = '', advImgSDatas = '', floorBrandDatas = '';
   await axiosAll([
     getAdvRecom({pageNo: 'indBanners'}),
     getProRecom({pageNo: 'pakRecom'}),
     getAdvRecom({pageNo: 'fName'}),
     getAdvRecom({pageNo: 'pFloorAdv'}),
     getProRecom({pageNo: 'pcRecom'}),
+    getAdvRecom({pageNo: 'fAdvImgL'}),
+    getAdvRecom({pageNo: 'fAdvImgS'}),
+    getRecomBrand({pageNo: 'akBrands'}),//楼层品牌推荐
   ])
   .then(res=>{
     // 轮播图
@@ -40,15 +43,32 @@ router.get(['/', '/index.html'], async (ctx, next) => {
     floorBotAdv = res[3].data.data;
     // 楼层商品推荐
     floorRecomDatas = res[4].data.data;
+    // 楼层大图广告
+    advImgLDatas = res[5].data.data;
+    // 楼层小图广告
+    advImgSDatas = res[6].data.data;
+    //楼层品牌推荐
+    floorBrandDatas = res[7].data.data;
   })
   .catch(err=>{
     console.log('获取轮播图或获取阿康推荐出错了， ', err)
   })
   
-  let akRecomDetailArr = [], floorRecomDetailArr = [];
+  let akRecomDetailArr = [], floorRecomDetailArr1 = [], floorRecomDetailArr2 = [], floorRecomDetailArr3 = [], floorRecomDetailArr4 = [], floorRecomDetailArr5 = [], floorRecomDetailArr6 = [], brandsDetailArr = [], brandRecomDetailArr1 = [], brandRecomDetailArr2 = [], brandRecomDetailArr3 = [], brandRecomDetailArr4 = [], brandRecomDetailArr5 = [], brandRecomDetailArr6 = [];
   await axiosAll([
     getProRecomDetail({showID: akRecomDatas[0].showID}),
-    getProRecomDetail({showID: floorRecomDatas[0].showID})
+    getProRecomDetail({showID: floorRecomDatas[0].showID}),//1楼
+    getProRecomDetail({showID: floorRecomDatas[1].showID}),//2楼
+    getProRecomDetail({showID: floorRecomDatas[2].showID}),//3楼
+    getProRecomDetail({showID: floorRecomDatas[3].showID}),//4楼
+    getProRecomDetail({showID: floorRecomDatas[4].showID}),//5楼
+    getProRecomDetail({showID: floorRecomDatas[5].showID}),//6楼
+    getBrandRecomDetail({showBrandID: floorBrandDatas[0].showBrandID}),//1楼品牌推荐
+    getBrandRecomDetail({showBrandID: floorBrandDatas[1].showBrandID}),//2楼品牌推荐
+    getBrandRecomDetail({showBrandID: floorBrandDatas[2].showBrandID}),//3楼品牌推荐
+    getBrandRecomDetail({showBrandID: floorBrandDatas[3].showBrandID}),//4楼品牌推荐
+    getBrandRecomDetail({showBrandID: floorBrandDatas[4].showBrandID}),//5楼品牌推荐
+    getBrandRecomDetail({showBrandID: floorBrandDatas[5].showBrandID}),//6楼品牌推荐
   ])
   .then(res=>{
     //阿康推荐
@@ -57,18 +77,95 @@ router.get(['/', '/index.html'], async (ctx, next) => {
         akRecomDetailArr.push(val.productID)
       }
     }
-    
-
-    //楼层商品推荐
+    //楼层1商品推荐
     if( res[1].data.data.length >0 ){
       for(let val of res[1].data.data){
-        floorRecomDetailArr.push(val.productID)
+        floorRecomDetailArr1.push(val.productID)
+      }
+    }
+    //楼层2商品推荐
+    if( res[2].data.data.length >0 ){
+      for(let val of res[2].data.data){
+        floorRecomDetailArr2.push(val.productID)
+      }
+    }
+    //楼层3商品推荐
+    if( res[3].data.data.length >0 ){
+      for(let val of res[3].data.data){
+        floorRecomDetailArr3.push(val.productID)
+      }
+    }
+    //楼层4商品推荐
+    if( res[4].data.data.length >0 ){
+      for(let val of res[4].data.data){
+        floorRecomDetailArr4.push(val.productID)
+      }
+    }
+    //楼层5商品推荐
+    if( res[5].data.data.length >0 ){
+      for(let val of res[5].data.data){
+        floorRecomDetailArr5.push(val.productID)
+      }
+    }
+    //楼层6商品推荐
+    if( res[6].data.data.length >0 ){
+      for(let val of res[6].data.data){
+        floorRecomDetailArr6.push(val.productID)
+      }
+    }
+    //楼层1品牌推荐
+    if( res[7].data.data.length >0 ){
+      for( let y=0; y<res[7].data.data.length; y++ ){
+        //只显示6个
+        if( y>5 ){ break; }
+        brandRecomDetailArr1.push(res[7].data.data[y])
+      }
+    }
+    //楼层2品牌推荐
+    if( res[8].data.data.length >0 ){
+      for( let y=0; y<res[8].data.data.length; y++ ){
+        //只显示6个
+        if( y>5 ){ break; }
+        brandRecomDetailArr2.push(res[8].data.data[y])
+      }
+    }
+    //楼层3品牌推荐
+    if( res[9].data.data.length >0 ){
+      for( let y=0; y<res[9].data.data.length; y++ ){
+        //只显示6个
+        if( y>5 ){ break; }
+        brandRecomDetailArr3.push(res[9].data.data[y])
+      }
+    }
+    //楼层4品牌推荐
+    if( res[10].data.data.length >0 ){
+      for( let y=0; y<res[10].data.data.length; y++ ){
+        //只显示6个
+        if( y>5 ){ break; }
+        brandRecomDetailArr4.push(res[10].data.data[y])
+      }
+    }
+    //楼层5品牌推荐
+    if( res[11].data.data.length >0 ){
+      for( let y=0; y<res[11].data.data.length; y++ ){
+        //只显示6个
+        if( y>5 ){ break; }
+        brandRecomDetailArr5.push(res[11].data.data[y])
+      }
+    }
+    //楼层6品牌推荐
+    if( res[12].data.data.length >0 ){
+      for( let y=0; y<res[12].data.data.length; y++ ){
+        //只显示6个
+        if( y>5 ){ break; }
+        brandRecomDetailArr6.push(res[12].data.data[y])
       }
     }
   })
   .catch(err=>{
     console.log('获取阿康推荐详细出错', err)
   })
+  
   // await getProRecomDetail({showID: akRecomDatas[0].showID})
   // .then(res=>{
   //   // console.log('获取阿康推荐详细: ', res)
@@ -96,17 +193,39 @@ router.get(['/', '/index.html'], async (ctx, next) => {
   //     console.log('获取阿康推荐产品列表出错，', err)
   //   })
   // }
+  
   await axiosAll([
     getPros({productNumbers: akRecomDetailArr}),
-    getPros({productNumbers: floorRecomDetailArr})
+    getPros({productNumbers: floorRecomDetailArr1}),
+    getPros({productNumbers: floorRecomDetailArr2}),
+    getPros({productNumbers: floorRecomDetailArr3}),
+    getPros({productNumbers: floorRecomDetailArr4}),
+    getPros({productNumbers: floorRecomDetailArr5}),
+    getPros({productNumbers: floorRecomDetailArr6})
   ])
   .then(res=>{
     if( res[0].data.success && res[0].data.data.length>0 ){
       akRecomProducts = res[0].data.data;
     }
     if( res[1].data.success && res[1].data.data.length>0 ){
-      floorRecomDatas = res[1].data.data;
+      floorProducts1 = res[1].data.data;
     }
+    if( res[2].data.success && res[2].data.data.length>0 ){
+      floorProducts2 = res[2].data.data;
+    }
+    if( res[3].data.success && res[3].data.data.length>0 ){
+      floorProducts3 = res[3].data.data;
+    }
+    if( res[4].data.success && res[4].data.data.length>0 ){
+      floorProducts4 = res[4].data.data;
+    }
+    if( res[5].data.success && res[5].data.data.length>0 ){
+      floorProducts5 = res[5].data.data;
+    }
+    if( res[6].data.success && res[6].data.data.length>0 ){
+      floorProducts6 = res[6].data.data;
+    }
+
   })
   .catch(err=>{
     console.log('获取阿康推荐产品列表出错，', err)
@@ -124,7 +243,21 @@ router.get(['/', '/index.html'], async (ctx, next) => {
       akRecomProducts, //阿康推荐产品
       floorName,// 楼层名称
       floorBotAdv,// 楼层底部广告
-      floorRecomDatas,//楼层商品推荐
+      floorProducts1,//楼层商品推荐
+      floorProducts2,//楼层商品推荐
+      floorProducts3,//楼层商品推荐
+      floorProducts4,//楼层商品推荐
+      floorProducts5,//楼层商品推荐
+      floorProducts6,//楼层商品推荐
+      advImgLDatas,// 楼层大图广告
+      advImgSDatas,// 楼层小图广告
+      floorBrandDatas,//楼层品牌推荐
+      brandRecomDetailArr1,//楼层1品牌推荐
+      brandRecomDetailArr2,//楼层2品牌推荐
+      brandRecomDetailArr3,//楼层3品牌推荐
+      brandRecomDetailArr4,//楼层4品牌推荐
+      brandRecomDetailArr5,//楼层5品牌推荐
+      brandRecomDetailArr6,//楼层6品牌推荐
     },
   })
 })

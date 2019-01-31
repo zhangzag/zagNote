@@ -19,13 +19,7 @@ const getAdvRecom = function ( {pageNo, isValid=1, endDate=curDate} ){
                 pageNo,
                 isValid
             },
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
 
@@ -46,13 +40,8 @@ const getProRecom = function ( {pageNo, isValid=1, endDate=curDate} ){
                 pageNo,
                 isValid
             },
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);})
+        .catch(err=>{reject(err);});
     });
 };
 
@@ -73,31 +62,69 @@ const getProRecomDetail = function ( {showID, isValid=1, endDate=curDate} ){
                 showID,
                 isValid
             },
-        })
-        .then(res=>{
-            resolve(res);
-        })
-        .catch(err=>{
-            reject(err);
-        });
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
 
-const axiosAll = function (axiosList){
+/**
+ *获取楼层品牌推荐
+ *
+ * @param {*} {pageNo, isValid=1, endDate=curDate}
+ * @returns
+ */
+const getRecomBrand = function ({pageNo, isValid=1, endDate=curDate}){
     return new Promise((resolve, reject)=>{
-        _req.all(axiosList)
-        .then(res=>{
-            resolve(res)
-        })
-        .catch(err=>{
-            reject(err)
-        })
-    })
+        if(!pageNo){reject('未指定模块名称');};
+
+        _req({
+            url: '/searchShowBrand',
+            data: {
+                endDate,//格式为 2018-05-26 00:00:00
+                pageNo,
+                isValid
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
 }
+
+/**
+ * 获取每层楼品牌列
+ *
+ * @export
+ * @returns
+ */
+const getBrandRecomDetail = function ( {showBrandID, isValid=1, endDate=curDate} ){
+    return new Promise((resolve, reject)=>{
+        if(!showBrandID){reject('未指定模块id');};
+
+        _req({
+            url: '/searchShowBrandDetail',
+            data: {
+                endDate,
+                showBrandID,
+                isValid,
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+};
+
+// const axiosAll = function (axiosList){
+//     return new Promise((resolve, reject)=>{
+//         _req.all(axiosList)
+//         .then(res=>{
+//             resolve(res)
+//         })
+//         .catch(err=>{
+//             reject(err)
+//         })
+//     })
+// }
 
 module.exports = {
     getAdvRecom,
     getProRecom,
     getProRecomDetail,
-    axiosAll,
+    // axiosAll,
+    getRecomBrand,
+    getBrandRecomDetail,
 }

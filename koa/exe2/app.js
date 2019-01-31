@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
+const processEnv = process.env;
 // const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
@@ -72,8 +73,13 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-// app.use(require('koa-static')(__dirname + '/public'))
-app.use(require('koa-static')(__dirname + '/assets', {
+
+//静态资源
+let staticPath = __dirname + '/assets';
+if( processEnv && (processEnv.NODE_ENV=='production' || processEnv.NODE_ENV=='preview') ){
+  staticPath = __dirname + '/dist'
+}
+app.use(require('koa-static')(staticPath, {
   hidden: true,
   gzip: true,
 }))
