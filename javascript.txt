@@ -117,7 +117,9 @@
 			return item > 3
 		})
 		console.log('filterArr: ', filterArr);//filterArr: [4, 5]
-	
+
+九、IE9以下 JSON.stringify() 和 JSON.parse()会报错 （JSON 未定义）
+	在页面引入 json2.js 可解决。
 		
 		
 		

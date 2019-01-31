@@ -147,8 +147,8 @@ app.use(session(conf, app))
 // // app.use(passport.authenticate('naive', {session: false}))
 // app.use(passport.initialize())
 // app.use(passport.session())
+
 const passport = require('./passport');
-// app.use(passport.authenticate('naive', {session: false}))
 app.use(passport.initialize())
 app.use(passport.session())
 

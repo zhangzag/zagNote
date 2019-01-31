@@ -95,7 +95,7 @@
     left: 190px;
     width: 44px;
     height: 60px;
-    background-image: url('/images/icons_index.png');
+    background-image: url('/static/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -176px;
     z-index: 4;
@@ -108,7 +108,7 @@
     width: 44px;
     height: 60px;
     z-index: 4;
-    background-image: url('/images/icons_index.png');
+    background-image: url('/static/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -316px;
     transition: background 0ms, opacity 120ms;
@@ -210,7 +210,7 @@
 	width: 200px;
 	height: 200px;
 	margin: 0 auto;
-	/* background: cadetblue; */
+	background: cadetblue;
 }
 .first .right-bottom{
 	/*overflow: hidden;*/
@@ -227,7 +227,7 @@
 	width: 150px;
 	height: 150px;
 	margin: 0 auto;
-	/* background: #129747; */
+	background: #129747;
 }
 .first .right-bottom .pro-list h6{
 	width: 150px;
@@ -300,13 +300,13 @@
 	vertical-align: middle;
 }
 .pro-wrap .item p .RX{
-	background: url('/images/listRX.png') no-repeat;
+	background: url('/static/images/listRX.png') no-repeat;
 }
 .pro-wrap .item p .OTC-2{
-	background: url('/images/listOTC-2.png') no-repeat;
+	background: url('/static/images/listOTC-2.png') no-repeat;
 }
 .pro-wrap .item p .OTC-1{
-	background: url('/images/listOTC-1.png') no-repeat;
+	background: url('/static/images/listOTC-1.png') no-repeat;
 }
 .pro-wrap .item .buy{
 	width: 256px;
@@ -337,7 +337,7 @@
 	font-size: 20px;
 	text-align: center;
 	line-height: 21px;
-	background: url(/images/reduce.png) no-repeat;
+	background: url(../images/reduce.png) no-repeat;
 	background-size: contain;
 	cursor: pointer;
 }
@@ -348,7 +348,7 @@
 	font-size: 20px;
 	text-align: center;
 	line-height: 21px;
-	background: url(/images/add.png) no-repeat;
+	background: url(../images/add.png) no-repeat;
 	background-size: contain;
 	cursor: pointer;
 }

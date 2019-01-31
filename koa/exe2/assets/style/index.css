@@ -454,7 +454,7 @@
     left: 190px;
     width: 44px;
     height: 60px;
-    background-image: url('/images/icons_index.png');
+    background-image: url('/static/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -176px;
     z-index: 4;
@@ -467,7 +467,7 @@
     width: 44px;
     height: 60px;
     z-index: 4;
-    background-image: url('/images/icons_index.png');
+    background-image: url('/static/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -316px;
     transition: background 0ms, opacity 120ms;

@@ -1,3 +1,4 @@
+
 /* CSS Document */
  html {
     background:#fafafa;
@@ -9,7 +10,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, input, tex
 }
 body, button, input, select, textarea {
     font-size:12px;
-    font-family: "寰蒋闆呴粦", "Hiragino Sans GB", arial, tahoma, "寰蒋闆呴粦", "瀹嬩綋", sans-serif;
+    font-family: "微软雅黑", "Hiragino Sans GB", arial, tahoma, "微软雅黑", "宋体", sans-serif;
 }
 h1, h2, h3, h4, h5, h6, textarea {
     font-weight:normal;
@@ -23,12 +24,12 @@ table {
     border-collapse:collapse;
     border-spacing:0;
 }
-/* 鍘绘帀 table cell 鐨勮竟璺濆苟璁╁叾杈归噸鍚� */
+/* 去掉 table cell 的边距并让其边重合 */
  pre {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
-/* pre 鍙互鎹㈣*/
+/* pre 可以换行*/
  img {
     border:none;
     vertical-align:middle;
@@ -39,7 +40,7 @@ input, select, textarea {
 del {
     text-decoration:line-through;
 }
-/* 涓€鑷寸殑 del 鏍峰紡 */
+/* 一致的 del 样式 */
  a {
     color:#666;
     text-decoration:none;
@@ -48,7 +49,7 @@ a:active, a:focus, *:focus {
     -moz-outline:none;
     outline:none;
 }
-/* 鍘婚櫎 ie6 & ie7 鐒︾偣鐐圭姸绾� */
+/* 去除 ie6 & ie7 焦点点状线 */
  a:hover, a:link, a:visited, a:active, input:focus {
     text-decoration: none;
     transition:background 120ms, border 120ms, text-shadow 250ms ease-in 0ms, color 120ms ease-in 0ms;
@@ -59,7 +60,7 @@ ul, li, ol {
 th {
     text-align:inherit;
 }
-/* 杈撳叆妗� */
+/* 输入框 */
 input {
     font-family:inherit;
     margin: 0;
@@ -77,7 +78,7 @@ input[type="text"]::-webkit-input-placeholder { color:#a7a7a7;font-size: 12px; }
 input[type="text"]::-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefox 19+ */
 input[type="text"]:-ms-input-placeholder { color:#a7a7a7;font-size: 12px; } /* Internet Explorer 10+ */
 input[type="text"]:-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefox 14-18 */
-/* 榛樿鏂囨湰鍩� */
+/* 默认文本域 */
 .default_textarea {
     background-color: #FAFAFA;
     border:1px solid #E8E8E8;
@@ -85,7 +86,7 @@ input[type="text"]:-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefo
     color:#646464;
     resize: none;
 }
-/* 鍗曢€夋寜閽� */
+/* 单选按钮 */
 .radio_label {
     display: inline-block;
     font-size: 0;
@@ -130,7 +131,7 @@ input[type="text"]:-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefo
 .radio_label input[type="radio"]:checked + .radio_frame i {
     display: block;
 }
-/* 澶氶€夋寜閽� */
+/* 多选按钮 */
 .checkbox_label {
     display: inline-block;
     font-size: 0;
@@ -176,11 +177,11 @@ input[type="text"]:-moz-placeholder { color:#a7a7a7;font-size: 12px; } /* firefo
 .checkbox_label input[type="checkbox"]:checked + .checkbox_frame i {
     display: block;
 }
-/* ie bug锛歵h 涓嶇户鎵� text-align */
+/* ie bug：th 不继承 text-align */
  iframe {
     display:block;
 }
-/* 瀛椾綋棰滆壊 */
+/* 字体颜色 */
 .c_green {
     color:#2FBA66;
     font-style: normal;
@@ -195,7 +196,7 @@ a.c_green:hover {
 a.c_orange:hover {
     color:#F08200;
 }
-/* 琛屽唴鍧� */
+/* 行内块 */
 .inlie_block {
     font-size: 0;
 }
@@ -204,7 +205,7 @@ a.c_orange:hover {
     vertical-align: middle;
     display: inline-block;
 }
-/* 鏂囨湰瀵归綈 */
+/* 文本对齐 */
 .tc {
     text-align: center;
 }
@@ -214,7 +215,7 @@ a.c_orange:hover {
 .tr {
     text-align: right;
 }
-/* ie6 7 8(q) bug 鏄剧ず涓鸿鍐呰〃鐜� */
+/* ie6 7 8(q) bug 显示为行内表现 */
  .mc-main .elli>a {
     color: #f03b44;
 }
@@ -223,7 +224,7 @@ a.c_orange:hover {
     text-overflow: clip;
     white-space: nowrap;
 }
-/* 琛ㄦ牸 */
+/* 表格 */
 .akdefult_table {
     line-height: 22px;
     width: 100%;
@@ -234,7 +235,7 @@ a.c_orange:hover {
     font-size: 14px;
     color:#646464;
 }
-/* 鍗曡澶氬嚭鐪佺暐鍙�.... */
+/* 单行多出省略号.... */
  .clear {
     display:block;
     overflow:hidden;
@@ -244,7 +245,7 @@ a.c_orange:hover {
     font-size:0;
     zoom:1;
 }
-/* 娓呴櫎娴姩 zoom:1 for ie6 & ie7 */
+/* 清除浮动 zoom:1 for ie6 & ie7 */
  .clear:after {
     content:".";
     display:block;
@@ -268,12 +269,12 @@ a.c_orange:hover {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-/* 澶氬嚭闅愯棌鍙�... */
+/* 多出隐藏变... */
  .fl {
     float:left;
     display:inline;
 }
-/* 璁剧疆娴姩锛屽噺灏戞诞鍔ㄥ甫鏉ョ殑 bug */
+/* 设置浮动，减少浮动带来的 bug */
  .fr {
     float:right;
     display:inline;
@@ -281,8 +282,8 @@ a.c_orange:hover {
 .ctrl-prev a, .ctrl-next a {
     transition: all 0.15s ease-in 0s;
 }
-/* 鎸夐挳 */
-/* 鏅€氫富瑕佹寜閽� */
+/* 按钮 */
+/* 普通主要按钮 */
 .btn_primary {
     height: 28px;
     line-height: 26px;
@@ -301,7 +302,7 @@ a.c_orange:hover {
     -ms-transition: all 0.5s ease-out;
     -o-transition: all 0.5s ease-out;
 }
-/* 涓昏鎸夐挳 - 缁胯壊 */
+/* 主要按钮 - 绿色 */
 .bp_green {
     background-color: #2fba66;
     border:1px solid #2fba66;
@@ -310,7 +311,7 @@ a.c_orange:hover {
     background-color: #51d485;
     border:1px solid #51d485;
 }
-/* 涓昏鎸夐挳 - 姗欒壊 */
+/* 主要按钮 - 橙色 */
 .bp_orange {
     background-color: #f08200;
     border:1px solid #f08200;
@@ -326,7 +327,7 @@ a.c_orange:hover {
     font-size: 18px;
     padding: 0 56px;
 }
-/* 涓昏鎸夐挳 - 鐏扮櫧鑹� */
+/* 主要按钮 - 灰白色 */
 .bp_default {
     background-color: #f5f5f5;
     color:#969696;
@@ -335,7 +336,7 @@ a.c_orange:hover {
 .bp_default:hover {
     background-color: #efefef;
 }
-/* 涓昏鎸夐挳 - 鐏扮櫧鑹叉湸绱犳寜閽� */
+/* 主要按钮 - 灰白色朴素按钮 */
 .plain {
     background-color: transparent;
     color:#646464;
@@ -345,12 +346,12 @@ a.c_orange:hover {
     background-color: #fafafa;
 }
 
-/*鍒嗛〉*/
+/*分页*/
 #pagings {
     text-align: center;
 }
 
-/* 寮规 */
+/* 弹框 */
 #loginLayer_wrap {
     position: fixed;
     top:0;
@@ -420,7 +421,7 @@ a.c_orange:hover {
     opacity: .9;
 }
 
-/* 椤堕儴浣庣増鏈彁绀� */
+/* 顶部低版本提示 */
 .lowVersion {
     display: none;
     width: 100%;
@@ -450,11 +451,11 @@ a.c_orange:hover {
     top:0;
     height: 32px;
     font-style: normal;
-    cursor: pointer;銆�
+    cursor: pointer;、
     color:#f55d12;
 }
 
-/*radio鍥炬爣*/
+/*radio图标*/
  /*.radio-label {
     cursor: pointer;
     float: left;
@@ -475,7 +476,7 @@ a.c_orange:hover {
     background: url("../images/baze-icon.png") no-repeat;
     background-position: 0 -26px;
 }*/
-/*checkbox鍥炬爣*/
+/*checkbox图标*/
  /*.checkbox-label {
     cursor: pointer;
     float: left;
@@ -497,7 +498,7 @@ a.c_orange:hover {
     background: url("../images/baze-icon.png") no-repeat;
     background-position: 0 -104px;
 }*/
-/*涓婁紶鍥炬爣*/
+/*上传图标*/
 /* .uploading {
     display:inline-block;
     width:84px;
@@ -513,7 +514,7 @@ a:hover.uploading {
     background: url("../images/uploading-icon.png") repeat-x;
     background-position: 0 -26px;
 }*/
-/*鏇村鍥炬爣*/
+/*更多图标*/
  /*.more-label {
     cursor: pointer;
     display: inline-block;
@@ -533,7 +534,7 @@ a:hover.uploading {
     background: url("../images/baze-icon.png") no-repeat;
     background-position: 0 -427px;
 }*/
-/*鍒嗛〉鏍峰紡*/
+/*分页样式*/
  /*.pager {
     width: 938px;
     overflow: hidden;
@@ -664,7 +665,7 @@ a:hover.uploading {
     border: 1px solid #059557;
 }*/
 
-/*  鍒嗛〉 */
+/*  分页 */
 /*#pagings {
     width: 1190px;
     margin:0 auto;
@@ -707,7 +708,7 @@ a:hover.uploading {
 }*/
 
 
-/** 鐧婚檰  **/
+/** 登陆  **/
 .alertWrap{
     width: 100%;
     height: 100%;
@@ -793,13 +794,13 @@ a:hover.uploading {
 
 
 
-/***** 澶撮儴 *****/
+/***** 头部 *****/
 #top {
     background-color: #fafafa;
 }
 
 
-/*椤堕儴瀵艰埅*/
+/*顶部导航*/
 
 .shortcut{
     height: 34px;
@@ -915,7 +916,7 @@ a:hover.uploading {
 /*end*/
 
 
-/*涓棿logo*/
+/*中间logo*/
 
 .header-mc {
     width: 1200px;
@@ -1343,7 +1344,7 @@ a:hover.uploading {
 /*end*/
 
 
-/* 椤堕儴瀵艰埅 */
+/* 顶部导航 */
 
 .nav {
     height: 40px;
@@ -1467,7 +1468,7 @@ a:hover.uploading {
 
 .nav_in .nav_lists ul li {
     float: left;
-    padding: 0 14px;
+    padding: 0 18px;
     text-align: center;
 }
 
@@ -1491,7 +1492,7 @@ a:hover.uploading {
     width: 260px;
 }
 
-/* 椤堕儴瀵艰埅 end */
+/* 顶部导航 end */
 
 
 

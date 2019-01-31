@@ -45,7 +45,7 @@
 	border-left: none;
 	background: #FFFFFF;
 	cursor: pointer;
-	background: #FFFFFF url(/images/listSearch.png) no-repeat 50%;
+	background: #FFFFFF url(../images/listSearch.png) no-repeat 50%;
 }
 .list-main .cru-s p{
 	float: left;
@@ -146,7 +146,7 @@
 	height: 24px;
 	padding: 0 6px 0 20px;
 	border: 1px solid #DDDDDD;
-	background: url(/images/pri_icon.png) no-repeat 3px;
+	background: url(../images/pri_icon.png) no-repeat 3px;
 	background-color: #FFFFFF;
 }
 .tab-card li .input-w span{
@@ -252,13 +252,13 @@
 	vertical-align: middle;
 }
 .pro-wrap .item .product-info p .RX{
-	background: url('/images/listRX.png') no-repeat;
+	background: url('/static/images/listRX.png') no-repeat;
 }
 .pro-wrap .item .product-info p .OTC-2{
-	background: url('/images/listOTC-2.png') no-repeat;
+	background: url('/static/images/listOTC-2.png') no-repeat;
 }
 .pro-wrap .item .product-info p .OTC-1{
-	background: url('/images/listOTC-1.png') no-repeat;
+	background: url('/static/images/listOTC-1.png') no-repeat;
 }
 .pro-wrap .item .buy{
 	width: 256px;
@@ -289,7 +289,7 @@
 	font-size: 20px;
 	text-align: center;
 	line-height: 21px;
-	background: url(/images/reduce.png) no-repeat;
+	background: url(../images/reduce.png) no-repeat;
 	background-size: contain;
 	cursor: pointer;
 }
@@ -300,7 +300,7 @@
 	font-size: 20px;
 	text-align: center;
 	line-height: 21px;
-	background: url(/images/add.png) no-repeat;
+	background: url(../images/add.png) no-repeat;
 	background-size: contain;
 	cursor: pointer;
 }

@@ -1,6 +1,7 @@
 var UglifyJS = require("uglify-js");
 var fs = require('fs')
 var path = require('path')
+var CleanCSS = require('clean-css');
 
 var options = {
     warnings: false,
@@ -13,6 +14,7 @@ var options = {
 
 //清空
 async function delDir(path){
+    console.log('清空 dist 文件夹...')
     let files = [];
     if(fs.existsSync(path)){
         files = fs.readdirSync(path);
@@ -24,7 +26,7 @@ async function delDir(path){
                 fs.unlinkSync(curPath); //删除文件
             }
         });
-        console.log('path: ', path)
+        
         fs.rmdirSync(path);
     }
 }
@@ -35,16 +37,16 @@ go();
 
 //css
 let styleFilePath = path.resolve('./assets/style');
-fileDisplay(styleFilePath, '/dist/style');
+fileHandle(styleFilePath, '/dist/style');
 //plug
 let plugFilePath = path.resolve('./assets/plug');
-fileDisplay(plugFilePath, '/dist/plug');
+fileHandle(plugFilePath, '/dist/plug');
 //images
 let imgFilePath = path.resolve('./assets/images');
-fileDisplay(imgFilePath, '/dist/images');
+fileHandle(imgFilePath, '/dist/images');
 
 //文件遍历方法
-function fileDisplay(filePath, dirName){
+function fileHandle(filePath, dirName){
     //根据文件路径读取文件，返回文件列表
     fs.readdir(filePath,function(err,files){
         if(err){
@@ -70,7 +72,7 @@ function fileDisplay(filePath, dirName){
             }else{
                 console.log('dist 目录已存在');
                 let paths = path.join(__dirname, dirName);
-                console.log('paths: ', paths)
+                // console.log('paths: ', paths)
                 if( !fs.existsSync(paths) ){
                     fs.mkdir(path.join(__dirname, dirName),function(error){
                         if(error){
@@ -84,27 +86,38 @@ function fileDisplay(filePath, dirName){
             //遍历读取到的文件列表
             files.forEach(function(filename){
                 //获取当前文件的绝对路径
-                var filedir = path.join(filePath, filename);
+                let filedir = path.join(filePath, filename);
                 //根据文件路径获取文件信息，返回一个fs.Stats对象
                 fs.stat(filedir,function(eror, stats){
                     if(eror){
                         console.warn('获取文件stats失败');
                     }else{
-                        var isFile = stats.isFile();//是文件
-                        var isDir = stats.isDirectory();//是文件夹
+                        let isFile = stats.isFile();//是文件
+                        let isDir = stats.isDirectory();//是文件夹
                         if(isFile){
+                            let fileExtname = path.extname(filedir);
                             // 读取文件内容
-                            // fs.writeFileSync(filedir.replace(/assets/, "dist"), UglifyJS.minify({
-                            //     filename: fs.readFileSync(filedir, 'utf-8'),
-                            // }, options).code, "utf8");
                             let curFile = fs.readFileSync(filedir);
 
-                            fs.writeFileSync(filedir.replace(/assets/, "dist"), curFile, "utf8");
+                            if( dirName == '/dist/plug' ){
+                                //插件目录下文件不压缩
+                                fs.writeFileSync(filedir.replace(/assets/, "dist"), curFile, "utf8");
+                            }else{
+                                if( fileExtname == '.css' ){
+                                    //cssy压缩
+                                    console.log(`压缩 ${filedir}`)
+                                    let output = new CleanCSS({compatibility: 'ie9'}).minify(curFile.toString());
+                                    
+                                    fs.writeFileSync(filedir.replace(/assets/, "dist"), output.styles, "utf8");
+                                }else{
+                                    console.log(`移动文件 ${filedir}`)
+                                    fs.writeFileSync(filedir.replace(/assets/, "dist"), curFile, "utf8");
+                                }
+                            }
                         }
                         if(isDir){
                             let prePath = path.resolve(filedir, '..');
-
-                            console.log('isDir文件: ', prePath)
+                            
                             if( !fs.existsSync(path.resolve(prePath.replace(/assets/, "dist"), filename)) ){
                                 fs.mkdir(path.resolve(prePath.replace(/assets/, "dist"), filename),function(error){
                                     if(error){
@@ -115,8 +128,7 @@ function fileDisplay(filePath, dirName){
                                 })
                             }
                             
-                            console.log('递归路径: ', filedir)
-                            fileDisplay(filedir, dirName);//递归，如果是文件夹，就继续遍历该文件夹下面的文件
+                            fileHandle(filedir, dirName);//递归，如果是文件夹，就继续遍历该文件夹下面的文件
                         }
                     }
                 })
@@ -125,27 +137,7 @@ function fileDisplay(filePath, dirName){
     });
 }
 
-
-// var filePath = path.resolve('./assets/js');
-
-// //清空
-// function delDir(path){
-//     let files = [];
-//     if(fs.existsSync(path)){
-//         files = fs.readdirSync(path);
-//         files.forEach((file, index) => {
-//             let curPath = path + "/" + file;
-//             if(fs.statSync(curPath).isDirectory()){
-//                 delDir(curPath); //递归删除文件夹
-//             } else {
-//                 fs.unlinkSync(curPath); //删除文件
-//             }
-//         });
-//         fs.rmdirSync(path);
-//     }
-// }
-// delDir(path.join(__dirname, '/dist'))
-
+//压缩处理js文件
 let jsFilePath = path.resolve('./assets/js');
 //调用文件遍历方法
 fileCompress(jsFilePath);
@@ -198,9 +190,10 @@ function fileCompress(filePath){
                         var isFile = stats.isFile();//是文件
                         var isDir = stats.isDirectory();//是文件夹
                         if(isFile){
-                            console.log('文件的路径： ', filedir);
+                            // console.log('文件的路径： ', filedir);
                             // 读取文件内容
-                            console.log('文件路径转换： ', filedir.replace(/test/, "dist"));
+                            // console.log('文件路径转换： ', filedir.replace(/test/, "dist"));
+                            console.log(`压缩 ${filedir}`)
                             fs.writeFileSync(filedir.replace(/assets/, "dist"), UglifyJS.minify({
                                 filename: fs.readFileSync(filedir, 'utf-8'),
                             }, options).code, "utf8");
@@ -208,7 +201,7 @@ function fileCompress(filePath){
                         if(isDir){
                             let prePath = path.resolve(filedir, '..');
 
-                            console.log('isDir文件: ', prePath)
+                            // console.log('isDir文件: ', prePath)
                             if( !fs.existsSync(path.resolve(prePath.replace(/assets/, "dist"), filename)) ){
                                 fs.mkdir(path.resolve(prePath.replace(/assets/, "dist"), filename),function(error){
                                     if(error){
