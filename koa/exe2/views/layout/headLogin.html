@@ -6,7 +6,7 @@
 
     </div>
 
-    <div class="h-title">会员登录</div>
+    <div class="h-title">{{headTitle}}</div>
     <!--页尾图片 取证后删除 end-->
     <div class="qualification">
         <ul>
@@ -30,10 +30,17 @@
             </li>
         </ul>
     </div>
+    {{if curPage==1}}
     <div class="rt">
         <span>还没有账号？</span>
         <a href="./register.html">立即注册</a>
     </div>
+    {{else if curPage==2}}
+    <div class="rt">
+        <span>已有会员账号？</span>
+        <a id="toLogin" href="/login.html">立即登录</a>
+    </div>
+    {{/if}}
     <div class="clear"></div>
 </div>
 <!-- 头部 logo  -->

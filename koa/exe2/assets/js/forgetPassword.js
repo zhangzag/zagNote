@@ -7,8 +7,7 @@ $(function () {
   function getPicCode(){
     // 获取图形码
     $('.picBtn img').attr("src", webRoot+'/sendCode?n=' + Math.random());
-    // $('.picBtn img').attr("src", 'http://192.168.2.248:8080/AKGW-api/v1/sendCode?n=' + Math.random());
-    // $('.picBtn img').attr("src", 'http://192.168.2.67:8082/AKGW-api/v1/sendCode?n=' + Math.random());
+//   }
   }
   getPicCode();
 

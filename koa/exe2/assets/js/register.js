@@ -181,7 +181,7 @@ $(function(){
                             icon: 1,
                             time: 1000
                         },function(){
-                           window.location.href= "./login.html";
+                           window.location.href= "/login.html";
                            //$.cookie("registerpath",window.location.pathname,{path:'/',expires: 7,domain: '.ak1ak1.com'})
                         })
                     })

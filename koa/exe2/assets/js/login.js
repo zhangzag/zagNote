@@ -14,6 +14,19 @@
 
 	//登录
 	$('.loginBtn').click(function(){
+		//测试
+		// $.ajax({
+		// 	url: '/toLogin',
+		// 	data: {
+		// 		username: '',//用户名
+		// 		password: '',//用户密码
+		// 	}
+		// })
+		// .done(function(res){
+		// 	console.log(res)
+		// })
+		// return false
+		//测试 end
 		var userName = $.trim( $('.userName').val() );
 		var pass = $.trim( $('.pass').val() );
 

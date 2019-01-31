@@ -14,45 +14,6 @@ $(function(){
 	
 	var domain = window.location.host;
 	domain = domain.indexOf('.ak1ak1.com') == -1 ? '': '.ak1ak1.com';
-
-	// 面包屑
-	var crumbBar = '<a href="/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>';
-	// // 一级分类
-	// if(productTypeOne != null){
-	// 	$.ajax({
-	// 		url: $.getGlobalVal().webRoot + '/productType/getAllOneLevelProductType',
-	// 		type: 'POST',
-	// 		dataType: 'json',
-	// 		async: false
-	// 	})
-	// 	.done(function(res) {
-	// 		// console.log(res)
-	// 		for (var i = 0; i < res.length; i++) {
-	// 			if(productTypeOne == res[i].productTypeID){
-	// 				crumbBar += '<a href="/list.html?productTypeOne='+res[i].productTypeID+'">'+res[i].productTypeName+'</a> <i class="layui-icon layui-icon-right"></i>';
-	// 			}
-	// 		}
-	// 	})
-	// }
-	// // 二级分类
-	// if(productTypeTwo != null){
-	// 	$.ajax({
-	// 		url: $.getGlobalVal().webRoot + '/productType/getAllTwoLevelProductType',
-	// 		type: 'POST',
-	// 		dataType: 'json',
-	// 		data: { parentTypeID: productTypeOne },
-	// 		async: false
-	// 	})
-	// 	.done(function(res) {
-	// 		// console.log(res)
-	// 		for (var i = 0; i < res.length; i++) {
-	// 			if(productTypeTwo == res[i].productTypeID){
-	// 				crumbBar += '<a href="/list.html?productTypeOne='+productTypeOne+'&productTypeTwo='+productTypeTwo+'">'+res[i].productTypeName+'</a> <i class="layui-icon layui-icon-right"></i>';
-	// 			}
-	// 		}
-	// 	})
-	// }
-	// $('.crumbs').append(crumbBar);
 	
 	$('.list-shou').click(function(){
 		if($(this).children('span').html() == '收起'){
@@ -104,7 +65,8 @@ $(function(){
 			sysNo: 'wap', //终端
 		}
 		$.ajax({
-			url: $.getGlobalVal().webRoot + '/product/getProductList',
+			// url: $.getGlobalVal().webRoot + '/product/getProductList',
+			url: '/product/getProductList',
 			type: 'POST',
 			dataType: 'json',
 			data: countData,
@@ -222,26 +184,6 @@ $(function(){
 		$(this).prev().val(num);
 	})
 
-	//  品牌
-	// function getBrandList(pageNumber){
-	// 	$.ajax({
-	// 		url: $.getGlobalVal().webRoot + '/brand/getBrandList',
-	// 		type: 'POST',
-	// 		dataType: 'json',
-	// 		data: {
-	// 			page: 1,
-	// 			limit: 60,
-	// 		},
-	// 	})
-	// 	.done(function(res){
-	// 		// console.log('品牌',res)
-	// 		for (var i = 0; i < res.data.length; i++) {
-	// 			$('.pro-type .brandList').append('<li><a href="javascript: void(0)" brandId="'+res.data[i].brandID+'">'+res.data[i].brandName+'</a></li>')
-	// 		}
-	// 	})
-	// }
-	// getBrandList(1)
-
 	// 品牌刷选
 	$('.pro-type .brandList').on('click','a',function(){
 		$('.crumbs').find('.crumbBrand').remove();
@@ -349,7 +291,8 @@ $(function(){
 		$(this).siblings('.buy').find('.num-wrap .num').val(count);
 		
 		$.ajax({
-			url: $.getGlobalVal().webRoot + '/product/findProductByProductNumber',
+			// url: $.getGlobalVal().webRoot + '/product/findProductByProductNumber',
+			url: '/product/findProductByProductNumber',
 			data: {
 				productNumber: productNumber
 			}

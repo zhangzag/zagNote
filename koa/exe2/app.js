@@ -243,6 +243,9 @@ Object.keys(routers).forEach(key=>{
   
   app.use(r.routes(), r.allowedMethods())
 })
+//webApi
+let webApi = require('./api/webApi')
+app.use(webApi.routes(), webApi.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

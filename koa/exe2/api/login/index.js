@@ -14,6 +14,7 @@ const loginMember = function ( {username, password} ){
         if(!password ){reject('请输入密码')};
 
         _req({
+            // url: '/login',
             url: '/login',
             data: {
                 username,//用户名
