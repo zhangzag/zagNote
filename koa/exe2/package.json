@@ -34,7 +34,8 @@
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
     "passport-local": "^1.0.0",
-    "sha-256-js": "^1.0.3"
+    "sha-256-js": "^1.0.3",
+    "sha256": "^0.2.0"
   },
   "devDependencies": {
     "clean-css": "^4.2.1",

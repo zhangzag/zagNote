@@ -11,38 +11,6 @@ $(function(){
 	if( hour < 9 ){
 		$('.mcb_info h3>span').html('早安，新的一天又开始了~');
 	}
-	// $.ajax({
-	// 	url: webRoot + '/vipSearchByID',
-	// 	type: 'POST',
-	// 	dataType: 'json',
-	// 	data: {id: memberId},
-	// })
-	// .done(function(res) {
-	// 	// console.log("success", res);
-	// 	if( res ){
-	// 		var now = new Date(),
-	// 			hour = now.getHours();
-			
-	// 		//会员名称
-	// 		if( hour < 9 ){
-	// 			var memberName = res.memberName + '<span>早安，新的一天又开始了~</span>';
-	// 		}else{
-	// 			var memberName = res.memberName;
-	// 		}
-	// 		$('.mcb_info h3').html(memberName);
-	// 		//会员头像
-	// 		if( res.picURL ){
-	// 			$('.mcb_img img').attr( 'src', res.picURL );
-	// 		}
-	// 		//会员等级
-	// 		$('.vip_grade').html( res.vipGradeName?res.vipGradeName:'普通会员' );
-	// 		//性别
-	// 		$('.mcb_infor .sex').html( res.sex?res.sex:'保密' );
-	// 		//生日
-	// 		$('.mcb_infor .bir').html( res.birthday?res.birthday:'未填写' )
-	// 	}
-	// });
-	
 
 	$('.ir_upImg').click(function(){
 		document.getElementById("upload_img_btn").click();
@@ -50,7 +18,8 @@ $(function(){
 
 	// 我的收藏
 	$.ajax({
-		url: webRoot + '/favorite/getFavoriteList',
+		// url: webRoot + '/favorite/getFavoriteList',
+		url: '/favorite/getFavoriteList',
 		type: 'POST',
 		dataType: 'json',
 		data: {

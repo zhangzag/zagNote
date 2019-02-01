@@ -271,7 +271,7 @@ router.get('/findDrug.html', async (ctx, next)=>{
     limit: 100,
   })
   .then(res=>{
-    console.log('找药列表： ', res)
+    // console.log('找药列表： ', res)
     if( res.data ){
       drugList = res.data;
     }

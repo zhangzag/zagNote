@@ -115,38 +115,6 @@ $(function () {
     var stepNum = 0
     var timeToIndex = 6
     initStep();
-    // 获取 验证码
-    // $('#getPhoneCode').click(function(){
-    //   var mobile = $.trim($("#userPhone").val());
-    //   var picCode = $.trim($("#picCode").val());
-    //   var phoneCode = $.trim($("#phoneCode").val());
-    //   console.log(mobile,picCode)
-    //   if(!contactPhoneValidate()){
-    //     getPicCode();
-    //     return false;
-    //   }
-    //   $.ajax({
-    //       // url:  $.getGlobalVal().webRoot + '/verifyCode',
-    //       url:  $.getGlobalVal().webRoot + '/verifyCode',
-    //       type: 'POST',
-    //       dataType: 'json',
-    //       data:{
-    //           telephone: mobile,//电话号码
-    //           code: picCode,//图形验证码
-    //       },
-    //       xhrFields: {
-    //         withCredentials: true
-    //       },
-    //       crossDomain: true,
-    //       success: function(res){
-    //           console.log(res,111);
-    //           //countDown(120);
-    //       },
-    //       error: function(err){
-    //           console.log(err);
-    //       }
-    //   })
-    // })
 
     // 下一步
     var t = null;
@@ -164,7 +132,8 @@ $(function () {
          }
          // console.log(mobile,picCode)
          $.ajax({
-            url: $.getGlobalVal().webRoot + '/verifyCode',
+            // url: $.getGlobalVal().webRoot + '/verifyCode',
+            url: '/verifyCode',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -194,7 +163,8 @@ $(function () {
       }else if(stepNum == 1){
         // 第二步 短信验证码
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/verifyMessage',
+            // url: $.getGlobalVal().webRoot + '/verifyMessage',
+            url: '/verifyMessage',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -228,7 +198,8 @@ $(function () {
          }
 
          $.ajax({
-            url: $.getGlobalVal().webRoot + '/changePassword',
+            // url: $.getGlobalVal().webRoot + '/changePassword',
+            url: '/changePassword',
             type: 'POST',
             dataType: 'json',
             data: {

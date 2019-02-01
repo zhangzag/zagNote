@@ -2,6 +2,7 @@ const { curDate } = require('../../util/');
 const _reqs = require('../apiConfig.js');
 
 let _req = _reqs._req;
+
 /**
  * 根据id数组获取产品列表
  *
@@ -22,6 +23,25 @@ const getPros = function ( {memberId=10299, productNumbers} ){
             transformRequest: [function (data) {
                 return data
             }]
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+};
+
+/**
+ * 根据商品id获取商品
+ *
+ * @export
+ * @returns
+ */
+const getProById = function ( {productId} ){
+    return new Promise((resolve, reject)=>{
+        if(!productId){reject('没有商品id');};
+
+        _req({
+            url: '/product/getProductByProductId',
+            data: JSON.stringify({
+                productId,
+            }),
         }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
@@ -114,4 +134,5 @@ module.exports = {
     getBrandList,
     getALLDisease,
     getProByProductNumber,
+    getProById,
 }

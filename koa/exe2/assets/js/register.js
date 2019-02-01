@@ -74,7 +74,8 @@ $(function(){
             // url:  $.getGlobalVal().webRoot + '/sendMessage',
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/sendMessage',
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/sendCodeMessage',
-            url: $.getGlobalVal().webRoot + '/sendCodeMessage',
+            // url: $.getGlobalVal().webRoot + '/sendCodeMessage',
+            url: '/sendCodeMessage',
             type: 'POST',
             dataType: 'json',
             xhrFields: {
@@ -157,7 +158,8 @@ $(function(){
             return false;
         }
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/vipRegisterInsert',
+            // url: $.getGlobalVal().webRoot + '/vipRegisterInsert',
+            url: '/vipRegisterInsert',
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/vipRegisterInsert',
             type: 'POST',
             dataType: 'json',

@@ -4,6 +4,7 @@ router.prefix('/member')
 
 //是否登录
 router.get('*', async (ctx, next)=>{
+  console.log(11111, ctx.state.memberInfo)
   if( !ctx.state.memberInfo ){
     ctx.redirect('/login.html');
     return
