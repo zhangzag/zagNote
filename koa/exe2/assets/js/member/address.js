@@ -28,7 +28,8 @@ $(function(){
     // 获取 地址
     function getAddress(){
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/delivery/getDeliveryAddress?memberId=' + $.getGlobalVal().memberId,
+            // url: $.getGlobalVal().webRoot + '/delivery/getDeliveryAddress?memberId=' + $.getGlobalVal().memberId,
+            url: '/delivery/getDeliveryAddress?memberId=' + $.getGlobalVal().memberId,
             type: 'GET',
             dataType: 'json',
             data: {},
@@ -63,7 +64,8 @@ $(function(){
     // 获取省,市，区
     function getProv(parentId,area){
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/selectArea',
+            // url: $.getGlobalVal().webRoot + '/selectArea',
+            url: '/selectArea',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -155,7 +157,8 @@ $(function(){
         mobile = mobile == '' ? null: mobile;
         var phone = mobile == null ? tel:mobile;
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/delivery/addDeliveryAddress',
+            // url: $.getGlobalVal().webRoot + '/delivery/addDeliveryAddress',
+            url: '/delivery/addDeliveryAddress',
             type: 'POST',
             dataType: 'json',
             data:{
@@ -208,8 +211,9 @@ $(function(){
         //console.log($(this).parent().parent().attr('addressID'));
         
         $.ajax({
-            url:  $.getGlobalVal().webRoot + '/delivery/getDeliveryAddressByMemberID?memberID='+$.getGlobalVal().memberId+'&addressID='+$(this).parent().parent().attr('addressID'),
-            type: 'POST',
+            // url:  $.getGlobalVal().webRoot + '/delivery/getDeliveryAddressByMemberID?memberID='+$.getGlobalVal().memberId+'&addressID='+$(this).parent().parent().attr('addressID'),
+            url: '/delivery/getDeliveryAddressByMemberID?memberID='+$.getGlobalVal().memberId+'&addressID='+$(this).parent().parent().attr('addressID'),
+            type: 'GET',
             data: 'json',
             data: {},
             success: function(res){
@@ -257,7 +261,8 @@ $(function(){
                 // console.log($(_self).parent().parent().attr('addressID'));
                 layer.close(index);
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/delivery/delDeliveryAddress',
+                    // url: $.getGlobalVal().webRoot + '/delivery/delDeliveryAddress',
+                    url: '/delivery/delDeliveryAddress',
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -268,6 +273,8 @@ $(function(){
                         console.log(res);
                         if(res.success){
                             tipsMsg('删除地址成功',1)
+                        }else{
+                            tipsMsg(res.msg||'除地址成功',2)
                         }
                         getAddress();
                     },
@@ -293,7 +300,8 @@ $(function(){
             layer.confirm('您确定把该地址设为默认地址吗?', {icon: 3, title:'默认地址提示',area:'300px'}, function(index){ // 确定
                 layer.close(index);
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/delivery/isDefualt',
+                    // url: $.getGlobalVal().webRoot + '/delivery/isDefualt',
+                    url: '/delivery/isDefualt',
                     type: 'POST',
                     dataType: 'json',
                     data: {

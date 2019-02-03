@@ -12,7 +12,7 @@ router.get('/login.html', async (ctx, next)=>{
     description: '阿康大药房，登录，忘记密码，注册',//页面描述
     title: '阿康大药房-登录',//页面标题
     //传到模板的数据
-    renderDada: { 
+    renderData: { 
       headTitle: '会员登录',
       curPage: 1,//当前页，1-登录页，2-注册页，3-找回密码
       // akRecomProducts, //阿康推荐产品
@@ -27,7 +27,7 @@ router.get('/register.html', async (ctx, next)=>{
     description: '阿康大药房，登录，忘记密码，注册',//页面描述
     title: '阿康大药房-会员注册',//页面标题
     //传到模板的数据
-    renderDada: { 
+    renderData: { 
       headTitle: '会员注册',
       curPage: 2,//当前页，1-登录页，2-注册页，3-找回密码
       // akRecomProducts, //阿康推荐产品
@@ -42,7 +42,7 @@ router.get('/forgetPassword.html', async (ctx, next)=>{
     description: '阿康大药房，登录，忘记密码，注册，找回密码',//页面描述
     title: '阿康大药房-找回密码',//页面标题
     //传到模板的数据
-    renderDada: { 
+    renderData: { 
       headTitle: '找回密码',
       curPage: 3,//当前页，1-登录页，2-注册页，3-找回密码
       // akRecomProducts, //阿康推荐产品

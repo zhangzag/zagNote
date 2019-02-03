@@ -16,14 +16,14 @@
 </head>
 <body>
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
     <!-- 头部 end -->
 
 	<!-- 主体 -->
 	<div class="member_wrap">
 		<!-- 左菜单 -->
 		<div class="member_l_block">
-                <% include('../layout/memleftblock.html', { curList: renderDada.curList || 0 }) %>
+                <% include('../layout/memleftblock.html', { curList: renderData.curList || 0 }) %>
 		</div>
 		<!-- 左菜单 end -->
 		

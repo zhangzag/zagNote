@@ -8,7 +8,8 @@ $(function(){
 
 	//获取订单详情
 	$.ajax({
-		url: webRoot + '/order/getOrderInfoByOrderId',
+		// url: webRoot + '/order/getOrderInfoByOrderId',
+		url: '/order/getOrderInfoByOrderId',
 		data: {orderID: orderId},
 	})
 	.done(function(res) {
@@ -123,7 +124,8 @@ $(function(){
 	        }, function(index, layero) {
 	            //确定按钮
 	            $.ajax({
-	                    url: webRoot + '/order/updateOrderStatusByCancel',
+	                    // url: webRoot + '/order/updateOrderStatusByCancel',
+	                    url: '/order/updateOrderStatusByCancel',
 	                    data: {
 	                        orderId: orderId
 	                    },
@@ -168,7 +170,8 @@ $(function(){
 	        	layer.close(index);
 				//确认收货
 				$.ajax({
-					url: webRoot + '/order/updateOrderStatusByConfirmReceipt',
+					// url: webRoot + '/order/updateOrderStatusByConfirmReceipt',
+					url: '/order/updateOrderStatusByConfirmReceipt',
 					data: {orderId: orderId},
 				})
 				.done(function(res) {
@@ -204,7 +207,8 @@ $(function(){
 		var logisticsPhone = $(this).attr('data-tel');
 
 		$.ajax({
-			url: webRoot + '/delivery/getLogistics',
+			// url: webRoot + '/delivery/getLogistics',
+			url: '/delivery/getLogistics',
 			data: {
 				logisticsNo: logisticsNo,//物流单号
 				logisticsCode: logisticsCode,//物流公司编码

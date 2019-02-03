@@ -128,6 +128,44 @@ const getProByProductNumber = function ({productNumber}){
     });
 }
 
+
+/**
+ *疗程装
+ *
+ * @param {*} {productID}
+ * @returns
+ */
+const toGetSingleCombo = function ({productID}){
+    return new Promise((resolve, reject)=>{
+        if(!productID && productID!=0){reject('没有商品id')}
+
+        _req({
+            url: '/getSingleComboByProductId',
+            data: {
+                productID
+            }
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+/**
+ *疗程装详情
+ *
+ * @param {*} {packageID}
+ * @returns
+ */
+const toGetSingleComboDetail = function ({packageID}){
+    return new Promise((resolve, reject)=>{
+        if(!packageID && packageID!=0){reject('没有指定疗程装')}
+
+        _req({
+            url: '/getComboDetailByPackageId',
+            data: {
+                packageID
+            }
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
 module.exports = {
     getPros,
     getProList,
@@ -135,4 +173,6 @@ module.exports = {
     getALLDisease,
     getProByProductNumber,
     getProById,
+    toGetSingleCombo,
+    toGetSingleComboDetail,
 }

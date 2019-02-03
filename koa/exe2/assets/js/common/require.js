@@ -10,7 +10,7 @@ $(function(){
 				product.photodURL = product.defaultPhoto;
 			}else if(params.path == 2){ // 慢病
 				product = params.product;
-				product.photodURL = product.productPhotos[0]?product.productPhotos[0].photoURL:'./static/images/ak_300x300.jpg'
+				product.photodURL = product.productPhotos[0]?product.productPhotos[0].photoURL:'/images/ak_300x300.jpg'
 			}else if(params.path == 3){ // 我的收藏
 				product = params.product.product;
 				var favoriteLis = params.product; // 我的收藏
@@ -50,7 +50,7 @@ $(function(){
 				
 				var mealItem = '';
 				for(var k=0;k<productList.length;k++){
-					mealItem += '<div class="item"><div class="mpInfo" style="width:70%;"><img src="'+(productList[k].photodURL?productList[k].photodURL:"./static/images/ak_200x200.jpg")+'" /><div class="mpText"><p class="mpName"><i class="'+$.imgType(productList[k].prescriptionType)+'"></i>'+productList[k].productName+'</p><p class="mpSpec"><span>'+productList[k].spec+'<span></p></div></div><div class="mpQty" style="width:15%;"><p>'+productList[k].qty+'</p></div><div class="mpPrice" style="width:15%;"><p>'+priceInit(Number(productList[k].price))+'</p></div><b class="clear"></b></div>'
+					mealItem += '<div class="item"><div class="mpInfo" style="width:70%;"><img src="'+(productList[k].photodURL?productList[k].photodURL:"/images/ak_200x200.jpg")+'" /><div class="mpText"><p class="mpName"><i class="'+$.imgType(productList[k].prescriptionType)+'"></i>'+productList[k].productName+'</p><p class="mpSpec"><span>'+productList[k].spec+'<span></p></div></div><div class="mpQty" style="width:15%;"><p>'+productList[k].qty+'</p></div><div class="mpPrice" style="width:15%;"><p>'+priceInit(Number(productList[k].price))+'</p></div><b class="clear"></b></div>'
 				}
 
 				productMould = '<p class="tips">提交登记后，阿康门店药师将在15分钟内致电与您确认，请您保持电话通畅哦。注：套餐商品的商品种类和数量为固定组合，不可修改。</p><div class="mealWrap"><input type="hidden" name="packageID" value="'+meal.packageID+'"><div class="mealTable"><div class="mealHead"><span style="width:70%;text-align:left;text-indent:20px;">商品信息</span><span style="width:15%;">数量</span><span style="width:15%;">原单价</span><i class="clear"></i></div><div class="mealBody">'+mealItem+'</div>	</div><div class="mealInfo"><div style="width:240px;"><span class="key">套餐数：</span><div class="value"><a href="javascript:void(0);" class="reduce"></a><input type="text" name="qty" id="demandNum" value="'+qty+'" /><a href="javascript:void(0);" class="add"></a></div></div><div style="width:160px;"><span class="key">套餐价：</span><div class="value" style="font-size:16px;color:#e00000;">'+priceInit(meal.afterBenefitCost)+'</div></div><div style="width:160px;"><span class="key">原总价：</span><div class="value">'+priceInit(meal.oldCost)+'</div></div><i class="clear"></i></div></div>'
@@ -60,7 +60,7 @@ $(function(){
 				}})
 
 
-				productMould = '<p class="tips"> 温馨提示：提交登记后，阿康门店药师将在15分钟内致电与您确认，请您保持电话通畅哦。</p><div class="productInfo"><div id="productSend"><input type="hidden" name="productID" value="'+product.productID+'"><input type="hidden" name="productName" value="'+product.productName+'"><input type="hidden" name="productCode" value="'+product.productCode+'"></div><a href="javascript:void(0)"><img src="'+(product.photodURL?product.photodURL:"./static/images/ak_200x200.jpg")+'"></a><div class="proInforShow"><p class="p-text">'+product.productName+'</p><div class="p-list"><span>规格：</span><div class="p-gui">'+product.spec+'</div></div><div class="p-list" id="alLiaoMoney"><span>价格：</span><div class="p-pri">￥ <span>'+priceInit(Number(product.ourPrice))+'</span></div></div><div class="p-list"><span>数量：</span><div class="p-num"><a href="javascript:void(0)" class="reduce"></a><input type="text" name="qty" id="demandNum" value="'+qty+'" /><a href="javascript:void(0)" class="add"></a></div></div><div class="p-list singleMeal" style="margin-top:3px;display:none;"><span style="line-height: 30px;">疗程装：</span><div class="liaoCheng"></div></div></div></div>'
+				productMould = '<p class="tips"> 温馨提示：提交登记后，阿康门店药师将在15分钟内致电与您确认，请您保持电话通畅哦。</p><div class="productInfo"><div id="productSend"><input type="hidden" name="productID" value="'+product.productID+'"><input type="hidden" name="productName" value="'+product.productName+'"><input type="hidden" name="productCode" value="'+product.productCode+'"></div><a href="javascript:void(0)"><img src="'+(product.photodURL?product.photodURL:"/images/ak_200x200.jpg")+'"></a><div class="proInforShow"><p class="p-text">'+product.productName+'</p><div class="p-list"><span>规格：</span><div class="p-gui">'+product.spec+'</div></div><div class="p-list" id="alLiaoMoney"><span>价格：</span><div class="p-pri">￥ <span>'+priceInit(Number(product.ourPrice))+'</span></div></div><div class="p-list"><span>数量：</span><div class="p-num"><a href="javascript:void(0)" class="reduce"></a><input type="text" name="qty" id="demandNum" value="'+qty+'" /><a href="javascript:void(0)" class="add"></a></div></div><div class="p-list singleMeal" style="margin-top:3px;display:none;"><span style="line-height: 30px;">疗程装：</span><div class="liaoCheng"></div></div></div></div>'
 			}
 
 			var content = '<div id="requireAlert333" class="alertWrap"><div style="height:650px;" class="alertContent"><div class="alertTop"><span>需求登记</span><b>X</b><i class="clear"></i></div><form id="demandAlert" enctype="multipart/form-data" action="javascript: void(0);"><div id="output" style="display: none;"></div><input type="hidden" name="memberID"><input type="hidden" name="sysNo" value="pc">'+productMould+'<div class="toLogin"><a id="loginShow" href="javascript:void(0)">登录阿康会员，可帮助您快速提交需求！</a></div><div class="user-wrap"><div class="user-item" style="width: 50%;"><span class="key">姓名：</span><div><input style="width:177px;" type="text" name="realName" id="userName" class="userName" placeholder="请输入姓名"></div></div><div class="user-item" style="width: 50%;"><span class="key">手机：</span><div><input type="text" id="phone" name="phone" class="phone" style="width: 223px;" placeholder="请输入手机"></div></div><div class="user-item"><span>地区：</span><div><select id="province" class="" name=""><option value="">请选择</option></select><select name="" id="city"><option value="">请选择</option></select><select name="" id="county"><option value="">请选择</option></select></div></div><div class="user-item"><span>详细地址：</span><div><input type="text" id="addressName" class="addressName" style="width: 559px;" placeholder="请输入详细地址"><input type="hidden" name="DeliveryAddress"></div></div><div class="left" style="width: 38%;"><div class="user-item" style="width: 100%"><span>年龄：</span><div><input id="age" type="text" name="age" placeholder="请输入年龄"></div></div><div class="user-item" style="width: 100%"><span>身份证号：</span><div><input id="carId" type="text" name="carId" placeholder="请输入身份证号"></div></div><div class="user-item"><span>性别：</span><div><label><input type="radio" name="sex" value="1" checked> 男</label><label><input type="radio" name="sex" value="2"> 女</label></div></div><div class="user-item"><span>门店递送：</span><div><input value="1" type="checkbox" checked disabled><input name="isStore" value="1" type="hidden"></div></div><div class="user-item docphone"><p>如紧急，请咨询药师 <span>400-9309-990</span></p></div></div><div class="left" style="width:31%;"><div class="user-item"><span style="width:50px;">留言：</span><div><textarea name="remark" id="demandRemark" placeholder="请留言您的要求"></textarea></div></div></div><div class="left" style="width:31%;"><div class="isPres"><span class="active">有处方</span><span>无处方</span></div><div class="user-item"><div id="upload"><span>上传处方笺图片</span><img src=""><input id="file" type="file" accept="image/jpeg,image/jpg,image/png"><input type="hidden" name="imgstr"></div></div></div></div><div class="demand-button"><button type="submit" class="demand-submit">提交需求</button><button class="demand-cancel">返回</button></div></form></div></div>';
@@ -358,7 +358,8 @@ $(function(){
 		    var singleDetail = null;
 		    if (!meal) {
 		    	$.ajax({
-			        url: $.getGlobalVal().webRoot + '/getSingleComboByProductId',
+			        // url: $.getGlobalVal().webRoot + '/getSingleComboByProductId',
+			        url: '/getSingleComboByProductId',
 			        // url: 'http://192.168.2.66:8080/AKGW-api/v1/getSingleComboByProductId?productID=120',
 			        type: 'POST',
 			        dataType:'json',
@@ -379,7 +380,8 @@ $(function(){
 
 			            var singleRes = res.data[0];
 			            $.ajax({
-			                url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+			                // url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+			                url: '/getComboDetailByPackageId',
 			                type: 'POST',
 			                dataType: 'json',
 			                data: {
@@ -501,7 +503,8 @@ $(function(){
 function getdefault(memberId,demand){
     // 会员信息
     $.ajax({
-        url: $.getGlobalVal().webRoot + '/vipSearchByID',
+        // url: $.getGlobalVal().webRoot + '/vipSearchByID',
+        url: '/vipSearchByID',
         type: 'POST',
         dataType: 'json',
         data: {
@@ -517,10 +520,12 @@ function getdefault(memberId,demand){
 
     // 获取地址
     $.ajax({
-        url: $.getGlobalVal().webRoot + '/delivery/getDeliveryAddress?memberId='+memberId,
-        type: 'POST',
+        // url: $.getGlobalVal().webRoot + '/delivery/getDeliveryAddress?memberId='+memberId,
+        url: '/delivery/getDeliveryAddress?memberId='+memberId,
+        // type: 'POST',
+        type: 'GET',
         dataType: 'json',
-        data:{},
+        // data:{},
         success: function(res){
             // console.log('收货地址',res);
             if(res.length > 0){
@@ -547,7 +552,8 @@ function getdefault(memberId,demand){
 // 获取省,市，区
 function getProv(parentId,area){
     $.ajax({
-        url: $.getGlobalVal().webRoot + '/selectArea',
+        // url: $.getGlobalVal().webRoot + '/selectArea',
+        url: '/selectArea',
         type: 'POST',
         dataType: 'json',
         data: {

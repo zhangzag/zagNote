@@ -8,7 +8,8 @@ $(function(){
 
 	//获取处方笺详情
 	$.ajax({
-		url: webRoot + '/prescription/getPrescriptionById',
+		// url: webRoot + '/prescription/getPrescriptionById',
+		url: '/prescription/getPrescriptionById',
 		data: {prescriptionId: prescriptionId},
 	})
 	.done(function(res) {

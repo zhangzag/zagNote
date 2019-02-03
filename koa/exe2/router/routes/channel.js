@@ -98,7 +98,7 @@ router.get('/chronic.html', async (ctx, next)=>{
       description: '',//页面描述
       title: '阿康大药房-慢病药馆',//页面标题
       //传到模板的数据
-      renderDada: { 
+      renderData: { 
         cateList: ctx.state.cateList || '',//分类列表数据
         bannerDatas,
         recomProducts,

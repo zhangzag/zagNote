@@ -6,8 +6,7 @@ $(function(){
     // 图形验证码
     function getPicCode(){
         $('.picBtn').children('img').attr("src", webRoot + '/sendCode?n=' + Math.random());
-        // $('.picBtn').children('img').attr("src", 'http://192.168.2.254:8080/AKGW-api/v1/sendCode?n=' + Math.random());
-        // $('.picBtn').children('img').attr("src", 'http://192.168.2.67:8082/AKGW-api/v1/sendCode?n=' + Math.random());
+    // }
     }
     getPicCode();
 

@@ -21,23 +21,23 @@
   <body>
     
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
     <!-- 头部 end -->
     
     <!-- 主体 -->
 		<div class="detail-main">
-        	{{if renderDada.productInfo.prescriptionType == 1}}
+        	{{if renderData.productInfo.prescriptionType == 1}}
       			<div class="pro-i rxtips"><p style="color: #a7a7a7;width: 100%;line-height: 28px;">温馨提示：本品为处方药，您成功预订后，阿康大药房会主动与您联系。（如需协助请拨打400-930-9990）</p></div>
       		{{/if}}
 			<div class="crumbs">
 				<a href="/products/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>
-				{{if renderDada.crumbBar.productTypeOne}}
-					<a href="/products/list.html?productTypeOne={{renderDada.crumbBar.productTypeOne.productTypeID}}">{{renderDada.crumbBar.productTypeOne.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
+				{{if renderData.crumbBar.productTypeOne}}
+					<a href="/products/list.html?productTypeOne={{renderData.crumbBar.productTypeOne.productTypeID}}">{{renderData.crumbBar.productTypeOne.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
 				{{/if}}
-				{{if renderDada.crumbBar.productTypeTwo}}
-					<a href="/products/list.html?productTypeOne={{renderDada.crumbBar.productTypeOne.productTypeID}}&productTypeTwo={{renderDada.crumbBar.productTypeTwo.productTypeID}}">{{renderDada.crumbBar.productTypeTwo.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
+				{{if renderData.crumbBar.productTypeTwo}}
+					<a href="/products/list.html?productTypeOne={{renderData.crumbBar.productTypeOne.productTypeID}}&productTypeTwo={{renderData.crumbBar.productTypeTwo.productTypeID}}">{{renderData.crumbBar.productTypeTwo.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
 				{{/if}}
-				<span>{{renderDada.productInfo.productName}}</span>
+				<span>{{renderData.productInfo.productName}}</span>
 			</div>
 			<!-- 基本信息 -->
 			<div class="pro-w">
@@ -55,8 +55,8 @@
                               <img src="http://113.108.163.210:9999/upLoadProduct/15312962613832018-07-11-16-04-21.jpg" alt="" width="60" height="60">
                           </div>
                       </li> -->
-                      {{if renderDada.productInfo.productPhotos.length>0}}
-                        {{each renderDada.productInfo.productPhotos}}
+                      {{if renderData.productInfo.productPhotos.length>0}}
+                        {{each renderData.productInfo.productPhotos}}
                           <li data-smallImg="{{$value.photoURL}}" data-bigImg="{{$value.photoURL}}"><div><img src="{{$value.photoURL}}" alt="" width="60" height="60"></div></li>
                         {{/each}}
                       {{else}}
@@ -69,7 +69,7 @@
 					</div>
 					<div class="tips"><span>温馨提示</span>：图片均为阿康大药房对原品的真实拍摄，仅供参考；如遇新包装上市可能存在上新滞后，请以实物为准!</div>
 					<div class="collection">
-						<span class="proCode">商品编码：<span>{{renderDada.productInfo.productCode}}</span></span>
+						<span class="proCode">商品编码：<span>{{renderData.productInfo.productCode}}</span></span>
 						<span class="star" id="collBtn">
 							<i class="layui-icon layui-icon-star"></i>
 							收藏
@@ -79,15 +79,15 @@
 				<!-- 放大镜 -->
 				<!-- 商品信息 -->
 				<div class="pro-r">
-					<div class="productTitle"><i class="{{renderDada.productInfo.prescriptionType | imgType}}"></i> <h1>{{renderDada.productInfo.productName}}</h1></div>
-					<h2 class="pro-text">{{@renderDada.productInfo.sellingPoint}}</h2>
+					<div class="productTitle"><i class="{{renderData.productInfo.prescriptionType | imgType}}"></i> <h1>{{renderData.productInfo.productName}}</h1></div>
+					<h2 class="pro-text">{{@renderData.productInfo.sellingPoint}}</h2>
 					<h3 class="pro-i pro-p">
 						<span>市场价</span>
-						<p class="shi">{{renderDada.productInfo.price | filterPrice}}</p>
+						<p class="shi">{{renderData.productInfo.price | filterPrice}}</p>
 					</h3>
 					<h3 class="pro-i pro-p" id="liao">
 						<span>本店价</span>
-						<p class="we"><span>{{renderDada.productInfo.ourPrice | filterPrice}}</span></p>
+						<p class="we"><span>{{renderData.productInfo.ourPrice | filterPrice}}</span></p>
 					</h3>
 					<!-- <h3 class="pro-i pro-p">
 						<span>合计</span>
@@ -96,15 +96,15 @@
 					</h3> -->
 					<h3 class="pro-i">
 						<span>批准文号</span>
-						<p class="approval_number">{{renderDada.productInfo.approvalNo}}</p>
+						<p class="approval_number">{{renderData.productInfo.approvalNo}}</p>
 					</h3>
 					<h3 class="pro-i">
 						<span>生产厂家</span>
-						<p class="productFactory">{{renderDada.productInfo.productFactory}}</p>
+						<p class="productFactory">{{renderData.productInfo.productFactory}}</p>
 					</h3>
 					<h3 class="pro-i">
 						<span>选择规格</span>
-						<button class="gui">{{renderDada.productInfo.spec}}</button>
+						<button class="gui">{{renderData.productInfo.spec}}</button>
 					</h3>
 					<div class="pro-i">
 						<span>数量</span>
@@ -121,7 +121,7 @@
 						</div>
 					</div>
 					<div class="pro-i pro-btn">
-            		{{if renderDada.productInfo.prescriptionType == 1}}
+            		{{if renderData.productInfo.prescriptionType == 1}}
             			<button	class="demand-btn">需求登记</button>
             		{{else}}
 						<button id="nowBuy" class="buy-btn">立即购买</button>
@@ -215,20 +215,20 @@
 					<div class="p-detail">
 						<div class="p-info">
 							<ul>
-								<li>品牌： <span class="brand">{{renderDada.productInfo.brandName}}</span></li>
-								<li>通用名称： <span class="commonName">{{renderDada.productInfo.currentName == null ? renderDada.productInfo.productCategoryProperty.drug_nm:renderDada.productInfo.currentName}}</span> </li>
-								<li>批准日期： <span class="approvalDate">{{renderDada.productInfo.productCategoryProperty.approval_date}}</span></li>
-								<li>英文名称： <span class="englishName">{{renderDada.productInfo.productCategoryProperty == null?'':renderDada.productInfo.productCategoryProperty.english_nm}}</span> </li>
-								<li>生产厂家： <span class="productFactory">{{renderDada.productInfo.productFactory}}</span> </li>
-								<li>GMP认证： <span class="gmp">{{renderDada.productInfo.productCategoryProperty == null?'是':(renderDada.productInfo.productCategoryProperty.gmp_attestation_stats == '0'?'否':'是')}}</span></li>
-								<li>批准文号： <span class="approvalNumber">{{renderDada.productInfo.approvalNo}}</span></li>
+								<li>品牌： <span class="brand">{{renderData.productInfo.brandName}}</span></li>
+								<li>通用名称： <span class="commonName">{{renderData.productInfo.currentName == null ? renderData.productInfo.productCategoryProperty.drug_nm:renderData.productInfo.currentName}}</span> </li>
+								<li>批准日期： <span class="approvalDate">{{renderData.productInfo.productCategoryProperty.approval_date}}</span></li>
+								<li>英文名称： <span class="englishName">{{renderData.productInfo.productCategoryProperty == null?'':renderData.productInfo.productCategoryProperty.english_nm}}</span> </li>
+								<li>生产厂家： <span class="productFactory">{{renderData.productInfo.productFactory}}</span> </li>
+								<li>GMP认证： <span class="gmp">{{renderData.productInfo.productCategoryProperty == null?'是':(renderData.productInfo.productCategoryProperty.gmp_attestation_stats == '0'?'否':'是')}}</span></li>
+								<li>批准文号： <span class="approvalNumber">{{renderData.productInfo.approvalNo}}</span></li>
 							</ul>
 						</div>
-						<div class="p-pic">{{@renderDada.productInfo.remark}}</div>
+						<div class="p-pic">{{@renderData.productInfo.remark}}</div>
 					</div>
 					<div class="p-detail" style="display: none;">
 						<div class="p-ins">
-			  				{{@renderDada.productInfo.instructions}}
+			  				{{@renderData.productInfo.instructions}}
 						</div>
 					</div>
 					<div class="p-detail" id="aboutAK" style="display: none;background-color: #fff;">

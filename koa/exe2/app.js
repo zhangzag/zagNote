@@ -10,7 +10,7 @@ const compress = require('koa-compress')
 const favicon = require('koa-favicon');
 const render = require('koa-art-template');
 const path = require('path')
-const sha256 = require('sha-256-js');
+const SHA256 = require('sha256')
 // var htmlMinifier = require('html-minifier').minify;
 const htmlMinifier = require('html-minifier').minify;
 const utils = require('./util/');//工具
@@ -162,7 +162,7 @@ app.use(async (ctx, next) => {
 
   //获取会员信息
   if(getCookieByKey(ctx, '_sami')){
-    apiArr.push( getMemberInfo({ id: getCookieByKey(ctx, '_sami'), headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')} }) );
+    apiArr.push( getMemberInfo({ id: getCookieByKey(ctx, '_sami'), headers: {Authorization: SHA256(getCookieByKey(ctx, '_sami') + 'akjk')} }) );
   }
   
   await axiosAll(apiArr)
@@ -185,57 +185,21 @@ app.use(async (ctx, next) => {
   .catch(err=>{
     console.log('获取分类或取会员信息出错了： ', err)
   })
-  // await getCategory()
-  // .then(res=>{
-  //   // console.log('分类列表: ', res.data)
-  //   if( res.data.data ){
-  //     let cateList = [];
-      
-  //     cateList = res.data.data.filter((item, index)=>{
-  //       return index < 14;
-  //     })
-  //     ctx.state = Object.assign(ctx.state, { cateList });
-  //   }
-  // })
-  // .catch(err=>{
-  //   console.log('分类列表出错了，', err)
-  // })
   
   await next();
 })
 
-// app.use(async (ctx, next) => {
-//   //获取用户信息
-//   if( getCookieByKey(ctx, '_sami') ){
-//     await getMemberInfo({
-//       id: getCookieByKey(ctx, '_sami'),
-//       headers: {Authorization: sha256(getCookieByKey(ctx, '_sami') + 'akjk')}
-//     })
-//     .then(res=>{
-//       // console.log('获取会员信息： ', res.data)
-//       if(!res.data){ console.log('没有会员信息，', res);return; }
-  
-//       // memberInfo = res.data;
-//       ctx.state = Object.assign(ctx.state, { memberInfo: res.data });
-//     })
-//     .catch(err=>{
-//       console.log('获取会员信息出错了： ', err)
-//     })
-//   }
-//   await next();
-// })
-
 const routers = require('./router/')
 
 //处理错误页面
-app.use(async (ctx, next)=>{
-  await next()
-  if( ctx.status == 404 ){
-    ctx.redirect('/404')
-  }else if(ctx.status == 500){
-    ctx.redirect('/err')
-  }
-})
+// app.use(async (ctx, next)=>{
+//   await next()
+//   if( ctx.status == 404 ){
+//     ctx.redirect('/404')
+//   }else if(ctx.status == 500){
+//     ctx.redirect('/err')
+//   }
+// })
 
 //路由
 Object.keys(routers).forEach(key=>{

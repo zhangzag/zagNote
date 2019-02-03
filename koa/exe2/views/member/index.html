@@ -15,7 +15,7 @@
 </head>
 <body>
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
     <!-- 头部 end -->
 
 	<!-- 主体 -->
@@ -23,7 +23,7 @@
 	<div class="member_wrap">
 		<!-- 左菜单 -->
 		<div class="member_l_block">
-                <% include('../layout/memleftblock.html', { curList: renderDada.curList || 0 }) %>
+                <% include('../layout/memleftblock.html', { curList: renderData.curList || 0 }) %>
 		</div>
 		<!-- 左菜单 end -->
 		<!-- 中心 -->
@@ -46,18 +46,18 @@
 				</div>
 			</div>
 			<div class="mcb_bot">
-				<a href="/module/member/collection.html">
-					<span class="c_green num_collect"></span>
+				<a href="/member/collection.html">
+					<span class="c_green num_collect">{{ renderData.myCollection.count || 0 }}</span>
 					<p>我的收藏</p>
 				</a>
 				<div class="line"></div>
-				<a href="/module/member/demandRecord.html">
-					<span class="c_green num_need"></span>
+				<a href="/member/demandRecord.html">
+					<span class="c_green num_need">{{ renderData.myRequire.count || 0 }}</span>
 					<p>我的需求记录</p>
 				</a>
 				<div class="line"></div>
-				<a href="/module/member/prescript_list.html">
-					<span class="c_green num_cjf"></span>
+				<a href="/member/prescript_list.html">
+					<span class="c_green num_cjf">{{ renderData.myPrescript.count || 0 }}</span>
 					<p>我的处方笺记录</p>
 				</a>
 			</div>
@@ -69,31 +69,31 @@
 				<dt>全部订单</dt>
 				<dd>
 					<a href="/module/member/order.html?status=1">
-						<span class="c_green num_wait">0</span>
+						<span class="c_green num_wait">{{ renderData.myOrderCount.obligation || 0 }}</span>
 						<span>待付款</span>
 					</a>
 				</dd>
 				<dd>
 					<a href="/module/member/order.html?status=2">
-						<span class="c_green num_wsend">0</span>
+						<span class="c_green num_wsend">{{ renderData.myOrderCount.sendTheGoods || 0 }}</span>
 						<span>待发货</span>
 					</a>
 				</dd>
 				<dd>
 					<a href="/module/member/order.html?status=3">
-						<span class="c_green num_wget">0</span>
+						<span class="c_green num_wget">{{ renderData.myOrderCount.waitForReceiv || 0 }}</span>
 						<span>待收货</span>
 					</a>
 				</dd>
 				<dd>
 					<a href="/module/member/order.html?status=4">
-						<span class="c_green num_finish">0</span>
+						<span class="c_green num_finish">{{ renderData.myOrderCount.complete || 0 }}</span>
 						<span>已完成</span>
 					</a>
 				</dd>
 				<dd>
 					<a href="/module/member/order.html?status=5">
-						<span class="c_green num_cancel">0</span>
+						<span class="c_green num_cancel">{{ renderData.myOrderCount.cancel || 0 }}</span>
 						<span>已取消</span>
 					</a>
 				</dd>

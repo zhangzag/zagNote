@@ -236,7 +236,7 @@ router.get(['/', '/index.html'], async (ctx, next) => {
     description: '网上买药找药去哪个网站？药房网、网上药店、处方药网购哪个好？买药品最正规的网站【阿康大药房】经国家药监局批准的专业药房网,可选同仁堂等品牌产品的网上药店!-阿康大药房',//页面描述
     title: '阿康大药房',//页面标题
     //传到模板的数据
-    renderDada: { 
+    renderData: { 
       memberInfo: ctx.state.memberInfo || '',//会员信息
       bannerDatas,//首页轮播
       cateList: ctx.state.cateList || '',//分类列表数据
@@ -286,7 +286,7 @@ router.get('/findDrug.html', async (ctx, next)=>{
     description: '',//页面描述
     title: '阿康大药房-找药,病重分类',//页面标题
     //传到模板的数据
-    renderDada: { 
+    renderData: { 
       cateList: ctx.state.cateList || '',//分类列表数据
       drugList,
     },
@@ -300,7 +300,7 @@ router.get('/help-new.html', async (ctx, next)=>{
     description: '',//页面描述
     title: '阿康大药房-帮助中心',//页面标题
     //传到模板的数据
-    renderDada: { 
+    renderData: { 
       cateList: ctx.state.cateList || '',//分类列表数据
     },
   })

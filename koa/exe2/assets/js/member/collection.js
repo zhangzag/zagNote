@@ -62,7 +62,8 @@ $(function(){
 	var collList = null;
 	function renderTable(pageSize,again){
 		$.ajax({
-			url: $.getGlobalVal().webRoot + '/favorite/getFavoriteList',
+			// url: $.getGlobalVal().webRoot + '/favorite/getFavoriteList',
+			url: '/favorite/getFavoriteList',
 			type: 'POST',
 			dataType: 'json',
 			data:{
@@ -138,7 +139,8 @@ $(function(){
 	// 分页
 	function getPage(){
 		$.ajax({
-			url: $.getGlobalVal().webRoot + '/favorite/getFavoriteList',
+			// url: $.getGlobalVal().webRoot + '/favorite/getFavoriteList',
+			url: '/favorite/getFavoriteList',
 			type: 'POST',
 			dataType: 'json',
 			data:{
@@ -204,7 +206,8 @@ $(function(){
 	$('#sureAlert .sure').click(function(){
 		 layer.close(collAlert);
 		 $.ajax({
-		 	url: $.getGlobalVal().webRoot + '/favorite/delFavoriteBymemberIdAndProId',
+		 	// url: $.getGlobalVal().webRoot + '/favorite/delFavoriteBymemberIdAndProId',
+		 	url: '/favorite/delFavoriteBymemberIdAndProId',
 		 	type: 'POST',
 		 	dataType: 'json',
 		 	data: {
@@ -268,7 +271,8 @@ $(function(){
 		}
 		//console.log(productArr)
 		$.ajax({
-			url: $.getGlobalVal().webRoot + '/favorite/delFavorite',
+			// url: $.getGlobalVal().webRoot + '/favorite/delFavorite',
+			url: '/favorite/delFavorite',
 			type: 'POST',
 			dataType: 'json',
 			data: JSON.stringify({

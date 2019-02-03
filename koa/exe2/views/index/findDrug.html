@@ -15,15 +15,15 @@
   <body>
     
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
     <!-- 头部 end -->
 
     <!-- 主体 -->
     <div class="f-main">
       <h3><span>病种</span></h3>
       <div class="drug-w">
-        {{if renderDada.drugList}}
-          {{each renderDada.drugList}}
+        {{if renderData.drugList}}
+          {{each renderData.drugList}}
           <a href="javascript:void(0)" productId="{{$index+2}}">{{$value}}</a>
           {{/each}}
         {{/if}}

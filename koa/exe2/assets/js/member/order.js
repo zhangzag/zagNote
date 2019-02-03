@@ -33,7 +33,8 @@ $(function(){
 	        }, function(index, layero) {
 	            //确定按钮
 	            $.ajax({
-	                    url: webRoot + '/order/updateOrderStatusByCancel',
+	                    // url: webRoot + '/order/updateOrderStatusByCancel',
+	                    url: '/order/updateOrderStatusByCancel',
 	                    data: {
 	                        orderId: orderId
 	                    },
@@ -86,7 +87,8 @@ $(function(){
 	            btnAlign: 'c',
 	        }, function(index, layero) {
 				$.ajax({
-					url: webRoot + '/order/updateOrderStatusByConfirmReceipt',
+					// url: webRoot + '/order/updateOrderStatusByConfirmReceipt',
+					url: '/order/updateOrderStatusByConfirmReceipt',
 					data: {
 						orderId: orderId
 					},
@@ -144,7 +146,8 @@ $(function(){
 		// console.log('运单编号: ', logisticsNumber)
 		// return 
 		$.ajax({
-			url: webRoot + '/delivery/getLogistics',
+			// url: webRoot + '/delivery/getLogistics',
+			url: '/delivery/getLogistics',
 			data: {
 				logisticsNo: logisticsNo,//物流单号
 				logisticsCode: logisticsCode,//物流公司编码
@@ -423,11 +426,12 @@ $(function(){
 		// console.log('getList', recentDate, orderCodeOrProName)
 
 		//获取tab各状态数量
-		getNumber( webRoot, memberId );
+		// getNumber( webRoot, memberId );
 
 		//获取全部订单
 		if( orderType === 'all' ){
-			var url = webRoot + '/order/getOrderByMemberId';
+			// var url = webRoot + '/order/getOrderByMemberId';
+			var url = '/order/getOrderByMemberId';
 			var data = {
 				memberId: memberId,
 				page: page,
@@ -437,7 +441,8 @@ $(function(){
 			}
 			var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
 		}else{
-			var url = webRoot + '/order/getOrderByMemberIdAndStatus';
+			// var url = webRoot + '/order/getOrderByMemberIdAndStatus';
+			var url = '/order/getOrderByMemberIdAndStatus';
 			var data = JSON.stringify({
 				memberId: memberId,
 				status: orderStatus,
@@ -537,6 +542,9 @@ $(function(){
 				}
 			}else{
 				console.log(res.msg)
+				//清空内容
+				$('.list_lists').html('');
+				alert(res.msg)
 			}
 			setTimeout(function(){
 				$('.loading_animate').stop(true,true).slideUp('300');
@@ -550,7 +558,8 @@ $(function(){
 //获取各状态订单数量
 function getNumber ( webRoot, memberId ){
 	$.ajax({
-	    url: webRoot + '/order/getOrderCount',
+	    // url: webRoot + '/order/getOrderCount',
+	    url: '/order/getOrderCount',
 	    data: {
 	        memberId: memberId
 	    },

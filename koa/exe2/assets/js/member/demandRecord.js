@@ -4,7 +4,8 @@ $(function(){
     var demandData = null;
     function getDemand(page){
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/require/getRequire',
+            // url: $.getGlobalVal().webRoot + '/require/getRequire',
+            url: '/require/getRequire',
             // url: 'http://192.168.2.65:8083/AKGW-api/v1' + '/require/getRequire',
             type: 'POST',
             dataType: 'json',

@@ -17,7 +17,7 @@
   <body>
     
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
 	<!-- 头部 end -->
 
 	<div class="list-main">
@@ -26,17 +26,17 @@
 				<!-- <a href="javascript:void(0)">全部结果</a>  >  
 				<a href="javascript:void(0)">肝瘤科药</a>  > -->
 				<a href="/product/list.html">全部结果</a> <i class="layui-icon layui-icon-right"></i>
-				{{if renderDada.crumbBar.productTypeOne}}
-					<a href="/product/list.html?productTypeOne={{renderDada.crumbBar.productTypeOne.productTypeID}}">{{renderDada.crumbBar.productTypeOne.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
+				{{if renderData.crumbBar.productTypeOne}}
+					<a href="/product/list.html?productTypeOne={{renderData.crumbBar.productTypeOne.productTypeID}}">{{renderData.crumbBar.productTypeOne.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
 				{{/if}}
-				{{if renderDada.crumbBar.productTypeTwo}}
-				<a href="/list.html?productTypeOne={{renderDada.crumbBar.productTypeOne.productTypeID}}&productTypeTwo={{renderDada.crumbBar.productTypeTwo.productTypeID}}">{{renderDada.crumbBar.productTypeTwo.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
+				{{if renderData.crumbBar.productTypeTwo}}
+				<a href="/list.html?productTypeOne={{renderData.crumbBar.productTypeOne.productTypeID}}&productTypeTwo={{renderData.crumbBar.productTypeTwo.productTypeID}}">{{renderData.crumbBar.productTypeTwo.productTypeName}}</a> <i class="layui-icon layui-icon-right"></i>
 				{{/if}}
 			</div>
 			<div class="cru-s">
 				<input id="productName" type="text" placeholder="在当前条件下搜索"/>
 				<button id="searchBtn"></button>
-				<p>商品共 <span id="prosCount" data-count="{{renderDada.proList.count}}">{{renderDada.proList.count}}</span> 个</p>
+				<p>商品共 <span id="prosCount" data-count="{{renderData.proList.count}}">{{renderData.proList.count}}</span> 个</p>
 			</div>
 		</div>
 		
@@ -45,8 +45,8 @@
 			<div class="pt-list">
 				<span class="list-name">品牌</span>
 				<ul class="brandList">
-					{{if renderDada.brandList}}
-						{{each renderDada.brandList}}
+					{{if renderData.brandList}}
+						{{each renderData.brandList}}
 						<li><a href="javascript: void(0)" brandId="{{$value.brandID}}">{{$value.brandName}}</a></li>
 						{{/each}}
 					{{/if}}
@@ -100,7 +100,7 @@
 			<div class="page">
 				<span class="tabCurr">1</span>
 				<span>/</span>
-				<span class="tabCount">{{ (renderDada.proList.count/20) | numCeil }}</span>
+				<span class="tabCount">{{ (renderData.proList.count/20) | numCeil }}</span>
 				<i class="layui-icon layui-icon-left" id="tabPagePrev"></i>
 				<i class="layui-icon layui-icon-right" id="tabPageNext"></i>
 			</div>
@@ -109,8 +109,8 @@
 		
 		<!-- 商品列表 -->
 		<div class="pro-wrap">
-			{{if renderDada.proList.data}} 
-				{{each renderDada.proList.data}}
+			{{if renderData.proList.data}} 
+				{{each renderData.proList.data}}
 					<div class="item" productIndex="{{$index}}" productId="{{$value.productID}}">
 						<a target="_blank" class="product-info" href="/products/{{$value.productNumber}}.html">
 							<img class="lazy" data-original="{{$value.defaultPhoto || $value.productName}}" alt="{{$value.productName}}" title="{{$value.productName}}">

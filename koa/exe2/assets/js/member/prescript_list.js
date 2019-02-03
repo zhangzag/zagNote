@@ -14,7 +14,8 @@ $(function(){
 
 function getList( param ){
 	$.ajax({
-		url: param.webRoot + '/prescription/getPrescription',
+		// url: param.webRoot + '/prescription/getPrescription',
+		url: '/prescription/getPrescription',
 		data: {
 			memberId: param.memberId,
 			page: param.page,

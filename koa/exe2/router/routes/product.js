@@ -62,7 +62,7 @@ router.get(['/', '/list.html'], async (ctx, next)=>{
       description: '哈哈哈',//页面描述
       title: '阿康大药房-商品列表',//页面标题
       //传到模板的数据
-      renderDada: { 
+      renderData: { 
         crumbBar: crumbBar,//面包屑, 一级分类和二级分类数据
         brandList: brandList || '', //品牌列表
         proList: proList || '',//商品列表
@@ -111,7 +111,7 @@ router.get('/:productNumber.html', async (ctx, next)=>{
         description: '哈哈哈',//页面描述
         title: '阿康大药房-商品详情',//页面标题
         //传到模板的数据
-        renderDada: { 
+        renderData: { 
           cateList: ctx.state.cateList || '',//分类列表数据
           productInfo,
           crumbBar,

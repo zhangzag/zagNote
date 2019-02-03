@@ -18,7 +18,7 @@
   </head>
   <body>
     <!-- 头部 -->
-    <% include('../layout/head.html', { cateList: renderDada.cateList, memberInfo: renderDada.memberInfo }) %>
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
     <!-- 头部 end -->
     
     <!-- 轮播图 -->
@@ -31,8 +31,8 @@
                     <a href="javascript:void(0);" class="next" id="turnR"></a>
                   </div>
                   <ul id="roteAdv" class="m-b-con">
-                    {{if renderDada.bannerDatas}}
-                      {{each renderDada.bannerDatas}}
+                    {{if renderData.bannerDatas}}
+                      {{each renderData.bannerDatas}}
                         <li id="{{$index+1}}">
                             <a target="_blank" href="{{$value.advertisementUrl}}">
                                 <img src="{{$value.advertisementPhoto}}" alt="">
@@ -53,14 +53,14 @@
     <div class="main">
       <div class="first">
         <div class="left">
-          {{if renderDada.tuiJian}}
-            <a target="_blank" href="{{renderDada.tuiJian[0].advertisementUrl}}"><img src="{{renderDada.tuiJian[0].advertisementPhoto}}" ></a>
+          {{if renderData.tuiJian}}
+            <a target="_blank" href="{{renderData.tuiJian[0].advertisementUrl}}"><img src="{{renderData.tuiJian[0].advertisementPhoto}}" ></a>
           {{/if}}
         </div>
         <div class="right">
           <div class="right-top">
-            <% if(renderDada.recomProducts){ %>
-              <% renderDada.recomProducts.forEach((item, index)=>{ %>
+            <% if(renderData.recomProducts){ %>
+              <% renderData.recomProducts.forEach((item, index)=>{ %>
                 <% if(index<2){ %>
                   <div class="product">
                     <div class="pro-l">
@@ -82,8 +82,8 @@
             <% } %>
           </div>
           <div class="right-bottom">
-              <% if(renderDada.recomProducts){ %>
-                <% renderDada.recomProducts.forEach((item, index)=>{ %>
+              <% if(renderData.recomProducts){ %>
+                <% renderData.recomProducts.forEach((item, index)=>{ %>
                   <% if(index>=2 && index<6){ %>
                       <div class="pro-list">
                         <a target="_blank" href="/products/<%= item.productNumber %>.html">
@@ -103,8 +103,8 @@
       </div>
       
       <div class="pro-wrap">
-        {{if renderDada.listRroducts}}
-          {{each renderDada.listRroducts}}
+        {{if renderData.listRroducts}}
+          {{each renderData.listRroducts}}
             <div class="item" productIndex="{{$index}}" productId="{{$value.productID}}">
               <div class="pro-img">
                 <a target="_blank" href="/products/{{$value.productNumber}}.html">

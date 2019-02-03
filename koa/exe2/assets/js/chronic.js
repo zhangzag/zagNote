@@ -81,7 +81,8 @@ $(function(){
         $(this).siblings('.buy').find('.num-wrap .num').val(count);
 		
 		$.ajax({
-			url: $.getGlobalVal().webRoot + '/product/findProductByProductNumber',
+			// url: $.getGlobalVal().webRoot + '/product/findProductByProductNumber',
+			url: '/product/findProductByProductNumber',
 			data: {
 				productNumber: productNumber
 			}
