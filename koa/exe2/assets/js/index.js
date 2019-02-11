@@ -44,22 +44,6 @@ $(function(){
     lazyLoad({
         imgSrc: '/images/i_placeholder.gif',
     });
-
-    
-    $.ajax({
-        // url: webRoot + '/seachAd',
-        url: '/akjk/seachAd',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            endDate: curDate,
-            pageNo: 'pFloorAdv',
-            isValid: 1
-        }
-    })
-    .done(function(res){
-        console.log('测试： ', res)
-    })
 });
 
 //图片过滤

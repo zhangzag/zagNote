@@ -4,7 +4,7 @@ const processEnv = process.env;
 
 const { getCookieByKey } = require('../util/')
 
-let curWebRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
+let curWebRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
 if( processEnv && processEnv.NODE_ENV ){
     switch( processEnv.NODE_ENV )
     {
@@ -25,10 +25,13 @@ if( processEnv && processEnv.NODE_ENV ){
             break;
         default: //默认
             // curWebRoot = '/tapi';
-            curWebRoot = 'http://192.168.2.254:8080/AKGW-api/v1';
+            curWebRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
     }
 }
 let webRoot = curWebRoot;
+console.log('111 processEnv: ', processEnv)
+console.log('111 processEnv.NODE_ENV: ', processEnv.NODE_ENV)
+console.log('111 curWebRoot: ', curWebRoot)
 
 const _req = axios.create({
     baseURL: webRoot,
@@ -63,5 +66,6 @@ _req.axiosAll = (axiosList) =>{
 // }
 
 module.exports = {
-    _req: _req
+    _req: _req,
+    curWebRoot,
 };

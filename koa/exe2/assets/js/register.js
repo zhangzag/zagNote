@@ -5,6 +5,9 @@ $(function(){
     })
     // 图形验证码
     function getPicCode(){
+        var ind = $('.picBtn>img').attr('src').indexOf('/sendCode');
+        var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
+        
         $('.picBtn').children('img').attr("src", webRoot + '/sendCode?n=' + Math.random());
     // }
     }

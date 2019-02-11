@@ -4,6 +4,7 @@ const { getAdvRecom, getProRecom, getProRecomDetail } = require('../../api/recom
 const { loginMember } = require('../../api/login/')
 
 const { setCookieByKey, getCookieByKey, removeCookie } = require('../../util/')
+const { curWebRoot } = require('../../api/apiConfig')
 
 //登录页
 router.get('/login.html', async (ctx, next)=>{
@@ -30,7 +31,7 @@ router.get('/register.html', async (ctx, next)=>{
     renderData: { 
       headTitle: '会员注册',
       curPage: 2,//当前页，1-登录页，2-注册页，3-找回密码
-      // akRecomProducts, //阿康推荐产品
+      curWebRoot, //baseUrl
     },
   })
 });
@@ -45,7 +46,7 @@ router.get('/forgetPassword.html', async (ctx, next)=>{
     renderData: { 
       headTitle: '找回密码',
       curPage: 3,//当前页，1-登录页，2-注册页，3-找回密码
-      // akRecomProducts, //阿康推荐产品
+      curWebRoot, //baseUrl
     },
   })
 });

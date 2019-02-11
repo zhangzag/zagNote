@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon bin/www",
     "pre": "node config.js && cross-env NODE_ENV=preview ./node_modules/.bin/nodemon bin/www",
     "private": "cross-env NODE_ENV=private ./node_modules/.bin/nodemon bin/www",
-    "prd": "node config.js && pm2 start bin/www",
+    "prd": "cross-env NODE_ENV=production pm2 start bin/www --name='akdyf-pc' --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

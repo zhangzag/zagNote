@@ -5,7 +5,10 @@ $(function () {
     getPicCode();
   })
   function getPicCode(){
-    // 获取图形码
+     var ind = $('.picBtn>img').attr('src').indexOf('/sendCode');
+     var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
+
+     // 获取图形码
     $('.picBtn img').attr("src", webRoot+'/sendCode?n=' + Math.random());
 //   }
   }
