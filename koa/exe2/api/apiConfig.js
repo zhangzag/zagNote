@@ -29,9 +29,6 @@ if( processEnv && processEnv.NODE_ENV ){
     }
 }
 let webRoot = curWebRoot;
-console.log('111 processEnv: ', processEnv)
-console.log('111 processEnv.NODE_ENV: ', processEnv.NODE_ENV)
-console.log('111 curWebRoot: ', curWebRoot)
 
 const _req = axios.create({
     baseURL: webRoot,

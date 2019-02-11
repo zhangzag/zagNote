@@ -149,10 +149,32 @@
 		
 		
 		
+六、linux下安装node.js
+	方法一： 直接安装编译好的 Nodejs（推荐）
+	1.下载对应的二进制文件，wget https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x64.tar.xz
+	2.解压为tar类型，xz -d node-v6.9.2-linux-x64.tar.xz
+	3.解压，tar -xvf node-v6.9.2-linux-x64.tar
+	
+	这种方式安装的node和npm不是全局的，可以通过建立两个软链接来实现：
+		ln -s /usr/local/node-v6.9.2-linux-x64/bin/node /usr/local/bin/node
+		ln -s /usr/local/node-v6.9.2-linux-x64/bin/npm /usr/local/bin/npm
+		注：/usr/local/node-v6.9.2-linux-x64/bin/node 为解压按钮node后的路径，后面的 /usr/local/bin/node 为软链接指向路径。
+
+
+七、linux下安装cnpm
+	npm install -g cnpm --registry=https://registry.npm.taobao.org
+	node链接：ln -s /usr/local/src/node-v8.10.0/bin/cnpm /usr/local/bin/
 		
 		
-		
-		
+八、解决linux 下node.js全局模块找不到
+	例如：全局安装pm2后 pm2 ls 报错
+	在linux上配置环境变量很简单，只需要修改 /etc/profile 文件就可以了，在profile文件最后写上node模块的目录就可以了。
+	
+	sudo vi /etc/profile
+	
+	export NODE_HOME=/usr/local/node/node-v7.3.0-linux-x64/bin
+	export PATH=$NODE_HOME:$PATH
+	注意，修改了环境变量之后需要注销再重新登录服务器才会生效，我是用的云服务器，直接退出系统再重新连接，然后修改的配置就生效了。
 		
 		
 		
