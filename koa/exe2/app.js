@@ -98,61 +98,28 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-//测试
-
 // Sessions
-const session = require('koa-session')
-app.use(session({
-  key: 'zayjt',// default is koa:sess
-  maxAge: 86400000,  // cookie的过期时间 maxAge in ms (default is 1 days)
-  overwrite: true,  //是否可以overwrite    (默认default true)
-  httpOnly: true, //cookie是否只有服务器端可以访问 httpOnly or not (default true)
-  signed: true,   //签名默认true
-  rolling: false,  //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
-  renew: false,  //(boolean) renew session when session is nearly expired,
-}, app))
-app.keys = ['zayjt key']
-const conf = {
-  encode: json => JSON.stringify(json),
-  decode: str => JSON.parse(str)
-}
-app.use(session(conf, app))
-
-// const passport = require('koa-passport')
-// const passport = require('./passport')
-// app.use(passport.initialize())
-// app.use(passport.session())
-
-// 定义一个验证用户的策略，需要定义name作为标识
-// const naiveStrategy = {
-//   name: 'naive',
-//   // 策略的主体就是authenticate(req)函数，在成功的时候返回用户身份，失败的时候返回错误
-//   authenticate: function (req) {
-//     let uid = req.query.uid
-//     if (uid) {
-//       // 策略很简单，就是从参数里获取uid，然后组装成一个user
-//       let user = {id: parseInt(uid), name: 'user' + uid}
-//       this.success(user)
-//     } else {
-//       // 如果找不到uid参数，认为鉴权失败
-//       this.fail(401)
-//     }
-//   }
+// const session = require('koa-session')
+// app.use(session({
+//   key: 'zayjt',// default is koa:sess
+//   maxAge: 86400000,  // cookie的过期时间 maxAge in ms (default is 1 days)
+//   overwrite: true,  //是否可以overwrite    (默认default true)
+//   httpOnly: true, //cookie是否只有服务器端可以访问 httpOnly or not (default true)
+//   signed: true,   //签名默认true
+//   rolling: false,  //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
+//   renew: false,  //(boolean) renew session when session is nearly expired,
+// }, app))
+// app.keys = ['zayjt key']
+// const conf = {
+//   encode: json => JSON.stringify(json),
+//   decode: str => JSON.parse(str)
 // }
+// app.use(session(conf, app))
 
-// // 调用use()来为passport新增一个可用的策略
-// const passport = require('koa-passport')
-// passport.use(naiveStrategy)
-// // 添加一个koa的中间件，使用naive策略来鉴权。这里暂不使用session
-// // app.use(passport.authenticate('naive', {session: false}))
+// const passport = require('./passport');
 // app.use(passport.initialize())
 // app.use(passport.session())
-
-const passport = require('./passport');
-app.use(passport.initialize())
-app.use(passport.session())
-
-//测试 end
+//session end
 
 // 设置全局数据
 const { getCategory } = require('./api/header/');//分类列表 

@@ -128,7 +128,6 @@ const getProByProductNumber = function ({productNumber}){
     });
 }
 
-
 /**
  *疗程装
  *
@@ -147,6 +146,7 @@ const toGetSingleCombo = function ({productID}){
         }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 }
+
 /**
  *疗程装详情
  *
@@ -166,6 +166,44 @@ const toGetSingleComboDetail = function ({packageID}){
     });
 }
 
+/**
+ *套餐
+ *
+ * @param {*} {productID}
+ * @returns
+ */
+const toGetCombo = function ({productID}){
+    return new Promise((resolve, reject)=>{
+        if(!productID && productID!=0){reject('没有商品id')}
+
+        _req({
+            url: '/getComboByProductId',
+            data: {
+                productID
+            }
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
+/**
+ *套餐详情
+ *
+ * @param {*} {packageID}
+ * @returns
+ */
+const toGetComboDetail = function ({packageID}){
+    return new Promise((resolve, reject)=>{
+        if(!packageID && packageID!=0){reject('没有套餐id')}
+
+        _req({
+            url: '/getComboDetailByPackageId',
+            data: {
+                packageID
+            }
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
 module.exports = {
     getPros,
     getProList,
@@ -175,4 +213,6 @@ module.exports = {
     getProById,
     toGetSingleCombo,
     toGetSingleComboDetail,
+    toGetCombo,
+    toGetComboDetail,
 }

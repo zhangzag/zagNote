@@ -198,5 +198,5 @@ function requireGtag(param){
     var title = param.title || '提交需求登记';
     var content = param.content || {};
     // console.log(param)
-    // gtag('event', title , content);
+    gtag('event', title , content);
 }

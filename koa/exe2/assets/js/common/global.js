@@ -61,7 +61,7 @@
 	//var webRoot = 'http://api-web.ak1ak1.com/AKGW-api/v1'; 
 	// var webRoot = '/testapi';
 	
-	// var webRoot = 'http://192.168.2.65:8083/AKGW-api/v1'; // 何杰
+	// var webRoot = 'http://192.168.2.65:8083/AKGW-api/v1'; //
 	
 	// var webRoot = 'http://192.168.2.65:8083/AKGW-api/v1';
 	//var webRoot = '/apilf';
@@ -275,7 +275,8 @@
 		            return false;
 		        }
 		        $.ajax({
-		            url: $.getGlobalVal().webRoot + '/login',
+		            // url: $.getGlobalVal().webRoot + '/login',
+		            url: '/login',
 		            type: 'POST',
 		            dataType: 'json',
 		            data: {

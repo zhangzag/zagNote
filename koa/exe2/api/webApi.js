@@ -10,7 +10,7 @@ const _reqs = require('./apiConfig.js');
 const { getProByProductNumber, getProList, getProById } = require('./product/');
 const { sendCodeMsg, vipRegister, verifyMapCode, verifyMsgCode } = require('./login/')
 const { getFavorite, getMyOrder, getMyOrderByStatus, cancelOrder, comfireGetOrder, getDeliveryInfo, getOrderDetail, cancelFavorite, cancelFavoriteByArr, getAddress, getSelectArea, addDelivery, toGetDeliveryAddress, toDelDeliveryAddress, setDefaultAddress, toGetPrescript, toGetPrescriptDetail, getMyRequire, getCodeImg, getMemberInfo, updateMemberInfo } = require('./member/')
-const { toGetSingleCombo, toGetSingleComboDetail } = require('./product/')
+const { toGetSingleCombo, toGetSingleComboDetail, toGetCombo, toGetComboDetail } = require('./product/')
 
 let _req = _reqs._req;
 
@@ -474,6 +474,56 @@ router.post('/favorite/delFavorite', async (ctx, next)=>{
     })
     .catch(err=>{
         console.log('取消多选收藏出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//套餐
+router.post('/getComboByProductId', async (ctx, next)=>{
+    let params = ctx.request.body || '';
+    let productID = params.productID;
+
+    if( !productID && productID != 0 ){
+        ctx.body = {
+            success: false,
+            msg: '未找到商品'
+        }
+        return;
+    }
+
+    await toGetCombo({
+        productID
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('获取套餐出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//套餐详情
+router.post('/getComboDetailByPackageId', async (ctx, next)=>{
+    let params = ctx.request.body || '';
+    let packageID = params.packageID;
+
+    if( !packageID && packageID != 0 ){
+        ctx.body = {
+            success: false,
+            msg: '未找到商品'
+        }
+        return;
+    }
+
+    await toGetComboDetail({
+        packageID
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('获取套餐详情出错了,', err)
         ctx.throw(err.response.status, err.response.data);
     })
 })

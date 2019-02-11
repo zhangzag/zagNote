@@ -331,9 +331,9 @@ $(function(){
             return false;
 		}
 		
-		// gtag('event', '点击立即购买', {
-		//   'event_category' : '商品id：' + productId
-		// });
+		gtag('event', '点击立即购买', {
+		  'event_category' : '商品id：' + productId
+		});
 
     	window.location.href = '/submitOrder.html';
         $.cookie('order',JSON.stringify({orderType:1,productId:productId,qty:Number(count)}),{  path:'/', domain:domain, /*secure:true*/});
@@ -406,5 +406,5 @@ function requireGtag(param){
     var title = param.title || '提交需求登记';
     var content = param.content || {};
 
-	// gtag('event', title , content);
+	gtag('event', title , content);
 }

@@ -19,5 +19,5 @@
   },
   "env_test": {
     "NODE_ENV": "testing"
-  },
+  }
 }

@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 
-const passport = require('koa-passport');
+// const passport = require('koa-passport');
 const {_req} = require('../../api/apiConfig.js');
 const axiosAll = _req.axiosAll;
 const { getAdvRecom, getProRecom, getProRecomDetail, getRecomBrand, getBrandRecomDetail } = require('../../api/recommend/')
@@ -13,12 +13,8 @@ const { setCookieByKey, getCookieByKey, removeCookie } = require('../../util/')
 //首页
 router.get(['/', '/index.html'], async (ctx, next) => {
   ctx.compress = true;
-  passport.authenticate('local', function(err, user, info, status){
-    ctx.login({id: 6565, username: '哈哈哈', password: '332211'})
-  })(ctx)
-   // passport.authenticate('local', function(err, user, info, status) {
-  //   ctx.body = {user, err, info, status}
-  //   return ctx.login({id: 1, username: 'admin', password: '123456'})
+  // passport.authenticate('local', function(err, user, info, status){
+  //   ctx.login({id: 6565, username: '哈哈哈', password: '332211'})
   // })(ctx)
 
   let bannerDatas = '', akRecomProducts = '', akRecomDatas = '', floorName = '', floorBotAdv = '', floorRecomDatas = '', floorProducts1 = '', floorProducts2 = '', floorProducts3 = '', floorProducts4 = '', floorProducts5 = '', floorProducts6 = '', advImgLDatas = '', advImgSDatas = '', floorBrandDatas = '';

@@ -102,9 +102,9 @@ $(function(){
 		if( !val || val === '请输入商品名称、拼音首字母、国药准字' ){
 			return false;
 		}else {
-			// gtag('event', '搜索', {
-			//   'event_category' : '搜索词：' + val
-			// });
+			gtag('event', '搜索', {
+			  'event_category' : '搜索词：' + val
+			});
 			window.location.href = '/product/list.html?productName='+ encodeURI(val);
 
 			var searchList = $.cookie('aksearchlis')?JSON.parse( $.cookie('aksearchlis')):[];

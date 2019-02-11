@@ -69,12 +69,12 @@ passport.serializeUser(function(user, done){
 // 反序列化（请求时，session中存在"passport":{"user":"1"}触发）
 passport.deserializeUser(async function(id, done) {
     const processEnv = process.env;
-    console.log('111 222 processEnv: ')
-    console.log('111 processEnv: ', processEnv)
-    console.log('3333 processEnv: ', processEnv.NODE_ENV)
+    // console.log('111 222 processEnv: ')
+    // console.log('111 processEnv: ', processEnv)
+    // console.log('3333 processEnv: ', processEnv.NODE_ENV)
 
-    console.log('deserializeUser: ', id)
-    console.log('curUser111: ', curUser)
+    // console.log('deserializeUser: ', id)
+    // console.log('curUser111: ', curUser)
 
     var user = {id, username: curUser.username, password: curUser.password}
     done(null, user)

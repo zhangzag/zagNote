@@ -102,7 +102,8 @@ $(function(){
 
     function getColl(memberId){
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/favorite/getFavoriteList',
+            // url: $.getGlobalVal().webRoot + '/favorite/getFavoriteList',
+            url: '/favorite/getFavoriteList',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -142,7 +143,8 @@ $(function(){
         // 取消收藏
         if($(this).find('.layui-icon-star-fill').length > 0){
             $.ajax({
-                url: $.getGlobalVal().webRoot + '/favorite/delFavoriteBymemberIdAndProId',
+                // url: $.getGlobalVal().webRoot + '/favorite/delFavoriteBymemberIdAndProId',
+                url: '/favorite/delFavoriteBymemberIdAndProId',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -164,7 +166,8 @@ $(function(){
         
         // 收藏
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/favorite/addFavorite',
+            // url: $.getGlobalVal().webRoot + '/favorite/addFavorite',
+            url: '/favorite/addFavorite',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -272,7 +275,8 @@ $(function(){
     // 套餐
     var setmealList = null;
     $.ajax({
-        url: $.getGlobalVal().webRoot + "/getComboByProductId",
+        // url: $.getGlobalVal().webRoot + "/getComboByProductId",
+        url: "/getComboByProductId",
         type:"POST",
         dataType: "json",
         data:{
@@ -323,7 +327,8 @@ $(function(){
         $('.setmeal .sayContent p').html(combo.useDesc?combo.useDesc:'暂无点评');
         // 获取 套餐详情
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+            // url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+            url: '/getComboDetailByPackageId',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -415,7 +420,8 @@ $(function(){
     // 疗程装
     var singleDetail = null;
     $.ajax({
-        url: $.getGlobalVal().webRoot + '/getSingleComboByProductId',
+        // url: $.getGlobalVal().webRoot + '/getSingleComboByProductId',
+        url: '/getSingleComboByProductId',
         // url: 'http://192.168.2.66:8080/AKGW-api/v1/getSingleComboByProductId?productID=120',
         type: 'POST',
         dataType:'json',
@@ -430,7 +436,8 @@ $(function(){
             };
             var singleRes = res.data[0];
             $.ajax({
-                url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+                // url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+                url: '/getComboDetailByPackageId',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -590,5 +597,5 @@ function requireGtag(param){
     var title = param.title || '提交需求登记';
     var content = param.content || {};
     // console.log(param)
-    // gtag('event', title , content);
+    gtag('event', title , content);
 }
