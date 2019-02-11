@@ -22,7 +22,8 @@ $(function(){
     if(order.orderType == 3){
         // 套餐 商品
         $.ajax({
-            url: $.getGlobalVal().webRoot + "/getComboByProductId",
+            // url: $.getGlobalVal().webRoot + "/getComboByProductId",
+            url: "/getComboByProductId",
             type: 'POST',
             dataType: 'json',
             data: {
@@ -639,10 +640,10 @@ $(function(){
                     success: function(res){
                         // console.log(res)
                         if(res.success === true){
-                            // gtag('event', '提交订单', {
-                            //   'event_category' : '购买的订单id：' + productDetail.productID,
-                            //   'event_label' : '成功'
-                            // });
+                            gtag('event', '提交订单', {
+                              'event_category' : '购买的订单id：' + productDetail.productID,
+                              'event_label' : '成功'
+                            });
                             window.location.href = '/submitSuccess.html';
                             
                         }else{
@@ -652,10 +653,10 @@ $(function(){
                     },
                     error: function(err){
                         // console.log(err)
-                        // gtag('event', '提交订单', {
-                        //   'event_category' : '购买的订单id：' + productDetail.productID,
-                        //   'event_label' : '失败'
-                        // });
+                        gtag('event', '提交订单', {
+                          'event_category' : '购买的订单id：' + productDetail.productID,
+                          'event_label' : '失败'
+                        });
                         canBuy = true;
                     }
                 })
@@ -688,10 +689,10 @@ $(function(){
                         // console.log(res);
                         if(res.success === true){
                             window.location.href = '/submitSuccess.html';
-                            // gtag('event', '提交套餐订单', {
-                            //   'event_category' : '购买的订单套餐id：' + order.packageID,
-                            //   'event_label' : '成功'
-                            // });
+                            gtag('event', '提交套餐订单', {
+                              'event_category' : '购买的订单套餐id：' + order.packageID,
+                              'event_label' : '成功'
+                            });
                         }else{
                             $.tips('提交订单失败！',2);
                         }
@@ -700,10 +701,10 @@ $(function(){
                     error: function(err){
                         console.log(err);
                         canBuy = true;
-                        // gtag('event', '提交套餐订单', {
-                        //   'event_category' : '购买的订单套餐id：' + order.packageID,
-                        //   'event_label' : '失败'
-                        // });
+                        gtag('event', '提交套餐订单', {
+                          'event_category' : '购买的订单套餐id：' + order.packageID,
+                          'event_label' : '失败'
+                        });
                     }
                 })
                 setTimeout(function(){canBuy = true;},1000)
@@ -725,7 +726,8 @@ $(function(){
             if(canBuy){
                 canBuy = false;
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/order/addorder',
+                    // url: $.getGlobalVal().webRoot + '/order/addorder',
+                    url: '/order/addorder',
                     type: 'POST',
                     dataType: 'json',
                     data: data,
@@ -735,10 +737,10 @@ $(function(){
                         if(res.success === true){
                             $.tips('提交订单成功！',1);
                             window.location.href = '/submitSuccess.html';
-                            // gtag('event', '提交疗程装订单', {
-                            //   'event_category' : '购买的订单疗程装id：' + order.packageID,
-                            //   'event_label' : '成功'
-                            // });
+                            gtag('event', '提交疗程装订单', {
+                              'event_category' : '购买的订单疗程装id：' + order.packageID,
+                              'event_label' : '成功'
+                            });
                         }else{
                             $.tips('提交订单失败！',2)
                         }
@@ -747,10 +749,10 @@ $(function(){
                     error: function(err){
                         // console.log(err);
                         canBuy = true;
-                        // gtag('event', '提交疗程装订单', {
-                        //   'event_category' : '购买的订单疗程装id：' + order.packageID,
-                        //   'event_label' : '失败'
-                        // });
+                        gtag('event', '提交疗程装订单', {
+                          'event_category' : '购买的订单疗程装id：' + order.packageID,
+                          'event_label' : '失败'
+                        });
                     }
                 })
                 setTimeout(function(){canBuy = true;},1000)

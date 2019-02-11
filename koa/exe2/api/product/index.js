@@ -204,6 +204,29 @@ const toGetComboDetail = function ({packageID}){
     });
 }
 
+/**
+ *套餐详情
+ *
+ * @param {*} {data}
+ * @returns
+ */
+const toAddOrder = function ({data}){
+    return new Promise((resolve, reject)=>{
+        if(!packageID && packageID!=0){reject('没有套餐id')}
+
+        _req({
+            url: '/order/addorder',
+            data: JSON.stringify({
+                data
+            }),
+            headers: {'Content-Type' : 'application/json;charset=utf-8'},
+            transformRequest: [function (data) {
+                return data
+            }]
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
 module.exports = {
     getPros,
     getProList,
