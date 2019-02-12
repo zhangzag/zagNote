@@ -108,23 +108,10 @@ const getBrandRecomDetail = function ( {showBrandID, isValid=1, endDate=curDate}
     });
 };
 
-// const axiosAll = function (axiosList){
-//     return new Promise((resolve, reject)=>{
-//         _req.all(axiosList)
-//         .then(res=>{
-//             resolve(res)
-//         })
-//         .catch(err=>{
-//             reject(err)
-//         })
-//     })
-// }
-
 module.exports = {
     getAdvRecom,
     getProRecom,
     getProRecomDetail,
-    // axiosAll,
     getRecomBrand,
     getBrandRecomDetail,
 }

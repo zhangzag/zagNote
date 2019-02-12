@@ -178,6 +178,24 @@ app.use(async (ctx, next) => {
   })
   
   await next();
+  
+  //出错
+  console.log(`dayindayin --- ${ctx}`)
+  // ctx.body = JSON.stringify(ctx)
+  //404
+  if( ctx.response.status == 404 ){
+    await ctx.render('error/404', {
+      keywords: '404',//页面关键字
+      description: '阿康大药房-找不到页面',//页面描述
+      title: '阿康大药房-404',//页面标题
+      //传到模板的数据
+      renderData: { 
+        cateList: ctx.state.cateList || '',//分类列表数据
+      },
+    })
+  }
+
+  
 })
 
 const routers = require('./router/')

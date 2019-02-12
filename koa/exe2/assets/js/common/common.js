@@ -1,12 +1,4 @@
 $(document).ready(function(){ 
-
-	// 单选框
-	// $('.radio_label input[type=radio]').click(function(event) {
-	// 	var inputName = $(this).attr('name');
-
-	// 	for( var i=0; i<$('input[name='+ inputName +']').length; i++ ){
-	// 	}
-	// });
 	
 	//低版本提示
 	$('body').on('click', '.lowVersion .lowVersionIn>i', function(event) {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include('../layout/headTextTop.html', {keywords: keywords ,description: description}) %>
+
+    <title><% if(title){ %><%= title %><% }else{ %>阿康大药房<% } %></title>
+
+    <% include('../layout/headTextBottom.html') %>
+
+    <% include('../layout/headCss.html') %>
+
+    <% include('../layout/headJs.html') %>
+  </head>
+  <body>
+    
+    <!-- 头部 -->
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
+    <!-- 头部 end -->
+    
+    <!-- 主体 -->
+
+    <!-- 主体 end -->
+
+    <!-- 底部 -->
+    <% include('../layout/footer.html') %>
+    <!-- 底部 end -->
+  </body>
+</html>
