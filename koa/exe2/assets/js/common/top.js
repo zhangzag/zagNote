@@ -28,7 +28,105 @@ $(function(){
     //获取一级分类
     var productTypeOne = $.getQueryString('productTypeOne') || '';
     //获取二级分类
-    var productTypeTwo = $.getQueryString('productTypeTwo') || '';
+	var productTypeTwo = $.getQueryString('productTypeTwo') || '';
+	
+	//获取热门搜索
+	$.ajax({
+		url: '/getHotSearchByProductTypeID',
+		data: {
+			endDate: curDate,//格式为 2018-05-26 00:00:00
+			productTypeID: productTypeTwo?productTypeTwo:productTypeOne,//格式为 int
+			type: '',//格式为 int   1、分类 2、商品 3、品牌   可为空，为空时返回3种类型的热门搜索
+			isValid: 1,
+		},
+	})
+	.done(function(res) {
+		// console.log("热门", res);
+		if(res.success){
+			var datas = res.data;
+
+			for( var i=0; i<datas.length; i++ ){
+				//品牌热门搜索 
+				if( datas[i].type === 3 ){
+					$.ajax({
+						url: '/getHSDetailByParams',
+						data: {
+							endDate: curDate, //格式为 2018-05-26 00:00:00
+							searchID: datas[i].searchID, //格式为 int
+							type: datas[i].type, //1、分类 2、商品 3、品牌   
+							isValid: 1, //格式为 string	1、有效  0、无效
+						},
+					})
+					.done(function(res) {
+						// console.log("热门搜索-按品牌：", res);
+						var brandHtml = '';
+
+						for( var i=0; i<res.data.length; i++ ){
+							brandHtml += '<span ><a href="/list.html?productName='+ res.data[i].brandName +'" title="'+ res.data[i].brandName +'">'+ res.data[i].brandName +'</a></span>';
+						};
+						$('.search_recommend').append( brandHtml );
+					});
+					
+				}
+				//分类热门搜索
+				if( datas[i].type === 1 ){
+					$.ajax({
+						url: '/getHSDetailByParams',
+						data: {
+							endDate: curDate, //格式为 2018-05-26 00:00:00
+							searchID: datas[i].searchID, //格式为 int
+							type: datas[i].type, //1、分类 2、商品 3、品牌   
+							isValid: 1, //格式为 string	1、有效  0、无效
+						},
+					})
+					.done(function(res) {
+						// console.log("热门搜索-按分类：", res);
+						var productTypeHtml = '';
+
+						for( var i=0; i<res.data.length; i++ ){
+							if( res.data[i].level  === 2 ){
+								//二级分类
+								productTypeHtml += '<span ><a href="/list.html?productTypeTwo='+ res.data[i].productTypeId +'" title="'+ res.data[i].productTypeName +'">'+ res.data[i].productTypeName +'</a></span>';
+							}else{
+								//一级分类
+								productTypeHtml += '<span ><a href="/list.html?productTypeOne='+ res.data[i].productTypeId +'" title="'+ res.data[i].productTypeName +'">'+ res.data[i].productTypeName +'</a></span>';
+							}
+						};
+						$('.search_recommend').append( productTypeHtml );
+					});
+					
+				}
+				//商品热门搜索
+				if( datas[i].type === 2 ){
+					$.ajax({
+						url: '/getHSDetailByParams',
+						data: {
+							endDate: curDate, //格式为 2018-05-26 00:00:00
+							searchID: datas[i].searchID, //格式为 int
+							type: datas[i].type, //1、分类 2、商品 3、品牌   
+							isValid: 1, //格式为 string	1、有效  0、无效
+						},
+					})
+					.done(function(res) {
+						// console.log("热门搜索-按商品：", res);
+						var productHtml = '';
+
+						if( res.success && (res.data.length>0) ){
+							// http://localhost:8081/productDetails.html?productId=873
+							for( var i=0; i<res.data.length; i++ ){
+								productHtml += '<span ><a href="/productDetails.html?poductId='+ res.data[i].productID +'" title="'+ res.data[i].productName +'">'+ res.data[i].productName +'</a></span>';
+							};
+						};
+						$('.search_recommend').append( productHtml );
+					});
+					
+				}
+			}
+		}
+	})
+	.fail(function() {
+		console.log("热门error");
+	});
     
     // 退出登陆
 	$('.loginOutBtn').click(function(){

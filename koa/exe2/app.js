@@ -4,7 +4,8 @@ const processEnv = process.env;
 // const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
+// const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body');
 const logger = require('koa-logger')
 const compress = require('koa-compress')
 const favicon = require('koa-favicon');
@@ -66,11 +67,20 @@ app.use(
 
 //favicon
 app.use(favicon(__dirname + '/favicon.ico'));
-console.log('现在时间： ' ,new Date().getTime())
 // middlewares
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
-}))
+// app.use(bodyparser({
+//   enableTypes:['json', 'form', 'text'],
+//   multipart: true
+// }))
+// app.use(bodybetter())
+app.use(koaBody({
+  multipart: true,  // 允许上传多个文件
+  formidable: { 
+    // uploadDir: 'public/images',// 上传的文件存储的路径 
+    keepExtensions: true  //  保存图片的扩展名
+  }
+}));
+
 app.use(json())
 app.use(logger())
 
@@ -94,6 +104,17 @@ app.use(require('koa-static')(staticPath, {
 app.use(async (ctx, next) => {
   const start = new Date()
   await next()
+  let date = new Date()
+  let year = date.getFullYear()
+  let month = date.getMonth() + 1
+  let dates = date.getDate();
+  
+  let hours = date.getHours();
+  let minute = date.getMinutes();
+  let second = date.getSeconds();
+  
+  console.log(`时间： ${year}年${month}月${dates}日 ${hours}时${minute}分${second}秒`)
+
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
@@ -122,8 +143,12 @@ app.use(async (ctx, next) => {
 //session end
 
 // 设置全局数据
-const { getCategory } = require('./api/header/');//分类列表 
+const { getCategory, getHotSearc } = require('./api/header/');//分类列表 
 app.use(async (ctx, next) => {
+  // let params = ctx.query;
+  // let productTypeOne = params.productTypeOne || '';
+  // let productTypeTwo = params.productTypeTwo || '';
+
   let apiArr = [];
   apiArr.push( getCategory() );//分类
 
@@ -131,10 +156,9 @@ app.use(async (ctx, next) => {
   if(getCookieByKey(ctx, '_sami')){
     apiArr.push( getMemberInfo({ id: getCookieByKey(ctx, '_sami'), headers: {Authorization: SHA256(getCookieByKey(ctx, '_sami') + 'akjk')} }) );
   }
-  
+
   await axiosAll(apiArr)
   .then(res=>{
-    // console.log('两个数据： ', res[1].data)
     //分类列表
     if( res[0].data.data ){
       let cateList = [];

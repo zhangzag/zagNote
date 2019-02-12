@@ -36,7 +36,7 @@ var lazyLoad = function( param ){
 	//替代图片
 	var imgSrc = param.imgSrc?param.imgSrc:"/static/images/myImg.png";
 	//提前加载
-	var threshold = param.threshold?param:200;
+	var threshold = param.threshold?param:0;
 	//载入效果
 	var effect = param.effect?param.effect:'fadeIn';
 

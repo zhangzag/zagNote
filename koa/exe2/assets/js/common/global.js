@@ -295,7 +295,7 @@
 		                });
 		                $('body').find('#loginAlert222').remove();
 		                $.tips('欢迎来到阿康健康！',1);
-		                $("#top").load('/module/common/top.html?n='+Math.random().toFixed(3));
+		                // $("#top").load('/module/common/top.html?n='+Math.random().toFixed(3));
 		                $.authorization(res.memberID)
 
 		                if (!callback) {

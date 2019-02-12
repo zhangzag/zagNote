@@ -4,4 +4,15 @@
 
 	1.koa-favicon：网站小图标。
 	2.koa-compress: gzip压缩。（要放在最前）
-		
+	
+	
+二、遇到的问题
+	1.koa-bodyparser中间件不支持 form-data类型的数据，前端传过来的数据无法在 ctx.request.body 中获取到。可以使用 koa-body 中间件代替：https://www.cnblogs.com/king-ying/p/7249204.html
+		const koaBody = require('koa-body')({
+			multipart: true,  // 允许上传多个文件
+		});
+		router.post('/users', koaBody,(ctx) => {
+			console.log(ctx.request.body);
+			ctx.body = JSON.stringify(ctx.request.body);
+		  }
+		);

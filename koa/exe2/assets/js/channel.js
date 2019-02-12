@@ -1,8 +1,13 @@
+
 $(function(){
+    var domain = window.location.host;
+    domain = domain.indexOf('.ak1ak1.com') == -1 ? '': '.ak1ak1.com';
+
     //图片懒加载
     lazyLoad({
         imgSrc: '/images/ak_300x300.jpg',
     });
+
     //轮换广告 start
     $('#roteAdv').after("<div class='slider' id='roteAdv_nav' style=''>").cycle({
         prev: '#turnL',
@@ -31,24 +36,4 @@ $(function(){
         }
     });
     /*轮换广告 end*/
-})
-
-function floorNameInit(floorName){
-    // if(floorName.indexOf('pc女性频道-') != -1){
-    //     floorName = floorName.replace('pc女性频道-','')
-    // }
-    return floorName;
-}
-
-function imgUrl(imgUrl){
-// "http://113.108.163.210:9999/upLoadProduct/15317125707382018-07-16-11-42-50.png"
-
-    // if(imgUrl.indexOf('http://113.108.163.210:9999') != -1){
-    //     imgUrl = imgUrl.replace('http://113.108.163.210:9999','http://192.168.2.250:8081')
-    // }else if(imgUrl.indexOf('http://localhost:8081') != -1){
-    //     imgUrl = imgUrl.replace('http://localhost:8081','')       
-    // }else if(imgUrl.indexOf('http://localhost:80') != -1){
-    //     imgUrl = imgUrl.replace('http://localhost:80','http://113.108.163.210:9999')
-    // }
-    return imgUrl;
-}
+});

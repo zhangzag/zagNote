@@ -41,7 +41,8 @@ $(function(){
 
 
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+            // url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+            url: '/getComboDetailByPackageId',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -56,7 +57,7 @@ $(function(){
                 for (var i = 0; i < mealList.length; i++) {
                     // productIdList.push(mealList[i].productID)
                     var packagePhoto = ''
-                    var packagePhoto = mealList[i].photodURL ? mealList[i].photodURL:'/static/images/ak_200x200.jpg';
+                    var packagePhoto = mealList[i].photodURL ? mealList[i].photodURL:'/images/ak_200x200.jpg';
                     // 商品小计
                     var productMoney = mealList[i].price * mealList[i].qty;
                     productMoney = productMoney.toFixed(2);
@@ -72,7 +73,8 @@ $(function(){
         })
     }else if (order.orderType == 2){
         $.ajax({
-            url: $.getGlobalVal().webRoot + "/getSingleComboByProductId",
+            // url: $.getGlobalVal().webRoot + "/getSingleComboByProductId",
+            url: "/getSingleComboByProductId",
             type: 'POST',
             dataType: 'json',
             data: {
@@ -89,7 +91,8 @@ $(function(){
         })
 
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+            // url: $.getGlobalVal().webRoot + '/getComboDetailByPackageId',
+            url: '/getComboDetailByPackageId',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -114,7 +117,8 @@ $(function(){
     }else{
         // 商品
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/product/getProductByProductId',
+            // url: $.getGlobalVal().webRoot + '/product/getProductByProductId',
+            url: '/product/getProductByProductId',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -141,7 +145,8 @@ $(function(){
     // 获取 地址
     function getAddress(){
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/delivery/getDeliveryAddress?memberId=' + $.getGlobalVal().memberId,
+            // url: $.getGlobalVal().webRoot + '/delivery/getDeliveryAddress?memberId=' + $.getGlobalVal().memberId,
+            url: '/delivery/getDeliveryAddress?memberId=' + $.getGlobalVal().memberId,
             type: 'GET',
             dataType: 'json',
             data: {},
@@ -188,7 +193,8 @@ $(function(){
      $('.address-w').on('click','.set-up-def',function(){
         var _self = this;
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/delivery/isDefualt',
+            // url: $.getGlobalVal().webRoot + '/delivery/isDefualt',
+            url: '/delivery/isDefualt',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -242,8 +248,10 @@ $(function(){
     $('.address-list').on('click','.modifyAlert',function(){
         // $('#addressAlert').attr({'alertType': '1','addressID': $(this).parent().parent().attr('addressID')})
         $.ajax({
-            url:  $.getGlobalVal().webRoot + '/delivery/getDeliveryAddressByMemberID?memberID='+$.getGlobalVal().memberId+'&addressID='+$(this).parent().parent().attr('addressID'),
-            type: 'POST',
+            // url:  $.getGlobalVal().webRoot + '/delivery/getDeliveryAddressByMemberID?memberID='+$.getGlobalVal().memberId+'&addressID='+$(this).parent().parent().attr('addressID'),
+            url:  '/delivery/getDeliveryAddressByMemberID?memberID='+$.getGlobalVal().memberId+'&addressID='+$(this).parent().parent().attr('addressID'),
+            // type: 'POST',
+            type: 'GET',
             data: 'json',
             data: {},
             success: function(res){
@@ -286,7 +294,8 @@ $(function(){
      // 获取省
     function getProv(parentId,area){
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/selectArea',
+            // url: $.getGlobalVal().webRoot + '/selectArea',
+            url: '/selectArea',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -378,7 +387,8 @@ $(function(){
         mobile = mobile == '' ? null: mobile;
         var phone = mobile == null ? tel:mobile;
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/delivery/addDeliveryAddress',
+            // url: $.getGlobalVal().webRoot + '/delivery/addDeliveryAddress',
+            url: '/delivery/addDeliveryAddress',
             type: 'POST',
             dataType: 'json',
             data:{
@@ -432,7 +442,8 @@ $(function(){
                 //console.log($(_self).parent().parent().attr('addressID'));
                 layer.close(index);
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/delivery/delDeliveryAddress',
+                    // url: $.getGlobalVal().webRoot + '/delivery/delDeliveryAddress',
+                    url: '/delivery/delDeliveryAddress',
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -467,8 +478,8 @@ $(function(){
     var addressId = $('.address-list .choice-active').attr('addressId')
     // 获取 运费模板
     $.ajax({
-        url: $.getGlobalVal().webRoot + '/order/getLogisticsCharge',
-        // url: 'http://192.168.2.67:8082/AKGW-api/v1/order/getLogisticsCharge',
+        // url: $.getGlobalVal().webRoot + '/order/getLogisticsCharge',
+        url: '/order/getLogisticsCharge',
         type: 'POST',
         dataType: 'json',
         data: {
@@ -497,7 +508,8 @@ $(function(){
         var orderAMT = $('.submit-w .proMoney').html();
         if(!addressId){return false;}
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/order/getLogisticsCharge',
+            // url: $.getGlobalVal().webRoot + '/order/getLogisticsCharge',
+            url: '/order/getLogisticsCharge',
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/order/getLogisticsCharge',
             type: 'POST',
             dataType: 'json',
@@ -563,7 +575,8 @@ $(function(){
             data.packageID = order.packageID
         }
         $.ajax({
-            url: $.getGlobalVal().webRoot + '/order/getDiscountsPrice',
+            // url: $.getGlobalVal().webRoot + '/order/getDiscountsPrice',
+            url: '/order/getDiscountsPrice',
             type: 'POST',
             dataType: 'json',
             data: data,
@@ -632,7 +645,8 @@ $(function(){
             if(canBuy){
                 canBuy = false;
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/order/addorder',
+                    // url: $.getGlobalVal().webRoot + '/order/addorder',
+                    url: '/order/addorder',
                     type: 'POST',
                     dataType: 'json',
                     data: data,
@@ -680,7 +694,8 @@ $(function(){
             if(canBuy){
                 canBuy = false;
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/order/addComboOrder',
+                    // url: $.getGlobalVal().webRoot + '/order/addComboOrder',
+                    url: '/order/addComboOrder',
                     type: 'POST',
                     dataType: 'json',
                     data: data,

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include('../layout/headTextTop.html', {keywords: keywords ,description: description}) %>
+
+    <title><% if(title){ %><%= title %><% }else{ %>首页a<% } %></title>
+
+    <% include('../layout/headTextBottom.html') %>
+
+    <% include('../layout/headCss.html') %>
+    <link rel="stylesheet" type="text/css" href="/style/channel.css">
+
+    <% include('../layout/headJs.html') %>
+    <script src="/plug/jquery.cycle.all.min.js"></script>
+
+  </head>
+  <body>
+    <!-- 头部 -->
+    <% include('../layout/head.html', { cateList: renderData.cateList, memberInfo: renderData.memberInfo }) %>
+    <!-- 头部 end -->
+    
+    <!-- 轮播图 -->
+	  <div class="focus-wrap">
+      <div class="focus_in">
+          <div class="focus">
+              <div class="m-banner" style="height: 500px;">
+                <div class="banner_btns">
+                    <a href="javascript:void(0);" class="prev" id="turnL"></a>
+                    <a href="javascript:void(0);" class="next" id="turnR"></a>
+                  </div>
+                  <ul id="roteAdv" class="m-b-con">
+                    {{if renderData.bannerDatas}}
+                      {{each renderData.bannerDatas}}
+                        <li id="{{$index+1}}">
+                            <a target="_blank" href="{{$value.advertisementUrl}}">
+                                <img src="{{$value.advertisementPhoto}}" alt="">
+                            </a>
+                        </li>
+                      {{/each}}
+                    {{/if}}
+                  </ul>
+                  <!-- <div id="roteAdv_nav" class="slider" style="">
+  
+                  </div> -->
+              </div>
+          </div>
+        </div>
+    </div>
+    <!-- 轮播图 end -->
+
+    <div class="wo-main">
+      <% for(var i=0; i<renderData.recomProducts.length; i++){ %>
+        <div class="floor">
+          <h3>
+            <a target="_blank" data-i="<%= i %>" href="<%= renderData.floorNames[i].advertisementUrl %>">
+              <img src="<%= renderData.floorNames[i].advertisementPhoto %>" width="282" height="28">
+            </a>
+          </h3>
+          <div class="flContent">
+            <div class="left">
+                <a target="_blank" href="<%= renderData.floorAdvs[i].advertisementUrl %>"><img src="<%= renderData.floorAdvs[i].advertisementPhoto %>" ></a>
+            </div>
+            <div class="right">
+              <div class="right-top">
+                  <% for(var c=0; c<2; c++){ %>
+                    <% if(renderData.recomProducts[i][c]){ %>
+                    <div class="product">
+                      <div class="pro-l">
+                        <h6><%= renderData.recomProducts[i][c].productName %></h6>
+                        <p><%= renderData.recomProducts[i][c].isHelpFor %></p>
+                        <div class="btn-wrap">
+                          <span class="pri"><%= $imports.filterPrice(renderData.recomProducts[i][c].ourPrice) %></span>
+                          <a target="_blank" class="det" href="/products/<%= renderData.recomProducts[i][c].productNumber %>.html">查看详情</a>
+                        </div>
+                      </div>
+                      <div class="pro-img">
+                        <a target="_blank" href="/products/<%= renderData.recomProducts[i][c].productNumber %>.html">
+                          <img class="lazy" data-original="<%= $imports.filterFirstPhoto(renderData.recomProducts[i][c].productPhotos) %>" alt="<%= renderData.recomProducts[i][c].productName %>" title="<%= renderData.recomProducts[i][c].productName %>">
+                        </a>
+                      </div>
+                    </div>
+                    <% } %>
+                  <% } %>
+              </div>
+              <div class="right-bottom">
+                <% for(var c=2; c<6; c++){ %>
+                    <% if(renderData.recomProducts[i][c]){ %>
+                    <div class="pro-list">
+                      <a target="_blank" href="/products/<%= renderData.recomProducts[i][c].productNumber %>.html">
+                        <img class="lazy" data-original="<%= $imports.filterFirstPhoto(renderData.recomProducts[i][c].productPhotos) %>" alt="<%= renderData.recomProducts[i][c].productName %>" title="<%= renderData.recomProducts[i][c].productName %>">
+                      </a>
+                      <h6>
+                        <a target="_blank" href="/products/<%= renderData.recomProducts[i][c].productNumber %>.html"><%= renderData.recomProducts[i][c].productName %>
+                        </a>
+                      </h6>
+                      <p><%= renderData.recomProducts[i][c].isHelpFor %></p>
+                      <span><%= $imports.filterPrice(renderData.recomProducts[i][c].ourPrice) %></span>
+                    </div>
+                    <% } %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- 底部 -->
+    <% include('../layout/footer.html') %>
+    <!-- 底部 end -->
+
+		<script type="text/javascript" src="/js/channel.js"></script>
+  </body>
+</html>

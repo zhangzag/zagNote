@@ -312,7 +312,8 @@ $(function(){
 
 		                listReload(1);
 		            },      
-		            url: $.getGlobalVal().webRoot + '/require/addRequire', //默认是form的action， 如果申明，则会覆盖
+		            // url: $.getGlobalVal().webRoot + '/require/addRequire', //默认是form的action， 如果申明，则会覆盖
+		            url: '/require/addRequire', //默认是form的action， 如果申明，则会覆盖
 		            // url: 'http://192.168.2.65:8083/AKGW-api/v1/require/addRequire',
 		            type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖
 		            dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型
@@ -634,7 +635,8 @@ function demandCancel(param){
 				// console.log(data);
 				// return false;
 				$.ajax({
-					url: $.getGlobalVal().webRoot + '/require/addfailedRequire',
+					// url: $.getGlobalVal().webRoot + '/require/addfailedRequire',
+					url: '/require/addfailedRequire',
 					// url: 'http://192.168.2.129:8083/AKGW-api/v1/require/addfailedRequire',
 					type: 'POST',
 					dataType: 'json',

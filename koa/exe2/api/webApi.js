@@ -10,9 +10,42 @@ const _reqs = require('./apiConfig.js');
 const { getProByProductNumber, getProList, getProById } = require('./product/');
 const { sendCodeMsg, vipRegister, verifyMapCode, verifyMsgCode } = require('./login/')
 const { getFavorite, getMyOrder, getMyOrderByStatus, cancelOrder, comfireGetOrder, getDeliveryInfo, getOrderDetail, cancelFavorite, cancelFavoriteByArr, getAddress, getSelectArea, addDelivery, toGetDeliveryAddress, toDelDeliveryAddress, setDefaultAddress, toGetPrescript, toGetPrescriptDetail, getMyRequire, getCodeImg, getMemberInfo, updateMemberInfo } = require('./member/')
-const { toGetSingleCombo, toGetSingleComboDetail, toGetCombo, toGetComboDetail } = require('./product/')
+const { toGetSingleCombo, toGetSingleComboDetail, toGetCombo, toGetComboDetail, toAddOrder, toAddPackageOrder, toGetCharge, toGetDiscount, toAddRequire } = require('./product/')
+const { getHotSearc, getHotSearcDetail } = require('./header/');
 
 let _req = _reqs._req;
+
+//获取热门搜索
+router.post('/getHotSearchByProductTypeID', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let productTypeID = params.productTypeID || '';
+    let type = params.type || '';
+
+    await getHotSearc({ productTypeID, type })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('获取热门搜索出错了, ', err.response.status, err.response.data)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//获取热门搜索详情
+router.post('/getHSDetailByParams', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let searchID = params.searchID || '';
+    let type = params.type || '';
+
+    await getHotSearcDetail({ searchID, type })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('获取热门搜索详情出错了, ', err.response.status, err.response.data)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
 
 //根据productNumber 获取商品信息
 router.post('/product/findProductByProductNumber', async (ctx, next)=>{
@@ -840,6 +873,203 @@ router.post('/toGetSingleComboDetail', async (ctx, next)=>{
     })
     .catch(err=>{
         console.log('获取疗程装出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//提交订单
+router.post('/order/addorder', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let productId = params.productId || '';//订单ID
+    let memberId = params.memberId || '';//会员ID
+    let detailCodeId = params.detailCodeId || '';//多规格id
+    let qty = params.qty || '';//商品数量
+    let addressID = params.addressID || '';//地址编号
+    let deliveryAddress = params.deliveryAddress || '';//配送详细地址
+    let logisticsID = params.logisticsID || '';//物流公司
+    let payType = params.payType || '';//支付方式 目前固定为 4 - 货到付款
+    let orderRemark = params.orderRemark || '';//客户留言
+    let sysNo = params.sysNo || 'pc';
+
+    if(!productId && productId!=0){
+        ctx.body = {
+            success: false,
+            msg: '未获找到商品'
+        }
+        return
+    }
+    if(!memberId && memberId!=0){
+        ctx.body = {
+            success: false,
+            msg: '请先登录'
+        }
+        return
+    }
+
+    await toAddOrder({
+        productId,//订单ID
+        memberId,//会员ID
+        detailCodeId,//多规格id
+        qty,//商品数量
+        addressID,//地址编号
+        deliveryAddress,//配送详细地址
+        logisticsID,//物流公司
+        payType,//支付方式 目前固定为 4 - 货到付款
+        orderRemark,//客户留言
+        sysNo
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('提交订单出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//提交套餐商品订单
+router.post('/order/addComboOrder', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let packageID = params.packageID || '';//订单ID
+    let memberId = params.memberId || '';//会员ID
+    let qty = params.qty || '';//商品数量
+    let addressID = params.addressID || '';//地址编号
+    let deliveryAddress = params.deliveryAddress || '';//配送详细地址
+    let logisticsID = params.logisticsID || '';//物流公司
+    let payType = params.payType || '';//支付方式 目前固定为 4 - 货到付款
+    let orderRemark = params.orderRemark || '';//客户留言
+    let sysNo = params.sysNo || 'pc';
+
+    if(!packageID && packageID!=0){
+        ctx.body = {
+            success: false,
+            msg: '未获找到商品'
+        }
+        return
+    }
+    if(!memberId && memberId!=0){
+        ctx.body = {
+            success: false,
+            msg: '请先登录'
+        }
+        return
+    }
+
+    await toAddPackageOrder({
+        packageID,//订单ID
+        memberId,//会员ID
+        qty,//商品数量
+        addressID,//地址编号
+        deliveryAddress,//配送详细地址
+        logisticsID,//物流公司
+        payType,//支付方式 目前固定为 4 - 货到付款
+        orderRemark,//客户留言
+        sysNo
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('提交套餐订单出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//提交需求登记
+router.post('/require/addRequire', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let memberID = params.memberID || '';
+    let sysNo = params.sysNo || 'pc';
+    let productID = params.productID || '';
+    let productName = params.productName || '';
+    let productCode = params.productCode || '';
+    let qty = params.qty || '';
+    let realName = params.realName || '';
+    let phone = params.phone || '';
+    let DeliveryAddress = params.DeliveryAddress || '';
+    let age = params.age || '';
+    let carId = params.carId || ''; 
+    let sex = params.sex || '';
+    let isStore = params.isStore || '';
+    let remark = params.remark || '';
+    let imgstr = params.imgstr || '';
+    
+    await toAddRequire({
+        memberID,
+        sysNo,
+        productID,
+        productName,
+        productCode,
+        qty,
+        realName,
+        phone,
+        DeliveryAddress,
+        age,
+        carId, 
+        sex,
+        isStore,
+        remark,
+        imgstr,
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('提交需求登记出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//获取运费模板
+router.post('/order/getLogisticsCharge', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let addressId = params.addressId || '';
+    let orderAMT = params.orderAMT || '';
+    let timestamp = params.timestamp || '';
+    let sysNo = params.sysNo || 'pc'
+
+    await toGetCharge({
+        addressId,
+        orderAMT,
+        timestamp,
+        sysNo
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('获取运费模板出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
+//获取优惠
+router.post('/order/getDiscountsPrice', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let productId = params.productId || '';
+    let totalPrice = params.totalPrice || '';
+    let qty = params.qty || '';
+    let sysNo = params.sysNo || 'pc'
+
+    if(!productId && productId!=0){
+        ctx.body = {
+            success: false,
+            msg: '未获找到商品'
+        }
+        return
+    }
+
+    await toGetDiscount({
+        productId,
+        totalPrice,
+        qty,
+        sysNo
+    })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('获取运费模板出错了,', err)
         ctx.throw(err.response.status, err.response.data);
     })
 })

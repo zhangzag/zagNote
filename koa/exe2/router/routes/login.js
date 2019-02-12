@@ -52,7 +52,7 @@ router.get('/forgetPassword.html', async (ctx, next)=>{
 });
 
 //接口 - 登录
-router.post('/toLogin', async (ctx, next)=>{
+router.post(['/toLogin', '/login'], async (ctx, next)=>{
   let account = ctx.request.body;
 
   if(!account){

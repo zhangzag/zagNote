@@ -39,9 +39,10 @@ const getProById = function ( {productId} ){
 
         _req({
             url: '/product/getProductByProductId',
-            data: JSON.stringify({
-                productId,
-            }),
+            // data: JSON.stringify({
+            //     productId,
+            // }),
+            data: { productId },
         }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 };
@@ -205,24 +206,130 @@ const toGetComboDetail = function ({packageID}){
 }
 
 /**
- *套餐详情
+ *提交订单
  *
- * @param {*} {data}
+ * @param {*} {productId, memberId, detailCodeId, qty, addressID, deliveryAddress, logisticsID, payType=4, orderRemark, sysNo="pc"}
  * @returns
  */
-const toAddOrder = function ({data}){
+const toAddOrder = function ({productId, memberId, detailCodeId, qty, addressID, deliveryAddress, logisticsID, payType=4, orderRemark, sysNo="pc"}){
     return new Promise((resolve, reject)=>{
-        if(!packageID && packageID!=0){reject('没有套餐id')}
+        if(!productId && productId!=0){reject('没有商品id')}
+        if(!memberId && memberId!=0){reject('没有会员id')}
 
         _req({
             url: '/order/addorder',
-            data: JSON.stringify({
-                data
-            }),
-            headers: {'Content-Type' : 'application/json;charset=utf-8'},
-            transformRequest: [function (data) {
-                return data
-            }]
+            data: {
+                productId,//订单ID
+                memberId,//会员ID
+                detailCodeId,//多规格id
+                qty,//商品数量
+                addressID,//地址编号
+                deliveryAddress,//配送详细地址
+                logisticsID,//物流公司
+                payType,//支付方式 目前固定为 4 - 货到付款
+                orderRemark,//客户留言
+                sysNo
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
+/**
+ *提交套餐商品订单
+ *
+ * @param {*} {packageID, memberId, qty, addressID, deliveryAddress, logisticsID, payType=4, orderRemark, sysNo="pc"}
+ * @returns
+ */
+const toAddPackageOrder = function ({packageID, memberId, qty, addressID, deliveryAddress, logisticsID, payType=4, orderRemark, sysNo="pc"}){
+    return new Promise((resolve, reject)=>{
+        if(!packageID && packageID!=0){reject('没有商品id')}
+        if(!memberId && memberId!=0){reject('没有会员id')}
+
+        _req({
+            url: '/order/addComboOrder',
+            data: {
+                packageID,//订单ID
+                memberId,//会员ID
+                qty,//商品数量
+                addressID,//地址编号
+                deliveryAddress,//配送详细地址
+                logisticsID,//物流公司
+                payType,//支付方式 目前固定为 4 - 货到付款
+                orderRemark,//客户留言
+                sysNo,
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
+/**
+ *获取 运费模板
+ *
+ * @param {*} {packageID, memberId, qty, addressID, deliveryAddress, logisticsID, payType=4, orderRemark, sysNo="pc"}
+ * @returns
+ */
+const toGetCharge = function ({addressId, orderAMT, timestamp=curDate, sysNo="pc"}){
+    return new Promise((resolve, reject)=>{
+        _req({
+            url: '/order/getLogisticsCharge',
+            data: {
+                addressId,
+                orderAMT,
+                timestamp,
+                sysNo
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
+/**
+ *获取优惠
+ *
+ * @param {*} {productId, totalPrice, qty, sysNo="pc"}
+ * @returns
+ */
+const toGetDiscount = function ({productId, totalPrice, qty, sysNo="pc"}){
+    return new Promise((resolve, reject)=>{
+        if(!productId && productId!=0){reject('没有商品id')}
+        _req({
+            url: '/order/getDiscountsPrice',
+            data: {
+                productId,
+                totalPrice,
+                qty,
+                sysNo
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
+/**
+ *提交需求登记
+ *
+ * @param {*} {memberID, sysNo='pc', productID, productName, productCode, qty, realName, phone, DeliveryAddress, age, carId, sex, carId, isStore, remark, imgstr}
+ * @returns
+ */
+const toAddRequire = function ({memberID, sysNo='pc', productID, productName, productCode, qty, realName, phone, DeliveryAddress, age, carId, sex, isStore, remark, imgstr}){
+    return new Promise((resolve, reject)=>{
+        _req({
+            url: '/require/addRequire',
+            data: {
+                memberID,
+                sysNo,
+                productID,
+                productName,
+                productCode,
+                qty,
+                realName,
+                phone,
+                DeliveryAddress,
+                age,
+                carId, 
+                sex,
+                isStore,
+                remark,
+                imgstr,
+            },
         }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 }
@@ -238,4 +345,9 @@ module.exports = {
     toGetSingleComboDetail,
     toGetCombo,
     toGetComboDetail,
+    toAddOrder,
+    toAddPackageOrder,
+    toGetCharge,
+    toGetDiscount,
+    toAddRequire,
 }
