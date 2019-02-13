@@ -9,8 +9,8 @@ const { curDate } = require('../util/');
 const _reqs = require('./apiConfig.js');
 const { getProByProductNumber, getProList, getProById } = require('./product/');
 const { sendCodeMsg, vipRegister, verifyMapCode, verifyMsgCode } = require('./login/')
-const { getFavorite, getMyOrder, getMyOrderByStatus, cancelOrder, comfireGetOrder, getDeliveryInfo, getOrderDetail, cancelFavorite, cancelFavoriteByArr, getAddress, getSelectArea, addDelivery, toGetDeliveryAddress, toDelDeliveryAddress, setDefaultAddress, toGetPrescript, toGetPrescriptDetail, getMyRequire, getCodeImg, getMemberInfo, updateMemberInfo } = require('./member/')
-const { toGetSingleCombo, toGetSingleComboDetail, toGetCombo, toGetComboDetail, toAddOrder, toAddPackageOrder, toGetCharge, toGetDiscount, toAddRequire } = require('./product/')
+const { getFavorite, getMyOrder, getMyOrderByStatus, cancelOrder, comfireGetOrder, getDeliveryInfo, getOrderDetail, cancelFavorite, cancelFavoriteByArr, getAddress, getSelectArea, addDelivery, toGetDeliveryAddress, toDelDeliveryAddress, setDefaultAddress, toGetPrescript, toGetPrescriptDetail, getMyRequire, getCodeImg, getMemberInfo, updateMemberInfo, toAddPrescript, toUpdateImg } = require('./member/')
+const { toGetSingleCombo, toGetSingleComboDetail, toGetCombo, toGetComboDetail, toAddOrder, toAddPackageOrder, toGetCharge, toGetDiscount, toAddRequire, toDelRequire } = require('./product/')
 const { getHotSearc, getHotSearcDetail } = require('./header/');
 
 let _req = _reqs._req;
@@ -746,6 +746,20 @@ router.post('/delivery/isDefualt', async (ctx, next)=>{
     })
 })
 
+//提交处方笺
+router.post('/prescription/addPrescription', async (ctx, next)=>{
+    let params = ctx.request.body;
+    
+    await toAddPrescript(params)
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('提交处方笺出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
 //获取处方笺列表
 router.post('/prescription/getPrescription', async (ctx, next)=>{
     let params = ctx.request.body;
@@ -1020,6 +1034,30 @@ router.post('/require/addRequire', async (ctx, next)=>{
     })
 })
 
+//删除需求登记
+router.post('/require/delRequire', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let memberId = params.memberId || '';
+    let requireId = params.requireId || '';
+
+    if(!memberId && memberId!=0){
+        ctx.body = {
+            success: false,
+            msg: '未找到会员'
+        }
+        return
+    }
+
+    await toDelRequire({memberId, requireId})
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('删除需求登记出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+
 //获取运费模板
 router.post('/order/getLogisticsCharge', async (ctx, next)=>{
     let params = ctx.request.body;
@@ -1130,6 +1168,83 @@ router.post('/updateByMemberId', async (ctx, body)=>{
     })
     .catch(err=>{
         console.log('更新会员信息出错了,', err)
+        ctx.throw(err.response.status, err.response.data);
+    })
+})
+const FormData = require('form-data');
+const fs = require('fs')
+const path = require('path')
+const FileReader = require('filereader')
+
+//上传头像
+router.post('/upLoadByMemberId', async (ctx, next)=>{
+    let params = ctx.request.body;
+    let memberId = ctx.state.memberInfo.memberID || '';
+
+    // console.log('ctx:  ', ctx)
+    // console.log('ctx.request:  ', ctx.request)
+    console.log('params:  ', params)
+    // console.log('ctx.request.files:  ', ctx.request.files)
+    let curFile = ctx.request.files;
+    // params.file = file;
+    console.log(11111111, curFile)
+    console.log(222222, curFile.file)
+    let stringflyFile = JSON.stringify(curFile.file)
+    console.log(333333333, stringflyFile)
+    console.log(4444444, JSON.parse(stringflyFile))
+    // ctx.body = JSON.stringify(curFile.file)
+// return
+    // ctx.body = JSON.stringify(ctx.request.files.file)
+    
+    // let formData = new FormData();
+    // formData.append("memberID", params.memberID);
+    // formData.append("file", params.file);
+    // return
+    // const file = fs.createReadStream(JSON.stringify(ctx.request.files.file)) 
+    // console.log(99999, file)
+    
+    // 上传单个文件
+    const file = ctx.request.files.file; // 获取上传文件
+    // 创建可读流
+    // const reader = fs.createReadStream(file.path);
+    // let filePath = path.join(__dirname, '../public/upload/') + `/${file.name}`;
+    // // 创建可写流
+    // const upStream = fs.createWriteStream(filePath);
+    // // 可读流通过管道写入可写流
+    // reader.pipe(upStream);
+    // console.log('reader, reader, reader: ', reader)
+    // console.log('upStream, upStream, upStream: ', upStream)
+
+    var reader = new FileReader();
+    // var img = new Image
+    reader.readAsDataURL(file);
+    reader.on('data', function (data) {
+        console.log("chunkSize:", data);
+    });
+    // reader.addEventListener('load', async function (ev) {
+    //     console.log("dataUrlSize:", ev.target.result.split(',')[1]);
+
+        
+    // });
+
+    console.log(123321123133)
+
+    // console.log(15515151, img)
+
+    return
+    var form = new FormData();
+    form.append('memberID', params.memberID);
+    // form.append('file', file);
+    form.append('file', JSON.stringify(file));
+
+    // return
+    let shaMemberId = SHA256( memberId + 'akjk' );
+    await toUpdateImg({ form, headers: {'Authorization': shaMemberId, 'Content-Type': 'multipart/form-data'} })
+    .then(res=>{
+        ctx.body = res.data;
+    })
+    .catch(err=>{
+        console.log('上传头像出错了,', err)
         ctx.throw(err.response.status, err.response.data);
     })
 })

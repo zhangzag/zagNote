@@ -179,9 +179,7 @@ app.use(async (ctx, next) => {
   
   await next();
   
-  //出错
-  console.log(`dayindayin --- ${ctx}`)
-  // ctx.body = JSON.stringify(ctx)
+  // 出错 //
   //404
   if( ctx.response.status == 404 ){
     await ctx.render('error/404', {

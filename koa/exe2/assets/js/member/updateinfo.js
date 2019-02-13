@@ -10,12 +10,8 @@ $(function(){
 	c[d+n]|0;else{var r=a[n-15],g=a[n-2];a[n]=((r<<25|r>>>7)^(r<<14|r>>>18)^r>>>3)+a[n-7]+((g<<15|g>>>17)^(g<<13|g>>>19)^g>>>10)+a[n-16]}r=l+((p<<26|p>>>6)^(p<<21|p>>>11)^(p<<7|p>>>25))+(p&j^~p&k)+q[n]+a[n];g=((e<<30|e>>>2)^(e<<19|e>>>13)^(e<<10|e>>>22))+(e&f^e&m^f&m);l=k;k=j;j=p;p=h+r|0;h=m;m=f;f=e;e=r+g|0}b[0]=b[0]+e|0;b[1]=b[1]+f|0;b[2]=b[2]+m|0;b[3]=b[3]+h|0;b[4]=b[4]+p|0;b[5]=b[5]+j|0;b[6]=b[6]+k|0;b[7]=b[7]+l|0},_doFinalize:function(){var a=this._data,d=a.words,b=8*this._nDataBytes,e=8*a.sigBytes;
 	d[e>>>5]|=128<<24-e%32;d[(e+64>>>9<<4)+14]=h.floor(b/4294967296);d[(e+64>>>9<<4)+15]=b;a.sigBytes=4*d.length;this._process();return this._hash},clone:function(){var a=g.clone.call(this);a._hash=this._hash.clone();return a}});s.SHA256=g._createHelper(f);s.HmacSHA256=g._createHmacHelper(f)})(Math);
 
-	var webRoot = $.getGlobalVal().webRoot;
 	var memberId = $.getGlobalVal().memberId;
-	var webOrigin = $.getGlobalVal().webOrigin;
-	var curDate = $.getGlobalVal().curDate;
 	var curDay = $.getGlobalVal().curDay;
-	var ImgSrc = $.getGlobalVal().ImgSrc;
 
 	//更新出生年月日
 	var newBirth = '';
@@ -76,7 +72,7 @@ $(function(){
 				$('.info_right .ir_upImg .img').append('<img class="lazy" data-original="'+ res.picURL +'">')
 		        //图片懒加载
 		        lazyLoad({
-		            imgSrc: '/static/images/myImg.png',
+		            imgSrc: '/images/myImg.png',
 		        });
 			}
 		}
@@ -88,21 +84,19 @@ $(function(){
 		$('#upload_img_btn').trigger('click');
 	});
 	//
-	var shaMemberId = CryptoJS.SHA256( memberId + 'akjk' ); 
+	// var shaMemberId = CryptoJS.SHA256( memberId + 'akjk' ); 
 	//实例化一个plupload上传对象
     var uploader = new plupload.Uploader({
         browse_button : 'upload_img_btn', //触发文件选择对话框的按钮，为那个元素id
-        url : webRoot + '/upLoadByMemberId', //服务器端的上传页面地址
-        // flash_swf_url : 'js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        // silverlight_xap_url : 'js/Moxie.xap' //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        url : '/upLoadByMemberId', //服务器端的上传页面地址
         multipart: true,//以multipart/form-data的形式来上传文件
         multi_selection: false,//是否可以在文件浏览对话框中选择多个文件
-        file_data_name: 'file',//指定文件上传时文件域的名称，默认为file
+        // file_data_name: 'file',//指定文件上传时文件域的名称，默认为file
         multipart_params: { //上传时的附加参数，以键/值对的形式传入，服务器端可是使用$_POST来获取这些参数
-        	memberID: memberId,
+			memberID: memberId,
         },
         headers:{
-			'Authorization': shaMemberId.toString(CryptoJS.enc.Base64),
+			// 'Authorization': shaMemberId.toString(CryptoJS.enc.Base64),
 		},
 		resize: {
 			// width: 120,
@@ -219,6 +213,8 @@ $(function(){
     
     //上传
     $('.user_img_options .bp_green').click(function(event) {
+		// console.log($('.user_img_con>img').attr('src'))
+		// return
     	uploader.start();
     });
 

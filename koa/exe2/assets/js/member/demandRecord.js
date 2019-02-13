@@ -103,7 +103,8 @@ $(function(){
                 //console.log($(_self).parent().parent().attr('requireID'));
                 layer.close(index);
                 $.ajax({
-                    url: $.getGlobalVal().webRoot + '/require/delRequire',
+                    //url: $.getGlobalVal().webRoot + '/require/delRequire',
+                    url: '/require/delRequire',
                     type: 'POST',
                     dataType: 'json',
                     data: {

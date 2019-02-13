@@ -334,6 +334,24 @@ const toAddRequire = function ({memberID, sysNo='pc', productID, productName, pr
     });
 }
 
+/**
+ *删除需求登记
+ *
+ * @param {*} {memberId, requireId}
+ * @returns
+ */
+const toDelRequire = function ({memberId, requireId}){
+    return new Promise((resolve, reject)=>{
+        _req({
+            url: '/require/delRequire',
+            data: {
+                memberId,
+                requireId,
+            },
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
 module.exports = {
     getPros,
     getProList,
@@ -350,4 +368,5 @@ module.exports = {
     toGetCharge,
     toGetDiscount,
     toAddRequire,
+    toDelRequire,
 }

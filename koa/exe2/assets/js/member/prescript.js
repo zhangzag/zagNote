@@ -53,7 +53,8 @@ $(function(){
 			        //按钮【按钮一】的回调
 			        flag = true;
 		         	var options = {
-			            url: webRoot + '/prescription/addPrescription', //提交地址：默认是form的action,如果申明,则会覆盖
+			            // url: webRoot + '/prescription/addPrescription', //提交地址：默认是form的action,如果申明,则会覆盖
+			            url: '/prescription/addPrescription', //提交地址：默认是form的action,如果申明,则会覆盖
 			            type: "post",   //默认是form的method（get or post），如果申明，则会覆盖
 			            beforeSubmit: function(){
 			            	//提交前的回调函数

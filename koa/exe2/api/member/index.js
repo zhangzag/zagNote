@@ -400,6 +400,21 @@ const setDefaultAddress = function({memberID, addressID, isDefault, headers}){
 }
 
 /**
+ *添加处方笺
+ *
+ * @param {*} params
+ * @returns
+ */
+const toAddPrescript = function (params){
+    return new Promise((resolve, reject)=>{
+        _req({
+            url: '/prescription/addPrescription',
+            data: params,
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
+/**
  *获取处方笺列表
  *
  * @param {*} {memberId, addressID, headers}
@@ -463,6 +478,26 @@ const updateMemberInfo = function({memberID, memberName, sex, birthday, headers}
     });
 }
 
+/**
+ *更新头像
+ *
+ * @param {*} params
+ */
+const toUpdateImg = function ({form, headers}){
+    console.log(9595959, form)
+
+    return new Promise((resolve, reject)=>{
+        _req({
+            url: '/upLoadByMemberId',
+			data: form,
+            headers,
+            transformRequest: [function (data) {
+              return data
+            }],
+        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+    });
+}
+
 module.exports = {
     getMemberInfo,
     getFavorite,
@@ -486,4 +521,6 @@ module.exports = {
     toGetPrescript,
     toGetPrescriptDetail,
     updateMemberInfo,
+    toAddPrescript,
+    toUpdateImg,
 }
