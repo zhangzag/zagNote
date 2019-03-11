@@ -259,7 +259,7 @@ router.get(['/', '/index.html'], async (ctx, next) => {
 })
 
 //找药
-router.get('/findDrug.html', async (ctx, next)=>{
+router.get('/finddrug.html', async (ctx, next)=>{
   let drugList = '';
 
   await getALLDisease({

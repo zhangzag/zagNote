@@ -310,9 +310,10 @@ const getSelectArea = function({parentId}){
  * @param {*} {memberID, isDefault=0, countryID=1, districtID, city, county, address, mobile, telephone, phone, contactMan, addressID}
  * @returns
  */
-const addDelivery = function({memberID, isDefault=0, countryID=1, districtID, city, county, address, mobile, telephone, phone, contactMan, addressID}){
+const addDelivery = function({memberID, isDefault=0, countryID=1, districtID, city, county, address, mobile, telephone, phone, contactMan, addressID, headers}){
+    console.log('pppp:  ', memberID, isDefault, countryID, districtID, city, county, address, mobile, telephone, phone, contactMan, addressID, headers)
     return new Promise((resolve, reject)=>{
-        if(!memberId && memberId!=0 ){reject('没有用户参数')};
+        if(!memberID && memberID!=0 ){reject('没有用户参数')};
         _req({
             url: '/delivery/addDeliveryAddress',
             data: {
@@ -329,6 +330,7 @@ const addDelivery = function({memberID, isDefault=0, countryID=1, districtID, ci
                 contactMan,//联系人
                 addressID,//编辑地址ID 不是编辑时不传
             },
+            headers
         }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
     });
 }
@@ -483,20 +485,18 @@ const updateMemberInfo = function({memberID, memberName, sex, birthday, headers}
  *
  * @param {*} params
  */
-const toUpdateImg = function ({form, headers}){
-    console.log(9595959, form)
-
-    return new Promise((resolve, reject)=>{
-        _req({
-            url: '/upLoadByMemberId',
-			data: form,
-            headers,
-            transformRequest: [function (data) {
-              return data
-            }],
-        }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
-    });
-}
+// const toUpdateImg = function ({form, headers}){
+//     return new Promise((resolve, reject)=>{
+//         _req({
+//             url: '/upLoadByMemberId',
+// 			data: form,
+//             headers,
+//             transformRequest: [function (data) {
+//               return data
+//             }],
+//         }).then(res=>{resolve(res);}).catch(err=>{reject(err);});
+//     });
+// }
 
 module.exports = {
     getMemberInfo,
@@ -522,5 +522,5 @@ module.exports = {
     toGetPrescriptDetail,
     updateMemberInfo,
     toAddPrescript,
-    toUpdateImg,
+    // toUpdateImg,
 }

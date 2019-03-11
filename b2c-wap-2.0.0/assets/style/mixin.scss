@@ -1,0 +1,26 @@
+
+// 1像素边框
+@mixin border-bottom( $color: #f0f0f0, $deg: 180deg ) {
+    background-image:linear-gradient($deg, $color, $color 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+@mixin border-top( $color: #f0f0f0, $deg: 180deg ) {
+    background-image:linear-gradient($deg, $color, $color 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+@mixin border-left( $color: #f0f0f0, $deg: 90deg ) {
+    background-image:linear-gradient($deg, $color, $color 50%, transparent 50%);
+    background-size: 1px 100%;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+}
+@mixin border-right( $color: #f0f0f0, $deg: 90deg ) {
+    background-image:linear-gradient($deg, $color, $color 50%, transparent 50%);
+    background-size: 1px 100%;
+    background-repeat: no-repeat;
+    background-position: top right;
+}

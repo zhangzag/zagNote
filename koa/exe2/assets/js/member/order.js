@@ -13,7 +13,7 @@ $(function(){
 	var orderCodeOrProName = '';
 	// 1 待付款 、2 待发货、 3 待发货、4 已完成、5 已取消、 all 全部订单
 	var orderTypeStatus =  $.getQueryString('status') || 'all';
-
+	
 	//获取tab各状态数量
 	// getNumber( webRoot, memberId );
 
@@ -54,7 +54,7 @@ $(function(){
 	                    	}
 	                        // console.log("取消订单", $(this).parents('.item').find('.i_head span.fr em'));
 							//更新订单状态
-							getNumber( webRoot, memberId );
+							getNumber( memberId );
 	                    }
 	                    layer.msg( res.msg );
 	                })
@@ -106,7 +106,7 @@ $(function(){
 		            		thisItem.parents('.item').remove();
 		            	}
 						//更新订单状态
-						getNumber( webRoot, memberId );
+						getNumber( memberId );
 					}
 					  
 					layer.alert( res.msg , {btnAlign: 'c'});
@@ -426,7 +426,7 @@ $(function(){
 		// console.log('getList', recentDate, orderCodeOrProName)
 
 		//获取tab各状态数量
-		// getNumber( webRoot, memberId );
+		// getNumber( memberId );
 
 		//获取全部订单
 		if( orderType === 'all' ){
@@ -551,12 +551,12 @@ $(function(){
 			}, 300);
 		});
 	}
+	
 });
 
 
-
 //获取各状态订单数量
-function getNumber ( webRoot, memberId ){
+function getNumber ( memberId ){
 	$.ajax({
 	    // url: webRoot + '/order/getOrderCount',
 	    url: '/order/getOrderCount',
@@ -565,7 +565,7 @@ function getNumber ( webRoot, memberId ){
 	    },
 	})
 	.done(function(res) {
-	    // console.log('getOrderCount: ', res);
+	    console.log('getOrderCount: ', res);
 	    if (res.success) {
 	        var datas = res.data[0];
 	        //

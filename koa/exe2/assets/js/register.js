@@ -1,12 +1,14 @@
 $(function(){
-    var webRoot = $.getGlobalVal().webRoot;
+    // var webRoot = $.getGlobalVal().webRoot;
+    var ind = $('.picBtn>img').attr('src').indexOf('/sendCode');
+    var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
+
     $('.picBtn').click(function(){
        getPicCode()
     })
     // 图形验证码
     function getPicCode(){
-        var ind = $('.picBtn>img').attr('src').indexOf('/sendCode');
-        var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
+        // var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
         
         $('.picBtn').children('img').attr("src", webRoot + '/sendCode?n=' + Math.random());
     // }
@@ -77,7 +79,8 @@ $(function(){
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/sendMessage',
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/sendCodeMessage',
             // url: $.getGlobalVal().webRoot + '/sendCodeMessage',
-            url: '/sendCodeMessage',
+            // url: '/sendCodeMessage',
+            url: webRoot + '/sendCodeMessage',
             type: 'POST',
             dataType: 'json',
             xhrFields: {
@@ -161,6 +164,7 @@ $(function(){
         }
         $.ajax({
             // url: $.getGlobalVal().webRoot + '/vipRegisterInsert',
+            // url: '/vipRegisterInsert',
             url: '/vipRegisterInsert',
             // url: 'http://192.168.2.67:8082/AKGW-api/v1/vipRegisterInsert',
             type: 'POST',

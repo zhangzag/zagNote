@@ -1,13 +1,13 @@
 	
 $(function () {
-  var webRoot = $.getGlobalVal().webRoot;
+   var ind = $('.picBtn>img').attr('src').indexOf('/sendCode');
+   var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
+
+
   $('.picBtn').click(function(){
     getPicCode();
   })
   function getPicCode(){
-     var ind = $('.picBtn>img').attr('src').indexOf('/sendCode');
-     var webRoot = $('.picBtn>img').attr('src').substring(0, ind);
-
      // 获取图形码
     $('.picBtn img').attr("src", webRoot+'/sendCode?n=' + Math.random());
 //   }
@@ -136,7 +136,7 @@ $(function () {
          // console.log(mobile,picCode)
          $.ajax({
             // url: $.getGlobalVal().webRoot + '/verifyCode',
-            url: '/verifyCode',
+            url: webRoot + '/verifyCode',
             type: 'POST',
             dataType: 'json',
             data: {

@@ -31,7 +31,7 @@
 		<div class="con">
 			<!-- 左菜单 end -->
 			<div class="tabs">
-				<ul>
+				<ul data-u="{{renderData.myOrderCount}}">
 					<li class="num_all"><a href="javascript:void(0);">全部<span>({{ renderData.myOrderCount.all || 0 }})</span></a></li>
 					<li class="num_wait"><a href="javascript:void(0);">待付款<span>({{ renderData.myOrderCount.obligation || 0 }})</span></a></li>
 					<li class="num_wsend"><a href="javascript:void(0);">待发货<span>({{ renderData.myOrderCount.sendTheGoods || 0 }})</span></a></li>

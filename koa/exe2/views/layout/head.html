@@ -10,7 +10,7 @@
                 欢迎来到阿康大药房！
             </div>
             <div class="fl">
-                <span class="isunlogin notLogin"><a class="login_entry c_orange" href="/login.html">请登录</a><a href="/register.html">注册</a></span>
+                <span class="isunlogin notLogin"><a class="login_entry c_orange" href="/login.html" rel="nofollow">请登录</a><a href="/register.html" rel="nofollow">注册</a></span>
             </div>
             {{/if}}
 
@@ -26,11 +26,11 @@
                 </li>
                 <li class="spacer"></li>
                 <li class="item">
-                    <a class="reg" href="/member/order.html" title="我的订单">我的订单</a>
+                    <a class="reg" href="/member/order.html" rel="nofollow" title="我的订单">我的订单</a>
                 </li>
                 <li class="spacer transparent"></li>
                 <li class="item">
-                    <a href="/member/index.html" class="toPersonal" title="会员中心">个人中心</a>
+                    <a href="/member/index.html" class="toPersonal" rel="nofollow" title="会员中心">个人中心</a>
                 </li>
                 <li class="spacer transparent"></li>
                 <li class="item">
@@ -44,9 +44,9 @@
 
     <!-- 头部 -->
     <div class="header-mc">
-        <div class="logo">
-            <a href="http://www.ak1ak1.com/index.html" title="Logon" target="_blank"><img src="/images/logo.png" border="0"></a>
-        </div>
+        <h1 class="logo" id="logo">
+            <a href="/"><img src="/images/logo.png" title="阿康大药房" alt="买药品最正规的网站，经国家药监局批准的专业药房网,药品网购就到阿康大药房!" border="0"></a>
+        </h1>
         <div class="search">
             <div class="form putArea">
                 <form id="searchForm" action="javascript:;" method="get">
@@ -162,7 +162,7 @@
                                     <dl>
                                         <dt><a target="_blank" href="/products/list.html?productTypeOne=<%- item.productTypeID %>&productTypeTwo=<%- ChildItem.productTypeID %>"><%- ChildItem.productTypeName %></a></dt>
                                         <% ChildItem.products.forEach(function(ChildTwoItem, index){ %>
-                                                <dd><a target="_blank" href="/list.html?productName=<%- ChildTwoItem.productNumber %>"><%- ChildTwoItem.currentName %></a></dd>
+                                                <dd><a target="_blank" href="/products/<%- ChildTwoItem.productNumber %>.html"><%- ChildTwoItem.currentName %></a></dd>
                                         <% }); %>
                                     </dl>
                                 <% }); %>
@@ -192,7 +192,7 @@
                         <!-- <a target="_blank" href="http://192.168.2.254:8132/index.html">资讯</a> -->
                     </li>
                     <li>
-                        <a target="_self" href="/findDrug.html">找药</a>
+                        <a target="_self" href="/finddrug.html">找药</a>
                     </li>
                 </ul>
             </div>

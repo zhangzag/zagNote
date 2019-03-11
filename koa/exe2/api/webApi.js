@@ -8,8 +8,8 @@ const SHA256 = require('sha256')
 const { curDate } = require('../util/');
 const _reqs = require('./apiConfig.js');
 const { getProByProductNumber, getProList, getProById } = require('./product/');
-const { sendCodeMsg, vipRegister, verifyMapCode, verifyMsgCode } = require('./login/')
-const { getFavorite, getMyOrder, getMyOrderByStatus, cancelOrder, comfireGetOrder, getDeliveryInfo, getOrderDetail, cancelFavorite, cancelFavoriteByArr, getAddress, getSelectArea, addDelivery, toGetDeliveryAddress, toDelDeliveryAddress, setDefaultAddress, toGetPrescript, toGetPrescriptDetail, getMyRequire, getCodeImg, getMemberInfo, updateMemberInfo, toAddPrescript, toUpdateImg } = require('./member/')
+const { sendCodeMsg, vipRegister, verifyMapCode, verifyMsgCode, changeNewPwd } = require('./login/')
+const { getFavorite, getMyOrder, getMyOrderByStatus, cancelOrder, comfireGetOrder, getDeliveryInfo, getOrderDetail, cancelFavorite, cancelFavoriteByArr, getAddress, getSelectArea, addDelivery, toGetDeliveryAddress, toDelDeliveryAddress, setDefaultAddress, toGetPrescript, toGetPrescriptDetail, getMyRequire, getCodeImg, getMemberInfo, updateMemberInfo, toAddPrescript, getMyOrderCount } = require('./member/')
 const { toGetSingleCombo, toGetSingleComboDetail, toGetCombo, toGetComboDetail, toAddOrder, toAddPackageOrder, toGetCharge, toGetDiscount, toAddRequire, toDelRequire } = require('./product/')
 const { getHotSearc, getHotSearcDetail } = require('./header/');
 
@@ -242,7 +242,7 @@ router.post('/verifyMessage', async (ctx, next)=>{
     })
 })
 
-//找回密码 - 改密码 changeNewPwd
+//找回密码 - 改密码
 router.post('/changePassword', async (ctx, next)=>{
     let params = ctx.request.body;
     let telephone = params.telephone || '';
@@ -281,12 +281,12 @@ router.post('/order/getOrderCount', async (ctx, next)=>{
     }
 
     let shaMemberId = SHA256( memberId + 'akjk' );
-    await getMyOrder({memberId, headers: {'Authorization': shaMemberId}})
+    await getMyOrderCount({memberId, headers: {'Authorization': shaMemberId}})
     .then(res=>{
         ctx.body = res.data;
     })
     .catch(err=>{
-        console.log('获取我的订单出错了,', err)
+        console.log('获取我的订单统计出错了,', err)
         ctx.throw(err.response.status, err.response.data);
     })
 })
@@ -606,20 +606,22 @@ router.post('/selectArea', async (ctx, next)=>{
 //addDelivery
 router.post('/delivery/addDeliveryAddress', async (ctx, next)=>{
     let params = ctx.request.body;
-    let memberID = params.memberID;//会员id
-    let isDefault = params.isDefault; //是否默认地址
-    let countryID = 1; //国家编码, 默认中国
-    let districtID = params.districtID; //省、直辖市
-    let city = params.city; //市县
-    let county = params.county; //区、县
-    let address = params.address;//街道地址
-    let mobile = params.mobile;//移动电话
-    let telephone = params.tel; //固定电话
-    let phone = params.phone;
-    let contactMan = params.contactMan;//联系人
-    let addressID = params.addressID;//编辑地址ID 不是编辑时不传
+    let memberID = params.memberID || '';//会员id
+    let isDefault = params.isDefault || ''; //是否默认地址
+    let countryID = params.countryID || 1; //国家编码, 默认中国
+    let districtID = params.districtID || ''; //省、直辖市
+    let city = params.city || ''; //市县
+    let county = params.county || ''; //区、县
+    let address = params.address || '';//街道地址
+    let mobile = params.mobile || '';//移动电话
+    let telephone = params.telephone || ''; //固定电话
+    let phone = params.phone || '';
+    let contactMan = params.contactMan || '';//联系人
+    let addressID = params.addressID || '';//编辑地址ID 不是编辑时不传
 
-    if( !memberId ){
+    console.log('params:  ', params)
+
+    if( !memberID ){
         ctx.body = {
             success: false,
             msg: '未找到会员'
@@ -627,6 +629,7 @@ router.post('/delivery/addDeliveryAddress', async (ctx, next)=>{
         return;
     }
 
+    let shaMemberId = SHA256( memberID + 'akjk' );
     await addDelivery({
         memberID,//会员id
         isDefault, //是否默认地址
@@ -640,6 +643,7 @@ router.post('/delivery/addDeliveryAddress', async (ctx, next)=>{
         phone,
         contactMan,//联系人
         addressID,//编辑地址ID 不是编辑时不传
+        headers: {'Authorization': shaMemberId}
     })
     .then(res=>{
         ctx.body = res.data;
@@ -1177,76 +1181,8 @@ const path = require('path')
 const FileReader = require('filereader')
 
 //上传头像
-router.post('/upLoadByMemberId', async (ctx, next)=>{
-    let params = ctx.request.body;
-    let memberId = ctx.state.memberInfo.memberID || '';
-
-    // console.log('ctx:  ', ctx)
-    // console.log('ctx.request:  ', ctx.request)
-    console.log('params:  ', params)
-    // console.log('ctx.request.files:  ', ctx.request.files)
-    let curFile = ctx.request.files;
-    // params.file = file;
-    console.log(11111111, curFile)
-    console.log(222222, curFile.file)
-    let stringflyFile = JSON.stringify(curFile.file)
-    console.log(333333333, stringflyFile)
-    console.log(4444444, JSON.parse(stringflyFile))
-    // ctx.body = JSON.stringify(curFile.file)
-// return
-    // ctx.body = JSON.stringify(ctx.request.files.file)
+// router.post('/upLoadByMemberId', async (ctx, next)=>{
     
-    // let formData = new FormData();
-    // formData.append("memberID", params.memberID);
-    // formData.append("file", params.file);
-    // return
-    // const file = fs.createReadStream(JSON.stringify(ctx.request.files.file)) 
-    // console.log(99999, file)
-    
-    // 上传单个文件
-    const file = ctx.request.files.file; // 获取上传文件
-    // 创建可读流
-    // const reader = fs.createReadStream(file.path);
-    // let filePath = path.join(__dirname, '../public/upload/') + `/${file.name}`;
-    // // 创建可写流
-    // const upStream = fs.createWriteStream(filePath);
-    // // 可读流通过管道写入可写流
-    // reader.pipe(upStream);
-    // console.log('reader, reader, reader: ', reader)
-    // console.log('upStream, upStream, upStream: ', upStream)
-
-    var reader = new FileReader();
-    // var img = new Image
-    reader.readAsDataURL(file);
-    reader.on('data', function (data) {
-        console.log("chunkSize:", data);
-    });
-    // reader.addEventListener('load', async function (ev) {
-    //     console.log("dataUrlSize:", ev.target.result.split(',')[1]);
-
-        
-    // });
-
-    console.log(123321123133)
-
-    // console.log(15515151, img)
-
-    return
-    var form = new FormData();
-    form.append('memberID', params.memberID);
-    // form.append('file', file);
-    form.append('file', JSON.stringify(file));
-
-    // return
-    let shaMemberId = SHA256( memberId + 'akjk' );
-    await toUpdateImg({ form, headers: {'Authorization': shaMemberId, 'Content-Type': 'multipart/form-data'} })
-    .then(res=>{
-        ctx.body = res.data;
-    })
-    .catch(err=>{
-        console.log('上传头像出错了,', err)
-        ctx.throw(err.response.status, err.response.data);
-    })
-})
+// })
 
 module.exports = router

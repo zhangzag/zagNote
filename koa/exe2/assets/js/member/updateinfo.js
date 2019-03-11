@@ -83,12 +83,13 @@ $(function(){
 		event.preventDefault();
 		$('#upload_img_btn').trigger('click');
 	});
-	//
-	// var shaMemberId = CryptoJS.SHA256( memberId + 'akjk' ); 
+	
+	var baseUrl = $('#upload_img_btn').attr('data-u') || '';
+	var shaMemberId = CryptoJS.SHA256( memberId + 'akjk' ); 
 	//实例化一个plupload上传对象
     var uploader = new plupload.Uploader({
         browse_button : 'upload_img_btn', //触发文件选择对话框的按钮，为那个元素id
-        url : '/upLoadByMemberId', //服务器端的上传页面地址
+        url : baseUrl + '/upLoadByMemberId', //服务器端的上传页面地址
         multipart: true,//以multipart/form-data的形式来上传文件
         multi_selection: false,//是否可以在文件浏览对话框中选择多个文件
         // file_data_name: 'file',//指定文件上传时文件域的名称，默认为file
@@ -96,7 +97,7 @@ $(function(){
 			memberID: memberId,
         },
         headers:{
-			// 'Authorization': shaMemberId.toString(CryptoJS.enc.Base64),
+			'Authorization': shaMemberId.toString(CryptoJS.enc.Base64),
 		},
 		resize: {
 			// width: 120,

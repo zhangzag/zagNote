@@ -26,8 +26,8 @@
           <div class="focus">
               <div class="m-banner" style="height: 500px;">
                 <div class="banner_btns">
-                  <a href="javascript:void(0);" class="prev" id="turnL"></a>
-                  <a href="javascript:void(0);" class="next" id="turnR"></a>
+                  <a href="javascript:void(0);" class="prev" id="turnL" rel="nofollow"></a>
+                  <a href="javascript:void(0);" class="next" id="turnR" rel="nofollow"></a>
                 </div>
                 <ul id="roteAdv" class="m-b-con">
                   <% if(renderData.bannerDatas){ %>
@@ -64,8 +64,8 @@
 
       <!-- 切换按钮 -->
       <div class="feature_btns">
-          <div id="feature_prev"><img src="/images/ak_arr_l.png" alt=""></div>
-          <div id="feature_next"><img src="/images/ak_arr_r.png" alt=""></div>
+          <div id="feature_prev" rel="nofollow"><img src="/images/ak_arr_l.png"></div>
+          <div id="feature_next" rel="nofollow"><img src="/images/ak_arr_r.png"></div>
       </div>
       <!-- 切换按钮 end -->
     </div>
@@ -73,7 +73,7 @@
     
     <!-- 楼层广告 1 -->
     {{if renderData.floorBotAdv[0]}}
-      <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[0].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[0].advertisementPhoto}}" ></a></div>
+      <div class="floor_bot_adv"><a target="_blank" rel="nofollow" href="{{renderData.floorBotAdv[0].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[0].advertisementPhoto}}" ></a></div>
     {{/if}}
     <!-- 楼层广告 1 end -->
     
@@ -88,13 +88,13 @@
         <div class="f_con">
           <div class="floor_l">
             <div class="pro_lar">
-                <div class="fl"><h3><%- renderData.floorProducts1[0].productName %></h3><span><%- renderData.floorProducts1[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts1[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts1[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts1[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts1[0].productName %>" title="<%- renderData.floorProducts1[0].productName %>"></a></div>
+                <div class="fl"><p class="ptitle"><%- renderData.floorProducts1[0].productName %></p><span><%- renderData.floorProducts1[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts1[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts1[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts1[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts1[0].productName %>" title="<%- renderData.floorProducts1[0].productName %>"></a></div>
             </div>
             <div class="pro_lar_bots">
               <% if(renderData.floorProducts1[1]){ %>
                 <% for(let i=1;i<3;i++){ %>
                   <% if(renderData.floorProducts1[i]){ %>
-                    <div class="fl"><h3><%- renderData.floorProducts1[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts1[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts1[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts1[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts1[i].productName %>" title="<%- renderData.floorProducts1[i].productName %>"></a></div></div>
+                    <div class="fl"><p class="ptitle"><%- renderData.floorProducts1[i].productName %></p><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts1[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts1[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts1[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts1[i].productName %>" title="<%- renderData.floorProducts1[i].productName %>"></a></div></div>
                   <% } %>
                 <% } %>
               <% } %>
@@ -105,7 +105,7 @@
             <% if(renderData.floorProducts1[3]){ %>
               <% for(let i=3;i<6;i++){ %>
                 <% if(renderData.floorProducts1[i]){ %>
-                  <div class="l_item"><h3><%- renderData.floorProducts1[i].productName %></h3><a target="_blank" href="/products/<%- renderData.floorProducts1[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts1[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts1[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts1[i].productName %>" title="<%- renderData.floorProducts1[i].productName %>"></span><span class="clear"></span></a></div>
+                  <div class="l_item"><p class="ptitle"><%- renderData.floorProducts1[i].productName %></p><a target="_blank" href="/products/<%- renderData.floorProducts1[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts1[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts1[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts1[i].productName %>" title="<%- renderData.floorProducts1[i].productName %>"></span><span class="clear"></span></a></div>
                 <% } %>
               <% } %>
             <% } %>
@@ -137,7 +137,7 @@
       <!-- 楼层1 end -->
       <!-- 楼层广告 1 -->
       {{if renderData.floorBotAdv[1]}}
-        <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[1].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[1].advertisementPhoto}}" ></a></div>
+        <div class="floor_bot_adv"><a rel="nofollow" target="_blank" href="{{renderData.floorBotAdv[1].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[1].advertisementPhoto}}" ></a></div>
       {{/if}}
       <!-- 楼层广告 1 end -->
     <% } %>
@@ -153,13 +153,13 @@
         <div class="f_con">
           <div class="floor_l">
             <div class="pro_lar">
-                <div class="fl"><h3><%- renderData.floorProducts2[0].productName %></h3><span><%- renderData.floorProducts2[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts2[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts2[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts2[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts2[0].productName %>" title="<%- renderData.floorProducts2[0].productName %>"></a></div>
+                <div class="fl"><p class="ptitle"><%- renderData.floorProducts2[0].productName %></p><span><%- renderData.floorProducts2[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts2[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts2[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts2[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts2[0].productName %>" title="<%- renderData.floorProducts2[0].productName %>"></a></div>
             </div>
             <div class="pro_lar_bots">
               <% if(renderData.floorProducts2[1]){ %>
                 <% for(let i=1;i<3;i++){ %>
                   <% if(renderData.floorProducts2[i]){ %>
-                    <div class="fl"><h3><%- renderData.floorProducts2[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts2[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts2[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts2[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts2[i].productName %>" title="<%- renderData.floorProducts2[i].productName %>"></a></div></div>
+                    <div class="fl"><p class="ptitle"><%- renderData.floorProducts2[i].productName %></p><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts2[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts2[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts2[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts2[i].productName %>" title="<%- renderData.floorProducts2[i].productName %>"></a></div></div>
                   <% } %>
                 <% } %>
               <% } %>
@@ -170,7 +170,7 @@
             <% if(renderData.floorProducts2[3]){ %>
               <% for(let i=3;i<6;i++){ %>
                 <% if(renderData.floorProducts2[i]){ %>
-                  <div class="l_item"><h3><%- renderData.floorProducts2[i].productName %></h3><a target="_blank" href="/products/<%- renderData.floorProducts2[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts2[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts2[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts2[i].productName %>" title="<%- renderData.floorProducts2[i].productName %>"></span><span class="clear"></span></a></div>
+                  <div class="l_item"><p class="ptitle"><%- renderData.floorProducts2[i].productName %></p><a target="_blank" href="/products/<%- renderData.floorProducts2[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts2[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts2[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts2[i].productName %>" title="<%- renderData.floorProducts2[i].productName %>"></span><span class="clear"></span></a></div>
                 <% } %>
               <% } %>
             <% } %>
@@ -202,7 +202,7 @@
       <!-- 楼层2 end -->
       <!-- 楼层广告 2 -->
       {{if renderData.floorBotAdv[2]}}
-        <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[2].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[2].advertisementPhoto}}" ></a></div>
+        <div class="floor_bot_adv"><a rel="nofollow" target="_blank" href="{{renderData.floorBotAdv[2].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[2].advertisementPhoto}}" ></a></div>
       {{/if}}
       <!-- 楼层广告 2 end -->
     <% } %>
@@ -218,13 +218,13 @@
         <div class="f_con">
           <div class="floor_l">
             <div class="pro_lar">
-                <div class="fl"><h3><%- renderData.floorProducts3[0].productName %></h3><span><%- renderData.floorProducts3[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts3[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts3[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts3[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts3[0].productName %>" title="<%- renderData.floorProducts3[0].productName %>"></a></div>
+                <div class="fl"><p class="ptitle"><%- renderData.floorProducts3[0].productName %></p><span><%- renderData.floorProducts3[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts3[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts3[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts3[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts3[0].productName %>" title="<%- renderData.floorProducts3[0].productName %>"></a></div>
             </div>
             <div class="pro_lar_bots">
               <% if(renderData.floorProducts3[1]){ %>
                 <% for(let i=1;i<3;i++){ %>
                   <% if(renderData.floorProducts3[i]){ %>
-                    <div class="fl"><h3><%- renderData.floorProducts3[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts3[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts3[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts3[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts3[i].productName %>" title="<%- renderData.floorProducts3[i].productName %>"></a></div></div>
+                    <div class="fl"><p class="ptitle"><%- renderData.floorProducts3[i].productName %></p><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts3[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts3[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts3[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts3[i].productName %>" title="<%- renderData.floorProducts3[i].productName %>"></a></div></div>
                   <% } %>
                 <% } %>
               <% } %>
@@ -235,7 +235,7 @@
             <% if(renderData.floorProducts3[3]){ %>
               <% for(let i=3;i<6;i++){ %>
                 <% if(renderData.floorProducts3[i]){ %>
-                  <div class="l_item"><h3><%- renderData.floorProducts3[i].productName %></h3><a target="_blank" href="/products/<%- renderData.floorProducts3[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts3[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts3[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts3[i].productName %>" title="<%- renderData.floorProducts3[i].productName %>"></span><span class="clear"></span></a></div>
+                  <div class="l_item"><p class="ptitle"><%- renderData.floorProducts3[i].productName %></p><a target="_blank" href="/products/<%- renderData.floorProducts3[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts3[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts3[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts3[i].productName %>" title="<%- renderData.floorProducts3[i].productName %>"></span><span class="clear"></span></a></div>
                 <% } %>
               <% } %>
             <% } %>
@@ -267,7 +267,7 @@
       <!-- 楼层2 end -->
       <!-- 楼层广告 2 -->
       {{if renderData.floorBotAdv[3]}}
-        <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[3].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[3].advertisementPhoto}}" ></a></div>
+        <div class="floor_bot_adv"><a rel="nofollow" target="_blank" href="{{renderData.floorBotAdv[3].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[3].advertisementPhoto}}" ></a></div>
       {{/if}}
       <!-- 楼层广告 3 end -->
     <% } %>
@@ -283,13 +283,13 @@
         <div class="f_con">
           <div class="floor_l">
             <div class="pro_lar">
-                <div class="fl"><h3><%- renderData.floorProducts4[0].productName %></h3><span><%- renderData.floorProducts4[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts4[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts4[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts4[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts4[0].productName %>" title="<%- renderData.floorProducts4[0].productName %>"></a></div>
+                <div class="fl"><p class="ptitle"><%- renderData.floorProducts4[0].productName %></p><span><%- renderData.floorProducts4[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts4[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts4[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts4[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts4[0].productName %>" title="<%- renderData.floorProducts4[0].productName %>"></a></div>
             </div>
             <div class="pro_lar_bots">
               <% if(renderData.floorProducts4[1]){ %>
                 <% for(let i=1;i<3;i++){ %>
                   <% if(renderData.floorProducts4[i]){ %>
-                    <div class="fl"><h3><%- renderData.floorProducts4[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts4[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts4[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts4[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts4[i].productName %>" title="<%- renderData.floorProducts4[i].productName %>"></a></div></div>
+                    <div class="fl"><p class="ptitle"><%- renderData.floorProducts4[i].productName %></p><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts4[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts4[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts4[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts4[i].productName %>" title="<%- renderData.floorProducts4[i].productName %>"></a></div></div>
                   <% } %>
                 <% } %>
               <% } %>
@@ -300,7 +300,7 @@
             <% if(renderData.floorProducts4[3]){ %>
               <% for(let i=3;i<6;i++){ %>
                 <% if(renderData.floorProducts4[i]){ %>
-                  <div class="l_item"><h3><%- renderData.floorProducts4[i].productName %></h3><a target="_blank" href="/products/<%- renderData.floorProducts4[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts4[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts4[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts4[i].productName %>" title="<%- renderData.floorProducts4[i].productName %>"></span><span class="clear"></span></a></div>
+                  <div class="l_item"><p class="ptitle"><%- renderData.floorProducts4[i].productName %></p><a target="_blank" href="/products/<%- renderData.floorProducts4[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts4[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts4[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts4[i].productName %>" title="<%- renderData.floorProducts4[i].productName %>"></span><span class="clear"></span></a></div>
                 <% } %>
               <% } %>
             <% } %>
@@ -332,7 +332,7 @@
       <!-- 楼层4 end -->
       <!-- 楼层广告 4 -->
       {{if renderData.floorBotAdv[4]}}
-        <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[4].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[4].advertisementPhoto}}" ></a></div>
+        <div class="floor_bot_adv"><a rel="nofollow" target="_blank" href="{{renderData.floorBotAdv[4].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[4].advertisementPhoto}}" ></a></div>
       {{/if}}
       <!-- 楼层广告 4 end -->
     <% } %>
@@ -348,13 +348,13 @@
         <div class="f_con">
           <div class="floor_l">
             <div class="pro_lar">
-                <div class="fl"><h3><%- renderData.floorProducts5[0].productName %></h3><span><%- renderData.floorProducts5[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts5[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts5[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts5[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts5[0].productName %>" title="<%- renderData.floorProducts5[0].productName %>"></a></div>
+                <div class="fl"><p class="ptitle"><%- renderData.floorProducts5[0].productName %></p><span><%- renderData.floorProducts5[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts5[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts5[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts5[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts5[0].productName %>" title="<%- renderData.floorProducts5[0].productName %>"></a></div>
             </div>
             <div class="pro_lar_bots">
               <% if(renderData.floorProducts5[1]){ %>
                 <% for(let i=1;i<3;i++){ %>
                   <% if(renderData.floorProducts5[i]){ %>
-                    <div class="fl"><h3><%- renderData.floorProducts5[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts5[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts5[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts5[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts5[i].productName %>" title="<%- renderData.floorProducts5[i].productName %>"></a></div></div>
+                    <div class="fl"><p class="ptitle"><%- renderData.floorProducts5[i].productName %></p><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts5[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts5[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts5[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts5[i].productName %>" title="<%- renderData.floorProducts5[i].productName %>"></a></div></div>
                   <% } %>
                 <% } %>
               <% } %>
@@ -365,7 +365,7 @@
             <% if(renderData.floorProducts5[3]){ %>
               <% for(let i=3;i<6;i++){ %>
                 <% if(renderData.floorProducts5[i]){ %>
-                  <div class="l_item"><h3><%- renderData.floorProducts5[i].productName %></h3><a target="_blank" href="/products/<%- renderData.floorProducts5[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts5[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts5[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts5[i].productName %>" title="<%- renderData.floorProducts5[i].productName %>"></span><span class="clear"></span></a></div>
+                  <div class="l_item"><p class="ptitle"><%- renderData.floorProducts5[i].productName %></p><a target="_blank" href="/products/<%- renderData.floorProducts5[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts5[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts5[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts5[i].productName %>" title="<%- renderData.floorProducts5[i].productName %>"></span><span class="clear"></span></a></div>
                 <% } %>
               <% } %>
             <% } %>
@@ -397,7 +397,7 @@
       <!-- 楼层5 end -->
       <!-- 楼层广告 5 -->
       {{if renderData.floorBotAdv[5]}}
-        <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[5].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[5].advertisementPhoto}}" ></a></div>
+        <div class="floor_bot_adv"><a rel="nofollow" target="_blank" href="{{renderData.floorBotAdv[5].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[5].advertisementPhoto}}" ></a></div>
       {{/if}}
       <!-- 楼层广告 5 end -->
     <% } %>
@@ -413,13 +413,13 @@
         <div class="f_con">
           <div class="floor_l">
             <div class="pro_lar">
-                <div class="fl"><h3><%- renderData.floorProducts6[0].productName %></h3><span><%- renderData.floorProducts6[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts6[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts6[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts6[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts6[0].productName %>" title="<%- renderData.floorProducts6[0].productName %>"></a></div>
+                <div class="fl"><p class="ptitle"><%- renderData.floorProducts6[0].productName %></p><span><%- renderData.floorProducts6[0].sellingPoint || '' %></span><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts6[0].ourPrice) %></p></div><div class="fr"><a target="_blank" href="/products/<%- renderData.floorProducts6[0].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts6[0].productPhotos) %>?240*240" alt="<%- renderData.floorProducts6[0].productName %>" title="<%- renderData.floorProducts6[0].productName %>"></a></div>
             </div>
             <div class="pro_lar_bots">
               <% if(renderData.floorProducts6[1]){ %>
                 <% for(let i=1;i<3;i++){ %>
                   <% if(renderData.floorProducts6[i]){ %>
-                    <div class="fl"><h3><%- renderData.floorProducts6[i].productName %></h3><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts6[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts6[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts6[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts6[i].productName %>" title="<%- renderData.floorProducts6[i].productName %>"></a></div></div>
+                    <div class="fl"><p class="ptitle"><%- renderData.floorProducts6[i].productName %></p><p class="c_orange"><%- $imports.filterPrice(renderData.floorProducts6[i].ourPrice) %></p><div><a target="_blank" href="/products/<%- renderData.floorProducts6[i].productNumber %>.html"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts6[i].productPhotos) %>?160*160" alt="<%- renderData.floorProducts6[i].productName %>" title="<%- renderData.floorProducts6[i].productName %>"></a></div></div>
                   <% } %>
                 <% } %>
               <% } %>
@@ -430,7 +430,7 @@
             <% if(renderData.floorProducts6[3]){ %>
               <% for(let i=3;i<6;i++){ %>
                 <% if(renderData.floorProducts6[i]){ %>
-                  <div class="l_item"><h3><%- renderData.floorProducts6[i].productName %></h3><a target="_blank" href="/products/<%- renderData.floorProducts6[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts6[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts6[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts6[i].productName %>" title="<%- renderData.floorProducts6[i].productName %>"></span><span class="clear"></span></a></div>
+                  <div class="l_item"><p class="ptitle"><%- renderData.floorProducts6[i].productName %></p><a target="_blank" href="/products/<%- renderData.floorProducts6[i].productNumber %>.html"><span class="fl c_orange"><%- $imports.filterPrice(renderData.floorProducts6[i].ourPrice) %></span><span class="fr"><img class="lazy" data-original="<%- $imports.filterFirstPhoto(renderData.floorProducts6[i].productPhotos) %>?120*120" alt="<%- renderData.floorProducts6[i].productName %>" title="<%- renderData.floorProducts6[i].productName %>"></span><span class="clear"></span></a></div>
                 <% } %>
               <% } %>
             <% } %>
@@ -462,13 +462,32 @@
       <!-- 楼层5 end -->
       <!-- 楼层广告 6 -->
       {{if renderData.floorBotAdv[6]}}
-        <div class="floor_bot_adv"><a target="_blank" href="{{renderData.floorBotAdv[6].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[6].advertisementPhoto}}" ></a></div>
+        <div class="floor_bot_adv"><a rel="nofollow" target="_blank" href="{{renderData.floorBotAdv[6].advertisementUrl}}"><img class="lazy" data-original="{{renderData.floorBotAdv[6].advertisementPhoto}}" ></a></div>
       {{/if}}
       <!-- 楼层广告 6 end -->
     <% } %>
 
+    
+    <!-- 聊天窗口 -->
+    <div class="chatLayer">
+      <a href="javascript:void(0);" id="tqchat1" rel="nofollow">
+        <img src="/images/chat-img.png" alt="咨询客服">
+      </a>
+    </div>
+    <!-- 聊天窗口 end -->
+
     <!-- 底部 -->
     <% include('../layout/footer.html') %>
     <!-- 底部 end -->
+
+    <!-- TQ统计 -->
+    <script language="JavaScript" src=http://float2006.tq.cn/floatcard?adminid=9815275&sort=3 ></script>
+    <!--以下为配合超链接指定的id可接入会话的代码-->
+    <script language="JavaScript">
+    TQ_RQF = 6;//坐席图标形式（固定格式，无需更改）
+    TQ_RQC = 2;//直接请求会话（固定格式，无需更改）
+    TQKF.Binding("tqchat1","acd","","123");//排队打开会话页面或留言页面，根据在线状态来定（"tqchat1"为超链接指定的id名，"acd"为策略组打开的方式，""为固定格式，不能去掉；"520"为指定的TQ后台设置的策略组编号）
+    </script>
+    <!-- TQ统计 end -->
   </body>
 </html>

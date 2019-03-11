@@ -58,21 +58,6 @@
 				<div class="inlie_block">
 					<span class="in_title">生日:</span>
 					<span class="birth_select">
-						<!-- <select name="" id="">
-							<option value="1">2008</option>
-							<option value="1">2002</option>
-						</select>
-						<span>年</span>
-						<select name="" id="">
-							<option value="1">05</option>
-							<option value="1">06</option>
-						</select>
-						<span>月</span>
-						<select name="" id="">
-							<option value="1">22</option>
-							<option value="1">23</option>
-						</select>
-						<span>日</span> -->
 						<input type="text" class="layui-input" id="birInput">
 					</span>
 				</div>
@@ -80,10 +65,8 @@
 			</div>
 			<div class="info_right fr">
 				<div class="ir_upImg">
-					<!-- <img src="/static/images/myImg.png" alt=""> -->
-					<!-- <img class="lazy" data-original=""> -->
 					<div class="img"></div>
-					<input id="upload_img_btn" type="file" name="file">
+					<input id="upload_img_btn" type="file" name="file" data-u="{{renderData.curWebRoot}}">
 				</div>
 				<span>编辑头像</span>
 				<p><em class="c_orange">提示：</em>请上传不超过1M且为jpg、jpeg、png格式的图像。</p>

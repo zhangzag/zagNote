@@ -1,9 +1,9 @@
 $(function(){
     //请求地址
     // var webRoot = 'http://113.108.163.210:9999/AKGW-api/v1';
-    var webRoot = $.getGlobalVal().webRoot;
+    // var webRoot = $.getGlobalVal().webRoot;
     //源地址
-    var webOrigin = $.getGlobalVal().webOrigin;
+    // var webOrigin = $.getGlobalVal().webOrigin;
     //当前时间
     var curDate = $.getGlobalVal().curDate;
     //会员Id
@@ -203,7 +203,7 @@ $(function(){
 			gtag('event', '搜索', {
 			  'event_category' : '搜索词：' + val
 			});
-			window.location.href = '/product/list.html?productName='+ encodeURI(val);
+			window.location.href = '/products/list.html?productName='+ encodeURI(val);
 
 			var searchList = $.cookie('aksearchlis')?JSON.parse( $.cookie('aksearchlis')):[];
 			var listLength = searchList.length || 0;

@@ -454,7 +454,7 @@
     left: 190px;
     width: 44px;
     height: 60px;
-    background-image: url('/static/images/icons_index.png');
+    background-image: url('/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -176px;
     z-index: 4;
@@ -467,7 +467,7 @@
     width: 44px;
     height: 60px;
     z-index: 4;
-    background-image: url('/static/images/icons_index.png');
+    background-image: url('/images/icons_index.png');
     background-repeat: no-repeat;
     background-position: -8px -316px;
     transition: background 0ms, opacity 120ms;
@@ -1652,7 +1652,7 @@
     padding-right: 40px;
 }
 
-.pro_lar .fl>h3 {
+.pro_lar .fl>.ptitle {
     font-size: 16px;
     color: #646464;
     line-height: 20px;
@@ -1699,7 +1699,7 @@
     border-right: 1px solid #e8e8e8;
 }
 
-.pro_lar_bots>div>h3 {
+.pro_lar_bots>div>.ptitle {
     color: #646464;
     font-size: 16px;
     overflow: hidden;
@@ -1758,7 +1758,7 @@
     border-bottom: 1px solid #fff;
 }
 
-.floor_lc .l_item>h3 {
+.floor_lc .l_item>.ptitle {
     color: #646464;
     font-size: 16px;
     overflow: hidden;

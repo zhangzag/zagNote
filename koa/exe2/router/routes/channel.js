@@ -250,7 +250,7 @@ router.get('/man.html', async (ctx, next)=>{
 });
 
 //冷链频道
-router.get('/coldChain.html', async (ctx, next)=>{
+router.get('/coldchain.html', async (ctx, next)=>{
   let bannerDatas = '', proRecomDatas = '', floorNames = '', floorAdvs = '';
 
   await axiosAll([ getAdvRecom({pageNo: 'pc_coldChain_banner'}), getAdvRecom({pageNo: 'pc_coldChain_flName'}), getAdvRecom({pageNo: 'pc_coldChain_flBanner'}), getProRecom({pageNo: 'pc_coldChain_flProduct'}) ])

@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const {_req} = require('../../api/apiConfig.js');
+const {_req, curWebRoot} = require('../../api/apiConfig.js');
 const axiosAll = _req.axiosAll;
 const SHA256 = require('sha256')
 const { getFavorite, getMyRequire, getMyPrescript, getMyOrderCount, getMyOrder } = require('../../api/member/')
@@ -79,6 +79,7 @@ router.get('/updateinfo.html', async (ctx, next)=>{
       memberInfo: ctx.state.memberInfo || '',//会员信息
       cateList: ctx.state.cateList || '',//分类列表数据
       curList: 1,//当前所在位置 对应左边导航条的行位置 1 - 个人资料
+      curWebRoot, //baseUrl
     },
   })
 })
@@ -86,7 +87,6 @@ router.get('/updateinfo.html', async (ctx, next)=>{
 //我的订单统计
 router.get('/order.html', async (ctx, next)=>{
   let shaMemberId = SHA256( ctx.state.memberInfo.memberID + 'akjk' );
-  console.log('有没我的订单: ', myOrderCount)
 
   if(!myOrderCount){
     await getMyOrderCount({memberId: ctx.state.memberInfo.memberID, headers: {'Authorization': shaMemberId}})

@@ -126,7 +126,8 @@ const changeNewPwd = function ({telephone, randomCodeTwo, password}){
         if(!password ){reject('请输入新密码')};
 
         _req({
-            url: '/verifyMessage',
+            // url: '/verifyMessage',
+            url: '/changePassword',
             data: {
                 telephone, //电话号码
                 randomCodeTwo,
