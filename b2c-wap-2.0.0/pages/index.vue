@@ -13,33 +13,38 @@
 <script>
 import { mapState } from 'vuex'
 import banners from '@/components/index/banners'
+import { curDate } from '~~/utils/utils.js'
 
 export default {
-  asyncData ({ app, params }){
-    return app.$axios({
-        url: '/product/getProductList',
-        method: 'post',
-        data: {
-            page: 1,
-            limit: 20,
-            sysNo: 'wap'
-        }
-    })
-    .then(res=>{
-      // console.log(321, res.data)
-      let asyncList = [];
-      for(let val of res.data){
-        asyncList.push(val)
+  async asyncData ({app, params}){
+    let banners = '';
+
+    await app.$axios({
+      url: '/seachAd',
+      method: 'post',
+      data: {
+        endDate: curDate,
+        pageNo: 'wapBanners',
+        isValid: 1
       }
-      return { asyncList }
     })
-    .catch(err=>{console.log(321,err)});
+      .then(res=>{
+        console.log('banners: ', res.data)
+      })
+      .catch(err=>{
+        console.log('获取banners出错了,', err)
+      });
+
+    return {
+      banners: banners,
+    }
   },
   data (){
     return {
+      banners: '',
       list: [],
       asyncList: [],
-      title: '云药库-首页'
+      title: '阿康大药房'
     }
   },
   head (){
@@ -64,19 +69,19 @@ export default {
   mounted(){
     let a = 111;
     this.$Toast('提示信息');
-    // this.$axios({
-    //     url: '/product/getProductList',
-    //     method: 'post',
-    //     data: {
-    //         page: 1,
-    //         limit: 20,
-    //         sysNo: 'wap'
-    //     }
-    // })
-    // .then(res=>{
-    //   console.log(321, res)
-    // })
-    // .catch(err=>{console.log(321,err)});
+    this.$axios({
+        url: '/product/getProductList',
+        method: 'post',
+        data: {
+            page: 1,
+            limit: 20,
+            sysNo: 'wap'
+        }
+    })
+    .then(res=>{
+      console.log(321, res)
+    })
+    .catch(err=>{console.log(321,err)});
     
     // getPro({})
     // .then(res=>{
@@ -88,6 +93,22 @@ export default {
     // .catch(err=>{
     //   console.log('出错了', err)
     // })
+
+    this.$axios({
+      url: '/seachAd',
+      method: 'post',
+      data: {
+        endDate: curDate,
+        pageNo: 'wapBanners',
+        isValid: 1
+      }
+    })
+      .then(res=>{
+        console.log('banners: ', res.data)
+      })
+      .catch(err=>{
+        console.log('获取banners出错了,', err)
+      });
   },
 }
 </script>

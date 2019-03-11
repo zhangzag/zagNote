@@ -1,4 +1,4 @@
-import utils from '~/utils/utils'
+import { getcookiesInServer, getcookiesInClient } from '~~/utils/utils'
 
 export default function ({route, req, res, redirect}) {
   let isClient = process.client;
@@ -8,7 +8,7 @@ export default function ({route, req, res, redirect}) {
 
   //在服务端
   if (isServer) {
-    let cookies = utils.getcookiesInServer(req)
+    let cookies = getcookiesInServer(req)
     path = req.originalUrl;
     // token = cookies.token ? cookies.token : ''
     token = cookies.memberId ? cookies.memberId : ''
@@ -17,7 +17,7 @@ export default function ({route, req, res, redirect}) {
   //在客户端判读是否需要登陆
   if (isClient) {
     // token = utils.getcookiesInClient('token')
-    memberId = utils.getcookiesInClient('memberId')
+    memberId = getcookiesInClient('memberId')
     path = route.path;
     console.log('isClient: ', memberId, path, req)
   }

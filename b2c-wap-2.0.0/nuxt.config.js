@@ -3,6 +3,7 @@ const Qs = require('qs')
 const processEnv = process.env;
 require("babel-core").transform("code");
 
+console.log('processEnv.NODE_ENV: ', processEnv.NODE_ENV)
 let curBaseUrl = '';
 switch( processEnv.NODE_ENV ){
   case 'proxy':
@@ -20,6 +21,7 @@ switch( processEnv.NODE_ENV ){
   default: 
   curBaseUrl = 'http://192.168.2.254:8080/AKGW-api/v1';
 }
+console.log('curBaseUrl: ', curBaseUrl)
 
 module.exports = {
   mode: 'universal',
@@ -123,6 +125,33 @@ module.exports = {
   ],
 
   /*
+  ** Axios module configuration
+  */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: curBaseUrl || '',
+    method: 'post',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    transformRequest: [function(data){
+      data = Qs.stringify(data)
+      return data
+    }],
+    timeout: 1000000,
+    withCredentials: true,
+    // prefix: '/api/',
+    // baseURL: processEnv.NODE_ENV === 'development'?'/dapi' : 'http://localhost:3000/te/',
+    // prefix: '/dapi',
+    proxy: processEnv.NODE_ENV=='proxy'? true : false,
+  },
+  proxy: {
+    // '/dapi': {
+    //   target: 'http://113.108.163.210:9999',
+    //   pathRewrite: {'^/dapi': '/AKGW-api/v1'}
+    // },
+    '/dapi': { target: 'http://113.108.163.210:9999', pathRewrite: {'^/dapi': '/AKGW-api/v1'} }
+  },
+
+  /*
   ** Plugins to load before mounting the App
   * 每次你需要使用 Vue.use() 时，你需要在 plugins/ 目录下创建相应的插件文件，并在 nuxt.config.js 中的 plugins 配置项中配置插件的路径。
   */
@@ -174,31 +203,6 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios'
   ],
-  /*
-  ** Axios module configuration
-  */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-    method: 'post',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    transformRequest: [function(data){
-      data = Qs.stringify(data)
-      return data
-    }],
-    timeout: 1000000,
-    withCredentials: true,
-    // prefix: '/api/',
-    // baseURL: processEnv.NODE_ENV === 'development'?'/dapi' : 'http://localhost:3000/te/',
-    prefix: '/dapi',
-    proxy: true,
-  },
-  proxy: {
-    // '/dapi': {
-    //   target: 'http://113.108.163.210:9999', 
-    //   pathRewrite: {'^/dapi': '/AKGW-api/v1'}
-    // },
-    '/dapi': { target: 'http://113.108.163.210:9999', pathRewrite: {'^/dapi': '/AKGW-api/v1'} }
-  },
 
   /*
   ** Build configuration
