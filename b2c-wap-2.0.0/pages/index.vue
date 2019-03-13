@@ -88,47 +88,119 @@
     <!-- 导航列表 end -->
 
     <!-- 资讯 -->
-    <news-block></news-block>
+    <news-block :artLists="artLists"></news-block>
     <!-- 资讯 end -->
+
+    <!-- 阿康推荐 -->
+    <floor-ak :akRecommend="akProDetails"></floor-ak>
+    <!-- 阿康推荐 end -->
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { searchAdvs, searchSt, getStDetail } from '@/api/recommend/'
+import { getArtById } from '@/api/article/'
+import { getProductByProductNumber } from '@/api/product/'
 import banners from '@/components/index/banners'
 import newsBlock from '@/components/index/news'
+import floorAk from '@/components/index/floorAk'
 import { curDate } from '~~/utils/utils.js'
 
 export default {
   async asyncData ({app, params}){
-    let banners = '';
+    let banners = '', artLists = [];
+    let akStFloor = [];//阿康商品推荐楼层
+    let akStList = [];//阿康推荐商品列表
+    let akProDetails = [];//商品推荐-商品列表详细
 
-    await app.$axios({
-      url: '/seachAd',
-      method: 'post',
-      data: {
-        endDate: curDate,
-        pageNo: 'wapBanners',
-        isValid: 1
-      }
-    })
+    await Promise.all([
+      searchAdvs({app, data: {
+          endDate: curDate,
+          pageNo: 'wapBanners',
+          isValid: 1
+        }}),
+      getArtById({app, data: {
+        parentTypeID: 21,
+        page: 1,
+        limit: 5}}),
+      searchSt({app, data: {
+          endDate: curDate,
+          pageNo: 'akRecommend',
+          isValid: 1
+        }}),
+    ])
       .then(res=>{
-        // console.log('banners: ', res.data)
-        if(res.data && res.data.length>0){
-          banners = res.data;
+        // console.log(111222, res[2])
+        //banner
+        if(res[0].data && res[0].data.length>0){
+          banners = res[0].data;
+        }else{console.log('banner模块无数据')}
+
+        //文章
+        if( res[1].code == 0 && res[1].data.length>0 ){
+          for(let val of res[1].data){
+            artLists.push(val);
+          }
+        }else{
+          console.log('文章模块无数据');
+        }
+
+        if( res[2].success && res[2].data.length>0 ){
+          for( let val of res[2].data ){
+            akStFloor.push(val);
+          }
         }
       })
       .catch(err=>{
-        console.log('获取banners出错了,', err)
+        console.log('首页获取错误了, ', err)
       });
 
+    await Promise.all([
+      getStDetail({app, data: !akStFloor[0]?'':{
+          endDate: curDate,
+          showID: akStFloor[0].showID,
+          isValid: 1
+        }}),
+    ])
+      .then(res=>{
+        // console.log(222, res)
+        if( res[0] && res[0].success && res[0].data.length>0 ){
+          for( let val of res[0].data ){
+            akStList.push(val.productID);
+          }
+        }
+      })
+      .catch(err=>{
+        console.log('首页获取错误了-层2， ', err)
+      })
+
+    await Promise.all([
+      getProductByProductNumber({app, data: {
+          productNumbers: akStList,
+        }}),
+    ])
+      .then(res=>{
+        // console.log(333, res)
+        if(res[0].success && res[0].data.length>0){
+          for(let val of res[0].data){
+            akProDetails.push(val)
+          }
+        }
+      })
+      .catch(err=>{
+        console.log('首页获取错误了-层3， ', err)
+      })
+
     return {
-      banners: banners,
+      banners,artLists,akProDetails,
     }
   },
   data (){
     return {
-      banners: '',
+      banners: [],
+      artLists: [],
+      akProDetails: [],
       list: [],
       asyncList: [],
       title: '阿康大药房'
@@ -143,7 +215,7 @@ export default {
     }
   },
   components: {
-    banners,newsBlock,
+    banners,newsBlock,floorAk,
   },
   computed: {
       ...mapState({
@@ -156,6 +228,17 @@ export default {
   mounted(){
     let a = 111;
     this.$Toast('提示信息');
+    //"productNumbers":["1499","593","9246","501","2628","56919","3013","3103","2134","908","746","001","634636"]
+
+  //   let akStList = [1499,593,9246]
+  //   getProductByProductNumber({app: this, data: akStList})
+  // .then(res=>{
+  //   console.log(3337777, res)
+  // })
+  // .catch(err=>{
+  //   console.log('出错了， ', err)
+  // })
+
     this.$axios({
         url: '/product/getProductList',
         method: 'post',

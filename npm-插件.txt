@@ -17,3 +17,6 @@
 五、js文件压缩 uglify-js
 	https://www.npmjs.com/package/uglify-js
 	https://segmentfault.com/a/1190000010874406
+	
+六、服务的使用 JSON.stringify() - json-stringify-safe
+	https://www.npmjs.com/package/json-stringify-safe

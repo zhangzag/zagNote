@@ -157,7 +157,8 @@ module.exports = {
   */
   plugins: [
     { src: '~/plugins/axios' },
-    { src: '~/plugins/mint-ui', ssr: true },
+    // { src: '~/plugins/mint-ui', ssr: true },
+    { src: '~/plugins/mint-ui', ssr: false },
     { src: '~/plugins/filters', ssr: false },
     { src: '~/plugins/publicComponents', ssr: false },
   ],
