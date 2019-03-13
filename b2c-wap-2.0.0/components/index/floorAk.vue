@@ -1,11 +1,10 @@
 <template>
-
   <!-- 阿康推荐 -->
   <section class="recommend" id="akRecommend">
     <div class="r_header"><p class="zone_title">阿康推荐</p><!-- <a href="javascript:;">更多精选</a> --></div>
     <div class="rec_con">
       <ul class="d_flex" v-if="akRecommend.length>0">
-        <li v-for="(ard,index) in akRecommend" @click="jumpDetail(ard)">
+        <li v-for="(ard, index) in akRecommend" @click="jumpDetail(ard)" :key="ard.productID">
           <div class="f_left">
             <!--<img v-lazy="ard.productPhotos.length>0?ard.productPhotos[0].photoURL + '?120*120':''" :alt="ard.productName">-->
             <img v-lazy="ard.productPhotos[0].photoURL + '?120*120'" :alt="ard.productName">

@@ -3,7 +3,7 @@
     <!-- 搜索框 -->
     <div class="search_fun">
       <div class="s_left">阿康</div>
-      <div class="s_center" @click="jumpSearch"><input type="text" readonly><i></i></div>
+      <div class="s_center"><input type="text" readonly><i></i></div>
       <div class="s_right">
         <!-- <router-link v-if="!$store.state.memberId" to="/login">登录</router-link> -->
         <!-- 已经登录的时候显示 -->
@@ -63,7 +63,6 @@
           <router-link to="/crare">
             <img v-lazy="require('~~/assets/images/navleft-zx.png')">
             <p>罕见病</p>
-            </a>
           </router-link>
           <!-- <li>
             <router-link to="/order/all">
@@ -94,6 +93,20 @@
     <!-- 阿康推荐 -->
     <floor-ak :akRecommend="akProDetails"></floor-ak>
     <!-- 阿康推荐 end -->
+
+    <!-- 楼层广告图 -->
+    <floor-adv :floorAdv1="floorAdv1"></floor-adv>
+    <!-- 楼层广告图 end -->
+
+    <!-- 楼层商品推荐 -->
+    <floor-recoms
+      :personalRecom="personalRecom"
+      :manPage="manPage"
+      :healthyPage="healthyPage"
+      :malePage="malePage"
+      :femalePage="femalePage"></floor-recoms>
+    <!-- 楼层商品推荐 end -->
+
   </section>
 </template>
 
@@ -105,14 +118,17 @@ import { getProductByProductNumber } from '@/api/product/'
 import banners from '@/components/index/banners'
 import newsBlock from '@/components/index/news'
 import floorAk from '@/components/index/floorAk'
+import floorAdv from '@/components/index/floorAdv'
+import floorRecoms from '@/components/index/floorRecoms'
 import { curDate } from '~~/utils/utils.js'
 
 export default {
   async asyncData ({app, params}){
-    let banners = '', artLists = [];
-    let akStFloor = [];//阿康商品推荐楼层
-    let akStList = [];//阿康推荐商品列表
+    let banners = '', artLists = [], floorAdv1 = [];
+    let akStFloor = [], personalSt = [], manSt = [], healthySt = [], maleSt = [], femaleSt = [];//阿康商品推荐楼层
+    let akStList = [], personalList = [], manList = [], healthyList = [], maleList = [], femaleList = [];//阿康推荐商品列表
     let akProDetails = [];//商品推荐-商品列表详细
+    let personalRecom = [], manPage = [], healthyPage = [], malePage = [], femalePage = [];//楼层商品推荐
 
     await Promise.all([
       searchAdvs({app, data: {
@@ -129,6 +145,36 @@ export default {
           pageNo: 'akRecommend',
           isValid: 1
         }}),
+      searchAdvs({app, data: {
+          endDate: curDate,
+          pageNo: 'floorAdv1',
+          isValid: 1
+        }}),
+      searchSt({app, data: {
+          endDate: curDate,
+          pageNo: 'personalRecom',
+          isValid: 1
+        }}),
+      searchSt({app, data: {
+          endDate: curDate,
+          pageNo: 'manPage',
+          isValid: 1
+        }}),
+      searchSt({app, data: {
+          endDate: curDate,
+          pageNo: 'healthyPage',
+          isValid: 1
+        }}),
+      searchSt({app, data: {
+          endDate: curDate,
+          pageNo: 'malePage',
+          isValid: 1
+        }}),
+      searchSt({app, data: {
+          endDate: curDate,
+          pageNo: 'femalePage',
+          isValid: 1
+        }}),
     ])
       .then(res=>{
         // console.log(111222, res[2])
@@ -136,7 +182,6 @@ export default {
         if(res[0].data && res[0].data.length>0){
           banners = res[0].data;
         }else{console.log('banner模块无数据')}
-
         //文章
         if( res[1].code == 0 && res[1].data.length>0 ){
           for(let val of res[1].data){
@@ -145,10 +190,46 @@ export default {
         }else{
           console.log('文章模块无数据');
         }
-
+        //阿康推荐
         if( res[2].success && res[2].data.length>0 ){
           for( let val of res[2].data ){
             akStFloor.push(val);
+          }
+        }
+        //楼层广告图
+        if( res[3].success && res[3].data.length>0 ){
+          for(let val of res[3].data){
+            floorAdv1.push(val);
+          }
+        }
+        //个人推荐
+        if( res[4].success && res[4].data.length>0 ){
+          for( let val of res[4].data ){
+            personalSt.push(val);
+          }
+        }
+        //慢病推荐
+        if( res[5].success && res[5].data.length>0 ){
+          for( let val of res[5].data ){
+            manSt.push(val);
+          }
+        }
+        //健康推荐
+        if( res[6].success && res[6].data.length>0 ){
+          for( let val of res[6].data ){
+            healthySt.push(val);
+          }
+        }
+        //男科推荐
+        if( res[7].success && res[7].data.length>0 ){
+          for( let val of res[7].data ){
+            maleSt.push(val);
+          }
+        }
+        //女科推荐
+        if( res[8].success && res[8].data.length>0 ){
+          for( let val of res[8].data ){
+            femaleSt.push(val);
           }
         }
       })
@@ -162,12 +243,62 @@ export default {
           showID: akStFloor[0].showID,
           isValid: 1
         }}),
+      getStDetail({app, data: !personalSt[0]?'':{
+          endDate: curDate,
+          showID: personalSt[0].showID,
+          isValid: 1
+        }}),
+      getStDetail({app, data: !manSt[0]?'':{
+          endDate: curDate,
+          showID: manSt[0].showID,
+          isValid: 1
+        }}),
+      getStDetail({app, data: !healthySt[0]?'':{
+          endDate: curDate,
+          showID: healthySt[0].showID,
+          isValid: 1
+        }}),
+      getStDetail({app, data: !maleSt[0]?'':{
+          endDate: curDate,
+          showID: maleSt[0].showID,
+          isValid: 1
+        }}),
+      getStDetail({app, data: !femaleSt[0]?'':{
+          endDate: curDate,
+          showID: femaleSt[0].showID,
+          isValid: 1
+        }}),
     ])
       .then(res=>{
         // console.log(222, res)
         if( res[0] && res[0].success && res[0].data.length>0 ){
           for( let val of res[0].data ){
             akStList.push(val.productID);
+          }
+        }
+        if( res[1] && res[1].success && res[1].data.length>0 ){
+          for( let val of res[1].data ){
+            personalList.push(val.productID);
+          }
+        }
+        if( res[2] && res[2].success && res[2].data.length>0 ){
+          for( let val of res[2].data ){
+            manList.push(val.productID);
+          }
+        }
+        if( res[3] && res[3].success && res[3].data.length>0 ){
+          for( let val of res[3].data ){
+            healthyList.push(val.productID);
+          }
+        }
+        if( res[4] && res[4].success && res[4].data.length>0 ){
+          for( let val of res[4].data ){
+            maleList.push(val.productID);
+          }
+        }
+        if( res[5] && res[5].success && res[5].data.length>0 ){
+          for( let val of res[5].data ){
+            femaleList.push(val.productID);
           }
         }
       })
@@ -179,6 +310,21 @@ export default {
       getProductByProductNumber({app, data: {
           productNumbers: akStList,
         }}),
+      getProductByProductNumber({app, data: {
+          productNumbers: personalList,
+        }}),
+      getProductByProductNumber({app, data: {
+          productNumbers: manList,
+        }}),
+      getProductByProductNumber({app, data: {
+          productNumbers: healthyList,
+        }}),
+      getProductByProductNumber({app, data: {
+          productNumbers: maleList,
+        }}),
+      getProductByProductNumber({app, data: {
+          productNumbers: femaleList,
+        }}),
     ])
       .then(res=>{
         // console.log(333, res)
@@ -187,13 +333,38 @@ export default {
             akProDetails.push(val)
           }
         }
+        if(res[1].success && res[1].data.length>0){
+          for(let val of res[1].data){
+            personalRecom.push(val)
+          }
+        }
+        if(res[2].success && res[2].data.length>0){
+          for(let val of res[2].data){
+            manPage.push(val)
+          }
+        }
+        if(res[3].success && res[3].data.length>0){
+          for(let val of res[3].data){
+            healthyPage.push(val)
+          }
+        }
+        if(res[4].success && res[4].data.length>0){
+          for(let val of res[4].data){
+            malePage.push(val)
+          }
+        }
+        if(res[5].success && res[5].data.length>0){
+          for(let val of res[5].data){
+            femalePage.push(val)
+          }
+        }
       })
       .catch(err=>{
         console.log('首页获取错误了-层3， ', err)
       })
 
     return {
-      banners,artLists,akProDetails,
+      banners,artLists,akProDetails,floorAdv1,personalRecom,manPage,healthyPage,malePage,femalePage
     }
   },
   data (){
@@ -201,6 +372,12 @@ export default {
       banners: [],
       artLists: [],
       akProDetails: [],
+      floorAdv1: [],
+      personalRecom: [],
+      manPage: [],
+      healthyPage: [],
+      malePage: [],
+      femalePage: [],
       list: [],
       asyncList: [],
       title: '阿康大药房'
@@ -215,7 +392,7 @@ export default {
     }
   },
   components: {
-    banners,newsBlock,floorAk,
+    banners,newsBlock,floorAk,floorAdv,floorRecoms,
   },
   computed: {
       ...mapState({

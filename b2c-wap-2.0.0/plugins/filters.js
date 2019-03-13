@@ -3,8 +3,8 @@ import Vue from 'vue'
 const filters = {
     //价格
     priceFilter: (data)=>{
-        if( price || price === 0 ){
-            return '￥' + Number(price).toFixed(2);
+        if( data || data === 0 ){
+            return '￥' + Number(data).toFixed(2);
         }else{
             return '';
         }
