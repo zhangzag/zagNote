@@ -369,6 +369,7 @@ export default {
   },
   data (){
     return {
+      isSignIn: false,
       banners: [],
       artLists: [],
       akProDetails: [],
@@ -459,13 +460,13 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-  .wrap>section:not(.banners) {
+<style>
+  .wrap>section {
     padding: 12px;
     background-color: #fff;
   }
-
+</style>
+<style lang="scss" scoped>
   .search_fun {
     position: fixed;
     top: 0;

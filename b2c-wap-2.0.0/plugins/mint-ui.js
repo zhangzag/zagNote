@@ -7,12 +7,14 @@
 import Vue from 'vue'
 import 'mint-ui/lib/style.css'
 
-import { Button, Header, InfiniteScroll, Toast, MessageBox, Indicator, Lazyload, Spinner, Popup } from 'mint-ui';
+import { Button, Header, InfiniteScroll, Toast, MessageBox, Indicator, Lazyload, Spinner, Popup, Swipe, SwipeItem } from 'mint-ui';
 
 Vue.component(Button.name, Button);
 Vue.component(Spinner.name, Spinner);
 Vue.component(Header.name, Header);
 Vue.component(Popup.name, Popup);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 //无限加载
 Vue.use(InfiniteScroll);
 

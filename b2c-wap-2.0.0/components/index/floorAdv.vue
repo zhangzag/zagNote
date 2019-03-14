@@ -1,7 +1,7 @@
 <template>
   <!-- 广告位-1 -->
   <section class="fadv fadv-1" id="floorAdv1">
-    <mt-swipe :auto="2000" >
+    <mt-swipe :auto="2000" class="adv_wrap">
       <mt-swipe-item v-for="(fa,index) in floorAdv1" :key="index"><a :href="fa.advertisementUrl"><img :src="fa.advertisementPhoto"></a></mt-swipe-item>
     </mt-swipe>
   </section>
@@ -9,14 +9,6 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import 'mint-ui/lib/style.css'
-
-  if(process.browser){
-    const VueAwesomeSwiper = require('vue-awesome-swiper/dist/ssr')
-    Vue.use(VueAwesomeSwiper)
-  }
-
   export default  {
     data (){
       return {
@@ -42,6 +34,9 @@
     padding: 0;
     /*height: 118px;*/
     margin-bottom: 12px;
+  }
+  .adv_wrap {
+    height: 175px;
   }
   section.fadv a {
     width: 100%;

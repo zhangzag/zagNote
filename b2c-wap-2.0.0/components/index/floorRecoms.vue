@@ -5,19 +5,19 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="swiperBanners">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <a :class="{cur: selected=='105'}"  href="javascript:;"><span>个人推荐</span></a>
+            <a :class="{cur: selected=='105'}" @click.stop="tabClick('105')" href="javascript:;"><span>个人推荐</span></a>
           </div>
           <div class="swiper-slide">
-            <a :class="{cur: selected=='105'}"  href="javascript:;"><span>慢性病</span></a>
+            <a :class="{cur: selected=='106'}" @click.stop="tabClick('106')" href="javascript:;"><span>慢性病</span></a>
           </div>
           <div class="swiper-slide">
-            <a :class="{cur: selected=='105'}"  href="javascript:;"><span>健康保健</span></a>
+            <a :class="{cur: selected=='107'}" @click.stop="tabClick('107')" href="javascript:;"><span>健康保健</span></a>
           </div>
           <div class="swiper-slide">
-            <a :class="{cur: selected=='105'}"  href="javascript:;"><span>男性频道</span></a>
+            <a :class="{cur: selected=='108'}" @click.stop="tabClick('108')" href="javascript:;"><span>男性频道</span></a>
           </div>
           <div class="swiper-slide">
-            <a :class="{cur: selected=='105'}"  href="javascript:;"><span>女性频道</span></a>
+            <a :class="{cur: selected=='109'}" @click.stop="tabClick('109')" href="javascript:;"><span>女性频道</span></a>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
       <mt-tab-container-item id="105">
         <ul class="tab_list" v-if="personalRecom.length>0">
           <li id="pr" v-for="pr in personalRecom" @click="jumpDetail(pr)">
-            <div class="tpro_img"><img :src="pr | photoFilter" :alt="pr.productName"></div>
+            <div class="tpro_img"><img v-lazy="pr.productPhotos&&pr.productPhotos[0]?pr.productPhotos[0].photoURL:''" :alt="pr.productName"></div>
             <div class="tpro_info">
               <h3>{{ pr.productName }}</h3>
               <span>{{ pr.spec }}</span>
@@ -39,7 +39,7 @@
       <mt-tab-container-item id="106">
         <ul class="tab_list" v-if="manPage.length>0">
           <li id="mp" v-for="mp in manPage" @click="jumpDetail(mp)">
-            <div class="tpro_img"><img :src="mp | photoFilter" :alt="mp.productName"></div>
+            <div class="tpro_img"><img v-lazy="mp.productPhotos&&mp.productPhotos[0]?mp.productPhotos[0].photoURL:''" :alt="mp.productName"></div>
             <div class="tpro_info">
               <h3>{{ mp.productName }}</h3>
               <span>{{ mp.spec }}</span>
@@ -51,7 +51,7 @@
       <mt-tab-container-item id="107">
         <ul class="tab_list" v-if="healthyPage.length>0">
           <li id="hp" v-for="hp in healthyPage" @click="jumpDetail(hp)">
-            <div class="tpro_img"><img :src="hp | photoFilter" :alt="hp.productName"></div>
+            <div class="tpro_img"><img v-lazy="hp.productPhotos&&hp.productPhotos[0]?hp.productPhotos[0].photoURL:''" :alt="hp.productName"></div>
             <div class="tpro_info">
               <h3>{{ hp.productName }}</h3>
               <span>{{ hp.spec }}</span>
@@ -63,7 +63,7 @@
       <mt-tab-container-item id="108">
         <ul class="tab_list" v-if="malePage.length>0">
           <li id="mpe" v-for="mpe in malePage" @click="jumpDetail(mpe)">
-            <div class="tpro_img"><img :src="mpe | photoFilter" :alt="mpe.productName"></div>
+            <div class="tpro_img"><img v-lazy="mpe.productPhotos&&mpe.productPhotos[0]?mpe.productPhotos[0].photoURL:''" :alt="mpe.productName"></div>
             <div class="tpro_info">
               <h3>{{ mpe.productName }}</h3>
               <span>{{ mpe.spec }}</span>
@@ -75,7 +75,7 @@
       <mt-tab-container-item id="109">
         <ul class="tab_list" v-if="femalePage.length>0">
           <li id="fp" v-for="fp in femalePage" @click="jumpDetail(fp)">
-            <div class="tpro_img"><img :src="fp | photoFilter" :alt="fp.productName"></div>
+            <div class="tpro_img"><img v-lazy="fp.productPhotos&&fp.productPhotos[0]?fp.productPhotos[0].photoURL:''" :alt="fp.productName"></div>
             <div class="tpro_info">
               <h3>{{ fp.productName }}</h3>
               <span>{{ fp.spec }}</span>
@@ -150,9 +150,109 @@
       // 'mt-tab-container-item': TabContainerItem,
       // 'mt-cell': Cell,
     },
+    methods: {
+      //切换tab
+      tabClick(index){
+        this.selected = index;
+      },
+    }
   }
 </script>
 
 <style scoped lang="scss">
+/*** btab ***/
+section.btab {
+  padding-right: 0;
+  margin-bottom: 12px;
+  .tabs {
+    overflow: hidden;
+    margin-bottom:20px;
 
+    .swiper-container {
+      padding-top: 12px;
+    }
+    .swiper-slide a {
+      font-size: 14px;
+      color: #555;
+      height: 36px;
+    }
+    span {
+      position: relative;
+      display: inline-block;
+      height: 100%;
+    }
+    .cur span::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-top: 1px solid #c5e1d0;
+      border-bottom: 1px solid #7dbc96;
+    }
+  }
+}
+/* tab_list */
+.tab_list {
+  display: box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-right: 10px;
+
+  li {
+    width: 50%;
+    padding:0 10px 0 9px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+
+    &:nth-of-type(2n) {
+       border-right: 0;
+    }
+    &:nth-last-child(1) {
+       border-bottom: 0;
+    }
+    &:nth-last-child(1) {
+       border-bottom: 0;
+    }
+    .tpro_img{
+      height: 106px;
+    }
+    .tpro_img img {
+      width: 106px;
+      height: 106px;
+      margin: 0 auto;
+    }
+
+    .tpro_info h3 {
+      font-size: 14px;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height: 18px;
+
+      &.r_color {
+         height: 22px;
+      }
+      span {
+        font-size: 12px;
+        width: 100%;
+        height: 22px;
+        display: block;
+        color: #a7a7a7;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
 </style>

@@ -50,6 +50,9 @@
 </script>
 
 <style scoped lang="scss">
+  section.banners {
+    padding: 0;
+  }
   .banners {
     height: 188px;
     position: relative;
