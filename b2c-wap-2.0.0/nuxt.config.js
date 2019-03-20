@@ -241,7 +241,8 @@ module.exports = {
     extractCSS: processEnv.NODE_ENV === 'production',
     postcss: [
       require('postcss-px2rem')({
-        remUnit: 37.5,
+        // remUnit: 37.5,
+        remUnit: 32,
         remPrecision: 2,
       }),
       require('autoprefixer')({

@@ -31,7 +31,7 @@
 		class="more_block"
 		v-model="isShowMore"
 		position="top">
-		<router-link to="/index">首页</router-link>
+		<router-link to="/">首页</router-link>
 		<router-link :to="{path: '/sort', query: {i: Math.random().toFixed(2)}}">分类</router-link>
 		<router-link :to="{path: '/myinfo', query: {i: Math.random().toFixed(2)}}">个人中心</router-link>
 	</mt-popup>
