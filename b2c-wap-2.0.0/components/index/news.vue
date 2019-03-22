@@ -68,29 +68,28 @@
 
   /*** information ***/
   .information {
-    /*height: 1.09375rem;*/
-    height: 42px;
+    height: 36px;
     font-size: 0;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .information>* {
     font-size: 14px;
     position: relative;
   }
   .information_img {
-    width: 52px;
-    height: 42px;
+    width: 45px;
+    height: 35px;
     background-image: url('~assets/images/icons_index.png');
     background-repeat: no-repeat;
-    background-size: 98px auto;
-    -webkit-background-size: 98px auto;
-    background-position: -23px -23px;
+    background-size: 86px auto;
+    -webkit-background-size: 84px auto;
+    background-position: -20px -20px;
   }
   .information_liist {
     color: #555555;
     font-size: 14px;
-    width: 256px;
-    height: 42px;
+    width: 220px;
+    height: 35px;
     overflow: hidden;
   }
   .information_liist ul {
@@ -99,7 +98,7 @@
     transition: top 0.3s ease-out;
   }
   .information_liist li {
-    line-height: 22px;
+    line-height: 18px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -110,24 +109,25 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 12px;
   }
   .newImg-1 {
     background-image: url('~assets/images/icons_index.png');
     background-repeat: no-repeat;
-    background-size: 98px auto;
-    -webkit-background-size: 98px auto;
-    background-position: -37.5px -80px;
+    background-size: 85px auto;
+    -webkit-background-size: 85px auto;
+    background-position: -32px -70px;
   }
   .newImg-2 {
     background-image: url('~assets/images/icons_index.png');
     background-repeat: no-repeat;
-    background-size: 98px auto;
-    -webkit-background-size: 98px auto;
-    background-position: -37.5px -112px;
+    background-size: 85px auto;
+    -webkit-background-size: 85px auto;
+    background-position: -32px -98px;
   }
   .information_more {
-    width: 38px;
-    height: 42px;
+    width: 32px;
+    height: 35px;
     color: #a7a7a7;
     float: right;
   }

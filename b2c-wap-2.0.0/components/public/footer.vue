@@ -49,11 +49,9 @@ export default {
         flex-wrap: wrap;
         justify-content: space-between;
         .logins  {
-            // width: 5.0rem;
-            width: 188px;
+            width: 160px;
             font-size: 0;
             a:nth-of-type(1) {
-                // padding-right: 0.1875rem;
                 padding-right: 6px;
                 border-right: 1px solid #a7a7a7;
             }
@@ -63,7 +61,7 @@ export default {
             }
         }
         .abouts  {
-            width: 3.125rem;
+            width: 100px;
             font-size: 0;
             text-align: right;
             a:nth-of-type(1) {
@@ -87,18 +85,14 @@ export default {
     }
 
     .f_bottom {
-        // padding-top: 0.5rem;
         padding-top: 20px;
-        // padding-bottom: 0.78125rem;
         padding-bottom: 30px;
 
         p {
             text-align: center;
-            // font-size: 0.34375rem;
-            font-size: 12px;
+            font-size: 10px;
             color: #a7a7a7;
-            // line-height: 0.53125rem;
-            line-height: 20px;
+            line-height: 18px;
             a {
                 color: #a7a7a7;
             }

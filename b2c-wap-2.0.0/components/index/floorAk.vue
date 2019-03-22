@@ -47,7 +47,7 @@
     .rec_con li {
       box-sizing: border-box;
       width: 50%;
-      height: 88px;
+      height: 75px;
       border-right: 1px solid #f0f0f0;
       border-bottom: 1px solid #f0f0f0;
       padding: 10px 10px 10px 0;
@@ -55,10 +55,10 @@
         border-right: 0;
       }
       &>.f_left {
-        width: 66px;
-        height: 66px;
+        width: 56px;
+        height: 56px;
         overflow: hidden;
-        margin-right: -66px;
+        margin-right: -56px;
 
         img {
           width: 100%;
@@ -90,15 +90,14 @@
     }
   }
   .recommend .rc_info {
-    padding-left: 70px;
+    padding-left: 60px;
     h3 {
-      font-size: 14px;
+      font-size: 12px;
       width: 100%;
       text-overflow: ellipsis;
-      /*white-space: nowrap;*/
       overflow: hidden;
-      height: 46px;
-      line-height: 24px;
+      height: 40px;
+      line-height: 20px;
       font-weight: normal;
     }
     &>p {
@@ -110,7 +109,7 @@
       height: 22px;
     }
     h2 {
-      font-size: 18px;
+      font-size: 14px;
       width: 100%;
       text-overflow: ellipsis;
       white-space: nowrap;

@@ -36,31 +36,31 @@
           </router-link>
         </li> -->
         <li>
-          <router-link to="/manb">
+          <router-link to="/zt/manb">
             <img v-lazy="require('~~/assets/images/navleft-mb.png')">
             <p>慢性病</p>
           </router-link>
         </li>
         <li>
-          <router-link to="/c_male">
+          <router-link to="/zt/cmale">
             <img v-lazy="require('~~/assets/images/navleft-nx.png')">
             <p>男性频道</p>
           </router-link>
         </li>
         <li>
-          <router-link to="/injecta">
+          <router-link to="/zt/injecta">
             <img v-lazy="require('~~/assets/images/navleft-zy.png')">
             <p>注射液专区</p>
           </router-link>
         </li>
         <li>
-          <router-link to="/c_female">
+          <router-link to="/zt/cfemale">
             <img v-lazy="require('~~/assets/images/navleft-nr.png')">
             <p>女性频道</p>
           </router-link>
         </li>
         <li>
-          <router-link to="/crare">
+          <router-link to="/zt/crare">
             <img v-lazy="require('~~/assets/images/navleft-zx.png')">
             <p>罕见病</p>
           </router-link>
@@ -71,7 +71,7 @@
             </router-link>
           </li> -->
         <li>
-          <router-link to="/coldChain">
+          <router-link to="/zt/coldchain">
             <img v-lazy="require('~~/assets/images/navleft-dd.png')">
             <p>冷链专区</p>
           </router-link>
@@ -135,49 +135,49 @@ export default {
           endDate: curDate,
           pageNo: 'wapBanners',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       getArtById({app, data: {
         parentTypeID: 21,
         page: 1,
-        limit: 5}}),
+        limit: 5}}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchSt({app, data: {
           endDate: curDate,
           pageNo: 'akRecommend',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchAdvs({app, data: {
           endDate: curDate,
           pageNo: 'floorAdv1',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchSt({app, data: {
           endDate: curDate,
           pageNo: 'personalRecom',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchSt({app, data: {
           endDate: curDate,
           pageNo: 'manPage',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchSt({app, data: {
           endDate: curDate,
           pageNo: 'healthyPage',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchSt({app, data: {
           endDate: curDate,
           pageNo: 'malePage',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
       searchSt({app, data: {
           endDate: curDate,
           pageNo: 'femalePage',
           isValid: 1
-        }}),
+        }}).catch(err=>{console.log('获取数据出错了: ', err)}),
     ])
       .then(res=>{
-        // console.log(111222, res[2])
+        // console.log(111222, res)
         //banner
         if(res[0].data && res[0].data.length>0){
           banners = res[0].data;
@@ -307,53 +307,53 @@ export default {
       })
 
     await Promise.all([
-      getProductByProductNumber({app, data: {
+      getProductByProductNumber({app, data: !akStList[0]?'':{
           productNumbers: akStList,
         }}),
-      getProductByProductNumber({app, data: {
+      getProductByProductNumber({app, data: !personalList[0]?'':{
           productNumbers: personalList,
         }}),
-      getProductByProductNumber({app, data: {
+      getProductByProductNumber({app, data: !manList[0]?'':{
           productNumbers: manList,
         }}),
-      getProductByProductNumber({app, data: {
+      getProductByProductNumber({app, data: !healthyList[0]?'':{
           productNumbers: healthyList,
         }}),
-      getProductByProductNumber({app, data: {
+      getProductByProductNumber({app, data: !maleList[0]?'':{
           productNumbers: maleList,
         }}),
-      getProductByProductNumber({app, data: {
+      getProductByProductNumber({app, data: !femaleList[0]?'':{
           productNumbers: femaleList,
         }}),
     ])
       .then(res=>{
         // console.log(333, res)
-        if(res[0].success && res[0].data.length>0){
+        if(res[0] && res[0].success && res[0].data.length>0){
           for(let val of res[0].data){
             akProDetails.push(val)
           }
         }
-        if(res[1].success && res[1].data.length>0){
+        if(res[1] && res[1].success && res[1].data.length>0){
           for(let val of res[1].data){
             personalRecom.push(val)
           }
         }
-        if(res[2].success && res[2].data.length>0){
+        if(res[2] && res[2].success && res[2].data.length>0){
           for(let val of res[2].data){
             manPage.push(val)
           }
         }
-        if(res[3].success && res[3].data.length>0){
+        if(res[3] && res[3].success && res[3].data.length>0){
           for(let val of res[3].data){
             healthyPage.push(val)
           }
         }
-        if(res[4].success && res[4].data.length>0){
+        if(res[4] && res[4].success && res[4].data.length>0){
           for(let val of res[4].data){
             malePage.push(val)
           }
         }
-        if(res[5].success && res[5].data.length>0){
+        if(res[5] && res[5].success && res[5].data.length>0){
           for(let val of res[5].data){
             femalePage.push(val)
           }
@@ -462,7 +462,7 @@ export default {
 </script>
 <style>
   .wrap>section {
-    padding: 12px;
+    padding: 10px;
     background-color: #fff;
   }
 </style>
@@ -474,8 +474,8 @@ export default {
     transform: translateX(-50%);
     width: 100%;
     max-width: 640px;
-    height: 45px;
-    line-height: 32px;
+    height: 38px;
+    line-height: 30px;
     z-index: 9;
     font-size: 14px;
     display: box;
@@ -491,30 +491,29 @@ export default {
     background: -moz-linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0)); /* Firefox 3.6 - 15 */
     background: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0)); /* 标准的语法 */
     color: #fff;
-    padding: 6px 10px;
+    padding: 5px 10px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
 
     .s_left {
-      /*width: 1.375rem;*/
-      width: 46px;
+      width: 40px;
       color: #fff;
     }
     .s_center {
-      width: 254px;
+      width: 216px;
       position: relative;
 
       input {
         width: 100%;
-        height: 32px;
+        height: 28px;
         padding: 0 18px 0 35px;
         margin: 0;
         border: 0;
         border-radius: 16px;
         background-color: rgba(255,255,255,0.66);
-        font-size: 0.34375rem;
+        font-size: 12px;
         box-sizing: border-box;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -530,19 +529,19 @@ export default {
         -webkit-background-size: cover;
         background-size: cover;
         background-position: center;
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         left: 14px;
         top: 50%;
-        margin-top: -8px;
+        margin-top: -5px;
       }
     }
     .s_right {
-      width: 46px;
+      width: 40px;
       text-align: right;
       a {
         color: #fff;
-        width: 46px;
+        width: 40px;
         height: 100%;
         display: inline-block;
       }
@@ -565,16 +564,16 @@ export default {
     border-bottom: 0.03125rem solid #f0f0f0;
 
     ul {
-      padding: 6px 0;
+      padding: 5px 0;
       li {
         width: 25%;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
       li:nth-child(n+5) {
         margin-bottom: 0;
       }
       li a img {
-        width: 45px;
+        width: 40px;
         margin: 0 auto;
       }
       li a p {

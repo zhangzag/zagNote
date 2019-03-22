@@ -91,7 +91,7 @@ module.exports = {
   env: {
     // baseUrl: process.env.BASE_URL || 'http://localhost:3000'
     // baseUrl: processEnv.NODE_ENV === 'development'?'/dapi' : 'http://localhost:3000'
-    baseUrl: curBaseUrl
+    baseUrl: curBaseUrl,
   },
   
   // 为应用程序内部nuxt.config.js中定义服务器访问主机和端口.
@@ -189,12 +189,6 @@ module.exports = {
         return position
       }
     }
-  },
-
-  //服务
-  server: {
-    // port: 8000, // default: 3000
-    // host: '0.0.0.0', // default: localhost,
   },
 
   /*

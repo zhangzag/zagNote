@@ -27,6 +27,18 @@ const filters = {
         else if( data == 4 ){ return '待收货' }
         else if( data == 5 || data == 6 || data == 7 ){ return '已完成' }
         else if( data == 8 ){ return '已取消' }
+    },
+    //时间过滤，"2019-01-23 09:37:15" - "2019-01-23"
+    timeToYMD: ( data ) => {
+        if(!data && !data[0]){return}
+        let arr = data.split(' ');
+    
+        // replace(/-/g, ".")
+        if( arr[0].indexOf('-') ){
+            return arr[0].replace(/-/g, '.')
+        }
+        
+        return arr[0];
     }
 }
 

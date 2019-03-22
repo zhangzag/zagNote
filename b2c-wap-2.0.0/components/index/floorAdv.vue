@@ -36,7 +36,7 @@
     margin-bottom: 12px;
   }
   .adv_wrap {
-    height: 175px;
+    height: 150px;
   }
   section.fadv a {
     width: 100%;

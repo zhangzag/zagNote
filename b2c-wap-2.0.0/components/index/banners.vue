@@ -54,21 +54,21 @@
     padding: 0;
   }
   .banners {
-    height: 188px;
+    height: 160px;
     position: relative;
   }
   .banners img {
     width: 100%;
   }
   .swiperBanners {
-    height: 188px;
+    height: 160px;
   }
   .swiperBanners a {
-    height: 188px;
+    height: 160px;
   }
   .swiperBanners img {
     width: 100%;
-    height: 188px;
+    height: 160px;
   }
   .banners .banners_pagination {
     bottom: 0;

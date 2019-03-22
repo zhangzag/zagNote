@@ -1,0 +1,203 @@
+
+.wrap_in {
+	padding-top: 0;
+	position: absolute;
+	bottom:0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+.login_wrap .header .mint-header {
+	background-color: transparent;
+	color: #fff;
+	border-bottom: 0;
+} 
+.login_wrap .login_bg {
+	background-color: #09ad58;
+	height: 300px;
+	padding-top: 1.25rem;
+	height: 5.625rem;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	background-image: url(~assets/images/login_bg.png);
+	background-repeat: no-repeat;
+	-webkit-background-size: 10.0rem auto;
+	background-size: 10.0rem auto;
+	max-width: 640px;
+}
+.login_wrap .headimg {
+	width: 2.25rem;
+	height: 2.265625rem;
+	margin: 0 auto;
+}
+.login_wrap .login_bg>p { 
+	color: #effff5;
+	text-align: center;
+	font-size: 0.5rem;
+	margin-top: 0.4375rem;
+}
+
+/* form_info */
+.login_wrap .form_info {
+	padding: 0.5625rem 0.8125rem;
+    box-sizing: border-box;
+	max-width: 640px;
+}
+.login_wrap .form_info .form>* {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	position: relative;
+}
+.login_wrap .form_info .form input {
+	background-image: url(~assets/images/icons_login.png);
+	background-repeat: no-repeat;
+	-webkit-background-size: 2.125rem auto;
+	background-size: 2.125rem auto;
+	padding-left: 1.1875rem;
+	color: #555;
+	font-size: 0.375rem;
+	display: block;
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	margin: 0;
+}
+.login_wrap .form_info .form input::-webkit-input-placeholder {
+	color: #a7a7a7;
+}
+.login_wrap .form_info .form input::-moz-placeholder {
+	color: #a7a7a7;
+}
+.login_wrap .form_info .form input:-ms-input-placeholder {
+	color: #a7a7a7;
+}
+.login_wrap .form_info .form input:-moz-placeholder {
+	color: #a7a7a7;
+}
+.login_wrap .form_info .form div:nth-of-type(1) input {
+	height: 1.40625rem;
+	/*line-height: 1.40625rem;*/
+	line-height: normal;
+	border-radius: 0.125rem 0.125rem 0 0;
+	border:0.03125rem solid #dadada ;
+	border-bottom: 0;
+	background-position: -0.5625rem -0.5rem;
+}
+.login_wrap .form_info .form div:nth-of-type(2) input {
+	height: 1.40625rem;
+	line-height: normal;
+	border-radius: 0 0 0.125rem 0.125rem;
+	border:0.03125rem solid #dadada ;
+	background-position: -0.5625rem -1.9375rem;
+}
+.login_wrap .form_info .form>button {
+	height: 1.1875rem;
+	border-radius: 0.125rem;
+	background-color: #2fba66;
+	border: 0;
+	color: #fff;
+	font-size: 0.5rem;
+	margin-top: 0.9375rem;
+}
+.login_wrap .form_info .form>button[disabled] {
+	background-color: #dadada;
+	color: #fff;
+}
+.login_wrap .links {
+	margin-top: 0.5625rem;
+}
+.login_wrap .links a {
+	font-size: 0.4375rem;
+	color: #555;
+}
+
+/* 快速注册 */
+.login_wrap .user_register .form>div:nth-of-type(2) input, .login_wrap .forger_step_2 .form>div:nth-of-type(1) input {
+	background-position: -0.53125rem -3.21875rem;
+	/* padding-right: 2.375rem; */
+	padding-right: 3.125rem;
+
+}
+.login_wrap .user_register .form>div:nth-of-type(2) button, .login_wrap .forger_step_2 .form>div:nth-of-type(1) span {
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #a7a7a7;
+	font-size: 0.40625rem;
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	/* width: 2.375rem; */
+	width: 3.125rem;
+	text-align: right;
+	padding-right: 0.1875rem;
+	overflow: hidden;
+	background-color: transparent;
+	border: 0;
+}
+.login_wrap .user_register .form>div:nth-of-type(2) span i, .login_wrap .forger_step_2 .form>div:nth-of-type(1) span i {
+	font-style: normal;
+}
+.login_wrap .user_register>label {
+	margin-top: 0.56rem;
+	display: block;
+}
+.login_wrap .user_register>label a {
+	display: inline;
+	color: #0f904e;
+}
+
+/* 找回密码 */
+.login_wrap .forger_step_1 .form>div:nth-of-type(2) input {
+	background-position: -0.53rem -3.21rem;
+    padding-right: 2.56rem;
+}
+.login_wrap .forger_step_1 .form>div:nth-of-type(2) span, .user_register .form .register_ver>span {
+	width: 2.56rem;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: right;
+	padding: 0.15625rem;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.login_wrap .forger_step_1 .form>div:nth-of-type(2) span::after, .user_register .form .register_ver>span::after {
+	content: '';
+	position: absolute;
+	width: 0.03rem;
+	height: 0.56rem;
+	left: 0;
+	top: 50%;
+	margin-top: -0.28rem;
+	background-color: #dadada;
+}
+.ver_img {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* 找回密码 2 */
+.login_wrap .forger_step_2 .form>div:nth-of-type(1) input {
+	border-bottom: 0.03125rem solid #dadada;
+	border-radius: 0.125rem ;
+}
+.login_wrap .forger_step_2 .form>p, .login_wrap .forger_step_3 .form>p,  .login_wrap .user_login .form>p {
+	font-size: 0.375rem;
+	color: #a7a7a7;
+	text-align: center;
+	line-height: 0.625rem;
+	margin-top: 0.3125rem;
+}
+
+/* 找回密码3 */
+.login_wrap .forger_step_3 .form>div:nth-of-type(1) input {
+	background-position: -0.5625rem -1.9375rem;
+}
+.login_wrap .forger_step_3 .form>div:nth-of-type(2) input {
+	background-position: -0.53125rem -4.53125rem;
+}

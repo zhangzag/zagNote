@@ -163,10 +163,10 @@
 /*** btab ***/
 section.btab {
   padding-right: 0;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   .tabs {
     overflow: hidden;
-    margin-bottom:20px;
+    margin-bottom:10px;
 
     .swiper-container {
       padding-top: 12px;
@@ -208,7 +208,7 @@ section.btab {
 
   li {
     width: 50%;
-    padding:0 10px 0 9px;
+    padding:0 9px 0 8px;
     box-sizing: border-box;
     border-bottom: 1px solid #f0f0f0;
     border-right: 1px solid #f0f0f0;
@@ -223,36 +223,37 @@ section.btab {
        border-bottom: 0;
     }
     .tpro_img{
-      height: 106px;
+      height: 90px;
     }
     .tpro_img img {
-      width: 106px;
-      height: 106px;
+      width: 90px;
+      height: 90px;
       margin: 0 auto;
     }
 
     .tpro_info h3 {
-      font-size: 14px;
+      font-size: 12px;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      height: 18px;
+      height: 16px;
 
       &.r_color {
-         height: 22px;
+         height: 20px;
       }
-      span {
-        font-size: 12px;
+    }
+    
+    .tpro_info span {
+        font-size: 10px;
         width: 100%;
-        height: 22px;
+        height: 20px;
         display: block;
         color: #a7a7a7;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-    }
   }
 }
 </style>

@@ -1,5 +1,7 @@
 
 import Cookie from 'js-cookie'
+// console.log(process)
+// const pEnv = process.env;
 
 //获取服务端cookie
 export const getcookiesInServer = function (req) {
@@ -64,4 +66,27 @@ export const verifyPwd = function(){
   const check = /^[0-9A-Za-z!#$%^&*]{6,20}$/;
 
   return check.test(data);
+};
+
+//GA统计事件
+export function gaEve( data ){
+	// console.log('ga', data)
+	// if( pEnv.NODE_ENV === 'development' || pEnv.NODE_ENV === 'testing' ){
+    return
+	if( pEnv && pEnv.NODE_ENV !== 'production' ){
+		//开发测试
+		return false;
+	}
+
+	if( !data ){
+		return false;
+	}
+	const eName = data.eName || '';
+	const eCate = data.eCate || '';
+	const eType = data.eType || '';
+
+	gtag('event', eName, {
+	  'event_category' : eCate,
+	  'event_label' : eType
+	});
 };

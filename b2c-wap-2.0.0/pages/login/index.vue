@@ -28,7 +28,7 @@
                 </div>
                 <div class="links d_flex">
                     <!-- <a href="javascript:;">忘记密码?</a> -->
-                    <router-link to="/findPwd">忘记密码?</router-link>
+                    <router-link to="/findpwd">忘记密码?</router-link>
                     <router-link to="/registerPage">新用户注册</router-link>
                     <!-- <a href="javascript:;">新用户注册</a> -->
                 </div>
@@ -42,15 +42,37 @@
 
 <script>
 import Cookie from 'js-cookie'
+import {gaEve, verifyPhone} from '@/utils/utils.js'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
+    name: 'login',
     layout: 'layLogin',
     data (){
         return {
             isUnscRollable: false,
             redirectUrl: '/',
+            headImgCurId: 1,
+            
+            isGoBack: false,//是否后退
+            flag: false, //防止多次提交
+            isDetailPage: false,// 是否打开其他页
+            pwd: '', //登录密码
+            titles: '',
+            phone: '', //登录号码
         }
     },
+	computed: {
+		//是否可以下一步
+		isNext (){
+			if( this.phone && this.pwd ){
+				return false;
+			}else{
+				return true;
+			}
+        },
+        ...mapState('userModule', ['memberId', 'memberInfo'])
+	},
     mounted (){
         let redirectUrl = this.$route.query.ref;
         
@@ -59,11 +81,116 @@ export default {
         }
     },
     methods: {
+        ...mapMutations('userModule', ['saveMemberId', 'saveMemberInfo']),
         signIn (){
             //将服务端的token存入cookie当中
             Cookie.set('memberId', 10299)
             //返回上一页
             // this.$router.push(this.redirectURL)
+
+  			if( this.flag ){return}
+              this.flag = true;
+              
+  			if( !verifyPhone( this.phone ) ){
+				this.$Toast( '请输入正确的手机号码' );
+
+				this.phone = this.pwd = '';
+				return false;
+  			}
+			
+			this.$Idc.open({
+			  text: '登录中...',
+			  spinnerType: 'fading-circle'
+			});
+
+  			let signin = new Promise( (resolve, reject)=>{
+	  			this.$axios({
+                    url: '/login',
+                    method: 'post',
+	  				data: {
+	  					username: this.phone,
+	  					password: this.pwd
+	  				}
+	  			}).then(( res )=>{
+	  				console.log('res: ', res);
+	  				if( res.success ){
+	  					resolve( res );
+	  				}else{
+	  					reject(res.msg);
+	  				}
+	  			}).catch( (err) => {
+	  				reject( err )
+	  			} );
+            } );
+              
+
+  			//获取会员信息
+  			signin.then( (val)=>{
+  				console.log('val: ', val);
+  				let memberId = '';
+
+  				memberId = val.memberID;
+				
+				// 储存个人信息
+                //   this.$store.commit('addLogin', {memberID: val.memberID});
+                this.saveMemberId(memberId)
+                
+				//GA统计
+				// gaEve({eName:'登录', eCate: '登录会员id: ' + val.memberID});
+
+				//会员查询 
+				this.$axios({
+                    url: '/vipSearchByID',
+                    method: 'post',
+					data: {
+						id: memberId,
+					}
+				})
+				.then((res)=>{
+					// console.log('获取个人信息', res)
+					this.$Idc.close();
+					if( !res ){
+						// console.log('获取个人信息失败')
+						this.$Toast( '获取个人信息失败' );
+						this.flag = false;
+						return false;
+					}
+					// 储存个人信息
+                    if(res){this.saveMemberInfo(res)}  
+                    this.$Toast({
+                        message: '登录成功',
+                        position: 'top',
+                        duration: 1000,
+                        iconClass: 'mintui mintui-success',
+                    });
+	  				
+	  				setTimeout(()=>{
+						if( window.history.length<2 ){
+							this.$router.replace({path:'/'});
+							return false;
+						}
+	  					if( this.isGoBack ){ 
+	  						this.$router.go(-1);//后退
+	  					}else{
+							// _self.$router.replace({ path: '/index' });
+							// _self.$router.go(-1);
+                            // window.history.go(-1);
+                            
+                            // document.getElementById('backRef').click();
+                            // console.log(this.redirectUrl)
+                            this.$router.replace({path: this.redirectUrl})
+						}
+						this.flag = false;
+	  				},300);
+				});
+              } )
+  			//登录失败或出错
+  			.catch( (err) => {
+  				// console.log('err: ', err);
+				this.$MsgBox.alert( err ).then(action => {});
+				this.flag = false;
+				this.$Idc.close();
+  			} );
         },
     },
 }

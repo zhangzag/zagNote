@@ -18,24 +18,20 @@
 		<div class="sort_con" ref="wrapper">
 			<div class="s_left">
 				<ul :style="{ height: wrapperHeight + 'px' }">
-					<!-- <li class="cur">
-						<span>风湿关节</span>
-					</li> -->
 					<li 
 						:class="{ 'cur': index+1==curKs }"
 						v-for=" (list,index) in allSortList "
-						@click="nextSort( list, index )">
+						@click="nextSort( list, index )"
+                        :key="list.productTypeID">
 						<span>{{ list.productTypeName }}</span>
 						<div class="sort_childs">
-							<div class="sort_two" v-for=" (listTwo,index) in list.productTypeList ">
+							<div class="sort_two" v-for=" (listTwo,index) in list.productTypeList" :key="listTwo.productTypeID">
 								<div 
 									class="sort_two_head"
 									@click="jumpProduct(listTwo,index)">{{ listTwo.productTypeName }}</div>
-								<div class="sort_three" v-for="(listThree,index) in listTwo.products">
+								<div class="sort_three" v-for="(listThree,index) in listTwo.products" :key="listThree.productTypeID">
 									<a href="javascript:;" @click="jumpDetail(listThree)" v-text="listThree.currentName">	
 									</a>
-									<!-- <router-link :to="{ path: '/product/product_detail', query: {proid: listThree.productID} }" v-text="listThree.currentName">	
-									</router-link> -->
 								</div>
 							</div>
 						</div>
@@ -84,24 +80,6 @@ export default {
     },
     mounted (){
         
-		//获取分类	
-		// this.$axios({
-		// 	url: '/productType/getProductTypeList',
-		// })
-		// .then(( res )=>{
-		// 	console.log('获取分类：', res.data);
-		// 	if( res.data.length>0 ){
-		// 		// this.allSortList.concat( res.data );
-        //         for( let val of res.data ){
-        //             // console.log(val)
-        //             this.allSortList.push( val );
-        //         }
-        //     }
-        //     console.log('allSortList: ', this.allSortList)
-		// }).catch(( error )=>{
-
-        // });
-        
 		this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
     },
     methods: {
@@ -123,14 +101,15 @@ export default {
             const _self = this;
 
             this.curKs = index+1; //当前科室
-            this.$ajax({
-                url: _self.webRoot + '/productType/getAllTwoLevelProductType',
-                data: { parentTypeID: item.productTypeID }
-            }).then(function(res){
-                // console.log(res)
-                _self.parentName = item.productTypeName; //父级
-                _self.childSort = res.data;
-            });
+            // this.$axios({
+            //     url: '/productType/getAllTwoLevelProductType',
+            //     method: 'post',
+            //     data: { parentTypeID: item.productTypeID }
+            // }).then(function(res){
+            //     // console.log(res)
+            //     _self.parentName = item.productTypeName; //父级
+            //     _self.childSort = res.data;
+            // });
         },
         //监听搜索
         searchKeyup (){ 
@@ -143,20 +122,6 @@ export default {
         clearAll (){ 
             this.searchCon = '';
             this.isShowX = false;
-        },
-        // 判断是否返回父页面
-        changeClassOne ( isChildDestroyed ){
-            if( isChildDestroyed ){ 
-            //退出子页面
-            this.backParentPage = true; //返回首页
-            this.isUnscRollable = false;
-            // console.log('1')
-            }else{
-            //没退出子页面
-            this.backParentPage = false; // 没返回首页
-            this.isUnscRollable = true;
-            // console.log('2')
-            }
         },
     },
 }
