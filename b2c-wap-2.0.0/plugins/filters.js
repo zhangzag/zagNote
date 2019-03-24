@@ -39,7 +39,17 @@ const filters = {
         }
         
         return arr[0];
-    }
+    },
+    // 药品图片类型 处方,OTC甲,OTC乙
+    imgType: ( data ) => {
+      if( data == 1 ){
+        return 'RX';
+      }else if(data == 2){
+        return 'OTC-2'
+      }else if(data == 3){
+        return 'OTC-1'
+      }
+    },
 }
 
 Object.keys( filters ).forEach( (key) => {

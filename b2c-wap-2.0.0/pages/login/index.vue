@@ -74,8 +74,8 @@ export default {
         ...mapState('userModule', ['memberId', 'memberInfo'])
 	},
     mounted (){
-        let redirectUrl = this.$route.query.ref;
-        
+        let redirectUrl = this.$route.query.ref || this.$route.query.redirectUrl;
+
         if (redirectUrl){
             this.redirectUrl = redirectUrl
         }
@@ -165,22 +165,18 @@ export default {
                     });
 	  				
 	  				setTimeout(()=>{
-						if( window.history.length<2 ){
-							this.$router.replace({path:'/'});
-							return false;
-						}
-	  					if( this.isGoBack ){ 
-	  						this.$router.go(-1);//后退
-	  					}else{
-							// _self.$router.replace({ path: '/index' });
-							// _self.$router.go(-1);
-                            // window.history.go(-1);
-                            
-                            // document.getElementById('backRef').click();
-                            // console.log(this.redirectUrl)
-                            this.$router.replace({path: this.redirectUrl})
-						}
-						this.flag = false;
+
+              if( window.history.length<2 ){
+                this.$router.replace({path:'/'});
+                return false;
+              }
+              // if( this.isGoBack ){
+              //     this.$router.go(-1);//后退
+              // }else{
+              //   this.$router.replace({path: this.redirectUrl})
+						  // }
+              this.$router.replace({path: this.redirectUrl})
+						  this.flag = false;
 	  				},300);
 				});
               } )

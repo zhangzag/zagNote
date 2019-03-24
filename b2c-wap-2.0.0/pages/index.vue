@@ -3,7 +3,7 @@
     <!-- 搜索框 -->
     <div class="search_fun">
       <div class="s_left">阿康</div>
-      <div class="s_center"><input type="text" readonly><i></i></div>
+      <div class="s_center" @click="jumpSearch"><input type="text" readonly><i></i></div>
       <div class="s_right">
         <!-- <router-link v-if="!$store.state.memberId" to="/login">登录</router-link> -->
         <!-- 已经登录的时候显示 -->
@@ -458,6 +458,12 @@ export default {
         console.log('获取banners出错了,', err)
       });
   },
+  methods: {
+    //跳转到通用搜索页
+    jumpSearch (){
+      this.$router.push({ path:'search', query:{id: '002'} });
+    },
+  }
 }
 </script>
 <style>

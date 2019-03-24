@@ -19,7 +19,7 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.use(InfiniteScroll);
 
 //懒加载
-import loadingImg from '../assets/images/default_bg.jpg';
+import loadingImg from '../assets/images/ak_100x100.jpg';
 Vue.use(Lazyload, {
   preLoad: 1.3,
   error: loadingImg, // 加载失败显示图
