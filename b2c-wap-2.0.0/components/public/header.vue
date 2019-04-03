@@ -128,3 +128,14 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+	.header {
+		position: fixed;
+		top:0;
+		left:0;
+		height: 40px;
+		width: 100%;
+		z-index: 10;
+	}
+</style>
+

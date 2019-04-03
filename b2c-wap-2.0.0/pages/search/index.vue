@@ -1,5 +1,5 @@
 <template>
-  <section class="full_wrap">
+  <section class="full_wrap contain">
     <!-- 搜索框 -->
     <div class="search_from">
       <form class="d_flex" action="javascript:;">

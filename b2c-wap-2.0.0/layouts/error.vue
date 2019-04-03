@@ -8,7 +8,7 @@
         <mt-button @click="goHome" size="large" type="primary">返回首页</mt-button>
     </main>
 
-    <h1 v-else>应用发生错误异常</h1>
+    <h1 v-else>应用发生错误异常 -- {{error.statusCode}}</h1>
     <!-- <nuxt-link to="/">首 页</nuxt-link> -->
   </div>
 </template>

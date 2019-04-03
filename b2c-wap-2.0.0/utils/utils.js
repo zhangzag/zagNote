@@ -10,12 +10,45 @@ export const getcookiesInServer = function (req) {
     let parts = val.split('=');
     service_cookie[parts[0].trim()] = (parts[1] || '').trim();
   });
+  console.log('从服务器获取cookie: ', service_cookie)
   return service_cookie;
 };
 //获取客户端cookie
 export const getcookiesInClient = function (key) {
   return Cookie.get(key) ? Cookie.get(key) : '';
 };
+//设置客户端cookie
+export const setcookiesInClient = function (key, val, option) {
+  // return Cookie.get(key) ? Cookie.get(key) : '';
+
+  Cookies.set(key, val, option?option:{ expires: 7, path: '/' });
+};
+
+//设置localStorage
+export const setStorage = function (key, data){
+  let setData = JSON.stringify(data);
+
+  localStorage.setItem(key, setData);
+};
+//获取localStorage
+export const getStorage = function (key){
+  if(!process.browser || !localStorage.getItem(key)){return false}
+
+  let getData = JSON.parse( localStorage.getItem(key) );
+
+  if(getData.expires && getData.startTime){
+    let curDate = new Date();
+    let times = curDate.getTime();
+
+    if( times >= expires ){
+      localStorage.setItem(key, '');
+      return false
+    }
+  }
+
+  return getData;
+};
+
 //时间格式化
 export const curDate = dataFormat();
 function dataFormat(type){

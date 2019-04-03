@@ -43,7 +43,7 @@
 <script>
 import Cookie from 'js-cookie'
 import {gaEve, verifyPhone} from '@/utils/utils.js'
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'login',
@@ -71,20 +71,23 @@ export default {
 				return true;
 			}
         },
-        ...mapState('userModule', ['memberId', 'memberInfo'])
+		// ...mapState('userModule', ['memberId', 'memberInfo']),
+		...mapGetters('userModule', ['memberId', 'memberInfo'])
 	},
     mounted (){
         let redirectUrl = this.$route.query.ref || this.$route.query.redirectUrl;
 
         if (redirectUrl){
             this.redirectUrl = redirectUrl
-        }
+		}
+		console.log('memberId: ', this.memberId)
+		console.log(this.memberInfo)
     },
     methods: {
         ...mapMutations('userModule', ['saveMemberId', 'saveMemberInfo']),
         signIn (){
             //将服务端的token存入cookie当中
-            Cookie.set('memberId', 10299)
+            // Cookie.set('memberId', 10299)
             //返回上一页
             // this.$router.push(this.redirectURL)
 
@@ -133,7 +136,9 @@ export default {
 				
 				// 储存个人信息
                 //   this.$store.commit('addLogin', {memberID: val.memberID});
-                this.saveMemberId(memberId)
+				this.saveMemberId(memberId)
+				//将服务端的token存入cookie当中
+            	Cookie.set('_co_mem', memberId)
                 
 				//GA统计
 				// gaEve({eName:'登录', eCate: '登录会员id: ' + val.memberID});
@@ -147,7 +152,7 @@ export default {
 					}
 				})
 				.then((res)=>{
-					// console.log('获取个人信息', res)
+					console.log('获取个人信息', res)
 					this.$Idc.close();
 					if( !res ){
 						// console.log('获取个人信息失败')

@@ -15,7 +15,7 @@
           position="top">
           <router-link to="/">首页</router-link>
           <router-link to="/sort">分类</router-link>
-          <router-link to="/myinfo">个人中心</router-link>
+          <router-link to="/member">个人中心</router-link>
         </mt-popup>
         <!-- 显示更多 end -->
       </div>

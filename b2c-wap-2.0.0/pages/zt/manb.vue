@@ -1,5 +1,5 @@
 <template>
-<section class="wrap has_header_wrap">
+<section class="contain">
 			
     <!-- banner -->
     <div class="banner">

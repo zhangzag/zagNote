@@ -3,7 +3,7 @@
     
     <!-- 头部标题 -->
     <com-header :titles="title">
-      <template slot="style-def"></template>
+      <!-- <template slot="style-def"></template> -->
     </com-header>
     <!-- 头部标题 end -->
 
@@ -24,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .contain {
+    margin-top: 40px;
+  }
+</style>

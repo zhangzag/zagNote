@@ -10,7 +10,8 @@ switch( processEnv.NODE_ENV ){
     curBaseUrl = '/dapi';
     break;
   case 'development':
-    curBaseUrl = 'http://192.168.2.254:8080/AKGW-api/v1';
+    // curBaseUrl = 'http://192.168.2.254:8080/AKGW-api/v1';
+    curBaseUrl = 'http://web.api.ak1ak1.com:8080/AKGW-api/v1';
     break;
   case 'private':
     curBaseUrl = 'http://113.108.163.210:9999/AKGW-api/v1';
@@ -214,7 +215,7 @@ module.exports = {
     extend(config, ctx) {
       // 为 客户端打包 进行扩展配置
       if (ctx.isClient) {
-        // config.devtool = 'eval-source-map'
+        config.devtool = 'eval-source-map'
       }
     },
     //babel

@@ -77,7 +77,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/myinfo">
+          <router-link to="/member">
             <img v-lazy="require('~~/assets/images/navleft-gr.png')">
             <p>个人中心</p>
           </router-link>
@@ -508,7 +508,7 @@ export default {
       color: #fff;
     }
     .s_center {
-      width: 216px;
+      width: 208px;
       position: relative;
 
       input {

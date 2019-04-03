@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="contain">
         <!-- 搜索 -->
 		<div class="sort_search">
 			<form action="javascript:;" @click="jumpSearch">

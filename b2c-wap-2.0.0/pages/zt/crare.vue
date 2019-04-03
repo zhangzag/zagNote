@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="contain">
         <!-- banner -->
         <div class="banner-2">
             <div class="banner-2-in" v-for="(bn,index) in banners" :key="bn.advertisementID">

@@ -22,8 +22,8 @@ export default function({ $axios, redirect, store }) {
   // http request 拦截器
 	$axios.interceptors.request.use(
     config => {
-        if (store.state.userModule.memberId) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-            config.headers.Authorization = sha256(store.state.userModule.memberId + 'akjk');
+        if (store.state.userModule.memberIdData) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+            config.headers.Authorization = sha256(store.state.userModule.memberIdData + 'akjk');
         }
         return config;
     },
