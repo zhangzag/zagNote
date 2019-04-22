@@ -1,1 +1,0 @@
-$.getGlobalVal().memberId||window.location.replace("/login.html");

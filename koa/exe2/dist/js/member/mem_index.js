@@ -1,1 +1,0 @@
-$(function(){$.getGlobalVal().webRoot,$.getGlobalVal().memberId,$.getGlobalVal().webOrigin;(new Date).getHours()<9&&$(".mcb_info h3>span").html("早安，新的一天又开始了~"),$(".ir_upImg").click(function(){document.getElementById("upload_img_btn").click()})});
