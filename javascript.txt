@@ -120,7 +120,9 @@
 
 九、IE9以下 JSON.stringify() 和 JSON.parse()会报错 （JSON 未定义）
 	在页面引入 json2.js 可解决。
-		
+
+
+十、new Boolean(1) 产生的值是一个对象，而不是一个布尔值。		
 		
 		
 		
